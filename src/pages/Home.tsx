@@ -616,7 +616,7 @@ const Home = () => {
                     className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-500 focus:border-transparent transition"
                   ></textarea>
                 </div>
-                <div className="g-recaptcha" data-sitekey="6Ld06m4rAAAAAHEZlzvQdLGyu5VMEb7_fjoiPamI" style={{transform: 'scale(1)', transformOrigin: '0 0'}}></div>
+                <div className="g-recaptcha" data-sitekey="6LeX7G4rAAAAAFtwozKT8vpB6VOHCj_9Y6zUT6aT" style={{transform: 'scale(1)', transformOrigin: '0 0'}}></div>
                 <div className="text-left">
                   <button
                     type="submit"
