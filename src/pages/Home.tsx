@@ -9,12 +9,6 @@ import serviceBedroom from '../assets/home/home-5.jpg';
 import serviceBathroom from '../assets/home/home-6.jpg';
 import serviceCommercial from '../assets/home/home-7.jpg';
 
-declare global {
-  interface Window {
-    grecaptcha: any;
-  }
-}
-
 type Service = {
   title: string;
   description: string;
@@ -87,13 +81,6 @@ const Home = () => {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
-
-    const recaptchaToken = (window as any).grecaptcha?.getResponse();
-    if (!recaptchaToken) {
-      alert("Please complete the reCAPTCHA.");
-      return;
-    }
-    formData.append("g-recaptcha-response", recaptchaToken);
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
@@ -230,7 +217,7 @@ const Home = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60"></div>
         </div>
         <div className="relative z-10 container mx-auto px-4 flex flex-col items-center justify-center md:justify-end min-h-screen min-h-[100svh]">
-          <div className="max-w-4xl mx-auto flex flex-col items-center justify-center pb-8 md:pb-24 gap-8 md:gap-14 w-full">
+          <div className="max-w-4xl mx-auto flex flex-col items-center justify-center gap-8 md:gap-14 w-full pb-8 md:pb-24">
             <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-2 md:mb-6">
               <span className="text-white">Beautiful Renovations.</span>
               <span className="block text-white">Inspired Living.</span>
@@ -616,7 +603,6 @@ const Home = () => {
                     className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-500 focus:border-transparent transition"
                   ></textarea>
                 </div>
-                <div className="g-recaptcha" data-sitekey="6LeX7G4rAAAAAFtwozKT8vpB6VOHCj_9Y6zUT6aT" style={{transform: 'scale(1)', transformOrigin: '0 0'}}></div>
                 <div className="text-left">
                   <button
                     type="submit"
