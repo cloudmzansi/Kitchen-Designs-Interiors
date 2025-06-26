@@ -4,16 +4,26 @@ import { ArrowRight, Star, CheckCircle, Phone } from 'lucide-react';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { useScrollTo } from '../hooks/useScrollTo';
-import commercialHero from '../assets/commercial/commercial-1.avif';
-import commercial2 from '../assets/commercial/commercial-2.avif';
-import commercial3 from '../assets/commercial/commercial-3.avif';
-import commercial4 from '../assets/commercial/commercial-4.avif';
-import commercial5 from '../assets/commercial/commercial-5.avif';
-import commercial6 from '../assets/commercial/commercial-6.avif';
-import commercial7 from '../assets/commercial/commercial-7.avif';
-import commercial8 from '../assets/commercial/commercial-8.avif';
-import commercial9 from '../assets/commercial/commercial-9.avif';
-import commercial10 from '../assets/commercial/commercial-10.avif';
+import commercialHeroAvif from '../assets/commercial/commercial-1.avif';
+import commercialHeroJpeg from '../assets/commercial/commercial-1.jpeg';
+import commercial2Avif from '../assets/commercial/commercial-2.avif';
+import commercial2Jpeg from '../assets/commercial/commercial-2.jpeg';
+import commercial3Avif from '../assets/commercial/commercial-3.avif';
+import commercial3Jpeg from '../assets/commercial/commercial-3.jpeg';
+import commercial4Avif from '../assets/commercial/commercial-4.avif';
+import commercial4Jpeg from '../assets/commercial/commercial-4.jpeg';
+import commercial5Avif from '../assets/commercial/commercial-5.avif';
+import commercial5Jpeg from '../assets/commercial/commercial-5.jpeg';
+import commercial6Avif from '../assets/commercial/commercial-6.avif';
+import commercial6Jpeg from '../assets/commercial/commercial-6.jpeg';
+import commercial7Avif from '../assets/commercial/commercial-7.avif';
+import commercial7Jpeg from '../assets/commercial/commercial-7.jpeg';
+import commercial8Avif from '../assets/commercial/commercial-8.avif';
+import commercial8Jpeg from '../assets/commercial/commercial-8.jpeg';
+import commercial9Avif from '../assets/commercial/commercial-9.avif';
+import commercial9Jpeg from '../assets/commercial/commercial-9.jpeg';
+import commercial10Avif from '../assets/commercial/commercial-10.avif';
+import commercial10Jpeg from '../assets/commercial/commercial-10.jpeg';
 
 const Commercial = () => {
   const [open, setOpen] = useState(false);
@@ -24,15 +34,15 @@ const Commercial = () => {
   const categories: { id: string; name: string }[] = [];
 
   const commercialGallery = [
-    { id: 1, category: 'gallery', image: commercial2 },
-    { id: 2, category: 'gallery', image: commercial3 },
-    { id: 3, category: 'gallery', image: commercial4 },
-    { id: 4, category: 'gallery', image: commercial5 },
-    { id: 5, category: 'gallery', image: commercial6 },
-    { id: 6, category: 'gallery', image: commercial7 },
-    { id: 7, category: 'gallery', image: commercial8 },
-    { id: 8, category: 'gallery', image: commercial9 },
-    { id: 9, category: 'gallery', image: commercial10 },
+    { id: 1, category: 'gallery', image: commercial2Avif },
+    { id: 2, category: 'gallery', image: commercial3Avif },
+    { id: 3, category: 'gallery', image: commercial4Avif },
+    { id: 4, category: 'gallery', image: commercial5Avif },
+    { id: 5, category: 'gallery', image: commercial6Avif },
+    { id: 6, category: 'gallery', image: commercial7Avif },
+    { id: 7, category: 'gallery', image: commercial8Avif },
+    { id: 8, category: 'gallery', image: commercial9Avif },
+    { id: 9, category: 'gallery', image: commercial10Avif },
   ];
 
   const filteredGallery = selectedCategory === 'all'
@@ -115,11 +125,14 @@ const Commercial = () => {
               </div>
             </div>
             <div className="relative">
-              <img
-                src={commercialHero}
-                alt="Commercial Design Process"
-                className="rounded-2xl shadow-2xl w-full h-auto object-cover"
-              />
+              <picture>
+                <source srcSet={commercialHeroAvif} type="image/avif" />
+                <img
+                  src={commercialHeroJpeg}
+                  alt="Commercial Design Process"
+                  className="rounded-2xl shadow-2xl w-full h-auto object-cover"
+                />
+              </picture>
             </div>
           </div>
         </div>
@@ -159,11 +172,14 @@ const Commercial = () => {
             {filteredGallery.map((item, index) => (
               <div key={item.id} className="bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer" onClick={() => handleImageClick(index)}>
                 <div className="relative overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={`Commercial Project ${item.id}`}
-                    className="w-full aspect-[1/1] object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+                  <picture>
+                    <source srcSet={eval(`commercial${item.id + 1}Avif`)} type="image/avif" />
+                    <img
+                      src={eval(`commercial${item.id + 1}Jpeg`)}
+                      alt={`Commercial Project ${item.id}`}
+                      className="w-full aspect-[1/1] object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </picture>
                 </div>
               </div>
             ))}

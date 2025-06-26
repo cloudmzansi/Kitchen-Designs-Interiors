@@ -4,16 +4,26 @@ import { ArrowRight, Star, CheckCircle, Phone } from 'lucide-react';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { useScrollTo } from '../hooks/useScrollTo';
-import kitchenHero from '../assets/kitchens/kitchens-1.avif';
-import kitchen2 from '../assets/kitchens/kitchens-2.avif';
-import kitchen3 from '../assets/kitchens/kitchens-3.avif';
-import kitchen4 from '../assets/kitchens/kitchens-4.avif';
-import kitchen5 from '../assets/kitchens/kitchens-5.avif';
-import kitchen6 from '../assets/kitchens/kitchens-6.avif';
-import kitchen7 from '../assets/kitchens/kitchens-7.avif';
-import kitchen8 from '../assets/kitchens/kitchens-8.avif';
-import kitchen9 from '../assets/kitchens/kitchens-9.avif';
-import kitchen10 from '../assets/kitchens/kitchens-10.avif';
+import kitchenHeroAvif from '../assets/kitchens/kitchens-1.avif';
+import kitchenHeroJpg from '../assets/kitchens/kitchens-1.jpg';
+import kitchen2Avif from '../assets/kitchens/kitchens-2.avif';
+import kitchen2Jpg from '../assets/kitchens/kitchens-2.jpg';
+import kitchen3Avif from '../assets/kitchens/kitchens-3.avif';
+import kitchen3Jpg from '../assets/kitchens/kitchens-3.jpg';
+import kitchen4Avif from '../assets/kitchens/kitchens-4.avif';
+import kitchen4Jpg from '../assets/kitchens/kitchens-4.jpg';
+import kitchen5Avif from '../assets/kitchens/kitchens-5.avif';
+import kitchen5Jpg from '../assets/kitchens/kitchens-5.jpg';
+import kitchen6Avif from '../assets/kitchens/kitchens-6.avif';
+import kitchen6Jpg from '../assets/kitchens/kitchens-6.jpg';
+import kitchen7Avif from '../assets/kitchens/kitchens-7.avif';
+import kitchen7Jpg from '../assets/kitchens/kitchens-7.jpg';
+import kitchen8Avif from '../assets/kitchens/kitchens-8.avif';
+import kitchen8Jpg from '../assets/kitchens/kitchens-8.jpg';
+import kitchen9Avif from '../assets/kitchens/kitchens-9.avif';
+import kitchen9Jpg from '../assets/kitchens/kitchens-9.jpg';
+import kitchen10Avif from '../assets/kitchens/kitchens-10.avif';
+import kitchen10Jpg from '../assets/kitchens/kitchens-10.jpg';
 
 const Kitchens = () => {
   const [open, setOpen] = useState(false);
@@ -24,15 +34,15 @@ const Kitchens = () => {
   const categories: { id: string; name: string }[] = [];
 
   const kitchenGallery = [
-    { id: 1, category: 'gallery', image: kitchen2 },
-    { id: 2, category: 'gallery', image: kitchen3 },
-    { id: 3, category: 'gallery', image: kitchen4 },
-    { id: 4, category: 'gallery', image: kitchen5 },
-    { id: 5, category: 'gallery', image: kitchen6 },
-    { id: 6, category: 'gallery', image: kitchen7 },
-    { id: 7, category: 'gallery', image: kitchen8 },
-    { id: 8, category: 'gallery', image: kitchen9 },
-    { id: 9, category: 'gallery', image: kitchen10 },
+    { id: 1, category: 'gallery', image: kitchen2Avif },
+    { id: 2, category: 'gallery', image: kitchen3Avif },
+    { id: 3, category: 'gallery', image: kitchen4Avif },
+    { id: 4, category: 'gallery', image: kitchen5Avif },
+    { id: 5, category: 'gallery', image: kitchen6Avif },
+    { id: 6, category: 'gallery', image: kitchen7Avif },
+    { id: 7, category: 'gallery', image: kitchen8Avif },
+    { id: 8, category: 'gallery', image: kitchen9Avif },
+    { id: 9, category: 'gallery', image: kitchen10Avif },
   ];
 
   const filteredGallery = selectedCategory === 'all' 
@@ -129,11 +139,14 @@ const Kitchens = () => {
               </div>
             </div>
             <div className="relative">
-              <img
-                src={kitchenHero}
-                alt="Kitchen Design Process"
-                className="rounded-2xl shadow-2xl"
-              />
+              <picture>
+                <source srcSet={kitchenHeroAvif} type="image/avif" />
+                <img
+                  src={kitchenHeroJpg}
+                  alt="Kitchen Design Process"
+                  className="rounded-2xl shadow-2xl"
+                />
+              </picture>
             </div>
           </div>
         </div>
@@ -173,11 +186,14 @@ const Kitchens = () => {
             {filteredGallery.map((kitchen, index) => (
               <div key={kitchen.id} className="bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer" onClick={() => handleImageClick(index)}>
                 <div className="relative overflow-hidden">
-                  <img
-                    src={kitchen.image}
-                    alt={`Kitchen Project ${kitchen.id}`}
-                    className="w-full aspect-[1/1] object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+                  <picture>
+                    <source srcSet={eval(`kitchen${kitchen.id + 1}Avif`)} type="image/avif" />
+                    <img
+                      src={eval(`kitchen${kitchen.id + 1}Jpg`)}
+                      alt={`Kitchen Project ${kitchen.id}`}
+                      className="w-full aspect-[1/1] object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </picture>
                 </div>
               </div>
             ))}

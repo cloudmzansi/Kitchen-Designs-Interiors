@@ -136,34 +136,41 @@ const Header = () => {
         </div>
 
         {/* Mobile Menu */}
+        {/* Overlay */}
         {isMenuOpen && (
-          <div className="fixed inset-0 z-50 bg-white bg-opacity-95 backdrop-blur-md flex flex-col">
-            <div className="flex justify-end p-6">
-              <button 
-                onClick={() => setIsMenuOpen(false)} 
-                className="p-3 rounded-full bg-forest-100 text-forest-800 shadow-lg hover:bg-forest-200 transition-all focus:outline-none focus:ring-2 focus:ring-forest-700"
-              >
-                <X size={24} />
-              </button>
-            </div>
-            <nav className="flex-1 flex flex-col justify-center items-center px-6">
-              <div className="w-full max-w-sm space-y-6 bg-white bg-opacity-100 rounded-2xl p-8 shadow-xl">
-                <a 
-                  href="/#top" 
-                  onClick={(e) => { handleScrollClick(e, 'top'); setIsMenuOpen(false); }} 
+          <>
+            <div
+              className="fixed inset-0 z-40 bg-black bg-opacity-40 transition-opacity duration-300 lg:hidden"
+              onClick={() => setIsMenuOpen(false)}
+            />
+            <aside
+              className="fixed top-0 right-0 z-50 h-full w-80 max-w-full bg-white shadow-2xl flex flex-col transition-transform duration-300 transform translate-x-0 lg:hidden"
+            >
+              <div className="flex justify-end p-4">
+                <button
+                  onClick={() => setIsMenuOpen(false)}
+                  className="p-2 rounded-full bg-forest-100 text-forest-800 shadow hover:bg-forest-200 focus:outline-none focus:ring-2 focus:ring-forest-700"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+              <nav className="flex-1 flex flex-col justify-center items-center px-6 overflow-y-auto space-y-6">
+                <a
+                  href="/#top"
+                  onClick={(e) => { handleScrollClick(e, 'top'); setIsMenuOpen(false); }}
                   className="block text-2xl font-bold text-forest-800 text-center hover:text-forest-600 transition-colors py-2"
                 >
                   Home
                 </a>
-                <a 
-                  href="/#about-us" 
-                  onClick={(e) => { handleScrollClick(e, 'about-us'); setIsMenuOpen(false); }} 
+                <a
+                  href="/#about-us"
+                  onClick={(e) => { handleScrollClick(e, 'about-us'); setIsMenuOpen(false); }}
                   className="block text-2xl font-bold text-forest-800 text-center hover:text-forest-600 transition-colors py-2"
                 >
                   About Us
                 </a>
-                <div className="text-center">
-                  <button 
+                <div className="text-center w-full">
+                  <button
                     onClick={() => setIsServicesOpen(!isServicesOpen)}
                     className="flex items-center justify-center w-full text-2xl font-bold text-forest-800 hover:text-forest-600 transition-colors py-2 focus:outline-none"
                   >
@@ -172,29 +179,29 @@ const Header = () => {
                   </button>
                   {isServicesOpen && (
                     <div className="mt-2 space-y-2 bg-forest-50 rounded-lg p-4">
-                      <Link 
-                        to="/kitchens" 
+                      <Link
+                        to="/kitchens"
                         onClick={() => setIsMenuOpen(false)}
                         className="block text-lg text-forest-800 hover:text-forest-600 transition-colors py-1"
                       >
                         Kitchen Renovations
                       </Link>
-                      <Link 
-                        to="/bedrooms" 
+                      <Link
+                        to="/bedrooms"
                         onClick={() => setIsMenuOpen(false)}
                         className="block text-lg text-forest-800 hover:text-forest-600 transition-colors py-1"
                       >
                         Bedroom Renovations
                       </Link>
-                      <Link 
-                        to="/bathrooms" 
+                      <Link
+                        to="/bathrooms"
                         onClick={() => setIsMenuOpen(false)}
                         className="block text-lg text-forest-800 hover:text-forest-600 transition-colors py-1"
                       >
                         Bathroom Renovations
                       </Link>
-                      <Link 
-                        to="/commercial" 
+                      <Link
+                        to="/commercial"
                         onClick={() => setIsMenuOpen(false)}
                         className="block text-lg text-forest-800 hover:text-forest-600 transition-colors py-1"
                       >
@@ -203,31 +210,29 @@ const Header = () => {
                     </div>
                   )}
                 </div>
-                <a 
-                  href="/#contact-section" 
-                  onClick={(e) => { handleScrollClick(e, 'contact-section'); setIsMenuOpen(false); }} 
+                <a
+                  href="/#contact-section"
+                  onClick={(e) => { handleScrollClick(e, 'contact-section'); setIsMenuOpen(false); }}
                   className="block text-2xl font-bold text-forest-800 text-center hover:text-forest-600 transition-colors py-2"
                 >
                   Contact Us
                 </a>
-              </div>
-            </nav>
-            <div className="p-6 flex flex-col items-center space-y-4">
-              <a 
-                href="/#contact-section" 
-                onClick={(e) => { handleScrollClick(e, 'contact-section'); setIsMenuOpen(false); }} 
-                className="w-full max-w-sm bg-forest-700 text-white text-lg font-bold py-4 rounded-lg text-center shadow-lg hover:bg-forest-800 transition-colors"
-              >
-                Get Free Quote
-              </a>
-              <a 
-                href="tel:+27799352223" 
-                className="block text-center text-base text-forest-700 hover:text-forest-900 font-medium transition-colors"
-              >
-                Call Now: +27 79 935 2223
-              </a>
-            </div>
-          </div>
+                <a
+                  href="/#contact-section"
+                  onClick={(e) => { handleScrollClick(e, 'contact-section'); setIsMenuOpen(false); }}
+                  className="w-full bg-forest-700 text-white text-lg font-bold py-4 rounded-lg text-center shadow-lg hover:bg-forest-800 transition-colors"
+                >
+                  Get Free Quote
+                </a>
+                <a
+                  href="tel:+27799352223"
+                  className="block text-center text-base text-forest-700 hover:text-forest-900 font-medium transition-colors"
+                >
+                  Call Now: +27 79 935 2223
+                </a>
+              </nav>
+            </aside>
+          </>
         )}
       </div>
     </header>

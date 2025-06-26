@@ -4,16 +4,26 @@ import { ArrowRight, Star, CheckCircle, Phone } from 'lucide-react';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { useScrollTo } from '../hooks/useScrollTo';
-import bathroomHero from '../assets/bathrooms/bathrooms-1.avif';
-import bathroom2 from '../assets/bathrooms/bathrooms-2.avif';
-import bathroom3 from '../assets/bathrooms/bathrooms-3.avif';
-import bathroom4 from '../assets/bathrooms/bathrooms-4.avif';
-import bathroom5 from '../assets/bathrooms/bathrooms-5.avif';
-import bathroom6 from '../assets/bathrooms/bathrooms-6.avif';
-import bathroom7 from '../assets/bathrooms/bathrooms-7.avif';
-import bathroom8 from '../assets/bathrooms/bathrooms-8.avif';
-import bathroom9 from '../assets/bathrooms/bathrooms-9.avif';
-import bathroom10 from '../assets/bathrooms/bathrooms-10.avif';
+import bathroomHeroAvif from '../assets/bathrooms/bathrooms-1.avif';
+import bathroomHeroJpeg from '../assets/bathrooms/bathrooms-1.jpeg';
+import bathroom2Avif from '../assets/bathrooms/bathrooms-2.avif';
+import bathroom2Jpeg from '../assets/bathrooms/bathrooms-2.jpeg';
+import bathroom3Avif from '../assets/bathrooms/bathrooms-3.avif';
+import bathroom3Jpeg from '../assets/bathrooms/bathrooms-3.jpeg';
+import bathroom4Avif from '../assets/bathrooms/bathrooms-4.avif';
+import bathroom4Jpeg from '../assets/bathrooms/bathrooms-4.jpeg';
+import bathroom5Avif from '../assets/bathrooms/bathrooms-5.avif';
+import bathroom5Jpeg from '../assets/bathrooms/bathrooms-5.jpeg';
+import bathroom6Avif from '../assets/bathrooms/bathrooms-6.avif';
+import bathroom6Jpeg from '../assets/bathrooms/bathrooms-6.jpeg';
+import bathroom7Avif from '../assets/bathrooms/bathrooms-7.avif';
+import bathroom7Jpeg from '../assets/bathrooms/bathrooms-7.jpeg';
+import bathroom8Avif from '../assets/bathrooms/bathrooms-8.avif';
+import bathroom8Jpeg from '../assets/bathrooms/bathrooms-8.jpeg';
+import bathroom9Avif from '../assets/bathrooms/bathrooms-9.avif';
+import bathroom9Jpeg from '../assets/bathrooms/bathrooms-9.jpeg';
+import bathroom10Avif from '../assets/bathrooms/bathrooms-10.avif';
+import bathroom10Jpeg from '../assets/bathrooms/bathrooms-10.jpeg';
 
 const Bathrooms = () => {
   const [open, setOpen] = useState(false);
@@ -24,15 +34,15 @@ const Bathrooms = () => {
   const categories: { id: string; name: string }[] = [];
 
   const bathroomGallery = [
-    { id: 1, category: 'gallery', image: bathroom2 },
-    { id: 2, category: 'gallery', image: bathroom3 },
-    { id: 3, category: 'gallery', image: bathroom4 },
-    { id: 4, category: 'gallery', image: bathroom5 },
-    { id: 5, category: 'gallery', image: bathroom6 },
-    { id: 6, category: 'gallery', image: bathroom7 },
-    { id: 7, category: 'gallery', image: bathroom8 },
-    { id: 8, category: 'gallery', image: bathroom9 },
-    { id: 9, category: 'gallery', image: bathroom10 },
+    { id: 1, category: 'gallery', image: bathroom2Avif },
+    { id: 2, category: 'gallery', image: bathroom3Avif },
+    { id: 3, category: 'gallery', image: bathroom4Avif },
+    { id: 4, category: 'gallery', image: bathroom5Avif },
+    { id: 5, category: 'gallery', image: bathroom6Avif },
+    { id: 6, category: 'gallery', image: bathroom7Avif },
+    { id: 7, category: 'gallery', image: bathroom8Avif },
+    { id: 8, category: 'gallery', image: bathroom9Avif },
+    { id: 9, category: 'gallery', image: bathroom10Avif },
   ];
 
   const filteredGallery = selectedCategory === 'all'
@@ -114,11 +124,14 @@ const Bathrooms = () => {
               </div>
             </div>
             <div className="relative">
-              <img
-                src={bathroomHero}
-                alt="Bathroom Design Process"
-                className="rounded-2xl shadow-2xl w-full h-auto object-cover"
-              />
+              <picture>
+                <source srcSet={bathroomHeroAvif} type="image/avif" />
+                <img
+                  src={bathroomHeroJpeg}
+                  alt="Bathroom Design Process"
+                  className="rounded-2xl shadow-2xl w-full h-auto object-cover"
+                />
+              </picture>
             </div>
           </div>
         </div>
@@ -158,11 +171,14 @@ const Bathrooms = () => {
             {filteredGallery.map((bathroom, index) => (
               <div key={bathroom.id} className="bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer" onClick={() => handleImageClick(index)}>
                 <div className="relative overflow-hidden">
-                  <img
-                    src={bathroom.image}
-                    alt={`Bathroom Project ${bathroom.id}`}
-                    className="w-full aspect-[1/1] object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+                  <picture>
+                    <source srcSet={eval(`bathroom${bathroom.id + 1}Avif`)} type="image/avif" />
+                    <img
+                      src={eval(`bathroom${bathroom.id + 1}Jpeg`)}
+                      alt={`Bathroom Project ${bathroom.id}`}
+                      className="w-full aspect-[1/1] object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </picture>
                 </div>
               </div>
             ))}
