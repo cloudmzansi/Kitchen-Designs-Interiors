@@ -66,7 +66,7 @@ const Home = () => {
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > minSwipeDistance;
     const isRightSwipe = distance < -minSwipeDistance;
-
+    
     if (isLeftSwipe) {
       if (type === 'specialties') nextSpecialty();
       if (type === 'testimonials') nextTestimonial();
@@ -74,31 +74,6 @@ const Home = () => {
     if (isRightSwipe) {
       if (type === 'specialties') prevSpecialty();
       if (type === 'testimonials') prevTestimonial();
-    }
-  };
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-
-    try {
-      const response = await fetch('https://formsubmit.co/ajax/andrewmichaelsrsa@gmail.com', {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json',
-        },
-      });
-      const result = await response.json();
-      if (result.success === 'true') {
-        setIsModalOpen(true);
-        form.reset();
-      } else {
-        alert('There was an error submitting the form.');
-      }
-    } catch (error) {
-      alert('There was an error submitting the form.');
     }
   };
 
@@ -530,10 +505,13 @@ const Home = () => {
             <div className="bg-gray-50 rounded-2xl p-8">
               <h3 className="text-2xl font-bold mb-6 text-gray-800">Request Your Free Quote</h3>
               <form
-                onSubmit={handleSubmit}
+                action="https://getform.io/f/amdmxozb"
                 method="POST"
                 className="space-y-6"
               >
+                {/* Hidden honeypot field to prevent spam */}
+                <input type="hidden" name="_gotcha" style={{display: 'none'}} />
+                
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
