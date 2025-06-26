@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Star, Users, Award, Shield, Clock, CheckCircle, Phone, Mail, MapPin, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
-import heroBg from '../assets/home/home-1.jpg';
-import about1 from '../assets/home/home-2.jpg';
-import about2 from '../assets/home/home-3.jpg';
-import serviceKitchen from '../assets/home/home-4.jpg';
-import serviceBedroom from '../assets/home/home-5.jpg';
-import serviceBathroom from '../assets/home/home-6.jpg';
-import serviceCommercial from '../assets/home/home-7.jpg';
+import heroBg from '../assets/home/home-1.avif';
+import about1 from '../assets/home/home-2.avif';
+import about2 from '../assets/home/home-3.avif';
+import serviceKitchen from '../assets/home/home-4.avif';
+import serviceBedroom from '../assets/home/home-5.avif';
+import serviceBathroom from '../assets/home/home-6.avif';
+import serviceCommercial from '../assets/home/home-7.avif';
 
 type Service = {
   title: string;
@@ -207,16 +207,16 @@ const Home = () => {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden">
+      <section className="relative min-h-screen min-h-[100svh] flex flex-col items-center justify-center text-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
             src={heroBg}
             alt="Luxury Kitchen Interior"
-            className="w-full h-full min-h-screen object-cover"
+            className="w-full h-full min-h-screen min-h-[100svh] object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60"></div>
         </div>
-        <div className="relative z-10 container mx-auto px-4 flex flex-col items-center justify-center min-h-screen">
+        <div className="relative z-10 container mx-auto px-4 flex flex-col items-center justify-center min-h-screen min-h-[100svh]">
           <div className="max-w-4xl mx-auto flex flex-col items-center justify-center py-16 md:py-24 gap-8 md:gap-12">
             <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-2 md:mb-4">
               <span className="text-white">Beautiful Renovations.</span>

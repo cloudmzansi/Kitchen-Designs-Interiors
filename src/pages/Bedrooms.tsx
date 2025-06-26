@@ -4,16 +4,16 @@ import { ArrowRight, Star, CheckCircle, Phone } from 'lucide-react';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { useScrollTo } from '../hooks/useScrollTo';
-import bedroomHero from '../assets/bedrooms/bedrooms-1.jpg';
-import bedroom2 from '../assets/bedrooms/bedrooms-2.jpg';
-import bedroom3 from '../assets/bedrooms/bedrooms-3.jpg';
-import bedroom4 from '../assets/bedrooms/bedrooms-4.jpg';
-import bedroom5 from '../assets/bedrooms/bedrooms-5.jpg';
-import bedroom6 from '../assets/bedrooms/bedrooms-6.jpg';
-import bedroom7 from '../assets/bedrooms/bedrooms-7.jpg';
-import bedroom8 from '../assets/bedrooms/bedrooms-8.jpg';
-import bedroom9 from '../assets/bedrooms/bedrooms-9.jpg';
-import bedroom10 from '../assets/bedrooms/bedrooms-10.jpg';
+import bedroomHero from '../assets/bedrooms/bedrooms-1.avif';
+import bedroom2 from '../assets/bedrooms/bedrooms-2.avif';
+import bedroom3 from '../assets/bedrooms/bedrooms-3.avif';
+import bedroom4 from '../assets/bedrooms/bedrooms-4.avif';
+import bedroom5 from '../assets/bedrooms/bedrooms-5.avif';
+import bedroom6 from '../assets/bedrooms/bedrooms-6.avif';
+import bedroom7 from '../assets/bedrooms/bedrooms-7.avif';
+import bedroom8 from '../assets/bedrooms/bedrooms-8.avif';
+import bedroom9 from '../assets/bedrooms/bedrooms-9.avif';
+import bedroom10 from '../assets/bedrooms/bedrooms-10.avif';
 
 const Bedrooms = () => {
   const [open, setOpen] = useState(false);

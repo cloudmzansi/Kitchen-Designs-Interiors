@@ -4,16 +4,16 @@ import { ArrowRight, Star, CheckCircle, Phone } from 'lucide-react';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { useScrollTo } from '../hooks/useScrollTo';
-import bathroomHero from '../assets/bathrooms/bathrooms-1.jpeg';
-import bathroom2 from '../assets/bathrooms/bathrooms-2.jpeg';
-import bathroom3 from '../assets/bathrooms/bathrooms-3.jpeg';
-import bathroom4 from '../assets/bathrooms/bathrooms-4.jpeg';
-import bathroom5 from '../assets/bathrooms/bathrooms-5.jpeg';
-import bathroom6 from '../assets/bathrooms/bathrooms-6.jpeg';
-import bathroom7 from '../assets/bathrooms/bathrooms-7.jpeg';
-import bathroom8 from '../assets/bathrooms/bathrooms-8.jpeg';
-import bathroom9 from '../assets/bathrooms/bathrooms-9.jpeg';
-import bathroom10 from '../assets/bathrooms/bathrooms-10.jpeg';
+import bathroomHero from '../assets/bathrooms/bathrooms-1.avif';
+import bathroom2 from '../assets/bathrooms/bathrooms-2.avif';
+import bathroom3 from '../assets/bathrooms/bathrooms-3.avif';
+import bathroom4 from '../assets/bathrooms/bathrooms-4.avif';
+import bathroom5 from '../assets/bathrooms/bathrooms-5.avif';
+import bathroom6 from '../assets/bathrooms/bathrooms-6.avif';
+import bathroom7 from '../assets/bathrooms/bathrooms-7.avif';
+import bathroom8 from '../assets/bathrooms/bathrooms-8.avif';
+import bathroom9 from '../assets/bathrooms/bathrooms-9.avif';
+import bathroom10 from '../assets/bathrooms/bathrooms-10.avif';
 
 const Bathrooms = () => {
   const [open, setOpen] = useState(false);

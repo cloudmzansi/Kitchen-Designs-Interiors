@@ -4,16 +4,16 @@ import { ArrowRight, Star, CheckCircle, Phone } from 'lucide-react';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { useScrollTo } from '../hooks/useScrollTo';
-import kitchenHero from '../assets/kitchens/kitchens-1.jpg';
-import kitchen2 from '../assets/kitchens/kitchens-2.jpg';
-import kitchen3 from '../assets/kitchens/kitchens-3.jpg';
-import kitchen4 from '../assets/kitchens/kitchens-4.jpg';
-import kitchen5 from '../assets/kitchens/kitchens-5.jpg';
-import kitchen6 from '../assets/kitchens/kitchens-6.jpg';
-import kitchen7 from '../assets/kitchens/kitchens-7.jpg';
-import kitchen8 from '../assets/kitchens/kitchens-8.jpg';
-import kitchen9 from '../assets/kitchens/kitchens-9.jpg';
-import kitchen10 from '../assets/kitchens/kitchens-10.jpg';
+import kitchenHero from '../assets/kitchens/kitchens-1.avif';
+import kitchen2 from '../assets/kitchens/kitchens-2.avif';
+import kitchen3 from '../assets/kitchens/kitchens-3.avif';
+import kitchen4 from '../assets/kitchens/kitchens-4.avif';
+import kitchen5 from '../assets/kitchens/kitchens-5.avif';
+import kitchen6 from '../assets/kitchens/kitchens-6.avif';
+import kitchen7 from '../assets/kitchens/kitchens-7.avif';
+import kitchen8 from '../assets/kitchens/kitchens-8.avif';
+import kitchen9 from '../assets/kitchens/kitchens-9.avif';
+import kitchen10 from '../assets/kitchens/kitchens-10.avif';
 
 const Kitchens = () => {
   const [open, setOpen] = useState(false);

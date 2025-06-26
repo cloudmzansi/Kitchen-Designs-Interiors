@@ -4,16 +4,16 @@ import { ArrowRight, Star, CheckCircle, Phone } from 'lucide-react';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { useScrollTo } from '../hooks/useScrollTo';
-import commercialHero from '../assets/commercial/commercial-1.jpeg';
-import commercial2 from '../assets/commercial/commercial-2.jpeg';
-import commercial3 from '../assets/commercial/commercial-3.jpeg';
-import commercial4 from '../assets/commercial/commercial-4.jpeg';
-import commercial5 from '../assets/commercial/commercial-5.jpeg';
-import commercial6 from '../assets/commercial/commercial-6.jpeg';
-import commercial7 from '../assets/commercial/commercial-7.jpeg';
-import commercial8 from '../assets/commercial/commercial-8.jpeg';
-import commercial9 from '../assets/commercial/commercial-9.jpeg';
-import commercial10 from '../assets/commercial/commercial-10.jpeg';
+import commercialHero from '../assets/commercial/commercial-1.avif';
+import commercial2 from '../assets/commercial/commercial-2.avif';
+import commercial3 from '../assets/commercial/commercial-3.avif';
+import commercial4 from '../assets/commercial/commercial-4.avif';
+import commercial5 from '../assets/commercial/commercial-5.avif';
+import commercial6 from '../assets/commercial/commercial-6.avif';
+import commercial7 from '../assets/commercial/commercial-7.avif';
+import commercial8 from '../assets/commercial/commercial-8.avif';
+import commercial9 from '../assets/commercial/commercial-9.avif';
+import commercial10 from '../assets/commercial/commercial-10.avif';
 
 const Commercial = () => {
   const [open, setOpen] = useState(false);
