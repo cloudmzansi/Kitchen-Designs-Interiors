@@ -82,19 +82,33 @@ const Home = () => {
     const form = event.currentTarget;
     const formData = new FormData(form);
 
+    // Convert FormData to object for JSON submission
+    const data: { [key: string]: any } = {};
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+    // Add Web3Forms access key
+    data.access_key = "1a5b610a-5454-42da-89ae-40d3d3820e44";
+
     try {
-      const response = await fetch('https://getform.io/f/amdmxozb', {
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(data),
       });
+
+      const result = await response.json();
       
-      // Getform.io returns 200 on success, but we'll show modal regardless
-      // since the form submission is working (email arrives)
-      setIsModalOpen(true);
-      form.reset();
-      
+      if (result.success) {
+        setIsModalOpen(true);
+        form.reset();
+      } else {
+        alert('There was an error submitting the form.');
+      }
     } catch (error) {
-      // Only show error if there's a network issue
       console.error('Form submission error:', error);
       alert('There was a network error. Please try again.');
     }
@@ -531,9 +545,6 @@ const Home = () => {
                 onSubmit={handleSubmit}
                 className="space-y-6"
               >
-                {/* Hidden honeypot field to prevent spam */}
-                <input type="hidden" name="_gotcha" style={{display: 'none'}} />
-                
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
