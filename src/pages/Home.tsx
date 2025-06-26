@@ -189,8 +189,8 @@ const Home = () => {
         <div className="relative z-10 container mx-auto px-4 flex flex-col items-center justify-center h-full">
           <div className="max-w-4xl mx-auto flex flex-col items-center justify-center h-full py-16 md:py-24 gap-8 md:gap-12">
             <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-2 md:mb-4 mt-24 md:mt-40">
-              <span className="text-white">Custom Interiors</span>
-              <span className="block text-white">Crafted to Perfection</span>
+              <span className="text-white">Beautiful Renovations.</span>
+              <span className="block text-white">Inspired Living.</span>
             </h1>
             <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto leading-relaxed mb-4 md:mb-8">
               From kitchens to bedrooms and bathrooms, we create bespoke spaces that reflect your style and enhance your lifestyle.
