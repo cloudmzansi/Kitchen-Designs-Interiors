@@ -32,7 +32,6 @@ type Testimonial = {
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [trustBadgeIndex, setTrustBadgeIndex] = useState(0);
   const [specialtyIndex, setSpecialtyIndex] = useState(0);
   const [testimonialIndex, setTestimonialIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -159,34 +158,20 @@ const Home = () => {
     { icon: Clock, title: "30+ Years Experience", desc: "Proven expertise" }
   ];
 
-  const nextTrustBadge = () => {
-    const itemsPerView = isMobile ? 2 : 4;
-    setTrustBadgeIndex((prev) => (prev + itemsPerView) % trustBadges.length);
-  };
-
-  const prevTrustBadge = () => {
-    const itemsPerView = isMobile ? 2 : 4;
-    setTrustBadgeIndex((prev) => (prev - itemsPerView + trustBadges.length) % trustBadges.length);
-  };
-
   const nextSpecialty = () => {
-    const itemsPerView = isMobile ? 2 : 4;
-    setSpecialtyIndex((prev) => (prev + itemsPerView) % services.length);
+    setSpecialtyIndex((prev) => (prev + 1) % services.length);
   };
 
   const prevSpecialty = () => {
-    const itemsPerView = isMobile ? 2 : 4;
-    setSpecialtyIndex((prev) => (prev - itemsPerView + services.length) % services.length);
+    setSpecialtyIndex((prev) => (prev - 1 + services.length) % services.length);
   };
 
   const nextTestimonial = () => {
-    const itemsPerView = isMobile ? 2 : 4;
-    setTestimonialIndex((prev) => (prev + itemsPerView) % testimonials.length);
+    setTestimonialIndex((prev) => (prev + 1) % testimonials.length);
   };
 
   const prevTestimonial = () => {
-    const itemsPerView = isMobile ? 2 : 4;
-    setTestimonialIndex((prev) => (prev - itemsPerView + testimonials.length) % testimonials.length);
+    setTestimonialIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
   return (
@@ -233,36 +218,16 @@ const Home = () => {
       {/* Trust Badges */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="relative">
-            <div className="flex justify-between items-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-800">Why Choose Us</h2>
-              <div className="flex space-x-2">
-                <button
-                  onClick={prevTrustBadge}
-                  className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
-                >
-                  <ChevronLeft size={20} className="text-gray-600" />
-                </button>
-                <button
-                  onClick={nextTrustBadge}
-                  className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
-                >
-                  <ChevronRight size={20} className="text-gray-600" />
-                </button>
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {trustBadges.slice(trustBadgeIndex, trustBadgeIndex + (isMobile ? 2 : 4)).map((badge, index) => (
-                <div key={index} className="text-center group">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4 group-hover:bg-forest-700 transition-colors duration-300">
-                    <badge.icon size={32} className="text-forest-700 group-hover:text-white transition-colors duration-300" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-forest-900 mb-2">{badge.title}</h3>
-                  <p className="text-forest-600 text-sm">{badge.desc}</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {trustBadges.map((badge, index) => (
+              <div key={index} className="text-center group">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4 group-hover:bg-forest-700 transition-colors duration-300">
+                  <badge.icon size={32} className="text-forest-700 group-hover:text-white transition-colors duration-300" />
                 </div>
-              ))}
-            </div>
+                <h3 className="text-lg font-semibold text-forest-900 mb-2">{badge.title}</h3>
+                <p className="text-forest-600 text-sm">{badge.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -278,11 +243,11 @@ const Home = () => {
           <div className="space-y-16">
             {/* Block 1 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div className="space-y-4 text-lg text-gray-700 leading-relaxed">
-                <p>
+              <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
+                <p className="text-base md:text-lg">
                   With over 30 years of experience, we specialise in bespoke kitchens, bedrooms, bathrooms, and cabinetry, delivering tailored solutions and exceptional craftsmanship to transform your home or business.
                 </p>
-                <p>
+                <p className="text-base md:text-lg">
                   We offer modern, made-to-measure cabinetry tailored to your exact specifications. Our extensive range of materials and finishes includes melamine, gloss and matt wraps, PVC, sprayed 'duco', solid woods, and veneers. Whether you're renovating or starting from scratch, we provide premium solutions to suit your style, requirements, and budget – all at competitive prices.
                 </p>
               </div>
@@ -297,11 +262,11 @@ const Home = () => {
 
             {/* Block 2 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div className="md:order-last space-y-4 text-lg text-gray-700 leading-relaxed">
-                <p>
+              <div className="md:order-last space-y-6 text-lg text-gray-700 leading-relaxed">
+                <p className="text-base md:text-lg">
                   In addition to cabinetry, we offer complete turnkey renovation services. Our trusted team of contractors manages every aspect of your project, from building work and electricals to plumbing, flooring, and painting. We're here to ensure a smooth, stress-free experience from beginning to end.
                 </p>
-                <p>
+                <p className="text-base md:text-lg">
                   We also offer kitchen remodelling services for those looking to refresh their existing space. Whether it's replacing doors and countertops or adding extra units, we help transform your kitchen with thoughtful, stylish upgrades that reflect your vision.
                 </p>
               </div>
@@ -325,7 +290,8 @@ const Home = () => {
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">We specialise in creating custom interior solutions that transform your living spaces into works of art.</p>
           </div>
           
-          <div className="relative">
+          {/* Mobile Carousel */}
+          <div className="md:hidden relative">
             <div className="flex justify-between items-center mb-8">
               <div></div>
               <div className="flex space-x-2">
@@ -345,8 +311,8 @@ const Home = () => {
             </div>
             
             <div className="max-w-4xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-                {services.slice(specialtyIndex, specialtyIndex + (isMobile ? 2 : 4)).map((service, index) => (
+              <div className="grid grid-cols-1 gap-x-12 gap-y-16">
+                {services.slice(specialtyIndex, specialtyIndex + 1).map((service, index) => (
                   <div key={index} className="group text-left">
                     <div className="relative mb-6 overflow-hidden rounded-2xl shadow-xl">
                       <img src={service.image} alt={service.title} className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105 max-w-full" />
@@ -363,6 +329,28 @@ const Home = () => {
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+
+          {/* Desktop Grid */}
+          <div className="hidden md:block max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+              {services.map((service, index) => (
+                <div key={index} className="group text-left">
+                  <div className="relative mb-6 overflow-hidden rounded-2xl shadow-xl">
+                    <img src={service.image} alt={service.title} className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105 max-w-full" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div className="absolute bottom-0 left-0 p-6">
+                      <h3 className="text-2xl font-bold text-white">{service.title}</h3>
+                    </div>
+                  </div>
+                  <p className="text-gray-700 mb-4 text-lg leading-relaxed">{service.description}</p>
+                  <Link to={service.link} className="font-semibold text-forest-700 hover:text-forest-800 flex items-center group-hover:text-forest-800 transition-colors">
+                    View Gallery
+                    <ArrowRight size={20} className="ml-2 transform group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -416,7 +404,8 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="relative">
+          {/* Mobile Carousel */}
+          <div className="md:hidden relative">
             <div className="flex justify-between items-center mb-8">
               <div></div>
               <div className="flex space-x-2">
@@ -435,8 +424,8 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {testimonials.slice(testimonialIndex, testimonialIndex + (isMobile ? 2 : 4)).map((testimonial, index) => (
+            <div className="grid grid-cols-1 gap-8">
+              {testimonials.slice(testimonialIndex, testimonialIndex + 1).map((testimonial, index) => (
                 <div key={index} className="bg-white rounded-2xl p-8 flex flex-col items-center text-center shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
                   <div className="text-forest-500 mb-4">
                     <Quote size={40} />
@@ -455,6 +444,28 @@ const Home = () => {
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* Desktop Grid */}
+          <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className="bg-white rounded-2xl p-8 flex flex-col items-center text-center shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
+                <div className="text-forest-500 mb-4">
+                  <Quote size={40} />
+                </div>
+                <div className="flex mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} size={20} className="text-forest-400 fill-current" />
+                  ))}
+                </div>
+                <p className="text-gray-700 mb-6 italic flex-grow">"{testimonial.text}"</p>
+                <div className="mt-auto">
+                  <img src={testimonial.avatar} alt={testimonial.name} className="w-16 h-16 rounded-full mx-auto mb-4" />
+                  <h4 className="font-semibold text-gray-800">{testimonial.name}</h4>
+                  <p className="text-sm text-gray-500">{testimonial.location}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
