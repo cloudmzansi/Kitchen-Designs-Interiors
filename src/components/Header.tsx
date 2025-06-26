@@ -46,6 +46,13 @@ const Header = () => {
     };
   }, [isMenuOpen]);
 
+  // Reset mobile dropdown when menu closes
+  useEffect(() => {
+    if (!isMenuOpen) {
+      setIsMobileServicesOpen(false);
+    }
+  }, [isMenuOpen]);
+
   // Determine if on home page or specialty/policy pages
   const specialtyOrPolicyPages = [
     '/kitchens', '/bedrooms', '/bathrooms', '/commercial', '/privacy-policy', '/terms-of-service'
@@ -210,32 +217,32 @@ const Header = () => {
                 <ChevronDown size={24} className={`ml-2 transition-transform duration-200 ${isMobileServicesOpen ? 'rotate-180' : ''}`} />
               </button>
               {isMobileServicesOpen && (
-                <div className="flex flex-col w-10/12 mx-auto mb-2">
+                <div className="flex flex-col w-10/12 mx-auto mb-2 bg-gray-50 border-l-4 border-forest-700 rounded-lg">
                   <Link
                     to="/kitchens"
                     onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
-                    className="text-base font-medium text-black w-full text-left py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors"
+                    className="text-base font-medium text-black w-full text-left py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors"
                   >
                     Kitchen Renovations
                   </Link>
                   <Link
                     to="/bedrooms"
                     onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
-                    className="text-base font-medium text-black w-full text-left py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors"
+                    className="text-base font-medium text-black w-full text-left py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors"
                   >
                     Bedroom Renovations
                   </Link>
                   <Link
                     to="/bathrooms"
                     onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
-                    className="text-base font-medium text-black w-full text-left py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors"
+                    className="text-base font-medium text-black w-full text-left py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors"
                   >
                     Bathroom Renovations
                   </Link>
                   <Link
                     to="/commercial"
                     onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
-                    className="text-base font-medium text-black w-full text-left py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors"
+                    className="text-base font-medium text-black w-full text-left py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors"
                   >
                     Commercial Renovations
                   </Link>
