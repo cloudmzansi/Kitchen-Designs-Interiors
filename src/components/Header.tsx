@@ -208,42 +208,41 @@ const Header = () => {
                 About Us
               </a>
               {/* Services Dropdown */}
-              <div className="w-11/12 mx-auto mb-2 flex flex-col items-center">
+              <div className="w-11/12 mx-auto mb-2">
                 <button
-                  onClick={() => setIsMobileServicesOpen((open) => !open)}
-                  className="flex items-center justify-between w-full text-xl font-semibold text-black py-4 rounded-lg hover:bg-gray-100 transition-colors focus:outline-none"
+                  className="w-full text-xl font-semibold text-black py-4 rounded-lg hover:bg-gray-100 transition-colors focus:outline-none text-center flex justify-center items-center"
                   aria-expanded={isMobileServicesOpen}
                 >
                   <span>Services</span>
                   <ChevronDown size={24} className={`ml-2 transition-transform duration-200 ${isMobileServicesOpen ? 'rotate-180' : ''}`} />
                 </button>
                 {isMobileServicesOpen && (
-                  <div className="flex flex-col bg-gray-50 rounded-lg mt-2 mb-2 w-full">
+                  <div className="flex flex-col bg-gray-50 rounded-lg mt-2 mb-2 w-full mx-auto text-center">
                     <Link
                       to="/kitchens"
                       onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
-                      className="text-base font-medium text-black w-full text-left py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors"
+                      className="text-base font-medium text-black w-full py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors mx-auto text-center"
                     >
                       Kitchen Renovations
                     </Link>
                     <Link
                       to="/bedrooms"
                       onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
-                      className="text-base font-medium text-black w-full text-left py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors"
+                      className="text-base font-medium text-black w-full py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors mx-auto text-center"
                     >
                       Bedroom Renovations
                     </Link>
                     <Link
                       to="/bathrooms"
                       onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
-                      className="text-base font-medium text-black w-full text-left py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors"
+                      className="text-base font-medium text-black w-full py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors mx-auto text-center"
                     >
                       Bathroom Renovations
                     </Link>
                     <Link
                       to="/commercial"
                       onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
-                      className="text-base font-medium text-black w-full text-left py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors"
+                      className="text-base font-medium text-black w-full py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors mx-auto text-center"
                     >
                       Commercial Renovations
                     </Link>
