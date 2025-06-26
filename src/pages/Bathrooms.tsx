@@ -97,32 +97,25 @@ const Bathrooms = () => {
         index={selectedIndex}
       />
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-gray-900 to-gray-800 text-white">
-        <div className="absolute inset-0 opacity-20">
-          <img 
-            src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop"
-            alt="Bathroom Design"
-            className="w-full h-full object-cover"
-          />
-        </div>
+      <section className="relative py-20 bg-gradient-to-r from-forest-900 to-forest-700 text-white">
         <div className="relative container mx-auto px-4 text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
             Bathroom Renovations
           </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-200">
+          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-forest-100">
             Design luxurious bathrooms that combine style, functionality, and lasting quality.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
               onClick={(e) => handleScrollClick(e, 'contact-section')}
-              className="bg-amber-600 text-white px-8 py-4 rounded-lg hover:bg-amber-700 transition-colors font-semibold text-lg inline-flex items-center justify-center space-x-2"
+              className="bg-gradient-to-r from-forest-700 to-forest-600 text-white px-8 py-4 rounded-lg hover:from-forest-800 hover:to-forest-900 transition-colors font-semibold text-lg inline-flex items-center justify-center space-x-2"
             >
               <span>Get a Free Quote</span>
               <ArrowRight size={20} />
             </button>
             <a 
               href="tel:+27799352223"
-              className="border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white hover:text-gray-900 transition-colors font-semibold text-lg inline-flex items-center justify-center space-x-2"
+              className="border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white hover:text-forest-900 transition-colors font-semibold text-lg inline-flex items-center justify-center space-x-2"
             >
               <Phone size={20} />
               <span>Call: +27 79 935 2223</span>
@@ -145,8 +138,8 @@ const Bathrooms = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {services.map((service, index) => (
                   <div key={index} className="flex items-center space-x-3">
-                    <CheckCircle size={20} className="text-amber-600 flex-shrink-0" />
-                    <span className="text-gray-700">{service}</span>
+                    <CheckCircle size={20} className="text-forest-600 flex-shrink-0" />
+                    <span className="text-forest-900">{service}</span>
                   </div>
                 ))}
               </div>
@@ -181,8 +174,8 @@ const Bathrooms = () => {
                   onClick={() => setSelectedCategory(category.id)}
                   className={`px-6 py-3 rounded-lg font-medium transition-colors ${
                     selectedCategory === category.id
-                      ? 'bg-amber-600 text-white'
-                      : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+                      ? 'bg-forest-700 text-white'
+                      : 'bg-white text-forest-700 hover:bg-forest-100 border border-forest-200'
                   }`}
                 >
                   {category.name}
@@ -220,7 +213,7 @@ const Bathrooms = () => {
             </p>
             <button 
               onClick={(e) => handleScrollClick(e, 'contact-section')}
-              className="bg-gradient-to-r from-amber-600 to-amber-700 text-white px-8 py-4 rounded-lg hover:from-amber-700 hover:to-amber-800 transition-all duration-300 font-semibold text-lg inline-flex items-center space-x-2 mt-6"
+              className="bg-gradient-to-r from-forest-700 to-forest-600 text-white px-8 py-4 rounded-lg hover:from-forest-800 hover:to-forest-900 transition-all duration-300 font-semibold text-lg inline-flex items-center space-x-2 mt-6"
             >
               <span>Get Free Consultation</span>
               <ArrowRight size={20} />

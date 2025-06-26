@@ -142,22 +142,19 @@ const Home = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60"></div>
         </div>
-
-        <div className="relative z-10 container mx-auto px-4 text-white">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
-              Custom Interiors
-              <span className="block text-amber-400">Crafted to Perfection</span>
+        <div className="relative z-10 container mx-auto px-4 flex flex-col items-center justify-center h-full">
+          <div className="max-w-4xl mx-auto flex flex-col items-center justify-center h-full py-16 md:py-24 gap-8 md:gap-12">
+            <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-2 md:mb-4">
+              <span className="text-white">Custom Interiors</span>
+              <span className="block text-white">Crafted to Perfection</span>
             </h1>
-
-            <p className="text-xl md:text-2xl mb-12 text-gray-200 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto leading-relaxed mb-4 md:mb-8">
               From kitchens to bedrooms and bathrooms, we create bespoke spaces that reflect your style and enhance your lifestyle.
             </p>
-
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center mt-12 md:mt-16">
               <a 
                 href="/#contact-section"
-                className="bg-gradient-to-r from-amber-600 to-amber-700 text-white px-10 py-4 rounded-lg hover:from-amber-700 hover:to-amber-800 transition-all duration-300 font-semibold text-lg flex items-center justify-center space-x-2 group shadow-2xl"
+                className="bg-forest-700 text-white px-10 py-4 rounded-lg hover:bg-forest-800 transition-all duration-300 font-semibold text-lg flex items-center justify-center space-x-2 group shadow-2xl"
               >
                 <span>Get Your Free Quote</span>
                 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
@@ -185,11 +182,11 @@ const Home = () => {
               { icon: Clock, title: "30+ Years Experience", desc: "Proven expertise" }
             ].map((badge, index) => (
               <div key={index} className="text-center group">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-amber-100 rounded-full mb-4 group-hover:bg-amber-600 transition-colors duration-300">
-                  <badge.icon size={32} className="text-amber-600 group-hover:text-white transition-colors duration-300" />
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4 group-hover:bg-forest-700 transition-colors duration-300">
+                  <badge.icon size={32} className="text-forest-700 group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">{badge.title}</h3>
-                <p className="text-gray-600 text-sm">{badge.desc}</p>
+                <h3 className="text-lg font-semibold text-forest-900 mb-2">{badge.title}</h3>
+                <p className="text-forest-600 text-sm">{badge.desc}</p>
               </div>
             ))}
           </div>
@@ -246,47 +243,38 @@ const Home = () => {
         </div>
       </section>
       
-      {/* Services Overview */}
+      {/* Our Specialties Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-              Our Specialities
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We specialise in creating custom interior solutions that transform your living spaces into works of art.
-            </p>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Our Specialties</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">We specialize in creating custom interior solutions that transform your living spaces into works of art.</p>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((service) => (
-              <div key={service.title} className="group text-center bg-white p-6 rounded-2xl shadow-lg transition-transform duration-300 hover:-translate-y-2">
-                <Link to={service.link} className="block">
-                  <div className="relative overflow-hidden rounded-xl mb-6">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+              {services.map((service, index) => (
+                <div key={index} className="group text-left">
+                  <div className="relative mb-6 overflow-hidden rounded-2xl shadow-xl">
+                    <img src={service.image} alt={service.title} className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105 max-w-full" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div className="absolute bottom-0 left-0 p-6">
+                      <h3 className="text-2xl font-bold text-white">{service.title}</h3>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-semibold mb-2 text-gray-800">{service.title}</h3>
-                </Link>
-                <p className="text-gray-600 mb-4 h-24 overflow-hidden">{service.description}</p>
-                <Link 
-                  to={service.link} 
-                  className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-amber-600 to-amber-700 text-white rounded-lg hover:from-amber-700 hover:to-amber-800 transition-all duration-300 font-semibold"
-                >
-                  View Gallery
-                  <ArrowRight className="ml-2" size={20} />
-                </Link>
-              </div>
-            ))}
+                  <p className="text-gray-700 mb-4 text-lg leading-relaxed">{service.description}</p>
+                  <Link to={service.link} className="font-semibold text-forest-700 hover:text-forest-800 flex items-center group-hover:text-forest-800 transition-colors">
+                    View Gallery
+                    <ArrowRight size={20} className="ml-2 transform group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Process Section */}
-      <section className="py-20 bg-white hidden">
+      {/* Our Proven Process Section */}
+      <section className="py-20 bg-gray-50" style={{ display: 'none' }}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
@@ -300,7 +288,7 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {process.map((step, index) => (
               <div key={index} className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-amber-600 text-white rounded-full font-bold text-xl mb-6">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-forest-600 text-white rounded-full font-bold text-xl mb-6">
                   {step.step}
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 mb-3">{step.title}</h3>
@@ -312,7 +300,7 @@ const Home = () => {
           <div className="text-center mt-12">
             <a 
               href="/#contact-section"
-              className="bg-amber-600 text-white px-8 py-4 rounded-lg hover:bg-amber-700 transition-colors font-semibold text-lg inline-flex items-center space-x-2"
+              className="bg-forest-600 text-white px-8 py-4 rounded-lg hover:bg-forest-700 transition-colors font-semibold text-lg inline-flex items-center space-x-2"
             >
               <span>Start Your Project</span>
               <ArrowRight size={20} />
@@ -336,12 +324,12 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {testimonials.map((testimonial, index) => (
               <div key={index} className="bg-white rounded-2xl p-8 flex flex-col items-center text-center shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
-                <div className="text-amber-500 mb-4">
+                <div className="text-forest-500 mb-4">
                   <Quote size={40} />
                 </div>
                 <div className="flex mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} size={20} className="text-amber-400 fill-current" />
+                    <Star key={i} size={20} className="text-forest-400 fill-current" />
                   ))}
                 </div>
                 <p className="text-gray-700 mb-6 italic flex-grow">"{testimonial.text}"</p>
@@ -384,7 +372,7 @@ const Home = () => {
                       id="name"
                       name="name"
                       placeholder="e.g. John Doe"
-                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition"
+                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-500 focus:border-transparent transition"
                       required
                     />
                   </div>
@@ -397,7 +385,7 @@ const Home = () => {
                       id="email"
                       name="email"
                       placeholder="e.g. john.doe@example.com"
-                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition"
+                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-500 focus:border-transparent transition"
                       required
                     />
                   </div>
@@ -412,7 +400,7 @@ const Home = () => {
                       id="phone"
                       name="phone"
                       placeholder="e.g. +27 12 345 6789"
-                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition"
+                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-500 focus:border-transparent transition"
                       required
                       pattern="^(?:\\+27|0)\\d{9}$"
                     />
@@ -424,7 +412,7 @@ const Home = () => {
                     <select
                       id="projectType"
                       name="projectType"
-                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition"
+                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-500 focus:border-transparent transition"
                       required
                     >
                       <option value="">Select a project type</option>
@@ -445,13 +433,13 @@ const Home = () => {
                     name="message"
                     rows={5}
                     placeholder="Tell us about your vision, timeline, and any specific needs..."
-                    className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition"
+                    className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-500 focus:border-transparent transition"
                   ></textarea>
                 </div>
                 <div className="text-left">
                   <button
                     type="submit"
-                    className="inline-block bg-gradient-to-r from-amber-600 to-amber-700 text-white px-8 py-4 rounded-lg hover:from-amber-700 hover:to-amber-800 transition-all duration-300 font-semibold text-lg items-center justify-center space-x-2 group shadow-lg"
+                    className="inline-block bg-gradient-to-r from-forest-600 to-forest-700 text-white px-8 py-4 rounded-lg hover:from-forest-700 hover:to-forest-800 transition-all duration-300 font-semibold text-lg items-center justify-center space-x-2 group shadow-lg"
                   >
                     <span>Send Your Request</span>
                     <ArrowRight size={20} className="inline-block ml-2 group-hover:translate-x-1 transition-transform" />
@@ -466,26 +454,26 @@ const Home = () => {
                 <h3 className="text-2xl font-bold mb-6 text-gray-800">Our Contact Details</h3>
                 <div className="space-y-6">
                   <div className="flex items-center space-x-4">
-                    <div className="bg-amber-100 p-3 rounded-full flex-shrink-0">
-                      <Phone size={24} className="text-amber-600" />
+                    <div className="bg-gray-100 p-3 rounded-full flex-shrink-0">
+                      <Phone size={24} className="text-forest-700" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-lg text-gray-800">Phone</h4>
-                      <a href="tel:+27799352223" className="text-gray-600 hover:text-amber-600 transition-colors">+27 79 935 2223</a>
+                      <a href="tel:+27799352223" className="text-gray-600 hover:text-forest-600 transition-colors">+27 79 935 2223</a>
                     </div>
                   </div>
                   <div className="flex items-center space-x-4">
-                    <div className="bg-amber-100 p-3 rounded-full flex-shrink-0">
-                      <Mail size={24} className="text-amber-600" />
+                    <div className="bg-gray-100 p-3 rounded-full flex-shrink-0">
+                      <Mail size={24} className="text-forest-700" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-lg text-gray-800">Email</h4>
-                      <a href="mailto:info@kdinteriors.co.za" className="text-gray-600 hover:text-amber-600 transition-colors">info@kdinteriors.co.za</a>
+                      <a href="mailto:info@kdinteriors.co.za" className="text-gray-600 hover:text-forest-600 transition-colors">info@kdinteriors.co.za</a>
                     </div>
                   </div>
                   <div className="flex items-start space-x-4">
-                    <div className="bg-amber-100 p-3 rounded-full flex-shrink-0">
-                      <Clock size={24} className="text-amber-600" />
+                    <div className="bg-gray-100 p-3 rounded-full flex-shrink-0">
+                      <Clock size={24} className="text-forest-700" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-lg text-gray-800">Business Hours</h4>
@@ -495,8 +483,8 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="flex items-start space-x-4">
-                    <div className="bg-amber-100 p-3 rounded-full flex-shrink-0">
-                      <MapPin size={24} className="text-amber-600" />
+                    <div className="bg-gray-100 p-3 rounded-full flex-shrink-0">
+                      <MapPin size={24} className="text-forest-700" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-lg text-gray-800">Location</h4>
@@ -514,7 +502,7 @@ const Home = () => {
       {/* Map Section - You can embed a map here if needed */}
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-amber-600 to-amber-700 text-white">
+      <section className="py-20 bg-gradient-to-r from-forest-600 to-forest-700 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Ready to Transform Your Space?
@@ -525,14 +513,14 @@ const Home = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
               href="/#contact-section"
-              className="bg-white text-amber-600 px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors font-semibold text-lg inline-flex items-center justify-center space-x-2"
+              className="bg-white text-forest-600 px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors font-semibold text-lg inline-flex items-center justify-center space-x-2"
             >
               <span>Get Free Quote</span>
               <ArrowRight size={20} />
             </a>
             <a 
               href="tel:+27799352223"
-              className="border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white hover:text-amber-600 transition-colors font-semibold text-lg inline-flex items-center justify-center space-x-2"
+              className="border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white hover:text-forest-600 transition-colors font-semibold text-lg inline-flex items-center justify-center space-x-2"
             >
               <Phone size={20} />
               <span>Call Now: +27 79 935 2223</span>
@@ -553,7 +541,7 @@ const Home = () => {
             </p>
             <button
               onClick={() => setIsModalOpen(false)}
-              className="bg-gradient-to-r from-amber-600 to-amber-700 text-white px-8 py-4 rounded-lg hover:from-amber-700 hover:to-amber-800 transition-all duration-300 font-semibold text-lg"
+              className="bg-gradient-to-r from-forest-600 to-forest-700 text-white px-8 py-4 rounded-lg hover:from-forest-700 hover:to-forest-800 transition-all duration-300 font-semibold text-lg"
             >
               Close
             </button>
