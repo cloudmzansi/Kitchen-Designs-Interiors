@@ -192,66 +192,68 @@ const Header = () => {
               </button>
             </div>
             {/* Menu Items */}
-            <nav className="flex flex-col items-center justify-center gap-2 flex-1 w-full py-6">
+            <nav className="flex flex-col items-center flex-1 w-full py-6">
               <a
                 href="/#top"
                 onClick={(e) => { handleScrollClick(e, 'top'); setIsMenuOpen(false); }}
-                className="text-xl font-semibold text-black w-11/12 text-center py-4 rounded-lg hover:bg-gray-100 transition-colors"
+                className="text-xl font-semibold text-black w-11/12 text-center py-4 rounded-lg hover:bg-gray-100 transition-colors mb-2"
               >
                 Home
               </a>
               <a
                 href="/#about-us"
                 onClick={(e) => { handleScrollClick(e, 'about-us'); setIsMenuOpen(false); }}
-                className="text-xl font-semibold text-black w-11/12 text-center py-4 rounded-lg hover:bg-gray-100 transition-colors"
+                className="text-xl font-semibold text-black w-11/12 text-center py-4 rounded-lg hover:bg-gray-100 transition-colors mb-2"
               >
                 About Us
               </a>
               {/* Services Dropdown */}
-              <button
-                onClick={() => setIsMobileServicesOpen((open) => !open)}
-                className="flex items-center justify-between w-11/12 text-xl font-semibold text-black py-4 rounded-lg hover:bg-gray-100 transition-colors focus:outline-none"
-                aria-expanded={isMobileServicesOpen}
-              >
-                <span>Services</span>
-                <ChevronDown size={24} className={`ml-2 transition-transform duration-200 ${isMobileServicesOpen ? 'rotate-180' : ''}`} />
-              </button>
-              {isMobileServicesOpen && (
-                <div className="flex flex-col w-10/12 mx-auto mb-2 bg-gray-50 border-l-4 border-forest-700 rounded-lg">
-                  <Link
-                    to="/kitchens"
-                    onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
-                    className="text-base font-medium text-black w-full text-left py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors"
-                  >
-                    Kitchen Renovations
-                  </Link>
-                  <Link
-                    to="/bedrooms"
-                    onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
-                    className="text-base font-medium text-black w-full text-left py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors"
-                  >
-                    Bedroom Renovations
-                  </Link>
-                  <Link
-                    to="/bathrooms"
-                    onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
-                    className="text-base font-medium text-black w-full text-left py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors"
-                  >
-                    Bathroom Renovations
-                  </Link>
-                  <Link
-                    to="/commercial"
-                    onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
-                    className="text-base font-medium text-black w-full text-left py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors"
-                  >
-                    Commercial Renovations
-                  </Link>
-                </div>
-              )}
+              <div className="w-11/12 mb-2">
+                <button
+                  onClick={() => setIsMobileServicesOpen((open) => !open)}
+                  className="flex items-center justify-between w-full text-xl font-semibold text-black py-4 rounded-lg hover:bg-gray-100 transition-colors focus:outline-none"
+                  aria-expanded={isMobileServicesOpen}
+                >
+                  <span>Services</span>
+                  <ChevronDown size={24} className={`ml-2 transition-transform duration-200 ${isMobileServicesOpen ? 'rotate-180' : ''}`} />
+                </button>
+                {isMobileServicesOpen && (
+                  <div className="flex flex-col bg-gray-50 border-l-4 border-forest-700 rounded-lg mt-2 mb-2 p-2" style={{ border: '2px solid red' }}>
+                    <Link
+                      to="/kitchens"
+                      onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
+                      className="text-base font-medium text-black w-full text-left py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors"
+                    >
+                      Kitchen Renovations
+                    </Link>
+                    <Link
+                      to="/bedrooms"
+                      onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
+                      className="text-base font-medium text-black w-full text-left py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors"
+                    >
+                      Bedroom Renovations
+                    </Link>
+                    <Link
+                      to="/bathrooms"
+                      onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
+                      className="text-base font-medium text-black w-full text-left py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors"
+                    >
+                      Bathroom Renovations
+                    </Link>
+                    <Link
+                      to="/commercial"
+                      onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
+                      className="text-base font-medium text-black w-full text-left py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors"
+                    >
+                      Commercial Renovations
+                    </Link>
+                  </div>
+                )}
+              </div>
               <a
                 href="/#contact-section"
                 onClick={(e) => { handleScrollClick(e, 'contact-section'); setIsMenuOpen(false); }}
-                className="text-xl font-semibold text-black w-11/12 text-center py-4 rounded-lg hover:bg-gray-100 transition-colors"
+                className="text-xl font-semibold text-black w-11/12 text-center py-4 rounded-lg hover:bg-gray-100 transition-colors mb-2"
               >
                 Contact Us
               </a>
