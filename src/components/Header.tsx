@@ -208,43 +208,41 @@ const Header = () => {
                 About Us
               </a>
               {/* Services Dropdown */}
-              <div className="w-11/12 mx-auto mb-2">
+              <div className="w-11/12 mx-auto mb-2 flex flex-col items-center">
                 <button
-                  className="w-full text-base md:text-xl font-semibold text-black py-3 md:py-4 rounded-lg hover:bg-gray-100 transition-colors focus:outline-none text-center flex justify-center items-center"
+                  className="w-full text-xl font-semibold text-black py-4 rounded-lg hover:bg-gray-100 transition-colors focus:outline-none flex justify-center items-center"
                   aria-expanded={isMobileServicesOpen}
-                  type="button"
-                  onClick={() => setIsMobileServicesOpen((open) => !open)}
                 >
                   <span>Services</span>
                   <ChevronDown size={24} className={`ml-2 transition-transform duration-200 ${isMobileServicesOpen ? 'rotate-180' : ''}`} />
                 </button>
                 {isMobileServicesOpen && (
-                  <div className="flex flex-col bg-gray-50 rounded-lg mt-2 mb-2 w-full mx-auto text-center">
+                  <div className="flex flex-col bg-gray-50 rounded-lg mt-2 mb-2 w-full">
                     <Link
                       to="/kitchens"
                       onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
-                      className="text-sm md:text-base font-medium text-black w-full py-2 md:py-3 px-3 md:px-4 rounded-lg hover:bg-gray-100 transition-colors mx-auto text-center"
+                      className="text-base font-medium text-black w-full py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors text-center"
                     >
                       Kitchen Renovations
                     </Link>
                     <Link
                       to="/bedrooms"
                       onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
-                      className="text-sm md:text-base font-medium text-black w-full py-2 md:py-3 px-3 md:px-4 rounded-lg hover:bg-gray-100 transition-colors mx-auto text-center"
+                      className="text-base font-medium text-black w-full py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors text-center"
                     >
                       Bedroom Renovations
                     </Link>
                     <Link
                       to="/bathrooms"
                       onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
-                      className="text-sm md:text-base font-medium text-black w-full py-2 md:py-3 px-3 md:px-4 rounded-lg hover:bg-gray-100 transition-colors mx-auto text-center"
+                      className="text-base font-medium text-black w-full py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors text-center"
                     >
                       Bathroom Renovations
                     </Link>
                     <Link
                       to="/commercial"
                       onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
-                      className="text-sm md:text-base font-medium text-black w-full py-2 md:py-3 px-3 md:px-4 rounded-lg hover:bg-gray-100 transition-colors mx-auto text-center"
+                      className="text-base font-medium text-black w-full py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors text-center"
                     >
                       Commercial Renovations
                     </Link>
@@ -254,19 +252,29 @@ const Header = () => {
               <a
                 href="/#contact-section"
                 onClick={(e) => { handleScrollClick(e, 'contact-section'); setIsMenuOpen(false); }}
-                className="w-full bg-forest-700 text-white text-base md:text-lg font-bold py-3 md:py-4 rounded-lg text-center shadow-lg hover:bg-forest-800 transition-colors"
+                className="text-xl font-semibold text-black w-11/12 mx-auto text-center py-4 rounded-lg hover:bg-gray-100 transition-colors mb-2"
+              >
+                Contact Us
+              </a>
+            </nav>
+            {/* Footer CTA & Contact */}
+            <div className="flex flex-col gap-2 w-full p-4 border-t border-gray-100">
+              <a
+                href="/#contact-section"
+                onClick={(e) => { handleScrollClick(e, 'contact-section'); setIsMenuOpen(false); }}
+                className="w-full bg-forest-700 text-white text-lg font-bold py-4 rounded-lg text-center shadow-lg hover:bg-forest-800 transition-colors"
               >
                 Get Free Quote
               </a>
               <a
                 href="tel:+27799352223"
-                className="w-full bg-forest-700 text-white text-base md:text-lg font-semibold py-3 md:py-4 rounded-lg text-center border border-forest-700 hover:bg-forest-800 hover:text-white transition-colors flex items-center justify-center gap-2"
+                className="w-full bg-forest-700 text-white text-lg font-semibold py-4 rounded-lg text-center border border-forest-700 hover:bg-forest-800 hover:text-white transition-colors flex items-center justify-center gap-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <Phone size={20} className="text-white" />
                 <span>Call Now: +27 79 935 2223</span>
               </a>
-            </nav>
+            </div>
           </div>
         )}
       </div>
