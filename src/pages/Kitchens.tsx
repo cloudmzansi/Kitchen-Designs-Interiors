@@ -198,15 +198,11 @@ const Kitchens = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
                 onClick={(e) => handleScrollClick(e, 'contact-section')}
-                className="bg-gradient-to-r from-forest-700 to-forest-600 text-white px-8 py-4 rounded-lg hover:from-forest-800 hover:to-forest-900 transition-colors font-semibold text-lg inline-flex items-center justify-center space-x-2 mt-6"
+                className="bg-gradient-to-r from-forest-700 to-forest-600 text-white px-8 py-4 rounded-lg hover:from-forest-800 hover:to-forest-900 transition-colors font-semibold text-lg inline-flex items-center justify-center space-x-2"
               >
                 <span>Get Free Consultation</span>
                 <ArrowRight size={20} />
               </button>
-              <a href="tel:+27799352223" className="inline-flex items-center space-x-2 text-forest-600 font-semibold hover:text-forest-700 transition-colors group">
-                <Phone size={20} />
-                <span>Call: +27 79 935 2223</span>
-              </a>
             </div>
           </div>
         </div>
