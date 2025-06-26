@@ -34,6 +34,17 @@ const Header = () => {
     setIsServicesOpen(false);
   }, [location]);
 
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+    return () => {
+      document.body.classList.remove('overflow-hidden');
+    };
+  }, [isMenuOpen]);
+
   // Determine if on home page or specialty/policy pages
   const specialtyOrPolicyPages = [
     '/kitchens', '/bedrooms', '/bathrooms', '/commercial', '/privacy-policy', '/terms-of-service'
@@ -156,9 +167,9 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="fixed inset-0 z-50 flex flex-col bg-white lg:hidden">
+          <div className="fixed inset-0 z-[9999] bg-white flex flex-col items-center justify-between min-h-screen w-screen lg:hidden">
             {/* Top Bar with Logo and Close */}
-            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+            <div className="w-full flex items-center justify-between p-4 border-b border-gray-200">
               <Link to="/" className="flex items-center" onClick={() => setIsMenuOpen(false)}>
                 <div className="w-12 h-12 bg-gradient-to-br from-forest-700 to-forest-600 rounded-xl flex items-center justify-center shadow-lg">
                   <span className="text-white font-bold text-2xl tracking-tighter" style={{letterSpacing: '-0.15em'}}>KD</span>
@@ -173,59 +184,59 @@ const Header = () => {
               </button>
             </div>
             {/* Menu Items */}
-            <nav className="flex-1 flex flex-col items-center justify-center gap-6 px-6">
+            <nav className="flex flex-col items-center justify-center gap-6 flex-1 w-full">
               <a
                 href="/#top"
                 onClick={(e) => { handleScrollClick(e, 'top'); setIsMenuOpen(false); }}
-                className={`text-2xl font-semibold ${isHomePage && !isScrolled ? 'text-white bg-forest-700' : 'text-black'} w-full text-center py-4 rounded-lg transition-colors`}
+                className={`text-2xl font-semibold ${isHomePage && !isScrolled ? 'text-white bg-forest-700' : 'text-black'} w-11/12 text-center py-4 rounded-lg transition-colors`}
               >
                 Home
               </a>
               <a
                 href="/#about-us"
                 onClick={(e) => { handleScrollClick(e, 'about-us'); setIsMenuOpen(false); }}
-                className={`text-2xl font-semibold ${isHomePage && !isScrolled ? 'text-white bg-forest-700' : 'text-black'} w-full text-center py-4 rounded-lg transition-colors`}
+                className={`text-2xl font-semibold ${isHomePage && !isScrolled ? 'text-white bg-forest-700' : 'text-black'} w-11/12 text-center py-4 rounded-lg transition-colors`}
               >
                 About Us
               </a>
               <Link
                 to="/kitchens"
                 onClick={() => setIsMenuOpen(false)}
-                className="text-2xl font-semibold text-black w-full text-center py-4 rounded-lg transition-colors"
+                className="text-2xl font-semibold text-black w-11/12 text-center py-4 rounded-lg transition-colors"
               >
                 Kitchen Renovations
               </Link>
               <Link
                 to="/bedrooms"
                 onClick={() => setIsMenuOpen(false)}
-                className="text-2xl font-semibold text-black w-full text-center py-4 rounded-lg transition-colors"
+                className="text-2xl font-semibold text-black w-11/12 text-center py-4 rounded-lg transition-colors"
               >
                 Bedroom Renovations
               </Link>
               <Link
                 to="/bathrooms"
                 onClick={() => setIsMenuOpen(false)}
-                className="text-2xl font-semibold text-black w-full text-center py-4 rounded-lg transition-colors"
+                className="text-2xl font-semibold text-black w-11/12 text-center py-4 rounded-lg transition-colors"
               >
                 Bathroom Renovations
               </Link>
               <Link
                 to="/commercial"
                 onClick={() => setIsMenuOpen(false)}
-                className="text-2xl font-semibold text-black w-full text-center py-4 rounded-lg transition-colors"
+                className="text-2xl font-semibold text-black w-11/12 text-center py-4 rounded-lg transition-colors"
               >
                 Commercial Renovations
               </Link>
               <a
                 href="/#contact-section"
                 onClick={(e) => { handleScrollClick(e, 'contact-section'); setIsMenuOpen(false); }}
-                className={`text-2xl font-semibold ${isHomePage && !isScrolled ? 'text-white bg-forest-700' : 'text-black'} w-full text-center py-4 rounded-lg transition-colors`}
+                className={`text-2xl font-semibold ${isHomePage && !isScrolled ? 'text-white bg-forest-700' : 'text-black'} w-11/12 text-center py-4 rounded-lg transition-colors`}
               >
                 Contact Us
               </a>
             </nav>
             {/* Footer CTA & Contact */}
-            <div className="flex flex-col gap-3 p-6 border-t border-gray-100">
+            <div className="flex flex-col gap-3 w-full p-6 border-t border-gray-100">
               <a
                 href="/#contact-section"
                 onClick={(e) => { handleScrollClick(e, 'contact-section'); setIsMenuOpen(false); }}
