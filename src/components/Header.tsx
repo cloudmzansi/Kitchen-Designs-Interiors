@@ -192,23 +192,23 @@ const Header = () => {
               </button>
             </div>
             {/* Menu Items */}
-            <nav className="flex flex-col items-center flex-1 w-full py-6">
+            <nav className="flex flex-col w-full py-6">
               <a
                 href="/#top"
                 onClick={(e) => { handleScrollClick(e, 'top'); setIsMenuOpen(false); }}
-                className="text-xl font-semibold text-black w-11/12 text-center py-4 rounded-lg hover:bg-gray-100 transition-colors mb-2"
+                className="text-xl font-semibold text-black w-11/12 mx-auto text-center py-4 rounded-lg hover:bg-gray-100 transition-colors mb-2"
               >
                 Home
               </a>
               <a
                 href="/#about-us"
                 onClick={(e) => { handleScrollClick(e, 'about-us'); setIsMenuOpen(false); }}
-                className="text-xl font-semibold text-black w-11/12 text-center py-4 rounded-lg hover:bg-gray-100 transition-colors mb-2"
+                className="text-xl font-semibold text-black w-11/12 mx-auto text-center py-4 rounded-lg hover:bg-gray-100 transition-colors mb-2"
               >
                 About Us
               </a>
               {/* Services Dropdown */}
-              <div className="w-11/12 mb-2">
+              <div className="w-11/12 mx-auto mb-2">
                 <button
                   onClick={() => setIsMobileServicesOpen((open) => !open)}
                   className="flex items-center justify-between w-full text-xl font-semibold text-black py-4 rounded-lg hover:bg-gray-100 transition-colors focus:outline-none"
@@ -219,6 +219,7 @@ const Header = () => {
                 </button>
                 {isMobileServicesOpen && (
                   <div className="flex flex-col bg-gray-50 border-l-4 border-forest-700 rounded-lg mt-2 mb-2 p-2" style={{ border: '2px solid red' }}>
+                    <div className="text-xs text-red-700 mb-2">[Dropdown is rendering]</div>
                     <Link
                       to="/kitchens"
                       onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
@@ -253,7 +254,7 @@ const Header = () => {
               <a
                 href="/#contact-section"
                 onClick={(e) => { handleScrollClick(e, 'contact-section'); setIsMenuOpen(false); }}
-                className="text-xl font-semibold text-black w-11/12 text-center py-4 rounded-lg hover:bg-gray-100 transition-colors mb-2"
+                className="text-xl font-semibold text-black w-11/12 mx-auto text-center py-4 rounded-lg hover:bg-gray-100 transition-colors mb-2"
               >
                 Contact Us
               </a>
