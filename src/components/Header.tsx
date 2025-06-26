@@ -11,6 +11,7 @@ const Header = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
   const { handleScrollClick } = useScrollTo();
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -199,34 +200,47 @@ const Header = () => {
               >
                 About Us
               </a>
-              <Link
-                to="/kitchens"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-xl font-semibold text-black w-11/12 text-center py-4 rounded-lg hover:bg-gray-100 transition-colors"
+              {/* Services Dropdown */}
+              <button
+                onClick={() => setIsMobileServicesOpen((open) => !open)}
+                className="flex items-center justify-between w-11/12 text-xl font-semibold text-black py-4 rounded-lg hover:bg-gray-100 transition-colors focus:outline-none"
+                aria-expanded={isMobileServicesOpen}
               >
-                Kitchen Renovations
-              </Link>
-              <Link
-                to="/bedrooms"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-xl font-semibold text-black w-11/12 text-center py-4 rounded-lg hover:bg-gray-100 transition-colors"
-              >
-                Bedroom Renovations
-              </Link>
-              <Link
-                to="/bathrooms"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-xl font-semibold text-black w-11/12 text-center py-4 rounded-lg hover:bg-gray-100 transition-colors"
-              >
-                Bathroom Renovations
-              </Link>
-              <Link
-                to="/commercial"
-                onClick={() => setIsMenuOpen(false)}
-                className="text-xl font-semibold text-black w-11/12 text-center py-4 rounded-lg hover:bg-gray-100 transition-colors"
-              >
-                Commercial Renovations
-              </Link>
+                <span>Services</span>
+                <ChevronDown size={24} className={`ml-2 transition-transform duration-200 ${isMobileServicesOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {isMobileServicesOpen && (
+                <div className="flex flex-col w-10/12 mx-auto mb-2">
+                  <Link
+                    to="/kitchens"
+                    onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
+                    className="text-base font-medium text-black w-full text-left py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors"
+                  >
+                    Kitchen Renovations
+                  </Link>
+                  <Link
+                    to="/bedrooms"
+                    onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
+                    className="text-base font-medium text-black w-full text-left py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors"
+                  >
+                    Bedroom Renovations
+                  </Link>
+                  <Link
+                    to="/bathrooms"
+                    onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
+                    className="text-base font-medium text-black w-full text-left py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors"
+                  >
+                    Bathroom Renovations
+                  </Link>
+                  <Link
+                    to="/commercial"
+                    onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
+                    className="text-base font-medium text-black w-full text-left py-3 px-4 rounded-lg hover:bg-gray-100 transition-colors"
+                  >
+                    Commercial Renovations
+                  </Link>
+                </div>
+              )}
               <a
                 href="/#contact-section"
                 onClick={(e) => { handleScrollClick(e, 'contact-section'); setIsMenuOpen(false); }}
