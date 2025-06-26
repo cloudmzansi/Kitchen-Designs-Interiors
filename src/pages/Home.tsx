@@ -77,6 +77,28 @@ const Home = () => {
     }
   };
 
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch('https://getform.io/f/amdmxozb', {
+        method: 'POST',
+        body: formData,
+      });
+      
+      if (response.ok) {
+        setIsModalOpen(true);
+        form.reset();
+      } else {
+        alert('There was an error submitting the form.');
+      }
+    } catch (error) {
+      alert('There was an error submitting the form.');
+    }
+  };
+
   const services: Service[] = [
     {
       title: "Kitchen Renovations",
@@ -505,8 +527,7 @@ const Home = () => {
             <div className="bg-gray-50 rounded-2xl p-8">
               <h3 className="text-2xl font-bold mb-6 text-gray-800">Request Your Free Quote</h3>
               <form
-                action="https://getform.io/f/amdmxozb"
-                method="POST"
+                onSubmit={handleSubmit}
                 className="space-y-6"
               >
                 {/* Hidden honeypot field to prevent spam */}
