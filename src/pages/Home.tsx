@@ -217,7 +217,7 @@ const Home = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60"></div>
         </div>
         <div className="relative z-10 container mx-auto px-4 flex flex-col items-center justify-end min-h-screen min-h-[100svh]">
-          <div className="max-w-4xl mx-auto flex flex-col items-center justify-center pb-12 md:pb-24 gap-8 md:gap-14 w-full">
+          <div className="max-w-4xl mx-auto flex flex-col items-center justify-center pb-8 md:pb-24 gap-8 md:gap-14 w-full">
             <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-2 md:mb-6">
               <span className="text-white">Beautiful Renovations.</span>
               <span className="block text-white">Inspired Living.</span>
