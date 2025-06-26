@@ -195,19 +195,19 @@ const Home = () => {
             <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto leading-relaxed mb-4 md:mb-8">
               From kitchens to bedrooms and bathrooms, we create bespoke spaces that reflect your style and enhance your lifestyle.
             </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center mt-12 md:mt-16">
+            <div className="flex flex-row flex-wrap gap-3 justify-center mt-8">
               <a 
                 href="/#contact-section"
-                className="bg-forest-700 text-white px-10 py-4 rounded-lg hover:bg-forest-800 transition-all duration-300 font-semibold text-lg flex items-center justify-center space-x-2 group shadow-2xl"
+                className="bg-forest-700 text-white px-5 py-2 rounded-lg hover:bg-forest-800 transition-all duration-300 font-semibold text-base flex items-center justify-center space-x-2 group shadow-2xl"
               >
                 <span>Get Your Free Quote</span>
-                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </a>
               <a 
                 href="tel:+27799352223"
-                className="border-2 border-white text-white px-10 py-4 rounded-lg hover:bg-white hover:text-gray-900 transition-all duration-300 font-semibold text-lg flex items-center justify-center space-x-2"
+                className="border-2 border-white text-white px-5 py-2 rounded-lg hover:bg-white hover:text-gray-900 transition-all duration-300 font-semibold text-base flex items-center justify-center space-x-2"
               >
-                <Phone size={20} />
+                <Phone size={18} />
                 <span>Call Now</span>
               </a>
             </div>
