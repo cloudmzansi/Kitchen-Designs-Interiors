@@ -93,7 +93,12 @@ const Header = () => {
     } ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'}`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
-          <Link to="/" className="flex items-center">
+          <Link to="/" className="flex items-center" onClick={(e) => {
+            if (location.pathname === '/') {
+              e.preventDefault();
+              handleScrollClick(e, 'top');
+            }
+          }}>
             <div className="w-12 h-12 bg-gradient-to-br from-forest-700 to-forest-600 rounded-xl flex items-center justify-center shadow-lg">
               <span className="text-white font-bold text-2xl tracking-tighter" style={{letterSpacing: '-0.15em'}}>KD</span>
             </div>
@@ -178,7 +183,13 @@ const Header = () => {
           <div className="fixed inset-0 z-[9999] bg-white flex flex-col min-h-screen w-screen lg:hidden">
             {/* Top Bar with Logo and Close */}
             <div className="w-full flex items-center justify-between p-4 border-b border-gray-200">
-              <Link to="/" className="flex items-center" onClick={() => setIsMenuOpen(false)}>
+              <Link to="/" className="flex items-center" onClick={(e) => {
+                setIsMenuOpen(false);
+                if (location.pathname === '/') {
+                  e.preventDefault();
+                  handleScrollClick(e, 'top');
+                }
+              }}>
                 <div className="w-12 h-12 bg-gradient-to-br from-forest-700 to-forest-600 rounded-xl flex items-center justify-center shadow-lg">
                   <span className="text-white font-bold text-2xl tracking-tighter" style={{letterSpacing: '-0.15em'}}>KD</span>
                 </div>
