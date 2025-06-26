@@ -169,14 +169,14 @@ const Kitchens = () => {
           </div>
 
           {/* Gallery Grid */}
-          <div className="grid grid-cols-2 gap-8">
+          <div className="grid grid-cols-2 gap-2 md:gap-8">
             {filteredGallery.map((kitchen, index) => (
               <div key={kitchen.id} className="bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer" onClick={() => handleImageClick(index)}>
                 <div className="relative overflow-hidden">
                   <img
                     src={kitchen.image}
                     alt={`Kitchen Project ${kitchen.id}`}
-                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full aspect-[1/1] object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
               </div>
