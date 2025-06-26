@@ -67,7 +67,7 @@ const PrivacyPolicy = () => {
                   <br />
                   Email: <a href="mailto:info@kdinteriors.co.za">info@kdinteriors.co.za</a>
                   <br />
-                  Phone: <a href="tel:+27799352223">+27 79 935 2223</a>
+                  Phone: <a href="tel:+27799352223" className="text-black hover:text-gray-800">+27 79 935 2223</a>
                 </p>
               </div>
             </div>

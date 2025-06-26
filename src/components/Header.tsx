@@ -34,16 +34,22 @@ const Header = () => {
     setIsServicesOpen(false);
   }, [location]);
 
-  // Determine if on home page
-  const isHomePage = location.pathname === "/";
+  // Determine if on home page or specialty/policy pages
+  const specialtyOrPolicyPages = [
+    '/kitchens', '/bedrooms', '/bathrooms', '/commercial', '/privacy-policy', '/terms-of-service'
+  ];
+  const isSpecialtyOrPolicyPage = specialtyOrPolicyPages.includes(location.pathname);
 
-  const navLinkClasses = isHomePage
+  const navLinkClasses = isSpecialtyOrPolicyPage
     ? (isScrolled ? 'text-gray-700 hover:text-black' : 'text-white hover:text-gray-200')
     : (isScrolled ? 'text-gray-700 hover:text-black' : 'text-gray-800 hover:text-black');
 
   const logoTextClasses = isScrolled ? 'text-forest-900' : 'text-white';
   
-  const phoneTextClasses = isScrolled ? 'text-forest-600 hover:text-forest-700' : 'text-forest-100 hover:text-white';
+  // Phone number color logic
+  const phoneTextClasses = isSpecialtyOrPolicyPage
+    ? 'text-black hover:text-gray-800'
+    : (isScrolled ? 'text-forest-600 hover:text-forest-700' : 'text-forest-100 hover:text-white');
 
   const ctaButtonClasses = "bg-forest-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-forest-800 transition-all duration-300";
 
@@ -114,7 +120,7 @@ const Header = () => {
           {/* Contact Info & CTA */}
           <div className="hidden lg:flex items-center space-x-6">
             <a href="tel:+27799352223" className={`flex items-center space-x-2 font-semibold transition-colors duration-300 ${phoneTextClasses}`}>
-              <Phone size={16} className={isScrolled ? 'text-forest-600' : 'text-white'} />
+              <Phone size={16} className={isSpecialtyOrPolicyPage ? 'text-black' : (isScrolled ? 'text-forest-600' : 'text-white')} />
               <span>+27 79 935 2223</span>
             </a>
             <a 
@@ -145,7 +151,7 @@ const Header = () => {
             />
             {/* Side Drawer */}
             <aside
-              className="fixed top-0 right-0 z-50 h-full w-4/5 max-w-xs bg-white shadow-2xl flex flex-col transition-transform duration-300 transform translate-x-0 lg:hidden"
+              className="fixed top-0 right-0 z-50 h-full w-full max-w-xs bg-white shadow-2xl flex flex-col transition-transform duration-300 transform translate-x-0 lg:hidden"
               tabIndex={-1}
               aria-modal="true"
               role="dialog"
@@ -243,10 +249,11 @@ const Header = () => {
                 </a>
                 <a
                   href="tel:+27799352223"
-                  className="w-full bg-forest-50 text-forest-800 text-lg font-semibold py-4 rounded-lg text-center border border-forest-200 hover:bg-forest-100 hover:text-forest-900 transition-colors"
+                  className="w-full bg-gray-100 text-black text-lg font-semibold py-4 rounded-lg text-center border border-gray-300 hover:bg-gray-200 hover:text-gray-800 transition-colors flex items-center justify-center gap-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Call Now: +27 79 935 2223
+                  <Phone size={20} className="text-black" />
+                  <span>Call Now: +27 79 935 2223</span>
                 </a>
               </div>
             </aside>

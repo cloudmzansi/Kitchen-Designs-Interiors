@@ -84,9 +84,9 @@ const Bedrooms = () => {
             </button>
             <a 
               href="tel:+27799352223"
-              className="border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white hover:text-forest-900 transition-colors font-semibold text-lg inline-flex items-center justify-center space-x-2"
+              className="border-2 border-white text-black px-8 py-4 rounded-lg hover:bg-white hover:text-gray-800 transition-colors font-semibold text-lg inline-flex items-center justify-center space-x-2"
             >
-              <Phone size={20} />
+              <Phone size={20} className="text-black" />
               <span>Call: +27 79 935 2223</span>
             </a>
           </div>
