@@ -82,18 +82,31 @@ const Home = () => {
     const form = event.currentTarget;
     const formData = new FormData(form);
 
+    // Convert FormData to object
+    const data: { [key: string]: any } = {};
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+    // Ensure access_key is present
+    data.access_key = "1a5b610a-5454-42da-89ae-40d3d3820e44";
+
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(data),
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (result.success) {
         setIsModalOpen(true);
         form.reset();
       } else {
-        // Handle error case
-        console.error('Form submission failed');
+        console.error('Form submission failed', result);
       }
     } catch (error) {
       console.error('An error occurred:', error);
