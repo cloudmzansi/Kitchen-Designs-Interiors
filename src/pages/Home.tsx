@@ -9,6 +9,12 @@ import serviceBedroom from '../assets/home/home-5.jpg';
 import serviceBathroom from '../assets/home/home-6.jpg';
 import serviceCommercial from '../assets/home/home-7.jpg';
 
+declare global {
+  interface Window {
+    grecaptcha: any;
+  }
+}
+
 type Service = {
   title: string;
   description: string;
@@ -81,6 +87,13 @@ const Home = () => {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
+
+    const recaptchaToken = (window as any).grecaptcha?.getResponse();
+    if (!recaptchaToken) {
+      alert("Please complete the reCAPTCHA.");
+      return;
+    }
+    formData.append("g-recaptcha-response", recaptchaToken);
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
@@ -603,6 +616,7 @@ const Home = () => {
                     className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-500 focus:border-transparent transition"
                   ></textarea>
                 </div>
+                <div className="g-recaptcha" data-sitekey="6Ld06m4rAAAAAHEZlzvQdLGyu5VMEb7_fjoiPamI" style={{transform: 'scale(1)', transformOrigin: '0 0'}}></div>
                 <div className="text-left">
                   <button
                     type="submit"
