@@ -38,18 +38,19 @@ const Header = () => {
   const specialtyOrPolicyPages = [
     '/kitchens', '/bedrooms', '/bathrooms', '/commercial', '/privacy-policy', '/terms-of-service'
   ];
+  const isHomePage = location.pathname === "/";
   const isSpecialtyOrPolicyPage = specialtyOrPolicyPages.includes(location.pathname);
 
-  const navLinkClasses = isSpecialtyOrPolicyPage
-    ? (isScrolled ? 'text-gray-700 hover:text-black' : 'text-white hover:text-gray-200')
-    : (isScrolled ? 'text-gray-700 hover:text-black' : 'text-gray-800 hover:text-black');
+  // Navigation menu item color logic
+  const navLinkClasses = isHomePage
+    ? (isScrolled ? 'text-black hover:text-black' : 'text-white hover:text-white')
+    : 'text-black hover:text-black';
 
   const logoTextClasses = isScrolled ? 'text-forest-900' : 'text-white';
   
-  // Phone number color logic
-  const phoneTextClasses = isSpecialtyOrPolicyPage
-    ? 'text-black hover:text-gray-800'
-    : (isScrolled ? 'text-forest-600 hover:text-forest-700' : 'text-forest-100 hover:text-white');
+  // Phone number and icon color logic
+  // Use solid green (forest-700) for phone number and icon everywhere except hero section on service pages
+  const phoneTextClasses = 'text-forest-700 hover:text-forest-700';
 
   const ctaButtonClasses = "bg-forest-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-forest-800 transition-all duration-300";
 
@@ -120,7 +121,7 @@ const Header = () => {
           {/* Contact Info & CTA */}
           <div className="hidden lg:flex items-center space-x-6">
             <a href="tel:+27799352223" className={`flex items-center space-x-2 font-semibold transition-colors duration-300 ${phoneTextClasses}`}>
-              <Phone size={16} className={isSpecialtyOrPolicyPage ? 'text-black' : (isScrolled ? 'text-forest-600' : 'text-white')} />
+              <Phone size={16} className="text-forest-700" />
               <span>+27 79 935 2223</span>
             </a>
             <a 
@@ -176,14 +177,14 @@ const Header = () => {
                 <a
                   href="/#top"
                   onClick={(e) => { handleScrollClick(e, 'top'); setIsMenuOpen(false); }}
-                  className="block text-xl font-semibold text-forest-800 rounded-lg text-left hover:bg-forest-50 hover:text-forest-700 transition-colors px-3 py-3"
+                  className={`block text-xl font-semibold ${isHomePage && !isScrolled ? 'text-white' : 'text-black'} rounded-lg text-left hover:bg-forest-50 hover:text-forest-700 transition-colors px-3 py-3`}
                 >
                   Home
                 </a>
                 <a
                   href="/#about-us"
                   onClick={(e) => { handleScrollClick(e, 'about-us'); setIsMenuOpen(false); }}
-                  className="block text-xl font-semibold text-forest-800 rounded-lg text-left hover:bg-forest-50 hover:text-forest-700 transition-colors px-3 py-3"
+                  className={`block text-xl font-semibold ${isHomePage && !isScrolled ? 'text-white' : 'text-black'} rounded-lg text-left hover:bg-forest-50 hover:text-forest-700 transition-colors px-3 py-3`}
                 >
                   About Us
                 </a>
@@ -191,7 +192,7 @@ const Header = () => {
                 <div className="w-full">
                   <button
                     onClick={() => setIsServicesOpen(!isServicesOpen)}
-                    className="flex items-center justify-between w-full text-xl font-semibold text-forest-800 rounded-lg hover:bg-forest-50 hover:text-forest-700 transition-colors px-3 py-3 focus:outline-none"
+                    className={`flex items-center justify-between w-full text-xl font-semibold ${isHomePage && !isScrolled ? 'text-white' : 'text-black'} rounded-lg hover:bg-forest-50 hover:text-forest-700 transition-colors px-3 py-3 focus:outline-none`}
                     aria-expanded={isServicesOpen}
                   >
                     <span>Services</span>
@@ -202,28 +203,28 @@ const Header = () => {
                       <Link
                         to="/kitchens"
                         onClick={() => setIsMenuOpen(false)}
-                        className="block text-lg text-forest-700 rounded-lg hover:bg-forest-100 hover:text-forest-900 transition-colors px-3 py-2"
+                        className="block text-lg text-black rounded-lg hover:bg-forest-100 hover:text-forest-900 transition-colors px-3 py-2"
                       >
                         Kitchen Renovations
                       </Link>
                       <Link
                         to="/bedrooms"
                         onClick={() => setIsMenuOpen(false)}
-                        className="block text-lg text-forest-700 rounded-lg hover:bg-forest-100 hover:text-forest-900 transition-colors px-3 py-2"
+                        className="block text-lg text-black rounded-lg hover:bg-forest-100 hover:text-forest-900 transition-colors px-3 py-2"
                       >
                         Bedroom Renovations
                       </Link>
                       <Link
                         to="/bathrooms"
                         onClick={() => setIsMenuOpen(false)}
-                        className="block text-lg text-forest-700 rounded-lg hover:bg-forest-100 hover:text-forest-900 transition-colors px-3 py-2"
+                        className="block text-lg text-black rounded-lg hover:bg-forest-100 hover:text-forest-900 transition-colors px-3 py-2"
                       >
                         Bathroom Renovations
                       </Link>
                       <Link
                         to="/commercial"
                         onClick={() => setIsMenuOpen(false)}
-                        className="block text-lg text-forest-700 rounded-lg hover:bg-forest-100 hover:text-forest-900 transition-colors px-3 py-2"
+                        className="block text-lg text-black rounded-lg hover:bg-forest-100 hover:text-forest-900 transition-colors px-3 py-2"
                       >
                         Commercial Renovations
                       </Link>
@@ -233,7 +234,7 @@ const Header = () => {
                 <a
                   href="/#contact-section"
                   onClick={(e) => { handleScrollClick(e, 'contact-section'); setIsMenuOpen(false); }}
-                  className="block text-xl font-semibold text-forest-800 rounded-lg text-left hover:bg-forest-50 hover:text-forest-700 transition-colors px-3 py-3"
+                  className={`block text-xl font-semibold ${isHomePage && !isScrolled ? 'text-white' : 'text-black'} rounded-lg text-left hover:bg-forest-50 hover:text-forest-700 transition-colors px-3 py-3`}
                 >
                   Contact Us
                 </a>
@@ -249,10 +250,10 @@ const Header = () => {
                 </a>
                 <a
                   href="tel:+27799352223"
-                  className="w-full bg-gray-100 text-black text-lg font-semibold py-4 rounded-lg text-center border border-gray-300 hover:bg-gray-200 hover:text-gray-800 transition-colors flex items-center justify-center gap-2"
+                  className="w-full bg-gray-100 text-forest-700 text-lg font-semibold py-4 rounded-lg text-center border border-gray-300 hover:bg-gray-200 hover:text-forest-800 transition-colors flex items-center justify-center gap-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  <Phone size={20} className="text-black" />
+                  <Phone size={20} className="text-forest-700" />
                   <span>Call Now: +27 79 935 2223</span>
                 </a>
               </div>
