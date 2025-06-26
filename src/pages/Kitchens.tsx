@@ -4,6 +4,16 @@ import { ArrowRight, Star, CheckCircle, Phone } from 'lucide-react';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { useScrollTo } from '../hooks/useScrollTo';
+import kitchenHero from '../assets/kitchens/kitchens-1.jpg';
+import kitchen2 from '../assets/kitchens/kitchens-2.jpg';
+import kitchen3 from '../assets/kitchens/kitchens-3.jpg';
+import kitchen4 from '../assets/kitchens/kitchens-4.jpg';
+import kitchen5 from '../assets/kitchens/kitchens-5.jpg';
+import kitchen6 from '../assets/kitchens/kitchens-6.jpg';
+import kitchen7 from '../assets/kitchens/kitchens-7.jpg';
+import kitchen8 from '../assets/kitchens/kitchens-8.jpg';
+import kitchen9 from '../assets/kitchens/kitchens-9.jpg';
+import kitchen10 from '../assets/kitchens/kitchens-10.jpg';
 
 const Kitchens = () => {
   const [open, setOpen] = useState(false);
@@ -11,60 +21,18 @@ const Kitchens = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const { handleScrollClick } = useScrollTo();
 
-  const categories = [
-    { id: 'all', name: 'All Kitchens' },
-    { id: 'modern', name: 'Modern' },
-    { id: 'traditional', name: 'Traditional' },
-    { id: 'contemporary', name: 'Contemporary' },
-    { id: 'freestanding', name: 'Freestanding Kitchens' }
-  ];
+  const categories: { id: string; name: string }[] = [];
 
   const kitchenGallery = [
-    {
-      id: 1,
-      category: "modern",
-      image: "https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 2,
-      category: "traditional",
-      image: "https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 3,
-      category: "farmhouse",
-      image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 4,
-      category: "modern",
-      image: "https://images.pexels.com/photos/2062426/pexels-photo-2062426.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 5,
-      category: "freestanding",
-      image: "https://images.pexels.com/photos/1080722/pexels-photo-1080722.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 6,
-      category: "traditional",
-      image: "https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 7,
-      category: "modern",
-      image: "https://images.pexels.com/photos/3074920/pexels-photo-3074920.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 8,
-      category: "farmhouse",
-      image: "https://images.pexels.com/photos/2819087/pexels-photo-2819087.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 9,
-      category: "contemporary",
-      image: "https://images.pexels.com/photos/279648/pexels-photo-279648.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    }
+    { id: 1, category: 'gallery', image: kitchen2 },
+    { id: 2, category: 'gallery', image: kitchen3 },
+    { id: 3, category: 'gallery', image: kitchen4 },
+    { id: 4, category: 'gallery', image: kitchen5 },
+    { id: 5, category: 'gallery', image: kitchen6 },
+    { id: 6, category: 'gallery', image: kitchen7 },
+    { id: 7, category: 'gallery', image: kitchen8 },
+    { id: 8, category: 'gallery', image: kitchen9 },
+    { id: 9, category: 'gallery', image: kitchen10 },
   ];
 
   const filteredGallery = selectedCategory === 'all' 
@@ -79,7 +47,7 @@ const Kitchens = () => {
   const services = [
     "Complete Kitchen Renovations",
     "Custom Cabinet Design & Installation",
-    "Worktop Installation (Quartz, Granite, Marble)",
+    "Countertop Installation (Quartz, Granite, Marble)",
     "Kitchen Island Design",
     "Appliance Integration",
     "Lighting Design & Installation",
@@ -162,7 +130,7 @@ const Kitchens = () => {
             </div>
             <div className="relative">
               <img
-                src="https://images.pexels.com/photos/1743227/pexels-photo-1743227.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop"
+                src={kitchenHero}
                 alt="Kitchen Design Process"
                 className="rounded-2xl shadow-2xl"
               />

@@ -4,6 +4,16 @@ import { ArrowRight, Star, CheckCircle, Phone } from 'lucide-react';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { useScrollTo } from '../hooks/useScrollTo';
+import bedroomHero from '../assets/bedrooms/bedrooms-1.jpg';
+import bedroom2 from '../assets/bedrooms/bedrooms-2.jpg';
+import bedroom3 from '../assets/bedrooms/bedrooms-3.jpg';
+import bedroom4 from '../assets/bedrooms/bedrooms-4.jpg';
+import bedroom5 from '../assets/bedrooms/bedrooms-5.jpg';
+import bedroom6 from '../assets/bedrooms/bedrooms-6.jpg';
+import bedroom7 from '../assets/bedrooms/bedrooms-7.jpg';
+import bedroom8 from '../assets/bedrooms/bedrooms-8.jpg';
+import bedroom9 from '../assets/bedrooms/bedrooms-9.jpg';
+import bedroom10 from '../assets/bedrooms/bedrooms-10.jpg';
 
 const Bedrooms = () => {
   const [open, setOpen] = useState(false);
@@ -11,59 +21,18 @@ const Bedrooms = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const { handleScrollClick } = useScrollTo();
 
-  const categories = [
-    { id: 'all', name: 'All Bedrooms' },
-    { id: 'master', name: 'Master Bedrooms' },
-    { id: 'kids', name: "Children's Rooms" },
-    { id: 'guest', name: 'Guest Rooms' }
-  ];
+  const categories: { id: string; name: string }[] = [];
 
   const bedroomGallery = [
-    {
-      id: 1,
-      category: "master",
-      image: "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 2,
-      category: "kids",
-      image: "https://images.pexels.com/photos/1571463/pexels-photo-1571463.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 3,
-      category: "guest",
-      image: "https://images.pexels.com/photos/1571464/pexels-photo-1571464.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 4,
-      category: "master",
-      image: "https://images.pexels.com/photos/1571467/pexels-photo-1571467.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 5,
-      category: "kids",
-      image: "https://images.pexels.com/photos/1571465/pexels-photo-1571465.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 6,
-      category: "guest",
-      image: "https://images.pexels.com/photos/1643384/pexels-photo-1643384.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 7,
-      category: "master",
-      image: "https://images.pexels.com/photos/2062426/pexels-photo-2062426.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 8,
-      category: "kids",
-      image: "https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 9,
-      category: "guest",
-      image: "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    }
+    { id: 1, category: 'gallery', image: bedroom2 },
+    { id: 2, category: 'gallery', image: bedroom3 },
+    { id: 3, category: 'gallery', image: bedroom4 },
+    { id: 4, category: 'gallery', image: bedroom5 },
+    { id: 5, category: 'gallery', image: bedroom6 },
+    { id: 6, category: 'gallery', image: bedroom7 },
+    { id: 7, category: 'gallery', image: bedroom8 },
+    { id: 8, category: 'gallery', image: bedroom9 },
+    { id: 9, category: 'gallery', image: bedroom10 },
   ];
 
   const filteredGallery = selectedCategory === 'all' 
@@ -146,7 +115,7 @@ const Bedrooms = () => {
             </div>
             <div className="relative">
               <img
-                src="https://images.pexels.com/photos/1571467/pexels-photo-1571467.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop"
+                src={bedroomHero}
                 alt="Bedroom Design Process"
                 className="rounded-2xl shadow-2xl"
               />

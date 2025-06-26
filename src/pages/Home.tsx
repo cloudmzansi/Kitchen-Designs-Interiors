@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Star, Users, Award, Shield, Clock, CheckCircle, Phone, Mail, MapPin, Quote } from 'lucide-react';
+import heroBg from '../assets/home/home-1.jpg';
+import about1 from '../assets/home/home-2.jpg';
+import about2 from '../assets/home/home-3.jpg';
+import serviceKitchen from '../assets/home/home-4.jpg';
+import serviceBedroom from '../assets/home/home-5.jpg';
+import serviceBathroom from '../assets/home/home-6.jpg';
+import serviceCommercial from '../assets/home/home-7.jpg';
 
 type Service = {
   title: string;
@@ -53,25 +60,25 @@ const Home = () => {
     {
       title: "Kitchen Renovations",
       description: "Transform your kitchen into the heart of your home with custom cabinetry and premium finishes.",
-      image: "https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
+      image: serviceKitchen,
       link: "/kitchens"
     },
     {
       title: "Bedroom Solutions",
       description: "Create your perfect sanctuary with built-in wardrobes and custom bedroom furniture.",
-      image: "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
+      image: serviceBedroom,
       link: "/bedrooms"
     },
     {
       title: "Bathroom Renovations",
       description: "Design luxurious bathrooms that combine style, functionality, and lasting quality.",
-      image: "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
+      image: serviceBathroom,
       link: "/bathrooms"
     },
     {
       title: "Commercial Interiors",
       description: "Expert commercial interior design and fit-out solutions for businesses of all sizes, creating functional and inspiring workspaces.",
-      image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
+      image: serviceCommercial,
       link: "/commercial"
     }
   ];
@@ -136,7 +143,7 @@ const Home = () => {
       <section className="relative h-screen flex flex-col items-center justify-center text-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop"
+            src={heroBg}
             alt="Luxury Kitchen Interior"
             className="w-full h-full object-cover"
           />
@@ -144,7 +151,7 @@ const Home = () => {
         </div>
         <div className="relative z-10 container mx-auto px-4 flex flex-col items-center justify-center h-full">
           <div className="max-w-4xl mx-auto flex flex-col items-center justify-center h-full py-16 md:py-24 gap-8 md:gap-12">
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-2 md:mb-4">
+            <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-2 md:mb-4 mt-24 md:mt-40">
               <span className="text-white">Custom Interiors</span>
               <span className="block text-white">Crafted to Perfection</span>
             </h1>
@@ -198,7 +205,7 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">About KD Interiors</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">Your vision, expertly crafted.</p>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">We are dedicated to delivering bespoke interiors and exceptional service, ensuring every project is tailored to your unique needs and finished to the highest standards.</p>
           </div>
 
           <div className="space-y-16">
@@ -206,7 +213,7 @@ const Home = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div className="space-y-4 text-lg text-gray-700 leading-relaxed">
                 <p>
-                  With over 30 years of experience, we specialise in designing, manufacturing, and installing bespoke kitchens, bedroom wardrobes, bathroom vanities, and general cabinetry. Our skilled team is dedicated to delivering high-quality craftsmanship and attention to detail in every project we undertake.
+                  With over 30 years of experience, we specialise in bespoke kitchens, bedrooms, bathrooms, and cabinetry, delivering tailored solutions and exceptional craftsmanship to transform your home or business.
                 </p>
                 <p>
                   We offer modern, made-to-measure cabinetry tailored to your exact specifications. Our extensive range of materials and finishes includes melamine, gloss and matt wraps, PVC, sprayed 'duco', solid woods, and veneers. Whether you're renovating or starting from scratch, we provide premium solutions to suit your style, requirements, and budget – all at competitive prices.
@@ -214,7 +221,7 @@ const Home = () => {
               </div>
               <div>
                 <img 
-                  src="https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" 
+                  src={about1}
                   alt="Modern Kitchen Interior by KD Interiors"
                   className="rounded-2xl shadow-2xl w-full h-auto object-cover"
                 />
@@ -228,12 +235,12 @@ const Home = () => {
                   In addition to cabinetry, we offer complete turnkey renovation services. Our trusted team of contractors manages every aspect of your project, from building work and electricals to plumbing, flooring, and painting. We're here to ensure a smooth, stress-free experience from beginning to end.
                 </p>
                 <p>
-                  We also offer kitchen remodelling services for those looking to refresh their existing space. Whether it's replacing doors and worktops or adding extra units, we help transform your kitchen with thoughtful, stylish upgrades that reflect your vision.
+                  We also offer kitchen remodelling services for those looking to refresh their existing space. Whether it's replacing doors and countertops or adding extra units, we help transform your kitchen with thoughtful, stylish upgrades that reflect your vision.
                 </p>
               </div>
               <div>
                 <img 
-                  src="https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" 
+                  src={about2}
                   alt="Modern Kitchen Interior by KD Interiors"
                   className="rounded-2xl shadow-2xl w-full h-auto object-cover"
                 />
@@ -248,7 +255,7 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Our Specialties</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">We specialize in creating custom interior solutions that transform your living spaces into works of art.</p>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">We specialise in creating custom interior solutions that transform your living spaces into works of art.</p>
           </div>
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
@@ -317,7 +324,7 @@ const Home = () => {
               What Our Clients Say
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Don't just take our word for it. Hear from satisfied clients who have transformed their spaces with KD Interiors.
+              Don't just take our word for it. Hear from satisfied clients who have transformed their spaces with Kitchen Designs & Interiors.
             </p>
           </div>
 
@@ -402,7 +409,6 @@ const Home = () => {
                       placeholder="e.g. +27 12 345 6789"
                       className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-500 focus:border-transparent transition"
                       required
-                      pattern="^(?:\\+27|0)\\d{9}$"
                     />
                   </div>
                   <div>

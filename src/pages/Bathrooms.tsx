@@ -4,6 +4,16 @@ import { ArrowRight, Star, CheckCircle, Phone } from 'lucide-react';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { useScrollTo } from '../hooks/useScrollTo';
+import bathroomHero from '../assets/bathrooms/bathrooms-1.jpeg';
+import bathroom2 from '../assets/bathrooms/bathrooms-2.jpeg';
+import bathroom3 from '../assets/bathrooms/bathrooms-3.jpeg';
+import bathroom4 from '../assets/bathrooms/bathrooms-4.jpeg';
+import bathroom5 from '../assets/bathrooms/bathrooms-5.jpeg';
+import bathroom6 from '../assets/bathrooms/bathrooms-6.jpeg';
+import bathroom7 from '../assets/bathrooms/bathrooms-7.jpeg';
+import bathroom8 from '../assets/bathrooms/bathrooms-8.jpeg';
+import bathroom9 from '../assets/bathrooms/bathrooms-9.jpeg';
+import bathroom10 from '../assets/bathrooms/bathrooms-10.jpeg';
 
 const Bathrooms = () => {
   const [open, setOpen] = useState(false);
@@ -11,59 +21,18 @@ const Bathrooms = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const { handleScrollClick } = useScrollTo();
 
-  const categories = [
-    { id: 'all', name: 'All Bathrooms' },
-    { id: 'modern', name: 'Modern' },
-    { id: 'traditional', name: 'Traditional' },
-    { id: 'luxury', name: 'Luxury' }
-  ];
+  const categories: { id: string; name: string }[] = [];
 
   const bathroomGallery = [
-    {
-      id: 1,
-      category: "modern",
-      image: "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 2,
-      category: "traditional",
-      image: "https://images.pexels.com/photos/1454804/pexels-photo-1454804.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 3,
-      category: "luxury",
-      image: "https://images.pexels.com/photos/2062431/pexels-photo-2062431.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 4,
-      category: "modern",
-      image: "https://images.pexels.com/photos/1239899/pexels-photo-1239899.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 5,
-      category: "traditional",
-      image: "https://images.pexels.com/photos/276534/pexels-photo-276534.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 6,
-      category: "luxury",
-      image: "https://images.pexels.com/photos/1571470/pexels-photo-1571470.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 7,
-      category: "modern",
-      image: "https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 8,
-      category: "traditional",
-      image: "https://images.pexels.com/photos/1329711/pexels-photo-1329711.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 9,
-      category: "luxury",
-      image: "https://images.pexels.com/photos/271795/pexels-photo-271795.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    }
+    { id: 1, category: 'gallery', image: bathroom2 },
+    { id: 2, category: 'gallery', image: bathroom3 },
+    { id: 3, category: 'gallery', image: bathroom4 },
+    { id: 4, category: 'gallery', image: bathroom5 },
+    { id: 5, category: 'gallery', image: bathroom6 },
+    { id: 6, category: 'gallery', image: bathroom7 },
+    { id: 7, category: 'gallery', image: bathroom8 },
+    { id: 8, category: 'gallery', image: bathroom9 },
+    { id: 9, category: 'gallery', image: bathroom10 },
   ];
 
   const filteredGallery = selectedCategory === 'all'
@@ -146,9 +115,9 @@ const Bathrooms = () => {
             </div>
             <div className="relative">
               <img
-                src="https://images.pexels.com/photos/1454804/pexels-photo-1454804.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop"
+                src={bathroomHero}
                 alt="Bathroom Design Process"
-                className="rounded-2xl shadow-2xl"
+                className="rounded-2xl shadow-2xl w-full h-auto object-cover"
               />
             </div>
           </div>

@@ -4,6 +4,16 @@ import { ArrowRight, Star, CheckCircle, Phone } from 'lucide-react';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { useScrollTo } from '../hooks/useScrollTo';
+import commercialHero from '../assets/commercial/commercial-1.jpeg';
+import commercial2 from '../assets/commercial/commercial-2.jpeg';
+import commercial3 from '../assets/commercial/commercial-3.jpeg';
+import commercial4 from '../assets/commercial/commercial-4.jpeg';
+import commercial5 from '../assets/commercial/commercial-5.jpeg';
+import commercial6 from '../assets/commercial/commercial-6.jpeg';
+import commercial7 from '../assets/commercial/commercial-7.jpeg';
+import commercial8 from '../assets/commercial/commercial-8.jpeg';
+import commercial9 from '../assets/commercial/commercial-9.jpeg';
+import commercial10 from '../assets/commercial/commercial-10.jpeg';
 
 const Commercial = () => {
   const [open, setOpen] = useState(false);
@@ -11,59 +21,18 @@ const Commercial = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const { handleScrollClick } = useScrollTo();
 
-  const categories = [
-    { id: 'all', name: 'All Projects' },
-    { id: 'office', name: 'Office Spaces' },
-    { id: 'retail', name: 'Retail Stores' },
-    { id: 'hospitality', name: 'Hospitality' }
-  ];
+  const categories: { id: string; name: string }[] = [];
 
   const commercialGallery = [
-    {
-      id: 1,
-      category: "office",
-      image: "https://images.pexels.com/photos/1170412/pexels-photo-1170412.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 2,
-      category: "retail",
-      image: "https://images.pexels.com/photos/271816/pexels-photo-271816.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 3,
-      category: "hospitality",
-      image: "https://images.pexels.com/photos/262047/pexels-photo-262047.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 4,
-      category: "office",
-      image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 5,
-      category: "hospitality",
-      image: "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 6,
-      category: "retail",
-      image: "https://images.pexels.com/photos/37347/office-sitting-room-executive-sitting.jpg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 7,
-      category: "office",
-      image: "https://images.pexels.com/photos/1181421/pexels-photo-1181421.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 8,
-      category: "hospitality",
-      image: "https://images.pexels.com/photos/6492397/pexels-photo-6492397.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    },
-    {
-      id: 9,
-      category: "retail",
-      image: "https://images.pexels.com/photos/380769/pexels-photo-380769.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    }
+    { id: 1, category: 'gallery', image: commercial2 },
+    { id: 2, category: 'gallery', image: commercial3 },
+    { id: 3, category: 'gallery', image: commercial4 },
+    { id: 4, category: 'gallery', image: commercial5 },
+    { id: 5, category: 'gallery', image: commercial6 },
+    { id: 6, category: 'gallery', image: commercial7 },
+    { id: 7, category: 'gallery', image: commercial8 },
+    { id: 8, category: 'gallery', image: commercial9 },
+    { id: 9, category: 'gallery', image: commercial10 },
   ];
 
   const filteredGallery = selectedCategory === 'all'
@@ -147,9 +116,9 @@ const Commercial = () => {
             </div>
             <div className="relative">
               <img
-                src="https://images.pexels.com/photos/37347/office-sitting-room-executive-sitting.jpg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop"
+                src={commercialHero}
                 alt="Commercial Design Process"
-                className="rounded-2xl shadow-2xl"
+                className="rounded-2xl shadow-2xl w-full h-auto object-cover"
               />
             </div>
           </div>
