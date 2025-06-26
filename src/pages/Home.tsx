@@ -101,15 +101,18 @@ const Home = () => {
       });
 
       const result = await response.json();
+      console.log('Web3Forms result:', result);
 
       if (result.success) {
         setIsModalOpen(true);
         form.reset();
       } else {
         console.error('Form submission failed', result);
+        alert('Form submission failed: ' + (result.message || 'Unknown error'));
       }
     } catch (error) {
       console.error('An error occurred:', error);
+      alert('An error occurred: ' + error);
     }
   };
 
