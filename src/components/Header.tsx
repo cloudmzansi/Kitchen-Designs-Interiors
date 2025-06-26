@@ -145,66 +145,79 @@ const Header = () => {
             />
             {/* Side Drawer */}
             <aside
-              className="fixed top-0 right-0 z-50 h-full w-80 max-w-full bg-white shadow-2xl flex flex-col transition-transform duration-300 transform translate-x-0 lg:hidden"
+              className="fixed top-0 right-0 z-50 h-full w-4/5 max-w-xs bg-white shadow-2xl flex flex-col transition-transform duration-300 transform translate-x-0 lg:hidden"
+              tabIndex={-1}
+              aria-modal="true"
+              role="dialog"
             >
-              <div className="flex justify-end p-4 border-b border-gray-200">
+              {/* Header with Logo and Close */}
+              <div className="flex items-center justify-between p-4 border-b border-gray-200">
+                <Link to="/" className="flex items-center" onClick={() => setIsMenuOpen(false)}>
+                  <div className="w-12 h-12 bg-gradient-to-br from-forest-700 to-forest-600 rounded-xl flex items-center justify-center shadow-lg">
+                    <span className="text-white font-bold text-2xl tracking-tighter" style={{letterSpacing: '-0.15em'}}>KD</span>
+                  </div>
+                </Link>
                 <button
                   onClick={() => setIsMenuOpen(false)}
                   className="p-2 rounded-full bg-gray-100 text-forest-800 shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-forest-700"
+                  aria-label="Close menu"
                 >
-                  <X size={24} />
+                  <X size={28} />
                 </button>
               </div>
-              <nav className="flex-1 flex flex-col justify-start items-center px-6 py-8 overflow-y-auto space-y-6">
+              {/* Nav Links */}
+              <nav className="flex-1 flex flex-col gap-2 px-6 py-6 overflow-y-auto">
                 <a
                   href="/#top"
                   onClick={(e) => { handleScrollClick(e, 'top'); setIsMenuOpen(false); }}
-                  className="block text-2xl font-bold text-forest-800 text-center hover:text-forest-600 transition-colors py-2"
+                  className="block text-xl font-semibold text-forest-800 rounded-lg text-left hover:bg-forest-50 hover:text-forest-700 transition-colors px-3 py-3"
                 >
                   Home
                 </a>
                 <a
                   href="/#about-us"
                   onClick={(e) => { handleScrollClick(e, 'about-us'); setIsMenuOpen(false); }}
-                  className="block text-2xl font-bold text-forest-800 text-center hover:text-forest-600 transition-colors py-2"
+                  className="block text-xl font-semibold text-forest-800 rounded-lg text-left hover:bg-forest-50 hover:text-forest-700 transition-colors px-3 py-3"
                 >
                   About Us
                 </a>
-                <div className="text-center w-full">
+                {/* Expandable Services */}
+                <div className="w-full">
                   <button
                     onClick={() => setIsServicesOpen(!isServicesOpen)}
-                    className="flex items-center justify-center w-full text-2xl font-bold text-forest-800 hover:text-forest-600 transition-colors py-2 focus:outline-none"
+                    className="flex items-center justify-between w-full text-xl font-semibold text-forest-800 rounded-lg hover:bg-forest-50 hover:text-forest-700 transition-colors px-3 py-3 focus:outline-none"
+                    aria-expanded={isServicesOpen}
                   >
                     <span>Services</span>
                     <ChevronDown size={24} className={`ml-2 transition-transform duration-200 ${isServicesOpen ? 'rotate-180' : ''}`} />
                   </button>
                   {isServicesOpen && (
-                    <div className="mt-2 space-y-2 bg-forest-50 rounded-lg p-4">
+                    <div className="mt-1 ml-4 flex flex-col gap-1">
                       <Link
                         to="/kitchens"
                         onClick={() => setIsMenuOpen(false)}
-                        className="block text-lg text-forest-800 hover:text-forest-600 transition-colors py-1"
+                        className="block text-lg text-forest-700 rounded-lg hover:bg-forest-100 hover:text-forest-900 transition-colors px-3 py-2"
                       >
                         Kitchen Renovations
                       </Link>
                       <Link
                         to="/bedrooms"
                         onClick={() => setIsMenuOpen(false)}
-                        className="block text-lg text-forest-800 hover:text-forest-600 transition-colors py-1"
+                        className="block text-lg text-forest-700 rounded-lg hover:bg-forest-100 hover:text-forest-900 transition-colors px-3 py-2"
                       >
                         Bedroom Renovations
                       </Link>
                       <Link
                         to="/bathrooms"
                         onClick={() => setIsMenuOpen(false)}
-                        className="block text-lg text-forest-800 hover:text-forest-600 transition-colors py-1"
+                        className="block text-lg text-forest-700 rounded-lg hover:bg-forest-100 hover:text-forest-900 transition-colors px-3 py-2"
                       >
                         Bathroom Renovations
                       </Link>
                       <Link
                         to="/commercial"
                         onClick={() => setIsMenuOpen(false)}
-                        className="block text-lg text-forest-800 hover:text-forest-600 transition-colors py-1"
+                        className="block text-lg text-forest-700 rounded-lg hover:bg-forest-100 hover:text-forest-900 transition-colors px-3 py-2"
                       >
                         Commercial Renovations
                       </Link>
@@ -214,10 +227,13 @@ const Header = () => {
                 <a
                   href="/#contact-section"
                   onClick={(e) => { handleScrollClick(e, 'contact-section'); setIsMenuOpen(false); }}
-                  className="block text-2xl font-bold text-forest-800 text-center hover:text-forest-600 transition-colors py-2"
+                  className="block text-xl font-semibold text-forest-800 rounded-lg text-left hover:bg-forest-50 hover:text-forest-700 transition-colors px-3 py-3"
                 >
                   Contact Us
                 </a>
+              </nav>
+              {/* Footer CTA & Contact */}
+              <div className="mt-auto flex flex-col gap-3 p-6 border-t border-gray-100">
                 <a
                   href="/#contact-section"
                   onClick={(e) => { handleScrollClick(e, 'contact-section'); setIsMenuOpen(false); }}
@@ -227,11 +243,12 @@ const Header = () => {
                 </a>
                 <a
                   href="tel:+27799352223"
-                  className="block text-center text-base text-forest-700 hover:text-forest-900 font-medium transition-colors"
+                  className="w-full bg-forest-50 text-forest-800 text-lg font-semibold py-4 rounded-lg text-center border border-forest-200 hover:bg-forest-100 hover:text-forest-900 transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Call Now: +27 79 935 2223
                 </a>
-              </nav>
+              </div>
             </aside>
           </>
         )}
