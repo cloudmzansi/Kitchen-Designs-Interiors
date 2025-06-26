@@ -113,8 +113,8 @@ const Header = () => {
 
           {/* Contact Info & CTA */}
           <div className="hidden lg:flex items-center space-x-6">
-            <a href="tel:+27799352223" className="flex items-center space-x-2 font-semibold transition-colors duration-300 text-white">
-              <Phone size={16} className="text-white" />
+            <a href="tel:+27799352223" className={`flex items-center space-x-2 font-semibold transition-colors duration-300 ${phoneTextClasses}`}>
+              <Phone size={16} className={isScrolled ? 'text-forest-600' : 'text-white'} />
               <span>+27 79 935 2223</span>
             </a>
             <a 
@@ -137,34 +137,101 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="fixed inset-0 z-50 bg-black bg-opacity-70 flex flex-col">
-            <div className="flex justify-end p-4">
-              <button onClick={() => setIsMenuOpen(false)} className="p-2 rounded-full bg-white text-forest-800 shadow-lg focus:outline-none focus:ring-2 focus:ring-forest-700">
-                <X size={28} />
+          <div className="fixed inset-0 z-50 bg-black bg-opacity-90 backdrop-blur-sm">
+            <div className="flex justify-end p-6">
+              <button 
+                onClick={() => setIsMenuOpen(false)} 
+                className="p-3 rounded-full bg-white bg-opacity-20 text-white shadow-lg hover:bg-opacity-30 transition-all focus:outline-none focus:ring-2 focus:ring-white"
+              >
+                <X size={24} />
               </button>
             </div>
-            <nav className="flex-1 flex flex-col justify-center items-center space-y-6">
-              <a href="/#top" onClick={(e) => { handleScrollClick(e, 'top'); setIsMenuOpen(false); }} className="text-2xl font-semibold text-white hover:text-forest-300 transition-colors">Home</a>
-              <a href="/#about-us" onClick={(e) => { handleScrollClick(e, 'about-us'); setIsMenuOpen(false); }} className="text-2xl font-semibold text-white hover:text-forest-300 transition-colors">About Us</a>
-              <div className="w-full flex flex-col items-center">
-                <button onClick={() => setIsServicesOpen(!isServicesOpen)} className="flex items-center text-2xl font-semibold text-white hover:text-forest-300 transition-colors focus:outline-none">
-                  <span>Services</span>
-                  <ChevronDown size={22} className={`ml-2 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} />
-                </button>
-                {isServicesOpen && (
-                  <div className="mt-2 space-y-2">
-                    <Link to="/kitchens" onClick={() => setIsMenuOpen(false)} className="block text-lg text-white hover:text-forest-300 transition-colors">Kitchen Renovations</Link>
-                    <Link to="/bedrooms" onClick={() => setIsMenuOpen(false)} className="block text-lg text-white hover:text-forest-300 transition-colors">Bedroom Renovations</Link>
-                    <Link to="/bathrooms" onClick={() => setIsMenuOpen(false)} className="block text-lg text-white hover:text-forest-300 transition-colors">Bathroom Renovations</Link>
-                    <Link to="/commercial" onClick={() => setIsMenuOpen(false)} className="block text-lg text-white hover:text-forest-300 transition-colors">Commercial Renovations</Link>
-                  </div>
-                )}
+            
+            <nav className="flex-1 flex flex-col justify-center items-center px-6">
+              <div className="w-full max-w-sm space-y-8">
+                <a 
+                  href="/#top" 
+                  onClick={(e) => { handleScrollClick(e, 'top'); setIsMenuOpen(false); }} 
+                  className="block text-2xl font-bold text-white text-center hover:text-forest-300 transition-colors py-3"
+                >
+                  Home
+                </a>
+                
+                <a 
+                  href="/#about-us" 
+                  onClick={(e) => { handleScrollClick(e, 'about-us'); setIsMenuOpen(false); }} 
+                  className="block text-2xl font-bold text-white text-center hover:text-forest-300 transition-colors py-3"
+                >
+                  About Us
+                </a>
+                
+                <div className="text-center">
+                  <button 
+                    onClick={() => setIsServicesOpen(!isServicesOpen)}
+                    className="flex items-center justify-center w-full text-2xl font-bold text-white hover:text-forest-300 transition-colors py-3 focus:outline-none"
+                  >
+                    <span>Services</span>
+                    <ChevronDown size={24} className={`ml-2 transition-transform duration-200 ${isServicesOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  
+                  {isServicesOpen && (
+                    <div className="mt-4 space-y-3 bg-white bg-opacity-10 rounded-lg p-4">
+                      <Link 
+                        to="/kitchens" 
+                        onClick={() => setIsMenuOpen(false)}
+                        className="block text-lg text-white hover:text-forest-300 transition-colors py-2"
+                      >
+                        Kitchen Renovations
+                      </Link>
+                      <Link 
+                        to="/bedrooms" 
+                        onClick={() => setIsMenuOpen(false)}
+                        className="block text-lg text-white hover:text-forest-300 transition-colors py-2"
+                      >
+                        Bedroom Renovations
+                      </Link>
+                      <Link 
+                        to="/bathrooms" 
+                        onClick={() => setIsMenuOpen(false)}
+                        className="block text-lg text-white hover:text-forest-300 transition-colors py-2"
+                      >
+                        Bathroom Renovations
+                      </Link>
+                      <Link 
+                        to="/commercial" 
+                        onClick={() => setIsMenuOpen(false)}
+                        className="block text-lg text-white hover:text-forest-300 transition-colors py-2"
+                      >
+                        Commercial Renovations
+                      </Link>
+                    </div>
+                  )}
+                </div>
+                
+                <a 
+                  href="/#contact-section" 
+                  onClick={(e) => { handleScrollClick(e, 'contact-section'); setIsMenuOpen(false); }} 
+                  className="block text-2xl font-bold text-white text-center hover:text-forest-300 transition-colors py-3"
+                >
+                  Contact Us
+                </a>
               </div>
-              <a href="/#contact-section" onClick={(e) => { handleScrollClick(e, 'contact-section'); setIsMenuOpen(false); }} className="text-2xl font-semibold text-white hover:text-forest-300 transition-colors">Contact Us</a>
             </nav>
+            
             <div className="p-6 flex flex-col items-center space-y-4">
-              <a href="/#contact-section" onClick={(e) => { handleScrollClick(e, 'contact-section'); setIsMenuOpen(false); }} className="w-full bg-forest-700 text-white text-lg font-semibold py-3 rounded-lg text-center shadow-lg hover:bg-forest-800 transition-colors">Get Free Quote</a>
-              <a href="tel:+27799352223" className="block text-center text-base text-forest-200 hover:text-white font-medium tracking-wide">Call Now: +27 79 935 2223</a>
+              <a 
+                href="/#contact-section" 
+                onClick={(e) => { handleScrollClick(e, 'contact-section'); setIsMenuOpen(false); }} 
+                className="w-full max-w-sm bg-forest-700 text-white text-lg font-bold py-4 rounded-lg text-center shadow-lg hover:bg-forest-800 transition-colors"
+              >
+                Get Free Quote
+              </a>
+              <a 
+                href="tel:+27799352223" 
+                className="block text-center text-base text-forest-200 hover:text-white font-medium transition-colors"
+              >
+                Call Now: +27 79 935 2223
+              </a>
             </div>
           </div>
         )}

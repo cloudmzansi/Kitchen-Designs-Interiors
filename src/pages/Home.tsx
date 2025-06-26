@@ -35,6 +35,8 @@ const Home = () => {
   const [specialtyIndex, setSpecialtyIndex] = useState(0);
   const [testimonialIndex, setTestimonialIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -46,6 +48,34 @@ const Home = () => {
     
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  // Minimum swipe distance (in px)
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(0);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = (type: 'specialties' | 'testimonials') => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      if (type === 'specialties') nextSpecialty();
+      if (type === 'testimonials') nextTestimonial();
+    }
+    if (isRightSwipe) {
+      if (type === 'specialties') prevSpecialty();
+      if (type === 'testimonials') prevTestimonial();
+    }
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -177,7 +207,7 @@ const Home = () => {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="relative h-screen min-h-screen flex flex-col items-center justify-center text-center overflow-hidden">
+      <section className="relative min-h-screen flex flex-col items-center justify-center text-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
             src={heroBg}
@@ -186,9 +216,9 @@ const Home = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60"></div>
         </div>
-        <div className="relative z-10 container mx-auto px-4 flex flex-col items-center justify-center h-full">
-          <div className="max-w-4xl mx-auto flex flex-col items-center justify-center h-full py-16 md:py-24 gap-8 md:gap-12">
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-2 md:mb-4 mt-24 md:mt-40">
+        <div className="relative z-10 container mx-auto px-4 flex flex-col items-center justify-center min-h-screen">
+          <div className="max-w-4xl mx-auto flex flex-col items-center justify-center py-16 md:py-24 gap-8 md:gap-12">
+            <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-2 md:mb-4">
               <span className="text-white">Beautiful Renovations.</span>
               <span className="block text-white">Inspired Living.</span>
             </h1>
@@ -312,7 +342,12 @@ const Home = () => {
               </div>
             </div>
             
-            <div className="max-w-4xl mx-auto">
+            <div 
+              className="max-w-4xl mx-auto"
+              onTouchStart={onTouchStart}
+              onTouchMove={onTouchMove}
+              onTouchEnd={() => onTouchEnd('specialties')}
+            >
               <div className="grid grid-cols-1 gap-x-12 gap-y-16">
                 {services.slice(specialtyIndex, specialtyIndex + 1).map((service, index) => (
                   <div key={index} className="group text-left">
@@ -426,7 +461,12 @@ const Home = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-8">
+            <div 
+              className="grid grid-cols-1 gap-8"
+              onTouchStart={onTouchStart}
+              onTouchMove={onTouchMove}
+              onTouchEnd={() => onTouchEnd('testimonials')}
+            >
               {testimonials.slice(testimonialIndex, testimonialIndex + 1).map((testimonial, index) => (
                 <div key={index} className="bg-white rounded-2xl p-8 flex flex-col items-center text-center shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
                   <div className="text-forest-500 mb-4">
