@@ -208,7 +208,7 @@ const Header = () => {
                 About Us
               </a>
               {/* Services Dropdown */}
-              <div className="w-11/12 mx-auto mb-2">
+              <div className="w-11/12 mx-auto mb-2 flex flex-col items-center">
                 <button
                   onClick={() => setIsMobileServicesOpen((open) => !open)}
                   className="flex items-center justify-between w-full text-xl font-semibold text-black py-4 rounded-lg hover:bg-gray-100 transition-colors focus:outline-none"
@@ -218,7 +218,7 @@ const Header = () => {
                   <ChevronDown size={24} className={`ml-2 transition-transform duration-200 ${isMobileServicesOpen ? 'rotate-180' : ''}`} />
                 </button>
                 {isMobileServicesOpen && (
-                  <div className="flex flex-col bg-gray-50 rounded-lg mt-2 mb-2">
+                  <div className="flex flex-col bg-gray-50 rounded-lg mt-2 mb-2 w-full">
                     <Link
                       to="/kitchens"
                       onClick={() => { setIsMenuOpen(false); setIsMobileServicesOpen(false); }}
