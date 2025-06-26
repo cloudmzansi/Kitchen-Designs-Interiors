@@ -156,121 +156,93 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <>
-            {/* Overlay */}
-            <div
-              className="fixed inset-0 z-40 bg-black bg-opacity-50 transition-opacity duration-300 lg:hidden"
-              onClick={() => setIsMenuOpen(false)}
-            />
-            {/* Side Drawer */}
-            <aside
-              className="fixed top-0 right-0 z-50 h-full w-full max-w-xs bg-white shadow-2xl flex flex-col transition-transform duration-300 transform translate-x-0 lg:hidden"
-              tabIndex={-1}
-              aria-modal="true"
-              role="dialog"
-            >
-              {/* Header with Logo and Close */}
-              <div className="flex items-center justify-between p-4 border-b border-gray-200">
-                <Link to="/" className="flex items-center" onClick={() => setIsMenuOpen(false)}>
-                  <div className="w-12 h-12 bg-gradient-to-br from-forest-700 to-forest-600 rounded-xl flex items-center justify-center shadow-lg">
-                    <span className="text-white font-bold text-2xl tracking-tighter" style={{letterSpacing: '-0.15em'}}>KD</span>
-                  </div>
-                </Link>
-                <button
-                  onClick={() => setIsMenuOpen(false)}
-                  className="p-2 rounded-full bg-gray-100 text-forest-800 shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-forest-700"
-                  aria-label="Close menu"
-                >
-                  <X size={28} />
-                </button>
-              </div>
-              {/* Nav Links */}
-              <nav className="flex-1 flex flex-col gap-2 px-6 py-6 overflow-y-auto">
-                <a
-                  href="/#top"
-                  onClick={(e) => { handleScrollClick(e, 'top'); setIsMenuOpen(false); }}
-                  className={`block text-xl font-semibold ${isHomePage && !isScrolled ? 'text-white' : 'text-black'} rounded-lg text-left hover:bg-forest-50 hover:text-forest-700 transition-colors px-3 py-3`}
-                >
-                  Home
-                </a>
-                <a
-                  href="/#about-us"
-                  onClick={(e) => { handleScrollClick(e, 'about-us'); setIsMenuOpen(false); }}
-                  className={`block text-xl font-semibold ${isHomePage && !isScrolled ? 'text-white' : 'text-black'} rounded-lg text-left hover:bg-forest-50 hover:text-forest-700 transition-colors px-3 py-3`}
-                >
-                  About Us
-                </a>
-                {/* Expandable Services */}
-                <div className="w-full">
-                  <button
-                    onClick={() => setIsServicesOpen(!isServicesOpen)}
-                    className={`flex items-center justify-between w-full text-xl font-semibold ${isHomePage && !isScrolled ? 'text-white' : 'text-black'} rounded-lg hover:bg-forest-50 hover:text-forest-700 transition-colors px-3 py-3 focus:outline-none`}
-                    aria-expanded={isServicesOpen}
-                  >
-                    <span>Services</span>
-                    <ChevronDown size={24} className={`ml-2 transition-transform duration-200 ${isServicesOpen ? 'rotate-180' : ''}`} />
-                  </button>
-                  {isServicesOpen && (
-                    <div className="mt-1 ml-4 flex flex-col gap-1">
-                      <Link
-                        to="/kitchens"
-                        onClick={() => setIsMenuOpen(false)}
-                        className="block text-lg text-black rounded-lg hover:bg-forest-100 hover:text-forest-900 transition-colors px-3 py-2"
-                      >
-                        Kitchen Renovations
-                      </Link>
-                      <Link
-                        to="/bedrooms"
-                        onClick={() => setIsMenuOpen(false)}
-                        className="block text-lg text-black rounded-lg hover:bg-forest-100 hover:text-forest-900 transition-colors px-3 py-2"
-                      >
-                        Bedroom Renovations
-                      </Link>
-                      <Link
-                        to="/bathrooms"
-                        onClick={() => setIsMenuOpen(false)}
-                        className="block text-lg text-black rounded-lg hover:bg-forest-100 hover:text-forest-900 transition-colors px-3 py-2"
-                      >
-                        Bathroom Renovations
-                      </Link>
-                      <Link
-                        to="/commercial"
-                        onClick={() => setIsMenuOpen(false)}
-                        className="block text-lg text-black rounded-lg hover:bg-forest-100 hover:text-forest-900 transition-colors px-3 py-2"
-                      >
-                        Commercial Renovations
-                      </Link>
-                    </div>
-                  )}
+          <div className="fixed inset-0 z-50 flex flex-col bg-white lg:hidden">
+            {/* Top Bar with Logo and Close */}
+            <div className="flex items-center justify-between p-4 border-b border-gray-200">
+              <Link to="/" className="flex items-center" onClick={() => setIsMenuOpen(false)}>
+                <div className="w-12 h-12 bg-gradient-to-br from-forest-700 to-forest-600 rounded-xl flex items-center justify-center shadow-lg">
+                  <span className="text-white font-bold text-2xl tracking-tighter" style={{letterSpacing: '-0.15em'}}>KD</span>
                 </div>
-                <a
-                  href="/#contact-section"
-                  onClick={(e) => { handleScrollClick(e, 'contact-section'); setIsMenuOpen(false); }}
-                  className={`block text-xl font-semibold ${isHomePage && !isScrolled ? 'text-white' : 'text-black'} rounded-lg text-left hover:bg-forest-50 hover:text-forest-700 transition-colors px-3 py-3`}
-                >
-                  Contact Us
-                </a>
-              </nav>
-              {/* Footer CTA & Contact */}
-              <div className="mt-auto flex flex-col gap-3 p-6 border-t border-gray-100">
-                <a
-                  href="/#contact-section"
-                  onClick={(e) => { handleScrollClick(e, 'contact-section'); setIsMenuOpen(false); }}
-                  className="w-full bg-forest-700 text-white text-lg font-bold py-4 rounded-lg text-center shadow-lg hover:bg-forest-800 transition-colors"
-                >
-                  Get Free Quote
-                </a>
-                <a
-                  href="tel:+27799352223"
-                  className={`w-full bg-gray-100 ${phoneTextClasses} text-lg font-semibold py-4 rounded-lg text-center border border-gray-300 hover:bg-gray-200 hover:text-forest-800 transition-colors flex items-center justify-center gap-2`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <Phone size={20} className={phoneIconClass} />
-                  <span>Call Now: +27 79 935 2223</span>
-                </a>
-              </div>
-            </aside>
-          </>
+              </Link>
+              <button
+                onClick={() => setIsMenuOpen(false)}
+                className="p-2 rounded-full bg-gray-100 text-forest-800 shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-forest-700"
+                aria-label="Close menu"
+              >
+                <X size={28} />
+              </button>
+            </div>
+            {/* Menu Items */}
+            <nav className="flex-1 flex flex-col items-center justify-center gap-6 px-6">
+              <a
+                href="/#top"
+                onClick={(e) => { handleScrollClick(e, 'top'); setIsMenuOpen(false); }}
+                className={`text-2xl font-semibold ${isHomePage && !isScrolled ? 'text-white bg-forest-700' : 'text-black'} w-full text-center py-4 rounded-lg transition-colors`}
+              >
+                Home
+              </a>
+              <a
+                href="/#about-us"
+                onClick={(e) => { handleScrollClick(e, 'about-us'); setIsMenuOpen(false); }}
+                className={`text-2xl font-semibold ${isHomePage && !isScrolled ? 'text-white bg-forest-700' : 'text-black'} w-full text-center py-4 rounded-lg transition-colors`}
+              >
+                About Us
+              </a>
+              <Link
+                to="/kitchens"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-2xl font-semibold text-black w-full text-center py-4 rounded-lg transition-colors"
+              >
+                Kitchen Renovations
+              </Link>
+              <Link
+                to="/bedrooms"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-2xl font-semibold text-black w-full text-center py-4 rounded-lg transition-colors"
+              >
+                Bedroom Renovations
+              </Link>
+              <Link
+                to="/bathrooms"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-2xl font-semibold text-black w-full text-center py-4 rounded-lg transition-colors"
+              >
+                Bathroom Renovations
+              </Link>
+              <Link
+                to="/commercial"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-2xl font-semibold text-black w-full text-center py-4 rounded-lg transition-colors"
+              >
+                Commercial Renovations
+              </Link>
+              <a
+                href="/#contact-section"
+                onClick={(e) => { handleScrollClick(e, 'contact-section'); setIsMenuOpen(false); }}
+                className={`text-2xl font-semibold ${isHomePage && !isScrolled ? 'text-white bg-forest-700' : 'text-black'} w-full text-center py-4 rounded-lg transition-colors`}
+              >
+                Contact Us
+              </a>
+            </nav>
+            {/* Footer CTA & Contact */}
+            <div className="flex flex-col gap-3 p-6 border-t border-gray-100">
+              <a
+                href="/#contact-section"
+                onClick={(e) => { handleScrollClick(e, 'contact-section'); setIsMenuOpen(false); }}
+                className="w-full bg-forest-700 text-white text-lg font-bold py-4 rounded-lg text-center shadow-lg hover:bg-forest-800 transition-colors"
+              >
+                Get Free Quote
+              </a>
+              <a
+                href="tel:+27799352223"
+                className={`w-full bg-gray-100 ${phoneTextClasses} text-lg font-semibold py-4 rounded-lg text-center border border-gray-300 hover:bg-gray-200 hover:text-forest-800 transition-colors flex items-center justify-center gap-2`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Phone size={20} className={phoneIconClass} />
+                <span>Call Now: +27 79 935 2223</span>
+              </a>
+            </div>
+          </div>
         )}
       </div>
     </header>
