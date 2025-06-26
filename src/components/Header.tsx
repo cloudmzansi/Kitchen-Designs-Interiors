@@ -131,7 +131,7 @@ const Header = () => {
             className="lg:hidden p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? <X size={24} className={isScrolled ? 'text-forest-800' : 'text-white'} /> : <Menu size={24} className={isScrolled ? 'text-forest-800' : 'text-white'} />}
+            {isMenuOpen ? <X size={24} className="text-forest-800" /> : <Menu size={24} className="text-forest-800" />}
           </button>
         </div>
 
