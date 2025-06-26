@@ -1,0 +1,257 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, Star, CheckCircle, Phone } from 'lucide-react';
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import { useScrollTo } from '../hooks/useScrollTo';
+
+const Kitchens = () => {
+  const [open, setOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const { handleScrollClick } = useScrollTo();
+
+  const categories = [
+    { id: 'all', name: 'All Kitchens' },
+    { id: 'modern', name: 'Modern' },
+    { id: 'traditional', name: 'Traditional' },
+    { id: 'contemporary', name: 'Contemporary' },
+    { id: 'freestanding', name: 'Freestanding Kitchens' }
+  ];
+
+  const kitchenGallery = [
+    {
+      id: 1,
+      category: "modern",
+      image: "https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    },
+    {
+      id: 2,
+      category: "traditional",
+      image: "https://images.pexels.com/photos/1350789/pexels-photo-1350789.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    },
+    {
+      id: 3,
+      category: "farmhouse",
+      image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    },
+    {
+      id: 4,
+      category: "modern",
+      image: "https://images.pexels.com/photos/2062426/pexels-photo-2062426.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    },
+    {
+      id: 5,
+      category: "freestanding",
+      image: "https://images.pexels.com/photos/1080722/pexels-photo-1080722.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    },
+    {
+      id: 6,
+      category: "traditional",
+      image: "https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    },
+    {
+      id: 7,
+      category: "modern",
+      image: "https://images.pexels.com/photos/3074920/pexels-photo-3074920.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    },
+    {
+      id: 8,
+      category: "farmhouse",
+      image: "https://images.pexels.com/photos/2819087/pexels-photo-2819087.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    },
+    {
+      id: 9,
+      category: "contemporary",
+      image: "https://images.pexels.com/photos/279648/pexels-photo-279648.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    }
+  ];
+
+  const filteredGallery = selectedCategory === 'all' 
+    ? kitchenGallery 
+    : kitchenGallery.filter(kitchen => kitchen.category === selectedCategory);
+
+  const handleImageClick = (index: number) => {
+    setSelectedIndex(index);
+    setOpen(true);
+  };
+
+  const services = [
+    "Complete Kitchen Renovations",
+    "Custom Cabinet Design & Installation",
+    "Worktop Installation (Quartz, Granite, Marble)",
+    "Kitchen Island Design",
+    "Appliance Integration",
+    "Lighting Design & Installation",
+    "Plumbing & Electrical Work",
+    "Backsplash Installation",
+    "Storage Solutions",
+    "Project Management"
+  ];
+
+  const testimonials = [
+    {
+      name: "John & Mary Smith",
+      location: "Stellenbosch, Western Cape",
+      text: "KD Interiors completely transformed our kitchen. It's now the heart of our home. We couldn't be happier!",
+      rating: 5
+    },
+    {
+      name: "Thabo Cele",
+      location: "Camps Bay, Cape Town",
+      text: "The team was professional, and the craftsmanship is second to none. Our new kitchen is both beautiful and functional.",
+      rating: 5
+    }
+  ];
+
+  return (
+    <div className="pt-20">
+      <Lightbox
+        open={open}
+        close={() => setOpen(false)}
+        slides={filteredGallery.map(item => ({ src: item.image }))}
+        index={selectedIndex}
+      />
+      {/* Hero Section */}
+      <section className="relative py-20 bg-gradient-to-r from-gray-900 to-gray-800 text-white">
+        <div className="absolute inset-0 opacity-20">
+          <img 
+            src="https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=1920&h=800&fit=crop"
+            alt="Kitchen Renovation"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="relative container mx-auto px-4 text-center">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">
+            Kitchen Renovations
+          </h1>
+          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-gray-200">
+            Discover the heart of your home with our bespoke kitchen designs, crafted for style and functionality.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button 
+              onClick={(e) => handleScrollClick(e, 'contact-section')}
+              className="bg-amber-600 text-white px-8 py-4 rounded-lg hover:bg-amber-700 transition-colors font-semibold text-lg inline-flex items-center justify-center space-x-2"
+            >
+              <span>Get a Free Quote</span>
+              <ArrowRight size={20} />
+            </button>
+            <a 
+              href="tel:+27799352223"
+              className="border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white hover:text-gray-900 transition-colors font-semibold text-lg inline-flex items-center justify-center space-x-2"
+            >
+              <Phone size={20} />
+              <span>Call: +27 79 935 2223</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Overview */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-4xl font-bold text-gray-800 mb-6">
+                Complete Kitchen Solutions
+              </h2>
+              <p className="text-lg text-gray-600 mb-8">
+                From complete kitchen makeovers to custom cabinetry and countertops, we provide a full range of services to bring your vision to life.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {services.map((service, index) => (
+                  <div key={index} className="flex items-center space-x-3">
+                    <CheckCircle size={20} className="text-amber-600 flex-shrink-0" />
+                    <span className="text-gray-700">{service}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="relative">
+              <img
+                src="https://images.pexels.com/photos/1743227/pexels-photo-1743227.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop"
+                alt="Kitchen Design Process"
+                className="rounded-2xl shadow-2xl"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+              Our Kitchen Portfolio
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+              Explore our collection of stunning kitchen transformations across Cape Town.
+            </p>
+
+            {/* Category Filter */}
+            <div className="flex flex-wrap justify-center gap-4">
+              {categories.map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => setSelectedCategory(category.id)}
+                  className={`px-6 py-3 rounded-lg font-medium transition-colors ${
+                    selectedCategory === category.id
+                      ? 'bg-amber-600 text-white'
+                      : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
+                  }`}
+                >
+                  {category.name}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Gallery Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredGallery.map((kitchen, index) => (
+              <div key={kitchen.id} className="bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer" onClick={() => handleImageClick(index)}>
+                <div className="relative overflow-hidden">
+                  <img
+                    src={kitchen.image}
+                    alt={`Kitchen Project ${kitchen.id}`}
+                    className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center bg-white rounded-2xl p-12 shadow-2xl">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Ready for Your Dream Kitchen?
+            </h2>
+            <p className="text-xl mb-8 max-w-2xl mx-auto">
+              Let's discuss your vision and create a kitchen that perfectly suits your lifestyle and budget.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button 
+                onClick={(e) => handleScrollClick(e, 'contact-section')}
+                className="bg-amber-600 text-white px-8 py-4 rounded-lg hover:bg-amber-700 transition-colors font-semibold text-lg inline-flex items-center justify-center space-x-2 mt-6"
+              >
+                <span>Get Free Consultation</span>
+                <ArrowRight size={20} />
+              </button>
+              <a href="tel:+27799352223" className="inline-flex items-center space-x-2 text-amber-600 font-semibold hover:text-amber-700 transition-colors group">
+                <Phone size={20} />
+                <span>Call: +27 79 935 2223</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Kitchens;
