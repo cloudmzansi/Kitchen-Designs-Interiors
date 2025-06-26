@@ -71,11 +71,11 @@ const Footer = () => {
 
         <div className="border-t border-forest-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 order-2 md:order-1">
+            <div className="flex flex-row space-x-6 order-1 md:order-2 mb-2 md:mb-0">
               <Link to="/privacy-policy" className="text-white hover:text-gray-200 text-sm transition-colors">Privacy Policy</Link>
               <Link to="/terms-of-service" className="text-white hover:text-gray-200 text-sm transition-colors">Terms of Service</Link>
             </div>
-            <p className="text-white text-sm text-center md:text-left order-1 md:order-2">
+            <p className="text-white text-sm text-center w-full order-2 md:order-1 md:w-auto">
               Copyright © 2025 Kitchen Designs & Interiors. All Rights Reserved.
             </p>
           </div>
