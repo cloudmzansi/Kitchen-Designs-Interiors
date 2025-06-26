@@ -69,7 +69,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-forest-800 mt-12 pt-8">
+        <div className="border-t border-white mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex flex-row space-x-6 order-1 md:order-2 mb-2 md:mb-0">
               <Link to="/privacy-policy" className="text-white hover:text-gray-200 text-sm transition-colors">Privacy Policy</Link>

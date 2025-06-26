@@ -216,8 +216,8 @@ const Home = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60"></div>
         </div>
-        <div className="relative z-10 container mx-auto px-4 flex flex-col items-center justify-center min-h-screen min-h-[100svh]">
-          <div className="max-w-4xl mx-auto flex flex-col items-center justify-center py-16 md:py-24 gap-8 md:gap-12">
+        <div className="relative z-10 container mx-auto px-4 flex flex-col items-center justify-end min-h-screen min-h-[100svh]">
+          <div className="max-w-4xl mx-auto flex flex-col items-center justify-center py-16 md:py-32 gap-8 md:gap-12">
             <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-2 md:mb-4">
               <span className="text-white">Beautiful Renovations.</span>
               <span className="block text-white">Inspired Living.</span>
@@ -225,7 +225,7 @@ const Home = () => {
             <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto leading-relaxed mb-4 md:mb-8">
               From kitchens to bedrooms and bathrooms, we create bespoke spaces that reflect your style and enhance your lifestyle.
             </p>
-            <div className="flex flex-row flex-wrap gap-3 justify-center mt-8 md:mt-16">
+            <div className="flex flex-row flex-wrap gap-3 justify-center mt-8 md:mt-20">
               <a 
                 href="/#contact-section"
                 className="bg-forest-700 text-white px-5 py-2 md:px-10 md:py-4 rounded-lg hover:bg-forest-800 transition-all duration-300 font-semibold text-base md:text-lg flex items-center justify-center space-x-2 group shadow-2xl"
