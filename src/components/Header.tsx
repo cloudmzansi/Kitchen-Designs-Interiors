@@ -218,8 +218,8 @@ const Header = () => {
                   Get Free Quote
                 </a>
               </div>
-              <div className="px-4 py-3 text-center">
-                <a href="tel:+27799352223" className="font-medium text-forest-600 hover:text-forest-700">
+              <div className="px-4 py-3 border-t border-gray-100 mt-2">
+                <a href="tel:+27799352223" className="block text-center text-sm text-forest-600 hover:text-forest-700 font-medium tracking-wide">
                   Call Now: +27 79 935 2223
                 </a>
               </div>
