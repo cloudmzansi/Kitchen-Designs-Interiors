@@ -543,9 +543,12 @@ const Home = () => {
             {/* Contact Form */}
             <div className="bg-gray-50 rounded-2xl p-8">
               <h3 className="text-2xl font-bold mb-6 text-gray-800">Request Your Free Quote</h3>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <input type="hidden" name="access_key" value="1a5b610a-5454-42da-89ae-40d3d3820e44" />
-                
+              <form
+                action="https://formsubmit.co/andrewmichaelsrsa@gmail.com"
+                method="POST"
+                className="space-y-6"
+              >
+                <input type="hidden" name="_next" value="https://kdinteriors.co.za/thank-you" />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
