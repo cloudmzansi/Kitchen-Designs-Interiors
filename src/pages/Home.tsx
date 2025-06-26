@@ -82,37 +82,23 @@ const Home = () => {
     const form = event.currentTarget;
     const formData = new FormData(form);
 
-    // Convert FormData to object
-    const data: { [key: string]: any } = {};
-    formData.forEach((value, key) => {
-      data[key] = value;
-    });
-    // Ensure access_key is present
-    data.access_key = "1a5b610a-5454-42da-89ae-40d3d3820e44";
-
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
+      const response = await fetch('https://formsubmit.co/ajax/andrewmichaelsrsa@gmail.com', {
         method: 'POST',
+        body: formData,
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          'Accept': 'application/json',
         },
-        body: JSON.stringify(data),
       });
-
       const result = await response.json();
-      console.log('Web3Forms result:', result);
-
-      if (result.success) {
+      if (result.success === 'true') {
         setIsModalOpen(true);
         form.reset();
       } else {
-        console.error('Form submission failed', result);
-        alert('Form submission failed: ' + (result.message || 'Unknown error'));
+        alert('There was an error submitting the form.');
       }
     } catch (error) {
-      console.error('An error occurred:', error);
-      alert('An error occurred: ' + error);
+      alert('There was an error submitting the form.');
     }
   };
 
@@ -544,11 +530,10 @@ const Home = () => {
             <div className="bg-gray-50 rounded-2xl p-8">
               <h3 className="text-2xl font-bold mb-6 text-gray-800">Request Your Free Quote</h3>
               <form
-                action="https://formsubmit.co/andrewmichaelsrsa@gmail.com"
+                onSubmit={handleSubmit}
                 method="POST"
                 className="space-y-6"
               >
-                <input type="hidden" name="_next" value="https://kdinteriors.co.za/thank-you" />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
@@ -558,79 +543,52 @@ const Home = () => {
                       type="text"
                       id="name"
                       name="name"
-                      placeholder="e.g. John Doe"
-                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-500 focus:border-transparent transition"
                       required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-600 focus:outline-none"
                     />
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                      Email Address *
+                      Email *
                     </label>
                     <input
                       type="email"
                       id="email"
                       name="email"
-                      placeholder="e.g. john.doe@example.com"
-                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-500 focus:border-transparent transition"
                       required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-600 focus:outline-none"
                     />
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                      Phone Number *
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      placeholder="e.g. +27 12 345 6789"
-                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-500 focus:border-transparent transition"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="projectType" className="block text-sm font-medium text-gray-700 mb-2">
-                      Project Type *
-                    </label>
-                    <select
-                      id="projectType"
-                      name="projectType"
-                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-500 focus:border-transparent transition"
-                      required
-                    >
-                      <option value="">Select a project type</option>
-                      <option value="kitchen">Kitchen Renovations</option>
-                      <option value="bedroom">Bedroom Renovations</option>
-                      <option value="bathroom">Bathroom Renovations</option>
-                      <option value="commercial">Commercial Renovations</option>
-                      <option value="other">Other</option>
-                    </select>
                   </div>
                 </div>
                 <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                    Phone
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-600 focus:outline-none"
+                  />
+                </div>
+                <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                    Project Details
+                    Message *
                   </label>
                   <textarea
                     id="message"
                     name="message"
+                    required
                     rows={5}
-                    placeholder="Tell us about your vision, timeline, and any specific needs..."
-                    className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-500 focus:border-transparent transition"
-                  ></textarea>
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-600 focus:outline-none"
+                  />
                 </div>
-                <div className="text-left">
-                  <button
-                    type="submit"
-                    className="inline-block bg-gradient-to-r from-forest-600 to-forest-700 text-white px-8 py-4 rounded-lg hover:from-forest-700 hover:to-forest-800 transition-all duration-300 font-semibold text-lg items-center justify-center space-x-2 group shadow-lg"
-                  >
-                    <span>Send Your Request</span>
-                    <ArrowRight size={20} className="inline-block ml-2 group-hover:translate-x-1 transition-transform" />
-                  </button>
-                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-forest-600 hover:bg-forest-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                >
+                  Send Your Request
+                </button>
               </form>
             </div>
 
