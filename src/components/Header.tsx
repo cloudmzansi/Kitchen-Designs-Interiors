@@ -136,25 +136,26 @@ const Header = () => {
         </div>
 
         {/* Mobile Menu */}
-        {/* Overlay */}
         {isMenuOpen && (
           <>
+            {/* Overlay */}
             <div
-              className="fixed inset-0 z-40 bg-black bg-opacity-40 transition-opacity duration-300 lg:hidden"
+              className="fixed inset-0 z-40 bg-black bg-opacity-50 transition-opacity duration-300 lg:hidden"
               onClick={() => setIsMenuOpen(false)}
             />
+            {/* Side Drawer */}
             <aside
               className="fixed top-0 right-0 z-50 h-full w-80 max-w-full bg-white shadow-2xl flex flex-col transition-transform duration-300 transform translate-x-0 lg:hidden"
             >
-              <div className="flex justify-end p-4">
+              <div className="flex justify-end p-4 border-b border-gray-200">
                 <button
                   onClick={() => setIsMenuOpen(false)}
-                  className="p-2 rounded-full bg-forest-100 text-forest-800 shadow hover:bg-forest-200 focus:outline-none focus:ring-2 focus:ring-forest-700"
+                  className="p-2 rounded-full bg-gray-100 text-forest-800 shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-forest-700"
                 >
                   <X size={24} />
                 </button>
               </div>
-              <nav className="flex-1 flex flex-col justify-center items-center px-6 overflow-y-auto space-y-6">
+              <nav className="flex-1 flex flex-col justify-start items-center px-6 py-8 overflow-y-auto space-y-6">
                 <a
                   href="/#top"
                   onClick={(e) => { handleScrollClick(e, 'top'); setIsMenuOpen(false); }}

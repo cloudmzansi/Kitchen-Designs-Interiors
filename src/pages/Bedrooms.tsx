@@ -4,26 +4,16 @@ import { ArrowRight, Star, CheckCircle, Phone } from 'lucide-react';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { useScrollTo } from '../hooks/useScrollTo';
-import bedroomHeroAvif from '../assets/bedrooms/bedrooms-1.avif';
-import bedroomHeroJpg from '../assets/bedrooms/bedrooms-1.jpg';
-import bedroom2Avif from '../assets/bedrooms/bedrooms-2.avif';
-import bedroom2Jpg from '../assets/bedrooms/bedrooms-2.jpg';
-import bedroom3Avif from '../assets/bedrooms/bedrooms-3.avif';
-import bedroom3Jpg from '../assets/bedrooms/bedrooms-3.jpg';
-import bedroom4Avif from '../assets/bedrooms/bedrooms-4.avif';
-import bedroom4Jpg from '../assets/bedrooms/bedrooms-4.jpg';
-import bedroom5Avif from '../assets/bedrooms/bedrooms-5.avif';
-import bedroom5Jpg from '../assets/bedrooms/bedrooms-5.jpg';
-import bedroom6Avif from '../assets/bedrooms/bedrooms-6.avif';
-import bedroom6Jpg from '../assets/bedrooms/bedrooms-6.jpg';
-import bedroom7Avif from '../assets/bedrooms/bedrooms-7.avif';
-import bedroom7Jpg from '../assets/bedrooms/bedrooms-7.jpg';
-import bedroom8Avif from '../assets/bedrooms/bedrooms-8.avif';
-import bedroom8Jpg from '../assets/bedrooms/bedrooms-8.jpg';
-import bedroom9Avif from '../assets/bedrooms/bedrooms-9.avif';
-import bedroom9Jpg from '../assets/bedrooms/bedrooms-9.jpg';
-import bedroom10Avif from '../assets/bedrooms/bedrooms-10.avif';
-import bedroom10Jpg from '../assets/bedrooms/bedrooms-10.jpg';
+import bedroomHero from '../assets/bedrooms/bedrooms-1.jpg';
+import bedroom2 from '../assets/bedrooms/bedrooms-2.jpg';
+import bedroom3 from '../assets/bedrooms/bedrooms-3.jpg';
+import bedroom4 from '../assets/bedrooms/bedrooms-4.jpg';
+import bedroom5 from '../assets/bedrooms/bedrooms-5.jpg';
+import bedroom6 from '../assets/bedrooms/bedrooms-6.jpg';
+import bedroom7 from '../assets/bedrooms/bedrooms-7.jpg';
+import bedroom8 from '../assets/bedrooms/bedrooms-8.jpg';
+import bedroom9 from '../assets/bedrooms/bedrooms-9.jpg';
+import bedroom10 from '../assets/bedrooms/bedrooms-10.jpg';
 
 const Bedrooms = () => {
   const [open, setOpen] = useState(false);
@@ -34,15 +24,15 @@ const Bedrooms = () => {
   const categories: { id: string; name: string }[] = [];
 
   const bedroomGallery = [
-    { id: 1, category: 'gallery', image: bedroom2Avif },
-    { id: 2, category: 'gallery', image: bedroom3Avif },
-    { id: 3, category: 'gallery', image: bedroom4Avif },
-    { id: 4, category: 'gallery', image: bedroom5Avif },
-    { id: 5, category: 'gallery', image: bedroom6Avif },
-    { id: 6, category: 'gallery', image: bedroom7Avif },
-    { id: 7, category: 'gallery', image: bedroom8Avif },
-    { id: 8, category: 'gallery', image: bedroom9Avif },
-    { id: 9, category: 'gallery', image: bedroom10Avif },
+    { id: 1, category: 'gallery', image: bedroom2 },
+    { id: 2, category: 'gallery', image: bedroom3 },
+    { id: 3, category: 'gallery', image: bedroom4 },
+    { id: 4, category: 'gallery', image: bedroom5 },
+    { id: 5, category: 'gallery', image: bedroom6 },
+    { id: 6, category: 'gallery', image: bedroom7 },
+    { id: 7, category: 'gallery', image: bedroom8 },
+    { id: 8, category: 'gallery', image: bedroom9 },
+    { id: 9, category: 'gallery', image: bedroom10 },
   ];
 
   const filteredGallery = selectedCategory === 'all' 
@@ -124,14 +114,11 @@ const Bedrooms = () => {
               </div>
             </div>
             <div className="relative">
-              <picture>
-                <source srcSet={bedroomHeroAvif} type="image/avif" />
-                <img
-                  src={bedroomHeroJpg}
-                  alt="Bedroom Design Process"
-                  className="rounded-2xl shadow-2xl"
-                />
-              </picture>
+              <img
+                src={bedroomHero}
+                alt="Bedroom Design Process"
+                className="rounded-2xl shadow-2xl"
+              />
             </div>
           </div>
         </div>
@@ -171,14 +158,11 @@ const Bedrooms = () => {
             {filteredGallery.map((bedroom, index) => (
               <div key={bedroom.id} className="bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer" onClick={() => handleImageClick(index)}>
                 <div className="relative overflow-hidden">
-                  <picture>
-                    <source srcSet={eval(`bedroom${bedroom.id + 1}Avif`)} type="image/avif" />
-                    <img
-                      src={eval(`bedroom${bedroom.id + 1}Jpg`)}
-                      alt={`Bedroom Project ${bedroom.id}`}
-                      className="w-full aspect-[1/1] object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </picture>
+                  <img
+                    src={eval(`bedroom${bedroom.id + 1}`)}
+                    alt={`Bedroom Project ${bedroom.id}`}
+                    className="w-full aspect-[1/1] object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
               </div>
             ))}
