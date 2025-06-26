@@ -78,7 +78,7 @@ const Home = () => {
       link: "/kitchens"
     },
     {
-      title: "Bedroom Solutions",
+      title: "Bedroom Renovations",
       description: "Create your perfect sanctuary with built-in wardrobes and custom bedroom furniture.",
       image: serviceBedroom,
       link: "/bedrooms"
@@ -90,7 +90,7 @@ const Home = () => {
       link: "/bathrooms"
     },
     {
-      title: "Commercial Interiors",
+      title: "Commercial Renovations",
       description: "Expert commercial interior design and fit-out solutions for businesses of all sizes, creating functional and inspiring workspaces.",
       image: serviceCommercial,
       link: "/commercial"
@@ -314,13 +314,13 @@ const Home = () => {
               <div className="grid grid-cols-1 gap-x-12 gap-y-16">
                 {services.slice(specialtyIndex, specialtyIndex + 1).map((service, index) => (
                   <div key={index} className="group text-left">
-                    <div className="relative mb-6 overflow-hidden rounded-2xl shadow-xl">
-                      <img src={service.image} alt={service.title} className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105 max-w-full" />
+                    <Link to={service.link} className="block relative mb-6 overflow-hidden rounded-2xl shadow-xl focus:outline-none focus:ring-2 focus:ring-forest-700">
+                      <img src={service.image} alt={service.title} className="w-full aspect-[1/1] object-cover transition-transform duration-300 group-hover:scale-105 max-w-full" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                       <div className="absolute bottom-0 left-0 p-6">
                         <h3 className="text-2xl font-bold text-white">{service.title}</h3>
                       </div>
-                    </div>
+                    </Link>
                     <p className="text-gray-700 mb-4 text-lg leading-relaxed">{service.description}</p>
                     <Link to={service.link} className="font-semibold text-forest-700 hover:text-forest-800 flex items-center group-hover:text-forest-800 transition-colors">
                       View Gallery
@@ -337,13 +337,13 @@ const Home = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
               {services.map((service, index) => (
                 <div key={index} className="group text-left">
-                  <div className="relative mb-6 overflow-hidden rounded-2xl shadow-xl">
-                    <img src={service.image} alt={service.title} className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105 max-w-full" />
+                  <Link to={service.link} className="block relative mb-6 overflow-hidden rounded-2xl shadow-xl focus:outline-none focus:ring-2 focus:ring-forest-700">
+                    <img src={service.image} alt={service.title} className="w-full aspect-[1/1] object-cover transition-transform duration-300 group-hover:scale-105 max-w-full" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                     <div className="absolute bottom-0 left-0 p-6">
                       <h3 className="text-2xl font-bold text-white">{service.title}</h3>
                     </div>
-                  </div>
+                  </Link>
                   <p className="text-gray-700 mb-4 text-lg leading-relaxed">{service.description}</p>
                   <Link to={service.link} className="font-semibold text-forest-700 hover:text-forest-800 flex items-center group-hover:text-forest-800 transition-colors">
                     View Gallery
@@ -542,9 +542,9 @@ const Home = () => {
                     >
                       <option value="">Select a project type</option>
                       <option value="kitchen">Kitchen Renovations</option>
-                      <option value="bedroom">Bedroom Solutions</option>
+                      <option value="bedroom">Bedroom Renovations</option>
                       <option value="bathroom">Bathroom Renovations</option>
-                      <option value="commercial">Commercial Interiors</option>
+                      <option value="commercial">Commercial Renovations</option>
                       <option value="other">Other</option>
                     </select>
                   </div>
