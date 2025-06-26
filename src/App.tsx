@@ -9,7 +9,6 @@ import Bathrooms from './pages/Bathrooms';
 import Commercial from './pages/Commercial';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
-import CookiePolicy from './pages/CookiePolicy';
 import ScrollToTop from './hooks/ScrollToTop';
 
 function App() {
@@ -27,7 +26,6 @@ function App() {
             <Route path="/commercial" element={<Commercial />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
-            <Route path="/cookie-policy" element={<CookiePolicy />} />
           </Routes>
         </main>
         <Footer />
