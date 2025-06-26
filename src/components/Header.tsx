@@ -49,8 +49,20 @@ const Header = () => {
   const logoTextClasses = isScrolled ? 'text-forest-900' : 'text-white';
   
   // Phone number and icon color logic
-  // Use solid green (forest-700) for phone number and icon everywhere except hero section on service pages
-  const phoneTextClasses = 'text-forest-700 hover:text-forest-700';
+  let phoneTextClasses = '';
+  let phoneIconClass = '';
+  if (isHomePage) {
+    if (isScrolled) {
+      phoneTextClasses = 'text-forest-700 hover:text-forest-700';
+      phoneIconClass = 'text-forest-700';
+    } else {
+      phoneTextClasses = 'text-white hover:text-white';
+      phoneIconClass = 'text-white';
+    }
+  } else {
+    phoneTextClasses = 'text-forest-700 hover:text-forest-700';
+    phoneIconClass = 'text-forest-700';
+  }
 
   const ctaButtonClasses = "bg-forest-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-forest-800 transition-all duration-300";
 
@@ -121,7 +133,7 @@ const Header = () => {
           {/* Contact Info & CTA */}
           <div className="hidden lg:flex items-center space-x-6">
             <a href="tel:+27799352223" className={`flex items-center space-x-2 font-semibold transition-colors duration-300 ${phoneTextClasses}`}>
-              <Phone size={16} className="text-forest-700" />
+              <Phone size={16} className={phoneIconClass} />
               <span>+27 79 935 2223</span>
             </a>
             <a 
@@ -250,10 +262,10 @@ const Header = () => {
                 </a>
                 <a
                   href="tel:+27799352223"
-                  className="w-full bg-gray-100 text-forest-700 text-lg font-semibold py-4 rounded-lg text-center border border-gray-300 hover:bg-gray-200 hover:text-forest-800 transition-colors flex items-center justify-center gap-2"
+                  className={`w-full bg-gray-100 ${phoneTextClasses} text-lg font-semibold py-4 rounded-lg text-center border border-gray-300 hover:bg-gray-200 hover:text-forest-800 transition-colors flex items-center justify-center gap-2`}
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  <Phone size={20} className="text-forest-700" />
+                  <Phone size={20} className={phoneIconClass} />
                   <span>Call Now: +27 79 935 2223</span>
                 </a>
               </div>
