@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Star, Users, Award, Shield, Clock, CheckCircle, Phone, Mail, MapPin, Quote } from 'lucide-react';
+import { ArrowRight, Star, Users, Award, Shield, Clock, CheckCircle, Phone, Mail, MapPin, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 import heroBg from '../assets/home/home-1.jpg';
 import about1 from '../assets/home/home-2.jpg';
 import about2 from '../assets/home/home-3.jpg';
@@ -32,6 +32,21 @@ type Testimonial = {
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [trustBadgeIndex, setTrustBadgeIndex] = useState(0);
+  const [specialtyIndex, setSpecialtyIndex] = useState(0);
+  const [testimonialIndex, setTestimonialIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -137,15 +152,52 @@ const Home = () => {
     }
   ];
 
+  const trustBadges = [
+    { icon: Shield, title: "Fully Licensed & Insured", desc: "Complete peace of mind" },
+    { icon: Award, title: "Award-Winning Designs", desc: "Industry recognition" },
+    { icon: Users, title: "500+ Satisfied Clients", desc: "Trusted across Cape Town" },
+    { icon: Clock, title: "30+ Years Experience", desc: "Proven expertise" }
+  ];
+
+  const nextTrustBadge = () => {
+    const itemsPerView = isMobile ? 2 : 4;
+    setTrustBadgeIndex((prev) => (prev + itemsPerView) % trustBadges.length);
+  };
+
+  const prevTrustBadge = () => {
+    const itemsPerView = isMobile ? 2 : 4;
+    setTrustBadgeIndex((prev) => (prev - itemsPerView + trustBadges.length) % trustBadges.length);
+  };
+
+  const nextSpecialty = () => {
+    const itemsPerView = isMobile ? 2 : 4;
+    setSpecialtyIndex((prev) => (prev + itemsPerView) % services.length);
+  };
+
+  const prevSpecialty = () => {
+    const itemsPerView = isMobile ? 2 : 4;
+    setSpecialtyIndex((prev) => (prev - itemsPerView + services.length) % services.length);
+  };
+
+  const nextTestimonial = () => {
+    const itemsPerView = isMobile ? 2 : 4;
+    setTestimonialIndex((prev) => (prev + itemsPerView) % testimonials.length);
+  };
+
+  const prevTestimonial = () => {
+    const itemsPerView = isMobile ? 2 : 4;
+    setTestimonialIndex((prev) => (prev - itemsPerView + testimonials.length) % testimonials.length);
+  };
+
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="relative h-screen flex flex-col items-center justify-center text-center overflow-hidden">
+      <section className="relative h-screen min-h-screen flex flex-col items-center justify-center text-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
             src={heroBg}
             alt="Luxury Kitchen Interior"
-            className="w-full h-full object-cover"
+            className="w-full h-full min-h-screen object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60"></div>
         </div>
@@ -181,21 +233,36 @@ const Home = () => {
       {/* Trust Badges */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {[
-              { icon: Shield, title: "Fully Licensed & Insured", desc: "Complete peace of mind" },
-              { icon: Award, title: "Award-Winning Designs", desc: "Industry recognition" },
-              { icon: Users, title: "500+ Satisfied Clients", desc: "Trusted across Cape Town" },
-              { icon: Clock, title: "30+ Years Experience", desc: "Proven expertise" }
-            ].map((badge, index) => (
-              <div key={index} className="text-center group">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4 group-hover:bg-forest-700 transition-colors duration-300">
-                  <badge.icon size={32} className="text-forest-700 group-hover:text-white transition-colors duration-300" />
-                </div>
-                <h3 className="text-lg font-semibold text-forest-900 mb-2">{badge.title}</h3>
-                <p className="text-forest-600 text-sm">{badge.desc}</p>
+          <div className="relative">
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="text-3xl font-bold text-gray-800">Why Choose Us</h2>
+              <div className="flex space-x-2">
+                <button
+                  onClick={prevTrustBadge}
+                  className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                >
+                  <ChevronLeft size={20} className="text-gray-600" />
+                </button>
+                <button
+                  onClick={nextTrustBadge}
+                  className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                >
+                  <ChevronRight size={20} className="text-gray-600" />
+                </button>
               </div>
-            ))}
+            </div>
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {trustBadges.slice(trustBadgeIndex, trustBadgeIndex + (isMobile ? 2 : 4)).map((badge, index) => (
+                <div key={index} className="text-center group">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4 group-hover:bg-forest-700 transition-colors duration-300">
+                    <badge.icon size={32} className="text-forest-700 group-hover:text-white transition-colors duration-300" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-forest-900 mb-2">{badge.title}</h3>
+                  <p className="text-forest-600 text-sm">{badge.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -204,7 +271,7 @@ const Home = () => {
       <section id="about-us" className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">About KD Interiors</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">About Kitchen Designs & Interiors</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">We are dedicated to delivering bespoke interiors and exceptional service, ensuring every project is tailored to your unique needs and finished to the highest standards.</p>
           </div>
 
@@ -257,24 +324,45 @@ const Home = () => {
             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Our Specialties</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">We specialise in creating custom interior solutions that transform your living spaces into works of art.</p>
           </div>
-          <div className="max-w-4xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-              {services.map((service, index) => (
-                <div key={index} className="group text-left">
-                  <div className="relative mb-6 overflow-hidden rounded-2xl shadow-xl">
-                    <img src={service.image} alt={service.title} className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105 max-w-full" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                    <div className="absolute bottom-0 left-0 p-6">
-                      <h3 className="text-2xl font-bold text-white">{service.title}</h3>
+          
+          <div className="relative">
+            <div className="flex justify-between items-center mb-8">
+              <div></div>
+              <div className="flex space-x-2">
+                <button
+                  onClick={prevSpecialty}
+                  className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                >
+                  <ChevronLeft size={20} className="text-gray-600" />
+                </button>
+                <button
+                  onClick={nextSpecialty}
+                  className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                >
+                  <ChevronRight size={20} className="text-gray-600" />
+                </button>
+              </div>
+            </div>
+            
+            <div className="max-w-4xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+                {services.slice(specialtyIndex, specialtyIndex + (isMobile ? 2 : 4)).map((service, index) => (
+                  <div key={index} className="group text-left">
+                    <div className="relative mb-6 overflow-hidden rounded-2xl shadow-xl">
+                      <img src={service.image} alt={service.title} className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105 max-w-full" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                      <div className="absolute bottom-0 left-0 p-6">
+                        <h3 className="text-2xl font-bold text-white">{service.title}</h3>
+                      </div>
                     </div>
+                    <p className="text-gray-700 mb-4 text-lg leading-relaxed">{service.description}</p>
+                    <Link to={service.link} className="font-semibold text-forest-700 hover:text-forest-800 flex items-center group-hover:text-forest-800 transition-colors">
+                      View Gallery
+                      <ArrowRight size={20} className="ml-2 transform group-hover:translate-x-1 transition-transform" />
+                    </Link>
                   </div>
-                  <p className="text-gray-700 mb-4 text-lg leading-relaxed">{service.description}</p>
-                  <Link to={service.link} className="font-semibold text-forest-700 hover:text-forest-800 flex items-center group-hover:text-forest-800 transition-colors">
-                    View Gallery
-                    <ArrowRight size={20} className="ml-2 transform group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -328,25 +416,45 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-white rounded-2xl p-8 flex flex-col items-center text-center shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
-                <div className="text-forest-500 mb-4">
-                  <Quote size={40} />
-                </div>
-                <div className="flex mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} size={20} className="text-forest-400 fill-current" />
-                  ))}
-                </div>
-                <p className="text-gray-700 mb-6 italic flex-grow">"{testimonial.text}"</p>
-                <div className="mt-auto">
-                  <img src={testimonial.avatar} alt={testimonial.name} className="w-16 h-16 rounded-full mx-auto mb-4" />
-                  <h4 className="font-semibold text-gray-800">{testimonial.name}</h4>
-                  <p className="text-sm text-gray-500">{testimonial.location}</p>
-                </div>
+          <div className="relative">
+            <div className="flex justify-between items-center mb-8">
+              <div></div>
+              <div className="flex space-x-2">
+                <button
+                  onClick={prevTestimonial}
+                  className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                >
+                  <ChevronLeft size={20} className="text-gray-600" />
+                </button>
+                <button
+                  onClick={nextTestimonial}
+                  className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                >
+                  <ChevronRight size={20} className="text-gray-600" />
+                </button>
               </div>
-            ))}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {testimonials.slice(testimonialIndex, testimonialIndex + (isMobile ? 2 : 4)).map((testimonial, index) => (
+                <div key={index} className="bg-white rounded-2xl p-8 flex flex-col items-center text-center shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
+                  <div className="text-forest-500 mb-4">
+                    <Quote size={40} />
+                  </div>
+                  <div className="flex mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} size={20} className="text-forest-400 fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-gray-700 mb-6 italic flex-grow">"{testimonial.text}"</p>
+                  <div className="mt-auto">
+                    <img src={testimonial.avatar} alt={testimonial.name} className="w-16 h-16 rounded-full mx-auto mb-4" />
+                    <h4 className="font-semibold text-gray-800">{testimonial.name}</h4>
+                    <p className="text-sm text-gray-500">{testimonial.location}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
