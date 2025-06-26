@@ -212,6 +212,7 @@ const Header = () => {
                 <button
                   className="w-full text-xl font-semibold text-black py-4 rounded-lg hover:bg-gray-100 transition-colors focus:outline-none flex justify-center items-center"
                   aria-expanded={isMobileServicesOpen}
+                  onClick={() => setIsMobileServicesOpen((open) => !open)}
                 >
                   <span>Services</span>
                   <ChevronDown size={24} className={`ml-2 transition-transform duration-200 ${isMobileServicesOpen ? 'rotate-180' : ''}`} />
