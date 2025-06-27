@@ -8,6 +8,7 @@ import serviceKitchen from '../assets/home/home-4.jpg';
 import serviceBedroom from '../assets/home/home-5.jpg';
 import serviceBathroom from '../assets/home/home-6.jpg';
 import serviceCommercial from '../assets/home/home-7.jpg';
+import { fetchGoogleReviews, fallbackReviews, GoogleReview } from '../services/googlePlaces';
 
 type Service = {
   title: string;
@@ -22,14 +23,6 @@ type ProcessStep = {
   description: string;
 };
 
-type Testimonial = {
-  name: string;
-  location: string;
-  text: string;
-  rating: number;
-  avatar: string;
-};
-
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [specialtyIndex, setSpecialtyIndex] = useState(0);
@@ -37,6 +30,8 @@ const Home = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
+  const [reviews, setReviews] = useState<GoogleReview[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -47,6 +42,27 @@ const Home = () => {
     window.addEventListener('resize', checkMobile);
     
     return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    const loadReviews = async () => {
+      try {
+        setLoading(true);
+        const googleReviews = await fetchGoogleReviews();
+        if (googleReviews.length > 0) {
+          setReviews(googleReviews);
+        } else {
+          setReviews(fallbackReviews);
+        }
+      } catch (error) {
+        console.error('Error loading reviews:', error);
+        setReviews(fallbackReviews);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadReviews();
   }, []);
 
   // Minimum swipe distance (in px)
@@ -164,37 +180,6 @@ const Home = () => {
     }
   ];
 
-  const testimonials: Testimonial[] = [
-    {
-      name: "Sarah Johnson",
-      location: "Sandton",
-      text: "KD Interiors transformed our outdated kitchen into a stunning modern space. The attention to detail and quality of work exceeded our expectations. Highly recommended!",
-      rating: 5,
-      avatar: "https://randomuser.me/api/portraits/women/44.jpg"
-    },
-    {
-      name: "Michael Thompson",
-      location: "Rosebank",
-      text: "Professional, reliable, and incredibly talented. The team delivered exactly what they promised, on time and within budget. Our kitchen is now the heart of our home.",
-      rating: 5,
-      avatar: "https://randomuser.me/api/portraits/men/62.jpg"
-    },
-    {
-      name: "Lisa Anderson",
-      location: "Melville",
-      text: "From the initial consultation to the final installation, KD Interiors provided exceptional service. Their design expertise and craftsmanship are truly outstanding.",
-      rating: 5,
-      avatar: "https://randomuser.me/api/portraits/women/75.jpg"
-    },
-    {
-      name: "David Wilson",
-      location: "Fourways",
-      text: "The team at KD Interiors turned our vision into reality. The project was completed smoothly, and the result is absolutely beautiful. We couldn't be happier!",
-      rating: 5,
-      avatar: "https://randomuser.me/api/portraits/men/86.jpg"
-    }
-  ];
-
   const trustBadges = [
     { icon: Shield, title: "Fully Licensed & Insured", desc: "Complete peace of mind" },
     { icon: Award, title: "Award-Winning Designs", desc: "Industry recognition" },
@@ -211,11 +196,11 @@ const Home = () => {
   };
 
   const nextTestimonial = () => {
-    setTestimonialIndex((prev) => (prev + 1) % testimonials.length);
+    setTestimonialIndex((prev) => (prev + 1) % reviews.length);
   };
 
   const prevTestimonial = () => {
-    setTestimonialIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setTestimonialIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
   };
 
   return (
@@ -455,74 +440,99 @@ const Home = () => {
             </p>
           </div>
 
-          {/* Mobile Carousel */}
-          <div className="md:hidden relative">
-            <div className="flex justify-between items-center mb-8">
-              <div></div>
-              <div className="flex space-x-2">
-                <button
-                  onClick={prevTestimonial}
-                  className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
-                >
-                  <ChevronLeft size={20} className="text-gray-600" />
-                </button>
-                <button
-                  onClick={nextTestimonial}
-                  className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
-                >
-                  <ChevronRight size={20} className="text-gray-600" />
-                </button>
-              </div>
+          {loading ? (
+            <div className="text-center py-12">
+              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-forest-600"></div>
+              <p className="mt-4 text-gray-600">Loading reviews...</p>
             </div>
-
-            <div 
-              className="grid grid-cols-1 gap-8"
-              onTouchStart={onTouchStart}
-              onTouchMove={onTouchMove}
-              onTouchEnd={() => onTouchEnd('testimonials')}
-            >
-              {testimonials.slice(testimonialIndex, testimonialIndex + 1).map((testimonial, index) => (
-                <div key={index} className="bg-white rounded-2xl p-8 flex flex-col items-center text-center shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
-                  <div className="text-forest-500 mb-4">
-                    <Quote size={40} />
-                  </div>
-                  <div className="flex mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} size={20} className="text-forest-400 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-gray-700 mb-6 italic flex-grow">"{testimonial.text}"</p>
-                  <div className="mt-auto">
-                    <img src={testimonial.avatar} alt={testimonial.name} className="w-16 h-16 rounded-full mx-auto mb-4" />
-                    <h4 className="font-semibold text-gray-800">{testimonial.name}</h4>
-                    <p className="text-sm text-gray-500">{testimonial.location}</p>
+          ) : (
+            <>
+              {/* Mobile Carousel */}
+              <div className="md:hidden relative">
+                <div className="flex justify-between items-center mb-8">
+                  <div></div>
+                  <div className="flex space-x-2">
+                    <button
+                      onClick={prevTestimonial}
+                      className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                    >
+                      <ChevronLeft size={20} className="text-gray-600" />
+                    </button>
+                    <button
+                      onClick={nextTestimonial}
+                      className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                    >
+                      <ChevronRight size={20} className="text-gray-600" />
+                    </button>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
 
-          {/* Desktop Grid */}
-          <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-white rounded-2xl p-8 flex flex-col items-center text-center shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
-                <div className="text-forest-500 mb-4">
-                  <Quote size={40} />
-                </div>
-                <div className="flex mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} size={20} className="text-forest-400 fill-current" />
+                <div 
+                  className="grid grid-cols-1 gap-8"
+                  onTouchStart={onTouchStart}
+                  onTouchMove={onTouchMove}
+                  onTouchEnd={() => onTouchEnd('testimonials')}
+                >
+                  {reviews.slice(testimonialIndex, testimonialIndex + 1).map((review, index) => (
+                    <div key={index} className="bg-white rounded-2xl p-8 flex flex-col items-center text-center shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
+                      <div className="text-forest-500 mb-4">
+                        <Quote size={40} />
+                      </div>
+                      <div className="flex mb-4">
+                        {[...Array(review.rating)].map((_, i) => (
+                          <Star key={i} size={20} className="text-forest-400 fill-current" />
+                        ))}
+                      </div>
+                      <p className="text-gray-700 mb-6 italic flex-grow">"{review.text}"</p>
+                      <div className="mt-auto">
+                        {review.profile_photo_url ? (
+                          <img src={review.profile_photo_url} alt={review.author_name} className="w-16 h-16 rounded-full mx-auto mb-4" />
+                        ) : (
+                          <div className="w-16 h-16 rounded-full mx-auto mb-4 bg-forest-100 flex items-center justify-center">
+                            <span className="text-forest-600 font-semibold text-lg">
+                              {review.author_name.charAt(0).toUpperCase()}
+                            </span>
+                          </div>
+                        )}
+                        <h4 className="font-semibold text-gray-800">{review.author_name}</h4>
+                        <p className="text-sm text-gray-500">{review.relative_time_description}</p>
+                      </div>
+                    </div>
                   ))}
                 </div>
-                <p className="text-gray-700 mb-6 italic flex-grow">"{testimonial.text}"</p>
-                <div className="mt-auto">
-                  <img src={testimonial.avatar} alt={testimonial.name} className="w-16 h-16 rounded-full mx-auto mb-4" />
-                  <h4 className="font-semibold text-gray-800">{testimonial.name}</h4>
-                  <p className="text-sm text-gray-500">{testimonial.location}</p>
-                </div>
               </div>
-            ))}
-          </div>
+
+              {/* Desktop Grid */}
+              <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {reviews.slice(0, 4).map((review, index) => (
+                  <div key={index} className="bg-white rounded-2xl p-8 flex flex-col items-center text-center shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
+                    <div className="text-forest-500 mb-4">
+                      <Quote size={40} />
+                    </div>
+                    <div className="flex mb-4">
+                      {[...Array(review.rating)].map((_, i) => (
+                        <Star key={i} size={20} className="text-forest-400 fill-current" />
+                      ))}
+                    </div>
+                    <p className="text-gray-700 mb-6 italic flex-grow">"{review.text}"</p>
+                    <div className="mt-auto">
+                      {review.profile_photo_url ? (
+                        <img src={review.profile_photo_url} alt={review.author_name} className="w-16 h-16 rounded-full mx-auto mb-4" />
+                      ) : (
+                        <div className="w-16 h-16 rounded-full mx-auto mb-4 bg-forest-100 flex items-center justify-center">
+                          <span className="text-forest-600 font-semibold text-lg">
+                            {review.author_name.charAt(0).toUpperCase()}
+                          </span>
+                        </div>
+                      )}
+                      <h4 className="font-semibold text-gray-800">{review.author_name}</h4>
+                      <p className="text-sm text-gray-500">{review.relative_time_description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </section>
 
