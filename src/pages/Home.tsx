@@ -8,7 +8,23 @@ import serviceKitchen from '../assets/home/home-4.jpg';
 import serviceBedroom from '../assets/home/home-5.jpg';
 import serviceBathroom from '../assets/home/home-6.jpg';
 import serviceCommercial from '../assets/home/home-7.jpg';
-import { fetchGoogleReviews, fallbackReviews, GoogleReview } from '../services/googlePlaces';
+import kitchen1 from '../assets/kitchens/kitchens-1.avif';
+import kitchen2 from '../assets/kitchens/kitchens-2.avif';
+import kitchen3 from '../assets/kitchens/kitchens-3.avif';
+import kitchen4 from '../assets/kitchens/kitchens-4.avif';
+import kitchen5 from '../assets/kitchens/kitchens-5.avif';
+import kitchen6 from '../assets/kitchens/kitchens-6.avif';
+import kitchen7 from '../assets/kitchens/kitchens-7.avif';
+import kitchen8 from '../assets/kitchens/kitchens-8.avif';
+import kitchen9 from '../assets/kitchens/kitchens-9.avif';
+import kitchen10 from '../assets/kitchens/kitchens-10.avif';
+import home1 from '../assets/home/home-1.avif';
+import home2 from '../assets/home/home-2.avif';
+import home3 from '../assets/home/home-3.avif';
+import home4 from '../assets/home/home-4.avif';
+import home5 from '../assets/home/home-5.avif';
+import home6 from '../assets/home/home-6.avif';
+import home7 from '../assets/home/home-7.avif';
 
 type Service = {
   title: string;
@@ -30,8 +46,7 @@ const Home = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
-  const [reviews, setReviews] = useState<GoogleReview[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [isTrustindexLoaded, setIsTrustindexLoaded] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -45,29 +60,56 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    const loadReviews = async () => {
-      try {
-        setLoading(true);
-        console.log('Loading reviews...');
-        const googleReviews = await fetchGoogleReviews();
-        console.log('Reviews loaded:', googleReviews);
-        if (googleReviews.length > 0) {
-          setReviews(googleReviews);
-        } else {
-          console.log('No reviews found, using fallback');
-          setReviews(fallbackReviews);
-        }
-      } catch (error) {
-        console.error('Error loading reviews:', error);
-        setReviews(fallbackReviews);
-      } finally {
-        setLoading(false);
-        console.log('Loading complete');
+    // Load Trustindex script
+    const script = document.createElement('script');
+    script.src = 'https://cdn.trustindex.io/loader.js?e0e4332487b09702ed9638e20d5';
+    script.defer = true;
+    script.async = true;
+    script.onload = () => setIsTrustindexLoaded(true);
+    document.head.appendChild(script);
+
+    return () => {
+      // Cleanup script if component unmounts
+      const existingScript = document.querySelector('script[src*="trustindex.io"]');
+      if (existingScript) {
+        existingScript.remove();
       }
     };
-
-    loadReviews();
   }, []);
+
+  const heroImages = [kitchen1, kitchen2, kitchen3, kitchen4, kitchen5];
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [heroImages.length]);
+
+  const testimonials = [
+    {
+      name: 'Sarah Johnson',
+      text: 'KD Interiors transformed our outdated kitchen into a modern masterpiece. Their attention to detail and quality work exceeded our expectations. Highly recommended!',
+      rating: 5
+    },
+    {
+      name: 'Michael Thompson',
+      text: 'Professional, reliable, and incredibly talented. The team at KD Interiors delivered our dream kitchen within budget. Our kitchen is now the heart of our home.',
+      rating: 5
+    },
+    {
+      name: 'Lisa Anderson',
+      text: 'From the initial consultation to the final installation, KD Interiors exceeded our expectations. Their expertise and craftsmanship are truly outstanding.',
+      rating: 5
+    },
+    {
+      name: 'David Wilson',
+      text: "The team at KD Interiors turned our vision into reality. The quality of work and attention to detail is absolutely beautiful. We couldn't be happier!",
+      rating: 5
+    }
+  ];
 
   // Minimum swipe distance (in px)
   const minSwipeDistance = 50;
@@ -200,11 +242,11 @@ const Home = () => {
   };
 
   const nextTestimonial = () => {
-    setTestimonialIndex((prev) => (prev + 1) % reviews.length);
+    setTestimonialIndex((prev) => (prev + 1) % testimonials.length);
   };
 
   const prevTestimonial = () => {
-    setTestimonialIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
+    setTestimonialIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
   return (
@@ -213,9 +255,9 @@ const Home = () => {
       <section className="relative min-h-screen min-h-[100svh] flex flex-col items-center justify-center text-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
-            src={heroBg}
-            alt="Luxury Kitchen Interior"
-            className="w-full h-full min-h-screen min-h-[100svh] object-cover"
+            src={heroImages[currentImageIndex]}
+            alt="Kitchen Design"
+            className="w-full h-full min-h-screen min-h-[100svh] object-cover transition-opacity duration-1000"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60"></div>
         </div>
@@ -444,98 +486,34 @@ const Home = () => {
             </p>
           </div>
 
-          {loading ? (
-            <div className="text-center py-12">
-              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-forest-600"></div>
-              <p className="mt-4 text-gray-600">Loading reviews...</p>
+          {/* Trustindex Widget */}
+          <div className="max-w-4xl mx-auto">
+            <div id="trustindex-widget" className="text-center">
+              {!isTrustindexLoaded && (
+                <div className="text-gray-500">
+                  Loading reviews...
+                </div>
+              )}
             </div>
-          ) : (
-            <>
-              {/* Mobile Carousel */}
-              <div className="md:hidden relative">
-                <div className="flex justify-between items-center mb-8">
-                  <div></div>
-                  <div className="flex space-x-2">
-                    <button
-                      onClick={prevTestimonial}
-                      className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
-                    >
-                      <ChevronLeft size={20} className="text-gray-600" />
-                    </button>
-                    <button
-                      onClick={nextTestimonial}
-                      className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
-                    >
-                      <ChevronRight size={20} className="text-gray-600" />
-                    </button>
-                  </div>
-                </div>
+          </div>
 
-                <div 
-                  className="grid grid-cols-1 gap-8"
-                  onTouchStart={onTouchStart}
-                  onTouchMove={onTouchMove}
-                  onTouchEnd={() => onTouchEnd('testimonials')}
-                >
-                  {reviews.slice(testimonialIndex, testimonialIndex + 1).map((review, index) => (
-                    <div key={index} className="bg-white rounded-2xl p-8 flex flex-col items-center text-center shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
-                      <div className="text-forest-500 mb-4">
-                        <Quote size={40} />
-                      </div>
-                      <div className="flex mb-4">
-                        {[...Array(review.rating)].map((_, i) => (
-                          <Star key={i} size={20} className="text-forest-400 fill-current" />
-                        ))}
-                      </div>
-                      <p className="text-gray-700 mb-6 italic flex-grow">"{review.text}"</p>
-                      <div className="mt-auto">
-                        {review.profile_photo_url ? (
-                          <img src={review.profile_photo_url} alt={review.author_name} className="w-16 h-16 rounded-full mx-auto mb-4" />
-                        ) : (
-                          <div className="w-16 h-16 rounded-full mx-auto mb-4 bg-forest-100 flex items-center justify-center">
-                            <span className="text-forest-600 font-semibold text-lg">
-                              {review.author_name.charAt(0).toUpperCase()}
-                            </span>
-                          </div>
-                        )}
-                        <h4 className="font-semibold text-gray-800">{review.author_name}</h4>
-                        <p className="text-sm text-gray-500">{review.relative_time_description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Desktop Grid */}
-              <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                {reviews.slice(0, 4).map((review, index) => (
-                  <div key={index} className="bg-white rounded-2xl p-8 flex flex-col items-center text-center shadow-lg transform hover:-translate-y-2 transition-transform duration-300">
-                    <div className="text-forest-500 mb-4">
-                      <Quote size={40} />
-                    </div>
-                    <div className="flex mb-4">
-                      {[...Array(review.rating)].map((_, i) => (
-                        <Star key={i} size={20} className="text-forest-400 fill-current" />
-                      ))}
-                    </div>
-                    <p className="text-gray-700 mb-6 italic flex-grow">"{review.text}"</p>
-                    <div className="mt-auto">
-                      {review.profile_photo_url ? (
-                        <img src={review.profile_photo_url} alt={review.author_name} className="w-16 h-16 rounded-full mx-auto mb-4" />
-                      ) : (
-                        <div className="w-16 h-16 rounded-full mx-auto mb-4 bg-forest-100 flex items-center justify-center">
-                          <span className="text-forest-600 font-semibold text-lg">
-                            {review.author_name.charAt(0).toUpperCase()}
-                          </span>
-                        </div>
-                      )}
-                      <h4 className="font-semibold text-gray-800">{review.author_name}</h4>
-                      <p className="text-sm text-gray-500">{review.relative_time_description}</p>
-                    </div>
+          {/* Fallback testimonials if Trustindex doesn't load */}
+          {!isTrustindexLoaded && (
+            <div className="grid md:grid-cols-2 gap-8 mt-8">
+              {testimonials.map((testimonial, index) => (
+                <div key={index} className="bg-white p-6 rounded-lg shadow-lg">
+                  <div className="flex items-center mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <svg key={i} className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                      </svg>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </>
+                  <p className="text-gray-600 mb-4">"{testimonial.text}"</p>
+                  <p className="font-semibold text-gray-800">- {testimonial.name}</p>
+                </div>
+              ))}
+            </div>
           )}
         </div>
       </section>
