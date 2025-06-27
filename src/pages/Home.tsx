@@ -48,10 +48,13 @@ const Home = () => {
     const loadReviews = async () => {
       try {
         setLoading(true);
+        console.log('Loading reviews...');
         const googleReviews = await fetchGoogleReviews();
+        console.log('Reviews loaded:', googleReviews);
         if (googleReviews.length > 0) {
           setReviews(googleReviews);
         } else {
+          console.log('No reviews found, using fallback');
           setReviews(fallbackReviews);
         }
       } catch (error) {
@@ -59,6 +62,7 @@ const Home = () => {
         setReviews(fallbackReviews);
       } finally {
         setLoading(false);
+        console.log('Loading complete');
       }
     };
 
@@ -447,6 +451,10 @@ const Home = () => {
             </div>
           ) : (
             <>
+              <div className="text-center mb-8 p-4 bg-blue-50 rounded-lg">
+                <p className="text-blue-800">Debug: {reviews.length} reviews loaded</p>
+              </div>
+              
               {/* Mobile Carousel */}
               <div className="md:hidden relative">
                 <div className="flex justify-between items-center mb-8">

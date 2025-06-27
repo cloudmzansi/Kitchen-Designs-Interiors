@@ -1,5 +1,4 @@
 const API_KEY = 'AIzaSyBAtfpXGCIod0yMvABQzIw9tX3Nu2blTII';
-const PLACE_ID = 'ChIJN1t_tDeuEmsRUsoyG83frY4'; // This will need to be updated with the actual Place ID
 
 export interface GoogleReview {
   author_name: string;
@@ -22,32 +21,19 @@ export interface GooglePlaceDetails {
 
 export const fetchGoogleReviews = async (): Promise<GoogleReview[]> => {
   try {
-    // First, we need to find the place ID for "Kitchen Designs & Interiors Cape Town"
-    const searchResponse = await fetch(
-      `https://maps.googleapis.com/maps/api/place/textsearch/json?query=Kitchen%20Designs%20%26%20Interiors%20Cape%20Town%20Custom%20Kitchens%20%26%20Cabinetry&key=${API_KEY}`
-    );
+    // Use the Vercel serverless function to avoid CORS issues
+    const response = await fetch('/api/google-reviews');
     
-    const searchData = await searchResponse.json();
-    
-    if (searchData.results && searchData.results.length > 0) {
-      const placeId = searchData.results[0].place_id;
-      
-      // Now fetch the place details including reviews
-      const detailsResponse = await fetch(
-        `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=place_id,name,rating,user_ratings_total,reviews&key=${API_KEY}`
-      );
-      
-      const detailsData = await detailsResponse.json();
-      
-      if (detailsData.result && detailsData.result.reviews) {
-        return detailsData.result.reviews;
-      }
+    if (response.ok) {
+      const reviews = await response.json();
+      return reviews;
+    } else {
+      console.error('Failed to fetch reviews from API');
+      return fallbackReviews;
     }
-    
-    return [];
   } catch (error) {
     console.error('Error fetching Google reviews:', error);
-    return [];
+    return fallbackReviews;
   }
 };
 
