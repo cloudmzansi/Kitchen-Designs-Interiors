@@ -46,7 +46,6 @@ const Home = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
-  const [isTrustindexLoaded, setIsTrustindexLoaded] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -57,40 +56,6 @@ const Home = () => {
     window.addEventListener('resize', checkMobile);
     
     return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  useEffect(() => {
-    // Load Trustindex script
-    const script = document.createElement('script');
-    script.src = 'https://cdn.trustindex.io/loader.js?6380cea488379712240669025cc';
-    script.defer = true;
-    script.async = true;
-    script.onload = () => {
-      console.log('Trustindex script loaded successfully');
-      setIsTrustindexLoaded(true);
-    };
-    script.onerror = () => {
-      console.error('Failed to load Trustindex script');
-      setIsTrustindexLoaded(false);
-    };
-    document.head.appendChild(script);
-
-    // Set a timeout to show fallback if widget doesn't load
-    const timeout = setTimeout(() => {
-      if (!isTrustindexLoaded) {
-        console.log('Trustindex widget timeout - showing fallback');
-        setIsTrustindexLoaded(false);
-      }
-    }, 5000); // 5 second timeout
-
-    return () => {
-      clearTimeout(timeout);
-      // Cleanup script if component unmounts
-      const existingScript = document.querySelector('script[src*="trustindex.io"]');
-      if (existingScript) {
-        existingScript.remove();
-      }
-    };
   }, []);
 
   const heroImages = [kitchen1, kitchen2, kitchen3, kitchen4, kitchen5];
@@ -502,36 +467,22 @@ const Home = () => {
             </p>
           </div>
 
-          {/* Trustindex Widget */}
-          <div className="max-w-4xl mx-auto">
-            <div id="trustindex-widget" data-widget-id="6380cea488379712240669025cc" className="text-center min-h-[200px] flex items-center justify-center">
-              {!isTrustindexLoaded && (
-                <div className="text-gray-500">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-500 mx-auto mb-4"></div>
-                  <p>Loading Google reviews...</p>
+          {/* Testimonials */}
+          <div className="grid md:grid-cols-2 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className="bg-white p-6 rounded-lg shadow-lg">
+                <div className="flex items-center mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <svg key={i} className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                      <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+                    </svg>
+                  ))}
                 </div>
-              )}
-            </div>
+                <p className="text-gray-600 mb-4">"{testimonial.text}"</p>
+                <p className="font-semibold text-gray-800">- {testimonial.name}</p>
+              </div>
+            ))}
           </div>
-
-          {/* Fallback testimonials if Trustindex doesn't load */}
-          {!isTrustindexLoaded && (
-            <div className="grid md:grid-cols-2 gap-8 mt-8">
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="bg-white p-6 rounded-lg shadow-lg">
-                  <div className="flex items-center mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <svg key={i} className="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 20 20">
-                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
-                      </svg>
-                    ))}
-                  </div>
-                  <p className="text-gray-600 mb-4">"{testimonial.text}"</p>
-                  <p className="font-semibold text-gray-800">- {testimonial.name}</p>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       </section>
 
