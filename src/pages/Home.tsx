@@ -455,6 +455,20 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Testimonials Section (heading only, no reviews) */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+              What Our Clients Say
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Don't just take our word for it. Hear from satisfied clients who have transformed their spaces with Kitchen Designs & Interiors.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="contact-section" className="py-20 bg-white">
         <div className="container mx-auto px-4">
