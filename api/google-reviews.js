@@ -36,51 +36,30 @@ export default async function handler(req, res) {
         return;
       } else {
         console.log('No reviews found in the response');
+        res.status(200).json({ 
+          error: 'No reviews found', 
+          business: detailsData.result.name,
+          total_reviews: detailsData.result.user_ratings_total,
+          message: 'The business has no reviews in the API response'
+        });
+        return;
       }
     } else {
       console.log('API Error:', detailsData.status, detailsData.error_message);
+      res.status(200).json({ 
+        error: 'Google API Error', 
+        status: detailsData.status, 
+        message: detailsData.error_message,
+        full_response: detailsData
+      });
+      return;
     }
-    
-    // Return fallback reviews if no reviews found
-    console.log('Using fallback reviews');
-    const fallbackReviews = [
-      {
-        author_name: "Sarah Johnson",
-        rating: 5,
-        relative_time_description: "2 months ago",
-        text: "KD Interiors transformed our outdated kitchen into a stunning modern space. The attention to detail and quality of work exceeded our expectations. Highly recommended!",
-        time: Date.now() - (60 * 24 * 60 * 60 * 1000),
-        language: "en"
-      },
-      {
-        author_name: "Michael Thompson",
-        rating: 5,
-        relative_time_description: "3 months ago",
-        text: "Professional, reliable, and incredibly talented. The team delivered exactly what they promised, on time and within budget. Our kitchen is now the heart of our home.",
-        time: Date.now() - (90 * 24 * 60 * 60 * 1000),
-        language: "en"
-      },
-      {
-        author_name: "Lisa Anderson",
-        rating: 5,
-        relative_time_description: "1 month ago",
-        text: "From the initial consultation to the final installation, KD Interiors provided exceptional service. Their design expertise and craftsmanship are truly outstanding.",
-        time: Date.now() - (30 * 24 * 60 * 60 * 1000),
-        language: "en"
-      },
-      {
-        author_name: "David Wilson",
-        rating: 5,
-        relative_time_description: "4 months ago",
-        text: "The team at KD Interiors turned our vision into reality. The project was completed smoothly, and the result is absolutely beautiful. We couldn't be happier!",
-        time: Date.now() - (120 * 24 * 60 * 60 * 1000),
-        language: "en"
-      }
-    ];
-    
-    res.status(200).json(fallbackReviews);
   } catch (error) {
     console.error('Error fetching Google reviews:', error);
-    res.status(500).json({ error: 'Failed to fetch reviews', details: error.message });
+    res.status(200).json({ 
+      error: 'Network Error', 
+      message: error.message,
+      details: error.toString()
+    });
   }
 } 
