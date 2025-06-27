@@ -62,7 +62,7 @@ const Home = () => {
   useEffect(() => {
     // Load Trustindex script
     const script = document.createElement('script');
-    script.src = 'https://cdn.trustindex.io/loader.js?e0e4332487b09702ed9638e20d5';
+    script.src = 'https://cdn.trustindex.io/loader.js?6380cea488379712240669025cc';
     script.defer = true;
     script.async = true;
     script.onload = () => {
@@ -504,7 +504,7 @@ const Home = () => {
 
           {/* Trustindex Widget */}
           <div className="max-w-4xl mx-auto">
-            <div id="trustindex-widget" className="text-center min-h-[200px] flex items-center justify-center">
+            <div id="trustindex-widget" data-widget-id="6380cea488379712240669025cc" className="text-center min-h-[200px] flex items-center justify-center">
               {!isTrustindexLoaded && (
                 <div className="text-gray-500">
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-500 mx-auto mb-4"></div>
