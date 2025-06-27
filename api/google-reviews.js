@@ -1,4 +1,5 @@
 const API_KEY = 'AIzaSyBAtfpXGCIod0yMvABQzIw9tX3Nu2blTII';
+const PLACE_ID = 'ChIJN1t_tDeuEmsRUsoyG83frY4'; // Kitchen Designs & Interiors Cape Town
 
 export default async function handler(req, res) {
   // Enable CORS
@@ -12,27 +13,19 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Search for the business
-    const searchResponse = await fetch(
-      `https://maps.googleapis.com/maps/api/place/textsearch/json?query=Kitchen%20Designs%20%26%20Interiors%20Cape%20Town%20Custom%20Kitchens%20%26%20Cabinetry&key=${API_KEY}`
+    // Fetch place details including reviews using the specific Place ID
+    const detailsResponse = await fetch(
+      `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=place_id,name,rating,user_ratings_total,reviews&key=${API_KEY}`
     );
     
-    const searchData = await searchResponse.json();
+    const detailsData = await detailsResponse.json();
     
-    if (searchData.results && searchData.results.length > 0) {
-      const placeId = searchData.results[0].place_id;
-      
-      // Fetch place details including reviews
-      const detailsResponse = await fetch(
-        `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=place_id,name,rating,user_ratings_total,reviews&key=${API_KEY}`
-      );
-      
-      const detailsData = await detailsResponse.json();
-      
-      if (detailsData.result && detailsData.result.reviews) {
-        res.status(200).json(detailsData.result.reviews);
-        return;
-      }
+    if (detailsData.result && detailsData.result.reviews) {
+      console.log(`Found ${detailsData.result.reviews.length} reviews for ${detailsData.result.name}`);
+      res.status(200).json(detailsData.result.reviews);
+      return;
+    } else {
+      console.log('No reviews found, using fallback');
     }
     
     // Return fallback reviews if no reviews found

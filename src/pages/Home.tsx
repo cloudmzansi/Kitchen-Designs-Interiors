@@ -451,10 +451,6 @@ const Home = () => {
             </div>
           ) : (
             <>
-              <div className="text-center mb-8 p-4 bg-blue-50 rounded-lg">
-                <p className="text-blue-800">Debug: {reviews.length} reviews loaded</p>
-              </div>
-              
               {/* Mobile Carousel */}
               <div className="md:hidden relative">
                 <div className="flex justify-between items-center mb-8">
