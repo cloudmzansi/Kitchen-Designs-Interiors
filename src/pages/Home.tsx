@@ -65,10 +65,26 @@ const Home = () => {
     script.src = 'https://cdn.trustindex.io/loader.js?e0e4332487b09702ed9638e20d5';
     script.defer = true;
     script.async = true;
-    script.onload = () => setIsTrustindexLoaded(true);
+    script.onload = () => {
+      console.log('Trustindex script loaded successfully');
+      setIsTrustindexLoaded(true);
+    };
+    script.onerror = () => {
+      console.error('Failed to load Trustindex script');
+      setIsTrustindexLoaded(false);
+    };
     document.head.appendChild(script);
 
+    // Set a timeout to show fallback if widget doesn't load
+    const timeout = setTimeout(() => {
+      if (!isTrustindexLoaded) {
+        console.log('Trustindex widget timeout - showing fallback');
+        setIsTrustindexLoaded(false);
+      }
+    }, 5000); // 5 second timeout
+
     return () => {
+      clearTimeout(timeout);
       // Cleanup script if component unmounts
       const existingScript = document.querySelector('script[src*="trustindex.io"]');
       if (existingScript) {
@@ -488,10 +504,11 @@ const Home = () => {
 
           {/* Trustindex Widget */}
           <div className="max-w-4xl mx-auto">
-            <div id="trustindex-widget" className="text-center">
+            <div id="trustindex-widget" className="text-center min-h-[200px] flex items-center justify-center">
               {!isTrustindexLoaded && (
                 <div className="text-gray-500">
-                  Loading reviews...
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-500 mx-auto mb-4"></div>
+                  <p>Loading Google reviews...</p>
                 </div>
               )}
             </div>
