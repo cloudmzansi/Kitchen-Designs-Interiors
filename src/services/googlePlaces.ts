@@ -21,11 +21,21 @@ export interface GooglePlaceDetails {
 
 export const fetchGoogleReviews = async (): Promise<GoogleReview[]> => {
   try {
-    // Use the Vercel serverless function to avoid CORS issues
+    // Check if we're in development or production
+    const isDevelopment = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    
+    if (isDevelopment) {
+      console.log('Development mode: Using fallback reviews');
+      return fallbackReviews;
+    }
+    
+    // Production: Use the serverless function
+    console.log('Production mode: Fetching from serverless function');
     const response = await fetch('/api/google-reviews');
     
     if (response.ok) {
       const reviews = await response.json();
+      console.log('Reviews fetched successfully:', reviews.length);
       return reviews;
     } else {
       console.error('Failed to fetch reviews from API');
