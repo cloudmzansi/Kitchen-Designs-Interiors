@@ -13,22 +13,36 @@ export default async function handler(req, res) {
   }
 
   try {
+    console.log('Fetching reviews for Place ID:', PLACE_ID);
+    
     // Fetch place details including reviews using the specific Place ID
     const detailsResponse = await fetch(
       `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=place_id,name,rating,user_ratings_total,reviews&key=${API_KEY}`
     );
     
     const detailsData = await detailsResponse.json();
+    console.log('API Response Status:', detailsData.status);
+    console.log('API Response:', JSON.stringify(detailsData, null, 2));
     
-    if (detailsData.result && detailsData.result.reviews) {
-      console.log(`Found ${detailsData.result.reviews.length} reviews for ${detailsData.result.name}`);
-      res.status(200).json(detailsData.result.reviews);
-      return;
+    if (detailsData.status === 'OK' && detailsData.result) {
+      console.log('Business Name:', detailsData.result.name);
+      console.log('Total Reviews:', detailsData.result.user_ratings_total);
+      console.log('Reviews Array:', detailsData.result.reviews ? detailsData.result.reviews.length : 0);
+      
+      if (detailsData.result.reviews && detailsData.result.reviews.length > 0) {
+        console.log(`Found ${detailsData.result.reviews.length} reviews for ${detailsData.result.name}`);
+        console.log('First review:', JSON.stringify(detailsData.result.reviews[0], null, 2));
+        res.status(200).json(detailsData.result.reviews);
+        return;
+      } else {
+        console.log('No reviews found in the response');
+      }
     } else {
-      console.log('No reviews found, using fallback');
+      console.log('API Error:', detailsData.status, detailsData.error_message);
     }
     
     // Return fallback reviews if no reviews found
+    console.log('Using fallback reviews');
     const fallbackReviews = [
       {
         author_name: "Sarah Johnson",
@@ -67,6 +81,6 @@ export default async function handler(req, res) {
     res.status(200).json(fallbackReviews);
   } catch (error) {
     console.error('Error fetching Google reviews:', error);
-    res.status(500).json({ error: 'Failed to fetch reviews' });
+    res.status(500).json({ error: 'Failed to fetch reviews', details: error.message });
   }
 } 
