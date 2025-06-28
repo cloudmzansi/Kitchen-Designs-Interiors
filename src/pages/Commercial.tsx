@@ -174,29 +174,42 @@ const Commercial = () => {
   return (
     <div className="pt-20">
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-forest-900 to-forest-700 text-white">
-        <div className="relative container mx-auto px-4 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            Commercial Renovations
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-forest-100">
-            Transform your commercial space with expert interior design and fit-out services that enhance productivity and customer experience.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button 
-              onClick={(e) => handleScrollClick(e, 'contact-section')}
-              className="bg-gradient-to-r from-forest-700 to-forest-600 text-white px-8 py-4 rounded-lg hover:from-forest-800 hover:to-forest-900 transition-colors font-semibold text-lg inline-flex items-center justify-center space-x-2"
-            >
-              <span>Get a Free Quote</span>
-              <ArrowRight size={20} />
-            </button>
-            <a 
-              href="tel:+27799352223"
-              className="border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white hover:text-forest-900 transition-colors font-semibold text-lg inline-flex items-center justify-center space-x-2"
-            >
-              <Phone size={20} className="text-white" />
-              <span>Call: +27 79 935 2223</span>
-            </a>
+      <section className="relative py-20 bg-gradient-to-r from-forest-900 to-forest-700 text-white overflow-hidden">
+        {/* Add subtle background pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
+        </div>
+        
+        {/* Add floating elements for visual interest */}
+        <div className="absolute top-10 right-10 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
+        <div className="absolute bottom-10 left-10 w-32 h-32 bg-white/5 rounded-full blur-2xl"></div>
+        
+        {/* Enhanced content with better spacing */}
+        <div className="relative z-10 container mx-auto px-4 text-center">
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
+              Commercial Renovations
+            </h1>
+            <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto text-forest-100 leading-relaxed">
+              Transform your commercial space with expert interior design and fit-out services that enhance productivity and customer experience.
+            </p>
+            {/* Enhanced CTA buttons with better visual hierarchy */}
+            <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center">
+              <button 
+                onClick={(e) => handleScrollClick(e, 'contact-section')}
+                className="group bg-gradient-to-r from-forest-700 to-forest-600 text-white px-8 py-4 md:px-12 md:py-5 rounded-2xl hover:from-forest-800 hover:to-forest-900 transition-all duration-500 font-semibold text-lg md:text-xl inline-flex items-center justify-center space-x-3 shadow-2xl hover:shadow-forest-900/25 transform hover:scale-105"
+              >
+                <span>Get a Free Quote</span>
+                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
+              </button>
+              <a 
+                href="tel:+27799352223"
+                className="group border-2 border-white/80 text-white px-8 py-4 md:px-12 md:py-5 rounded-2xl hover:bg-white hover:text-forest-900 transition-all duration-500 font-semibold text-lg md:text-xl inline-flex items-center justify-center space-x-3 backdrop-blur-sm hover:backdrop-blur-none"
+              >
+                <Phone size={20} className="group-hover:scale-110 transition-transform duration-300" />
+                <span>Call: +27 79 935 2223</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -242,22 +255,56 @@ const Commercial = () => {
       />
 
       {/* CTA Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-forest-50">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center bg-white rounded-2xl p-12 shadow-2xl">
-            <h2 className="text-4xl font-bold text-gray-800 mb-6">
-              Ready to Transform Your Commercial Space?
-            </h2>
-            <p className="text-xl text-gray-600 mb-8">
-              Let's create a commercial space that enhances your business operations and impresses your clients.
-            </p>
-            <button 
-              onClick={(e) => handleScrollClick(e, 'contact-section')}
-              className="bg-gradient-to-r from-forest-600 to-forest-700 text-white px-8 py-4 rounded-lg hover:from-forest-700 hover:to-forest-800 transition-all duration-300 font-semibold text-lg inline-flex items-center space-x-2 mt-6"
-            >
-              <span>Get Free Consultation</span>
-              <ArrowRight size={20} />
-            </button>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="text-center lg:text-left">
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                  Ready to Transform Your Commercial Space?
+                </h2>
+                <p className="text-xl text-gray-600 mb-8">
+                  Let's create a commercial space that enhances your business operations and impresses your clients.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                  <button 
+                    onClick={(e) => handleScrollClick(e, 'contact-section')}
+                    className="bg-gradient-to-r from-forest-700 to-forest-600 text-white px-8 py-4 rounded-xl hover:from-forest-800 hover:to-forest-900 transition-all duration-300 font-semibold text-lg inline-flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transform hover:scale-105"
+                  >
+                    <span>Get Free Consultation</span>
+                    <ArrowRight size={20} />
+                  </button>
+                  <a 
+                    href="tel:+27799352223"
+                    className="border-2 border-forest-600 text-forest-600 px-8 py-4 rounded-xl hover:bg-forest-600 hover:text-white transition-all duration-300 font-semibold text-lg inline-flex items-center justify-center space-x-2"
+                  >
+                    <Phone size={20} />
+                    <span>Call Now</span>
+                  </a>
+                </div>
+              </div>
+              <div className="bg-white rounded-3xl p-8 shadow-2xl">
+                <h3 className="text-2xl font-bold text-gray-800 mb-4">Why Choose Us?</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-center space-x-3">
+                    <CheckCircle size={20} className="text-forest-600 flex-shrink-0" />
+                    <span className="text-gray-700">30+ years of experience</span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <CheckCircle size={20} className="text-forest-600 flex-shrink-0" />
+                    <span className="text-gray-700">Free consultation & quote</span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <CheckCircle size={20} className="text-forest-600 flex-shrink-0" />
+                    <span className="text-gray-700">Complete project management</span>
+                  </li>
+                  <li className="flex items-center space-x-3">
+                    <CheckCircle size={20} className="text-forest-600 flex-shrink-0" />
+                    <span className="text-gray-700">Commercial expertise</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </section>

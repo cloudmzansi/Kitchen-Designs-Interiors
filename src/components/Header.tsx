@@ -65,75 +65,80 @@ const Header = () => {
   // Phone number and icon color logic
   let phoneTextClasses = '';
   let phoneIconClass = '';
+  let phoneContainerClasses = '';
+  
   if (isHomePage) {
     if (isScrolled) {
-      phoneTextClasses = 'text-forest-700 hover:text-forest-700';
+      phoneTextClasses = 'text-forest-700 hover:text-forest-800 font-bold';
       phoneIconClass = 'text-forest-700';
+      phoneContainerClasses = 'bg-white/90 backdrop-blur-sm px-3 py-2 rounded-lg shadow-sm border border-forest-100';
     } else {
-      phoneTextClasses = 'text-white hover:text-white';
+      phoneTextClasses = 'text-white hover:text-forest-100 font-bold';
       phoneIconClass = 'text-white';
+      phoneContainerClasses = 'bg-white/10 backdrop-blur-sm px-3 py-2 rounded-lg';
     }
   } else {
-    phoneTextClasses = 'text-forest-700 hover:text-forest-700';
+    phoneTextClasses = 'text-forest-700 hover:text-forest-800 font-bold';
     phoneIconClass = 'text-forest-700';
+    phoneContainerClasses = 'bg-white/90 backdrop-blur-sm px-3 py-2 rounded-lg shadow-sm border border-forest-100';
   }
 
-  const ctaButtonClasses = "bg-forest-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:bg-forest-800 transition-all duration-300";
+  const ctaButtonClasses = "bg-gradient-to-r from-forest-700 to-forest-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:from-forest-800 hover:to-forest-700 transition-all duration-300 transform hover:scale-105 hover:shadow-xl";
 
   const isActive = (path: string) => location.pathname === path;
 
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white shadow-lg' : 'bg-transparent'
+      isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100' : 'bg-transparent'
     } ${isHeaderVisible ? 'translate-y-0' : '-translate-y-full'}`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
-          <Link to="/" className="flex items-center" onClick={(e) => {
+          <Link to="/" className="flex items-center group" onClick={(e) => {
             if (location.pathname === '/') {
               e.preventDefault();
               handleScrollClick(e, 'top');
             }
           }}>
-            <div className="w-12 h-12 bg-gradient-to-br from-forest-700 to-forest-600 rounded-xl flex items-center justify-center shadow-lg">
+            <div className="w-12 h-12 bg-gradient-to-br from-forest-700 to-forest-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 transform group-hover:scale-105">
               <span className="text-white font-bold text-2xl tracking-tighter" style={{letterSpacing: '-0.15em'}}>KD</span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-10">
+          <nav className="hidden lg:flex items-center space-x-8">
             <a 
               href="/#top" 
               onClick={(e) => handleScrollClick(e, 'top')}
-              className={`font-semibold transition-colors duration-300 ${navLinkClasses}`}
+              className={`font-semibold transition-all duration-300 hover:scale-105 ${navLinkClasses}`}
             >
               Home
             </a>
             <a 
               href="/#about-us" 
               onClick={(e) => handleScrollClick(e, 'about-us')}
-              className={`font-semibold transition-colors duration-300 ${navLinkClasses}`}
+              className={`font-semibold transition-all duration-300 hover:scale-105 ${navLinkClasses}`}
             >
               About Us
             </a>
             
             {/* Services Dropdown */}
             <div className="relative group">
-              <button className={`flex items-center space-x-1 font-semibold transition-colors duration-300 ${navLinkClasses}`}>
+              <button className={`flex items-center space-x-1 font-semibold transition-all duration-300 hover:scale-105 ${navLinkClasses}`}>
                 <span>Services</span>
                 <ChevronDown size={16} className="group-hover:rotate-180 transition-transform duration-200" />
               </button>
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-56 bg-white rounded-2xl shadow-2xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform-gpu z-50 p-2">
+              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-64 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform-gpu z-50 p-3">
                 <div className="flex flex-col gap-1">
-                  <Link to="/kitchens" className={`block px-5 py-3 rounded-lg font-semibold transition-colors text-gray-700 hover:bg-forest-50 hover:text-forest-700 focus:bg-forest-50 focus:text-forest-700 outline-none` + (isActive('/kitchens') ? ' bg-forest-50 text-forest-700' : '')}>
+                  <Link to="/kitchens" className={`block px-5 py-3 rounded-xl font-semibold transition-all duration-300 text-gray-700 hover:bg-forest-50 hover:text-forest-700 hover:scale-105 focus:bg-forest-50 focus:text-forest-700 outline-none` + (isActive('/kitchens') ? ' bg-forest-50 text-forest-700' : '')}>
                     Kitchen Renovations
                   </Link>
-                  <Link to="/bedrooms" className={`block px-5 py-3 rounded-lg font-semibold transition-colors text-gray-700 hover:bg-forest-50 hover:text-forest-700 focus:bg-forest-50 focus:text-forest-700 outline-none` + (isActive('/bedrooms') ? ' bg-forest-50 text-forest-700' : '')}>
+                  <Link to="/bedrooms" className={`block px-5 py-3 rounded-xl font-semibold transition-all duration-300 text-gray-700 hover:bg-forest-50 hover:text-forest-700 hover:scale-105 focus:bg-forest-50 focus:text-forest-700 outline-none` + (isActive('/bedrooms') ? ' bg-forest-50 text-forest-700' : '')}>
                     Bedroom Renovations
                   </Link>
-                  <Link to="/bathrooms" className={`block px-5 py-3 rounded-lg font-semibold transition-colors text-gray-700 hover:bg-forest-50 hover:text-forest-700 focus:bg-forest-50 focus:text-forest-700 outline-none` + (isActive('/bathrooms') ? ' bg-forest-50 text-forest-700' : '')}>
+                  <Link to="/bathrooms" className={`block px-5 py-3 rounded-xl font-semibold transition-all duration-300 text-gray-700 hover:bg-forest-50 hover:text-forest-700 hover:scale-105 focus:bg-forest-50 focus:text-forest-700 outline-none` + (isActive('/bathrooms') ? ' bg-forest-50 text-forest-700' : '')}>
                     Bathroom Renovations
                   </Link>
-                  <Link to="/commercial" className={`block px-5 py-3 rounded-lg font-semibold transition-colors text-gray-700 hover:bg-forest-50 hover:text-forest-700 focus:bg-forest-50 focus:text-forest-700 outline-none` + (isActive('/commercial') ? ' bg-forest-50 text-forest-700' : '')}>
+                  <Link to="/commercial" className={`block px-5 py-3 rounded-xl font-semibold transition-all duration-300 text-gray-700 hover:bg-forest-50 hover:text-forest-700 hover:scale-105 focus:bg-forest-50 focus:text-forest-700 outline-none` + (isActive('/commercial') ? ' bg-forest-50 text-forest-700' : '')}>
                     Commercial Renovations
                   </Link>
                 </div>
@@ -143,7 +148,7 @@ const Header = () => {
             <a 
               href="/#contact-section" 
               onClick={(e) => handleScrollClick(e, 'contact-section')}
-              className={`font-semibold transition-colors duration-300 ${navLinkClasses}`}
+              className={`font-semibold transition-all duration-300 hover:scale-105 ${navLinkClasses}`}
             >
               Contact Us
             </a>
@@ -151,9 +156,9 @@ const Header = () => {
 
           {/* Contact Info & CTA */}
           <div className="hidden lg:flex items-center space-x-6">
-            <a href="tel:+27799352223" className={`flex items-center space-x-2 font-semibold transition-colors duration-300 ${phoneTextClasses}`}>
+            <a href="tel:+27799352223" className={`flex items-center space-x-2 transition-all duration-300 hover:scale-105 ${phoneContainerClasses} ${phoneTextClasses}`}>
               <Phone size={16} className={phoneIconClass} />
-              <span>+27 79 935 2223</span>
+              <span className="tracking-wide">+27 79 935 2223</span>
             </a>
             <a 
               href="/#contact-section"
@@ -275,11 +280,11 @@ const Header = () => {
               </a>
               <a
                 href="tel:+27799352223"
-                className="w-full bg-forest-700 text-white text-lg font-semibold py-4 rounded-lg text-center border border-forest-700 hover:bg-forest-800 hover:text-white transition-colors flex items-center justify-center gap-2"
+                className="w-full bg-gradient-to-r from-forest-600 to-forest-700 text-white text-lg font-bold py-4 rounded-lg text-center shadow-lg hover:from-forest-700 hover:to-forest-800 transition-all duration-300 flex items-center justify-center gap-3 border-2 border-forest-600"
                 onClick={() => setIsMenuOpen(false)}
               >
-                <Phone size={20} className="text-white" />
-                <span>Call Now: +27 79 935 2223</span>
+                <Phone size={22} className="text-white" />
+                <span className="tracking-wide">+27 79 935 2223</span>
               </a>
             </div>
           </div>

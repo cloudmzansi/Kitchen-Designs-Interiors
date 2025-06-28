@@ -16,14 +16,27 @@ const NotFound = React.lazy(() => import('./pages/NotFound'));
 
 // Loading component
 const LoadingSpinner = () => (
-  <div className="flex items-center justify-center min-h-screen">
-    <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-forest-600"></div>
+  <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 to-white">
+    <div className="relative">
+      <div className="w-16 h-16 border-4 border-forest-200 rounded-full animate-spin"></div>
+      <div className="absolute top-0 left-0 w-16 h-16 border-4 border-transparent border-t-forest-600 rounded-full animate-spin"></div>
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <div className="w-8 h-8 bg-gradient-to-br from-forest-700 to-forest-600 rounded-full flex items-center justify-center shadow-lg">
+          <span className="text-white font-bold text-sm">KD</span>
+        </div>
+      </div>
+    </div>
   </div>
 );
 
 function App() {
   return (
-    <Router>
+    <Router
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true
+      }}
+    >
       <ScrollToTop />
       <div id="top" className="bg-white">
         <Header />

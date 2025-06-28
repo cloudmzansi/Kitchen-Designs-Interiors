@@ -164,6 +164,7 @@ const Home = () => {
     <div className="bg-white">
       {/* Hero Section */}
       <section className="relative min-h-screen min-h-[100svh] flex flex-col items-center justify-center text-center overflow-hidden">
+        {/* Enhanced background with multiple layers */}
         <div className="absolute inset-0 z-0">
           <picture>
             <source srcSet={heroImages[currentImageIndex]} type="image/avif" />
@@ -173,18 +174,33 @@ const Home = () => {
               className="w-full h-full min-h-screen min-h-[100svh] object-cover transition-opacity duration-1000"
             />
           </picture>
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60"></div>
+          {/* Enhanced gradient overlay with multiple stops */}
+          <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-black/60"></div>
+          
+          {/* Add subtle geometric elements */}
+          <div className="absolute top-20 left-20 w-32 h-32 border border-white/10 rounded-full"></div>
+          <div className="absolute bottom-20 right-20 w-24 h-24 border border-white/10 rounded-full"></div>
+          <div className="absolute top-1/2 left-10 w-16 h-16 border border-white/5 rounded-full"></div>
         </div>
-        <div className="relative z-10 container mx-auto px-4 flex flex-col items-center justify-center md:justify-end min-h-screen min-h-[100svh]">
-          <div className="max-w-4xl mx-auto flex flex-col items-center justify-center gap-8 md:gap-14 w-full pb-8 md:pb-24">
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-2 md:mb-6">
-              <span className="text-white">Beautiful Renovations.</span>
-              <span className="block text-white">Inspired Living.</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto leading-relaxed mb-4 md:mb-8">
+        
+        {/* Enhanced content layout */}
+        <div className="relative z-10 container mx-auto px-4 flex flex-col items-center justify-center min-h-screen min-h-[100svh]">
+          <div className="max-w-4xl mx-auto flex flex-col items-center justify-center gap-6 md:gap-10 w-full pb-8 md:pb-24 mt-32">
+            {/* Enhanced typography with better hierarchy */}
+            <div className="space-y-4">
+              <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-2 md:mb-4">
+                <span className="text-white">Beautiful Renovations.</span>
+                <span className="block text-forest-300 text-4xl md:text-5xl font-light mt-2">Inspired Living.</span>
+              </h1>
+            </div>
+            
+            {/* Enhanced description with better typography */}
+            <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto leading-relaxed mb-6 md:mb-8">
               From kitchens to bedrooms and bathrooms, we create bespoke spaces that reflect your style and enhance your lifestyle.
             </p>
-            <div className="flex flex-row flex-wrap gap-3 justify-center mt-8 md:mt-14">
+            
+            {/* Enhanced CTA section with smaller buttons */}
+            <div className="flex flex-row flex-wrap gap-3 justify-center mt-12 md:mt-20">
               <a 
                 href="/#contact-section"
                 className="bg-forest-700 text-white px-5 py-2 md:px-10 md:py-4 rounded-lg hover:bg-forest-800 transition-all duration-300 font-semibold text-base md:text-lg flex items-center justify-center space-x-2 group shadow-2xl"
@@ -212,7 +228,7 @@ const Home = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {trustBadges.map((badge, index) => (
               <div key={index} className="text-center group">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4 group-hover:bg-forest-700 transition-colors duration-300">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-forest-100 to-forest-50 rounded-full mb-4 group-hover:bg-forest-700 transition-colors duration-300 border border-forest-200">
                   <badge.icon size={32} className="text-forest-700 group-hover:text-white transition-colors duration-300" />
                 </div>
                 <h3 className="text-lg font-semibold text-forest-900 mb-2">{badge.title}</h3>
@@ -234,13 +250,16 @@ const Home = () => {
           <div className="space-y-16">
             {/* Block 1 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div className="space-y-6 text-lg text-gray-700 leading-relaxed">
-                <p className="text-base md:text-lg">
-                  With over 30 years of experience, we specialise in bespoke kitchens, bedrooms, bathrooms, and cabinetry, delivering tailored solutions and exceptional craftsmanship to transform your home or business.
-                </p>
-                <p className="text-base md:text-lg">
-                  We offer modern, made-to-measure cabinetry tailored to your exact specifications. Our extensive range of materials and finishes includes melamine, gloss and matt wraps, PVC, sprayed 'duco', solid woods, and veneers. Whether you're renovating or starting from scratch, we provide premium solutions to suit your style, requirements, and budget – all at competitive prices.
-                </p>
+              <div className="space-y-6">
+                <h3 className="text-2xl font-bold text-gray-800 mb-4">Three Decades of Excellence</h3>
+                <div className="space-y-4 text-lg text-gray-700 leading-relaxed">
+                  <p className="text-base md:text-lg">
+                    With over 30 years of experience, we specialise in bespoke kitchens, bedrooms, bathrooms, and cabinetry, delivering tailored solutions and exceptional craftsmanship to transform your home or business.
+                  </p>
+                  <p className="text-base md:text-lg">
+                    We offer modern, made-to-measure cabinetry tailored to your exact specifications. Our extensive range of materials and finishes includes melamine, gloss and matt wraps, PVC, sprayed 'duco', solid woods, and veneers.
+                  </p>
+                </div>
               </div>
               <div>
                 <picture>
@@ -256,13 +275,16 @@ const Home = () => {
 
             {/* Block 2 */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div className="md:order-last space-y-6 text-lg text-gray-700 leading-relaxed">
-                <p className="text-base md:text-lg">
-                  In addition to cabinetry, we offer complete turnkey renovation services. Our trusted team of contractors manages every aspect of your project, from building work and electricals to plumbing, flooring, and painting. We're here to ensure a smooth, stress-free experience from beginning to end.
-                </p>
-                <p className="text-base md:text-lg">
-                  We also offer kitchen remodelling services for those looking to refresh their existing space. Whether it's replacing doors and countertops or adding extra units, we help transform your kitchen with thoughtful, stylish upgrades that reflect your vision.
-                </p>
+              <div className="md:order-last space-y-6">
+                <h3 className="text-2xl font-bold text-gray-800 mb-4">Complete Turnkey Solutions</h3>
+                <div className="space-y-4 text-lg text-gray-700 leading-relaxed">
+                  <p className="text-base md:text-lg">
+                    In addition to cabinetry, we offer complete turnkey renovation services. Our trusted team of contractors manages every aspect of your project, from building work and electricals to plumbing, flooring, and painting.
+                  </p>
+                  <p className="text-base md:text-lg">
+                    We also offer kitchen remodelling services for those looking to refresh their existing space. Whether it's replacing doors and countertops or adding extra units, we help transform your kitchen with thoughtful, stylish upgrades.
+                  </p>
+                </div>
               </div>
               <div>
                 <picture>
@@ -284,7 +306,7 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Our Services</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">We specialise in creating custom interior solutions that transform your living spaces into works of art.</p>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">We specialise in creating custom interior solutions that transform your living spaces into works of art, tailored to your unique style and requirements.</p>
           </div>
           {/* Mobile Carousel */}
           <div className="md:hidden relative">
@@ -359,7 +381,7 @@ const Home = () => {
       </section>
 
       {/* Our Proven Process Section */}
-      <section className="py-20 bg-gray-50" style={{ display: 'none' }}>
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
@@ -394,51 +416,105 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Testimonials Section (heading only, no reviews) */}
-      <section className="py-20 bg-gray-50" style={{ display: 'none' }}>
+      {/* Why Choose Us Section */}
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-              What Our Clients Say
+              Why Choose Kitchen Designs & Interiors?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Don't just take our word for it. Hear from satisfied clients who have transformed their spaces with Kitchen Designs & Interiors.
+              Experience the difference that 30+ years of expertise and dedication to quality brings to your project.
             </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="text-center p-6 rounded-2xl bg-gray-50 hover:bg-gray-100 transition-colors duration-300 border border-gray-200">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-forest-600 text-white rounded-full mb-6">
+                <CheckCircle size={32} />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-3">30+ Years Experience</h3>
+              <p className="text-gray-600">Three decades of expertise in bespoke interior design and installation across Cape Town.</p>
+            </div>
+            
+            <div className="text-center p-6 rounded-2xl bg-gray-50 hover:bg-gray-100 transition-colors duration-300 border border-gray-200">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-forest-600 text-white rounded-full mb-6">
+                <CheckCircle size={32} />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-3">Complete Turnkey Service</h3>
+              <p className="text-gray-600">From design to installation, we handle every aspect of your project for a stress-free experience.</p>
+            </div>
+            
+            <div className="text-center p-6 rounded-2xl bg-gray-50 hover:bg-gray-100 transition-colors duration-300 border border-gray-200">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-forest-600 text-white rounded-full mb-6">
+                <CheckCircle size={32} />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-3">Premium Materials</h3>
+              <p className="text-gray-600">Access to the finest materials including melamine, gloss wraps, solid woods, and premium veneers.</p>
+            </div>
+            
+            <div className="text-center p-6 rounded-2xl bg-gray-50 hover:bg-gray-100 transition-colors duration-300 border border-gray-200">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-forest-600 text-white rounded-full mb-6">
+                <CheckCircle size={32} />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-3">Competitive Pricing</h3>
+              <p className="text-gray-600">High-quality craftsmanship and materials at competitive prices that fit your budget.</p>
+            </div>
+            
+            <div className="text-center p-6 rounded-2xl bg-gray-50 hover:bg-gray-100 transition-colors duration-300 border border-gray-200">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-forest-600 text-white rounded-full mb-6">
+                <CheckCircle size={32} />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-3">Local Expertise</h3>
+              <p className="text-gray-600">Deep understanding of Cape Town homes and local building requirements.</p>
+            </div>
+            
+            <div className="text-center p-6 rounded-2xl bg-gray-50 hover:bg-gray-100 transition-colors duration-300 border border-gray-200">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-forest-600 text-white rounded-full mb-6">
+                <CheckCircle size={32} />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-3">Free Consultation</h3>
+              <p className="text-gray-600">No-obligation consultation to discuss your vision and provide expert recommendations.</p>
+            </div>
           </div>
         </div>
       </section>
+
+      {/* Testimonials Section (heading only, no reviews) */}
+      {/* Removed "Ready to Transform Your Space?" section as requested */}
 
       {/* Contact Section */}
       <section id="contact-section" className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Get In Touch</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">Ready to transform your space? Contact us for a free consultation and quote.</p>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">Ready to transform your space? Contact us for a free consultation and detailed quote tailored to your project requirements.</p>
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Contact Form */}
             <div className="bg-white rounded-2xl shadow-xl p-8">
               <h3 className="text-2xl font-bold text-gray-800 mb-6">Request Your Free Quote</h3>
+              <p className="text-gray-600 mb-6">Tell us about your project and we'll get back to you within 24 hours with a detailed consultation.</p>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
-                    <input type="text" id="name" name="name" required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-600 focus:outline-none" />
+                    <input type="text" id="name" name="name" required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200" />
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
-                    <input type="email" id="email" name="email" required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-600 focus:outline-none" />
+                    <input type="email" id="email" name="email" required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200" />
                   </div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-600 focus:outline-none" />
+                    <input type="tel" id="phone" name="phone" className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200" />
                   </div>
                   <div>
                     <label htmlFor="projectType" className="block text-sm font-medium text-gray-700 mb-2">Service Required *</label>
-                    <select id="projectType" name="projectType" required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-600 focus:outline-none">
+                    <select id="projectType" name="projectType" required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200">
                       <option value="">Select a service</option>
                       <option value="kitchen">Kitchen Renovations</option>
                       <option value="bedroom">Bedroom Renovations</option>
@@ -450,9 +526,9 @@ const Home = () => {
                 </div>
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">Project Details *</label>
-                  <textarea id="message" name="message" required rows={5} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-600 focus:outline-none" />
+                  <textarea id="message" name="message" required rows={5} placeholder="Tell us about your project, timeline, and any specific requirements..." className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200" />
                 </div>
-                <button type="submit" className="w-full bg-forest-600 hover:bg-forest-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2 text-lg">
+                <button type="submit" className="w-full bg-gradient-to-r from-forest-600 to-forest-700 hover:from-forest-700 hover:to-forest-800 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 text-lg shadow-lg hover:shadow-xl transform hover:scale-105">
                   <CheckCircle size={20} className="inline-block mr-2" />
                   Send Message
                 </button>
@@ -469,7 +545,7 @@ const Home = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold text-lg text-gray-800">Phone</h4>
-                      <a href="tel:+27799352223" className="text-gray-600 hover:text-forest-600 transition-colors">+27 79 935 2223</a>
+                      <a href="tel:+27799352223" className="text-gray-600 hover:text-forest-600 transition-colors font-medium">+27 79 935 2223</a>
                     </div>
                   </div>
                   <div className="flex items-center space-x-4">
@@ -478,7 +554,7 @@ const Home = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold text-lg text-gray-800">Email</h4>
-                      <a href="mailto:info@kdinteriors.co.za" className="text-gray-600 hover:text-forest-600 transition-colors">info@kdinteriors.co.za</a>
+                      <a href="mailto:info@kdinteriors.co.za" className="text-gray-600 hover:text-forest-600 transition-colors font-medium">info@kdinteriors.co.za</a>
                     </div>
                   </div>
                   <div className="flex items-start space-x-4">
@@ -486,16 +562,16 @@ const Home = () => {
                       <MapPin size={24} className="text-forest-700" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-lg text-gray-800">Location</h4>
-                      <span className="text-gray-600">Cape Town & Surrounding Areas</span>
+                      <h4 className="font-semibold text-lg text-gray-800">Service Area</h4>
+                      <span className="text-gray-600 font-medium">Cape Town & Surrounding Areas</span>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="bg-forest-700 text-white rounded-2xl p-8 shadow-xl">
                 <h3 className="text-2xl font-bold mb-4">Free Consultation</h3>
-                <p className="mb-4">Book your free consultation today and let us help you transform your space into something extraordinary.</p>
-                <ul className="list-disc pl-5 space-y-2 text-white">
+                <p className="mb-6 text-forest-100">Book your free consultation today and let us help you transform your space into something extraordinary.</p>
+                <ul className="list-disc pl-5 space-y-2 text-forest-100">
                   <li>No obligation consultation</li>
                   <li>Expert advice and recommendations</li>
                   <li>Detailed quote and timeline</li>
@@ -510,25 +586,25 @@ const Home = () => {
       {/* Map Section - You can embed a map here if needed */}
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-forest-600 to-forest-700 text-white">
+      <section className="py-20 bg-gradient-to-br from-forest-50 via-white to-forest-50">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-800">
             Ready to Transform Your Space?
           </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
+          <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-600">
             Get your free consultation and quote today. Let's bring your vision to life.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
               href="/#contact-section"
-              className="bg-white text-forest-600 px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors font-semibold text-lg inline-flex items-center justify-center space-x-2"
+              className="bg-gradient-to-r from-forest-600 to-forest-700 text-white px-8 py-4 rounded-lg hover:from-forest-700 hover:to-forest-800 transition-all duration-300 font-semibold text-lg inline-flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transform hover:scale-105"
             >
               <span>Get Free Quote</span>
               <ArrowRight size={20} />
             </a>
             <a 
               href="tel:+27799352223"
-              className="border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white hover:text-forest-600 transition-colors font-semibold text-lg inline-flex items-center justify-center space-x-2"
+              className="border-2 border-forest-600 text-forest-600 px-8 py-4 rounded-lg hover:bg-forest-600 hover:text-white transition-all duration-300 font-semibold text-lg inline-flex items-center justify-center space-x-2"
             >
               <Phone size={20} />
               <span>Call Now: +27 79 935 2223</span>

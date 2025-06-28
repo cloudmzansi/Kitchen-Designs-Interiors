@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X, ZoomIn } from 'lucide-react';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 
@@ -51,27 +51,27 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ sliders, title, description }
   const currentImages = sliders[currentSlider]?.images || [];
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+        <div className="text-center mb-20">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-8 leading-tight">
             {title}
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-12 leading-relaxed">
             {description}
           </p>
         </div>
 
         {/* Slider Navigation */}
-        <div className="flex justify-center mb-8">
-          <div className="flex space-x-2">
+        <div className="flex justify-center mb-12">
+          <div className="flex space-x-3 bg-white/80 backdrop-blur-sm rounded-full p-2 shadow-lg">
             {sliders.map((_, index) => (
               <button
                 key={index}
                 onClick={() => goToSlider(index)}
-                className={`w-3 h-3 rounded-full transition-colors ${
+                className={`w-4 h-4 rounded-full transition-all duration-300 transform hover:scale-110 ${
                   currentSlider === index
-                    ? 'bg-forest-600'
+                    ? 'bg-forest-600 scale-110 shadow-md'
                     : 'bg-gray-300 hover:bg-gray-400'
                 }`}
                 aria-label={`Go to slider ${index + 1}`}
@@ -85,7 +85,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ sliders, title, description }
           {/* Navigation Arrows */}
           <button
             onClick={prevSlider}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-800 p-4 rounded-full shadow-xl transition-all duration-300 hover:scale-110 hover:shadow-2xl border border-gray-100"
             aria-label="Previous slider"
           >
             <ChevronLeft size={24} />
@@ -93,19 +93,19 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ sliders, title, description }
 
           <button
             onClick={nextSlider}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-gray-800 p-3 rounded-full shadow-lg transition-all duration-200 hover:scale-110"
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-800 p-4 rounded-full shadow-xl transition-all duration-300 hover:scale-110 hover:shadow-2xl border border-gray-100"
             aria-label="Next slider"
           >
             <ChevronRight size={24} />
           </button>
 
           {/* Image Grid */}
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3">
               {currentImages.map((image, index) => (
                 <div
                   key={index}
-                  className="bg-white rounded-xl shadow-lg overflow-hidden group cursor-pointer"
+                  className="bg-white rounded-xl shadow-lg hover:shadow-2xl overflow-hidden group cursor-pointer transition-all duration-500 transform hover:-translate-y-1 border border-gray-100 relative"
                   onClick={() => handleImageClick(index)}
                 >
                   <div className="relative overflow-hidden">
@@ -120,11 +120,17 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ sliders, title, description }
                       <img
                         src={image.jpg}
                         alt={image.alt}
-                        className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="w-full aspect-[4/3] object-cover group-hover:scale-110 transition-transform duration-700"
                         loading="lazy"
                         sizes="(max-width: 768px) 50vw, 33vw"
                       />
                     </picture>
+                    {/* Overlay with zoom icon */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                      <div className="bg-white/90 backdrop-blur-sm rounded-full p-3 transform scale-0 group-hover:scale-100 transition-transform duration-300">
+                        <ZoomIn size={20} className="text-gray-800" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -132,14 +138,14 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ sliders, title, description }
           </div>
 
           {/* Slider Indicator */}
-          <div className="text-center mt-6">
-            <span className="text-gray-600">
+          <div className="text-center mt-8">
+            <span className="text-gray-600 font-medium bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
               {currentSlider + 1} of {sliders.length}
             </span>
           </div>
         </div>
 
-        {/* Lightbox */}
+        {/* Enhanced Lightbox */}
         <Lightbox
           open={lightboxOpen}
           close={() => setLightboxOpen(false)}
@@ -152,6 +158,22 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ sliders, title, description }
             };
           })}
           index={lightboxIndex}
+          carousel={{
+            finite: true,
+            preload: 2,
+          }}
+          controller={{
+            closeOnBackdropClick: true,
+            closeOnPullDown: true,
+          }}
+          styles={{
+            container: {
+              backgroundColor: "rgba(0, 0, 0, 0.95)",
+            },
+            slide: {
+              padding: "20px",
+            },
+          }}
         />
       </div>
     </section>
