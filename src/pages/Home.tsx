@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Users, Award, Shield, Clock, CheckCircle, Phone, Mail, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 import heroBg from '../assets/home/kd-interiors-hero-kitchen.jpg';
@@ -30,15 +30,78 @@ type ProcessStep = {
   description: string;
 };
 
+type TrustBadge = {
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  title: string;
+  desc: string;
+};
+
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [specialtyIndex, setSpecialtyIndex] = useState(0);
+  const [servicesIndex, setServicesIndex] = useState(0);
+  const [processIndex, setProcessIndex] = useState(0);
+  const [trustIndex, setTrustIndex] = useState(0);
+  const [whyChooseIndex, setWhyChooseIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
 
   const heroImages = [heroBgAvif];
   const heroImagesFallback = [heroBg];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Touch handling functions
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = (carouselType: 'services' | 'process' | 'trust' | 'whyChoose') => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      // Swipe left - next item
+      switch (carouselType) {
+        case 'services':
+          setServicesIndex((prev) => (prev + 1) % services.length);
+          break;
+        case 'process':
+          setProcessIndex((prev) => (prev + 1) % process.length);
+          break;
+        case 'trust':
+          setTrustIndex((prev) => (prev + 1) % trustBadges.length);
+          break;
+        case 'whyChoose':
+          setWhyChooseIndex((prev) => (prev + 1) % 6); // 6 items in Why Choose Us
+          break;
+      }
+    } else if (isRightSwipe) {
+      // Swipe right - previous item
+      switch (carouselType) {
+        case 'services':
+          setServicesIndex((prev) => (prev - 1 + services.length) % services.length);
+          break;
+        case 'process':
+          setProcessIndex((prev) => (prev - 1 + process.length) % process.length);
+          break;
+        case 'trust':
+          setTrustIndex((prev) => (prev - 1 + trustBadges.length) % trustBadges.length);
+          break;
+        case 'whyChoose':
+          setWhyChooseIndex((prev) => (prev - 1 + 6) % 6); // 6 items in Why Choose Us
+          break;
+      }
+    }
+    
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -145,19 +208,43 @@ const Home = () => {
     }
   ];
 
-  const trustBadges = [
+  const trustBadges: TrustBadge[] = [
     { icon: Shield, title: "Fully Licensed & Insured", desc: "Complete peace of mind" },
     { icon: Award, title: "Award-Winning Designs", desc: "Industry recognition" },
     { icon: Users, title: "500+ Satisfied Clients", desc: "Trusted across Cape Town" },
     { icon: Clock, title: "30+ Years Experience", desc: "Proven expertise" }
   ];
 
-  const nextSpecialty = () => {
-    setSpecialtyIndex((prev) => (prev + 1) % services.length);
+  const nextServices = () => {
+    setServicesIndex((prev) => (prev + 1) % services.length);
   };
 
-  const prevSpecialty = () => {
-    setSpecialtyIndex((prev) => (prev - 1 + services.length) % services.length);
+  const prevServices = () => {
+    setServicesIndex((prev) => (prev - 1 + services.length) % services.length);
+  };
+
+  const nextProcess = () => {
+    setProcessIndex((prev) => (prev + 1) % process.length);
+  };
+
+  const prevProcess = () => {
+    setProcessIndex((prev) => (prev - 1 + process.length) % process.length);
+  };
+
+  const nextTrust = () => {
+    setTrustIndex((prev) => (prev + 1) % trustBadges.length);
+  };
+
+  const prevTrust = () => {
+    setTrustIndex((prev) => (prev - 1 + trustBadges.length) % trustBadges.length);
+  };
+
+  const nextWhyChoose = () => {
+    setWhyChooseIndex((prev) => (prev + 1) % 6);
+  };
+
+  const prevWhyChoose = () => {
+    setWhyChooseIndex((prev) => (prev - 1 + 6) % 6);
   };
 
   return (
@@ -225,7 +312,46 @@ const Home = () => {
       {/* Trust Badges */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {/* Mobile Carousel */}
+          <div className="md:hidden relative">
+            <div className="flex justify-between items-center mb-8">
+              <div></div>
+              <div className="flex space-x-2">
+                <button
+                  onClick={prevTrust}
+                  className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                >
+                  <ChevronLeft size={20} className="text-gray-600" />
+                </button>
+                <button
+                  onClick={nextTrust}
+                  className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                >
+                  <ChevronRight size={20} className="text-gray-600" />
+                </button>
+              </div>
+            </div>
+            <div 
+              className="max-w-4xl mx-auto"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={() => handleTouchEnd('trust')}
+            >
+              <div className="grid grid-cols-1 gap-x-12 gap-y-16">
+                {trustBadges.slice(trustIndex, trustIndex + 1).map((badge, index) => (
+                  <div key={index} className="text-center group">
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-forest-100 to-forest-50 rounded-full mb-4 group-hover:bg-forest-700 transition-colors duration-300 border border-forest-200">
+                      <badge.icon size={32} className="text-forest-700 group-hover:text-white transition-colors duration-300" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-forest-900 mb-2">{badge.title}</h3>
+                    <p className="text-forest-600 text-sm">{badge.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          {/* Desktop Grid */}
+          <div className="hidden md:grid grid-cols-4 gap-8">
             {trustBadges.map((badge, index) => (
               <div key={index} className="text-center group">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-forest-100 to-forest-50 rounded-full mb-4 group-hover:bg-forest-700 transition-colors duration-300 border border-forest-200">
@@ -314,13 +440,13 @@ const Home = () => {
               <div></div>
               <div className="flex space-x-2">
                 <button
-                  onClick={prevSpecialty}
+                  onClick={prevServices}
                   className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
                 >
                   <ChevronLeft size={20} className="text-gray-600" />
                 </button>
                 <button
-                  onClick={nextSpecialty}
+                  onClick={nextServices}
                   className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
                 >
                   <ChevronRight size={20} className="text-gray-600" />
@@ -329,9 +455,12 @@ const Home = () => {
             </div>
             <div 
               className="max-w-4xl mx-auto"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={() => handleTouchEnd('services')}
             >
               <div className="grid grid-cols-1 gap-x-12 gap-y-16">
-                {services.slice(specialtyIndex, specialtyIndex + 1).map((service, index) => (
+                {services.slice(servicesIndex, servicesIndex + 1).map((service, index) => (
                   <div key={index} className="group text-left">
                     <Link to={service.link} className="block relative mb-6 overflow-hidden rounded-2xl shadow-xl focus:outline-none focus:ring-2 focus:ring-forest-700">
                       <picture>
@@ -392,7 +521,47 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Mobile Carousel */}
+          <div className="md:hidden relative">
+            <div className="flex justify-between items-center mb-8">
+              <div></div>
+              <div className="flex space-x-2">
+                <button
+                  onClick={prevProcess}
+                  className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                >
+                  <ChevronLeft size={20} className="text-gray-600" />
+                </button>
+                <button
+                  onClick={nextProcess}
+                  className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                >
+                  <ChevronRight size={20} className="text-gray-600" />
+                </button>
+              </div>
+            </div>
+            <div 
+              className="max-w-4xl mx-auto"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={() => handleTouchEnd('process')}
+            >
+              <div className="grid grid-cols-1 gap-x-12 gap-y-16">
+                {process.slice(processIndex, processIndex + 1).map((step, index) => (
+                  <div key={index} className="text-center">
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-forest-600 text-white rounded-full font-bold text-xl mb-6">
+                      {step.step}
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-800 mb-3">{step.title}</h3>
+                    <p className="text-gray-600">{step.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Desktop Grid */}
+          <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {process.map((step, index) => (
               <div key={index} className="text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-forest-600 text-white rounded-full font-bold text-xl mb-6">
@@ -428,7 +597,78 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Mobile Carousel */}
+          <div className="md:hidden relative">
+            <div className="flex justify-between items-center mb-8">
+              <div></div>
+              <div className="flex space-x-2">
+                <button
+                  onClick={prevWhyChoose}
+                  className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                >
+                  <ChevronLeft size={20} className="text-gray-600" />
+                </button>
+                <button
+                  onClick={nextWhyChoose}
+                  className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                >
+                  <ChevronRight size={20} className="text-gray-600" />
+                </button>
+              </div>
+            </div>
+            <div 
+              className="max-w-4xl mx-auto"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={() => handleTouchEnd('whyChoose')}
+            >
+              <div className="grid grid-cols-1 gap-x-12 gap-y-16">
+                {[
+                  {
+                    icon: CheckCircle,
+                    title: "30+ Years Experience",
+                    description: "Three decades of expertise in bespoke interior design and installation across Cape Town."
+                  },
+                  {
+                    icon: CheckCircle,
+                    title: "Complete Turnkey Service",
+                    description: "From design to installation, we handle every aspect of your project for a stress-free experience."
+                  },
+                  {
+                    icon: CheckCircle,
+                    title: "Premium Materials",
+                    description: "Access to the finest materials including melamine, gloss wraps, solid woods, and premium veneers."
+                  },
+                  {
+                    icon: CheckCircle,
+                    title: "Competitive Pricing",
+                    description: "High-quality craftsmanship and materials at competitive prices that fit your budget."
+                  },
+                  {
+                    icon: CheckCircle,
+                    title: "Local Expertise",
+                    description: "Deep understanding of Cape Town homes and local building requirements."
+                  },
+                  {
+                    icon: CheckCircle,
+                    title: "Free Consultation",
+                    description: "No-obligation consultation to discuss your vision and provide expert recommendations."
+                  }
+                ].slice(whyChooseIndex, whyChooseIndex + 1).map((item, index) => (
+                  <div key={index} className="text-center p-6 rounded-2xl bg-gray-50 hover:bg-gray-100 transition-colors duration-300 border border-gray-200">
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-forest-600 text-white rounded-full mb-6">
+                      <item.icon size={32} />
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-800 mb-3">{item.title}</h3>
+                    <p className="text-gray-600">{item.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Desktop Grid */}
+          <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="text-center p-6 rounded-2xl bg-gray-50 hover:bg-gray-100 transition-colors duration-300 border border-gray-200">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-forest-600 text-white rounded-full mb-6">
                 <CheckCircle size={32} />
