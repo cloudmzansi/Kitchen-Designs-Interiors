@@ -312,15 +312,15 @@ const Home = () => {
       {/* Trust Badges */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          {/* Mobile Grid: 2x2 */}
-          <div className="md:hidden grid grid-cols-2 gap-8">
+          {/* Mobile Grid: 4 in a row */}
+          <div className="md:hidden grid grid-cols-4 gap-4">
             {trustBadges.map((badge, index) => (
               <div key={index} className="text-center group">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-forest-100 to-forest-50 rounded-full mb-4 group-hover:bg-forest-700 transition-colors duration-300 border border-forest-200">
-                  <badge.icon size={32} className="text-forest-700 group-hover:text-white transition-colors duration-300" />
+                <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-forest-100 to-forest-50 rounded-full mb-3 group-hover:bg-forest-700 transition-colors duration-300 border border-forest-200">
+                  <badge.icon size={24} className="text-forest-700 group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h3 className="text-lg font-semibold text-forest-900 mb-2">{badge.title}</h3>
-                <p className="text-forest-600 text-sm">{badge.desc}</p>
+                <h3 className="text-sm font-semibold text-forest-900 mb-1">{badge.title}</h3>
+                <p className="text-forest-600 text-xs">{badge.desc}</p>
               </div>
             ))}
           </div>
@@ -495,43 +495,17 @@ const Home = () => {
             </p>
           </div>
 
-          {/* Mobile Carousel */}
-          <div className="md:hidden relative">
-            <div className="flex justify-between items-center mb-8">
-              <div></div>
-              <div className="flex space-x-2">
-                <button
-                  onClick={prevProcess}
-                  className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
-                >
-                  <ChevronLeft size={20} className="text-gray-600" />
-                </button>
-                <button
-                  onClick={nextProcess}
-                  className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
-                >
-                  <ChevronRight size={20} className="text-gray-600" />
-                </button>
+          {/* Mobile Grid: 2x2 */}
+          <div className="md:hidden grid grid-cols-2 gap-6">
+            {process.map((step, index) => (
+              <div key={index} className="text-center">
+                <div className="inline-flex items-center justify-center w-12 h-12 bg-forest-600 text-white rounded-full font-bold text-lg mb-4">
+                  {step.step}
+                </div>
+                <h3 className="text-lg font-bold text-gray-800 mb-2">{step.title}</h3>
+                <p className="text-gray-600 text-sm">{step.description}</p>
               </div>
-            </div>
-            <div 
-              className="max-w-4xl mx-auto"
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={() => handleTouchEnd('process')}
-            >
-              <div className="grid grid-cols-1 gap-x-12 gap-y-16">
-                {process.slice(processIndex, processIndex + 1).map((step, index) => (
-                  <div key={index} className="text-center">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-forest-600 text-white rounded-full font-bold text-xl mb-6">
-                      {step.step}
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-3">{step.title}</h3>
-                    <p className="text-gray-600">{step.description}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
 
           {/* Desktop Grid */}

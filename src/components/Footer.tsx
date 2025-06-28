@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Heart } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -64,9 +65,41 @@ const Footer: React.FC = () => {
 
         {/* Bottom Bar */}
         <div className="border-t border-forest-700 mt-16 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          {/* Mobile Layout */}
+          <div className="md:hidden flex flex-col items-center space-y-4">
+            <div className="flex space-x-8 text-sm">
+              <Link to="/privacy-policy" className="text-white hover:text-forest-200 transition-all duration-300 hover:translate-x-1 inline-block">Privacy Policy</Link>
+              <Link to="/terms-of-service" className="text-white hover:text-forest-200 transition-all duration-300 hover:translate-x-1 inline-block">Terms of Service</Link>
+            </div>
+            <p className="text-white text-sm text-center">
+              Copyright © 2025 Kitchen Designs & Interiors. All Rights Reserved.
+              <br />
+              Made with <Heart size={12} className="inline text-red-400" /> by{' '}
+              <a 
+                href="https://cloudmzansi.co.za" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-forest-200 hover:text-white transition-colors duration-300"
+              >
+                Cloud Mzansi
+              </a>
+            </p>
+          </div>
+          
+          {/* Desktop Layout */}
+          <div className="hidden md:flex flex-row justify-between items-center">
             <p className="text-white text-sm">
-              Copyright © {new Date().getFullYear()} Kitchen Designs & Interiors. All Rights Reserved.
+              Copyright © 2025 Kitchen Designs & Interiors. All Rights Reserved.
+              <br />
+              Made with <Heart size={12} className="inline text-red-400" /> by{' '}
+              <a 
+                href="https://cloudmzansi.co.za" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-forest-200 hover:text-white transition-colors duration-300"
+              >
+                Cloud Mzansi
+              </a>
             </p>
             <div className="flex space-x-8 text-sm">
               <Link to="/privacy-policy" className="text-white hover:text-forest-200 transition-all duration-300 hover:translate-x-1 inline-block">Privacy Policy</Link>
