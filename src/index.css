@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px; /* Adjust this value based on the actual height of the fixed header */
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  @apply bg-white text-gray-800;
+}
