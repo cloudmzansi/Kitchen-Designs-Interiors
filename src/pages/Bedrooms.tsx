@@ -1,48 +1,65 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Star, CheckCircle, Phone } from 'lucide-react';
-import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
+import React from 'react';
+import { ArrowRight, CheckCircle, Phone } from 'lucide-react';
 import { useScrollTo } from '../hooks/useScrollTo';
-import bedroomHero from '../assets/bedrooms/bedrooms-1.jpg';
-import bedroom2 from '../assets/bedrooms/bedrooms-2.jpg';
-import bedroom3 from '../assets/bedrooms/bedrooms-3.jpg';
-import bedroom4 from '../assets/bedrooms/bedrooms-4.jpg';
-import bedroom5 from '../assets/bedrooms/bedrooms-5.jpg';
-import bedroom6 from '../assets/bedrooms/bedrooms-6.jpg';
-import bedroom7 from '../assets/bedrooms/bedrooms-7.jpg';
-import bedroom8 from '../assets/bedrooms/bedrooms-8.jpg';
-import bedroom9 from '../assets/bedrooms/bedrooms-9.jpg';
-import bedroom10 from '../assets/bedrooms/bedrooms-10.jpg';
+import { usePageMeta } from '../hooks/usePageMeta';
+import ImageSlider from '../components/ImageSlider';
+import bedroomHero from '../assets/bedrooms/bedroom-hero.jpg';
+import bedroomHeroAvif from '../assets/bedrooms/bedroom-hero.avif';
+
+// Import all bedroom slider images
+// Slider 1
+import bedroomMasterSuite from '../assets/bedrooms/Slider 1/bedroom-master-suite.jpg';
+import bedroomMasterSuiteAvif from '../assets/bedrooms/Slider 1/bedroom-master-suite.avif';
+import bedroomCustomWardrobe from '../assets/bedrooms/Slider 1/bedroom-custom-wardrobe.jpg';
+import bedroomCustomWardrobeAvif from '../assets/bedrooms/Slider 1/bedroom-custom-wardrobe.avif';
+import bedroomBuiltInStorage from '../assets/bedrooms/Slider 1/bedroom-built-in-storage.jpg';
+import bedroomBuiltInStorageAvif from '../assets/bedrooms/Slider 1/bedroom-built-in-storage.avif';
+import bedroomWalkInCloset from '../assets/bedrooms/Slider 1/bedroom-walk-in-closet.jpg';
+import bedroomWalkInClosetAvif from '../assets/bedrooms/Slider 1/bedroom-walk-in-closet.avif';
+import bedroomHeadboardDesign from '../assets/bedrooms/Slider 1/bedroom-headboard-design.jpg';
+import bedroomHeadboardDesignAvif from '../assets/bedrooms/Slider 1/bedroom-headboard-design.avif';
+import bedroomFeatureWall from '../assets/bedrooms/Slider 1/bedroom-feature-wall.jpg';
+import bedroomFeatureWallAvif from '../assets/bedrooms/Slider 1/bedroom-feature-wall.avif';
+import bedroomLightingDesign from '../assets/bedrooms/Slider 1/bedroom-lighting-design.jpg';
+import bedroomLightingDesignAvif from '../assets/bedrooms/Slider 1/bedroom-lighting-design.avif';
+import bedroomEnSuite from '../assets/bedrooms/Slider 1/bedroom-en-suite.jpg';
+import bedroomEnSuiteAvif from '../assets/bedrooms/Slider 1/bedroom-en-suite.avif';
+import bedroomStorageSolutions from '../assets/bedrooms/Slider 1/bedroom-storage-solutions.jpg';
+import bedroomStorageSolutionsAvif from '../assets/bedrooms/Slider 1/bedroom-storage-solutions.avif';
+
+// Slider 2
+import bedroomLuxuryDesign from '../assets/bedrooms/Slider 2/bedroom-luxury-design.jpg';
+import bedroomLuxuryDesignAvif from '../assets/bedrooms/Slider 2/bedroom-luxury-design.avif';
+import bedroomCustomFurniture from '../assets/bedrooms/Slider 2/bedroom-custom-furniture.jpg';
+import bedroomCustomFurnitureAvif from '../assets/bedrooms/Slider 2/bedroom-custom-furniture.avif';
+import bedroomStorageSystem from '../assets/bedrooms/Slider 2/bedroom-storage-system.jpg';
+import bedroomStorageSystemAvif from '../assets/bedrooms/Slider 2/bedroom-storage-system.avif';
+import bedroomMirrorDoors from '../assets/bedrooms/Slider 2/bedroom-mirror-doors.jpg';
+import bedroomMirrorDoorsAvif from '../assets/bedrooms/Slider 2/bedroom-mirror-doors.avif';
+import bedroomSlidingDoors from '../assets/bedrooms/Slider 2/bedroom-sliding-doors.jpg';
+import bedroomSlidingDoorsAvif from '../assets/bedrooms/Slider 2/bedroom-sliding-doors.avif';
+import bedroomBifoldDoors from '../assets/bedrooms/Slider 2/bedroom-bifold-doors.jpg';
+import bedroomBifoldDoorsAvif from '../assets/bedrooms/Slider 2/bedroom-bifold-doors.avif';
+import bedroomCustomShelving from '../assets/bedrooms/Slider 2/bedroom-custom-shelving.jpg';
+import bedroomCustomShelvingAvif from '../assets/bedrooms/Slider 2/bedroom-custom-shelving.avif';
+import bedroomDrawerSystem from '../assets/bedrooms/Slider 2/bedroom-drawer-system.jpg';
+import bedroomDrawerSystemAvif from '../assets/bedrooms/Slider 2/bedroom-drawer-system.avif';
+import bedroomAccessoryStorage from '../assets/bedrooms/Slider 2/bedroom-accessory-storage.jpg';
+import bedroomAccessoryStorageAvif from '../assets/bedrooms/Slider 2/bedroom-accessory-storage.avif';
 
 const Bedrooms = () => {
-  const [open, setOpen] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [selectedCategory, setSelectedCategory] = useState('all');
   const { handleScrollClick } = useScrollTo();
 
-  const categories: { id: string; name: string }[] = [];
-
-  const bedroomGallery = [
-    { id: 1, category: 'gallery', image: bedroom2 },
-    { id: 2, category: 'gallery', image: bedroom3 },
-    { id: 3, category: 'gallery', image: bedroom4 },
-    { id: 4, category: 'gallery', image: bedroom5 },
-    { id: 5, category: 'gallery', image: bedroom6 },
-    { id: 6, category: 'gallery', image: bedroom7 },
-    { id: 7, category: 'gallery', image: bedroom8 },
-    { id: 8, category: 'gallery', image: bedroom9 },
-    { id: 9, category: 'gallery', image: bedroom10 },
-  ];
-
-  const filteredGallery = selectedCategory === 'all' 
-    ? bedroomGallery 
-    : bedroomGallery.filter(bedroom => bedroom.category === selectedCategory);
-
-  const handleImageClick = (index: number) => {
-    setSelectedIndex(index);
-    setOpen(true);
-  };
+  // Page-specific meta tags
+  usePageMeta({
+    title: "Bedroom Renovations Cape Town - Custom Wardrobes & Bedroom Design | KD Interiors",
+    description: "Transform your bedroom with custom wardrobes, built-in storage, and complete bedroom renovations in Cape Town. Create your perfect sanctuary today!",
+    keywords: "bedroom renovation Cape Town, custom wardrobes, built-in storage, bedroom design, Cape Town bedroom contractor, walk-in closet",
+    ogTitle: "Bedroom Renovations Cape Town - Custom Wardrobes & Design",
+    ogDescription: "Expert bedroom renovations in Cape Town. Custom wardrobes, built-in storage, and complete bedroom makeovers. Free consultation available.",
+    ogImage: "/src/assets/bedrooms/bedroom-hero.jpg",
+    canonical: "https://kdinteriors.co.za/bedrooms"
+  });
 
   const services = [
     "Custom Wardrobe Design & Installation",
@@ -57,14 +74,40 @@ const Bedrooms = () => {
     "Smart Home Integration"
   ];
 
+  // Bedroom sliders data
+  const bedroomSliders = [
+    {
+      id: "master-bedrooms",
+      images: [
+        { avif: bedroomMasterSuiteAvif, jpg: bedroomMasterSuite, alt: "Master bedroom suite design" },
+        { avif: bedroomCustomWardrobeAvif, jpg: bedroomCustomWardrobe, alt: "Custom bedroom wardrobe" },
+        { avif: bedroomBuiltInStorageAvif, jpg: bedroomBuiltInStorage, alt: "Built-in bedroom storage" },
+        { avif: bedroomWalkInClosetAvif, jpg: bedroomWalkInCloset, alt: "Walk-in closet design" },
+        { avif: bedroomHeadboardDesignAvif, jpg: bedroomHeadboardDesign, alt: "Custom headboard design" },
+        { avif: bedroomFeatureWallAvif, jpg: bedroomFeatureWall, alt: "Bedroom feature wall" },
+        { avif: bedroomLightingDesignAvif, jpg: bedroomLightingDesign, alt: "Bedroom lighting design" },
+        { avif: bedroomEnSuiteAvif, jpg: bedroomEnSuite, alt: "Bedroom en-suite design" },
+        { avif: bedroomStorageSolutionsAvif, jpg: bedroomStorageSolutions, alt: "Bedroom storage solutions" }
+      ]
+    },
+    {
+      id: "storage-solutions",
+      images: [
+        { avif: bedroomLuxuryDesignAvif, jpg: bedroomLuxuryDesign, alt: "Luxury bedroom design" },
+        { avif: bedroomCustomFurnitureAvif, jpg: bedroomCustomFurniture, alt: "Custom bedroom furniture" },
+        { avif: bedroomStorageSystemAvif, jpg: bedroomStorageSystem, alt: "Bedroom storage system" },
+        { avif: bedroomMirrorDoorsAvif, jpg: bedroomMirrorDoors, alt: "Mirror doors for bedroom" },
+        { avif: bedroomSlidingDoorsAvif, jpg: bedroomSlidingDoors, alt: "Sliding doors for bedroom" },
+        { avif: bedroomBifoldDoorsAvif, jpg: bedroomBifoldDoors, alt: "Bifold doors for bedroom" },
+        { avif: bedroomCustomShelvingAvif, jpg: bedroomCustomShelving, alt: "Custom bedroom shelving" },
+        { avif: bedroomDrawerSystemAvif, jpg: bedroomDrawerSystem, alt: "Bedroom drawer system" },
+        { avif: bedroomAccessoryStorageAvif, jpg: bedroomAccessoryStorage, alt: "Bedroom accessory storage" }
+      ]
+    }
+  ];
+
   return (
     <div className="pt-20">
-      <Lightbox
-        open={open}
-        close={() => setOpen(false)}
-        slides={filteredGallery.map(item => ({ src: item.image }))}
-        index={selectedIndex}
-      />
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-r from-forest-900 to-forest-700 text-white">
         <div className="relative container mx-auto px-4 text-center">
@@ -114,61 +157,24 @@ const Bedrooms = () => {
               </div>
             </div>
             <div className="relative">
-              <img
-                src={bedroomHero}
-                alt="Bedroom Design Process"
-                className="rounded-2xl shadow-2xl"
-              />
+              <picture>
+                <img
+                  src={bedroomHero}
+                  alt="Bedroom Design Process"
+                  className="rounded-2xl shadow-2xl"
+                />
+              </picture>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Gallery Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-              Our Bedroom Portfolio
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-              Discover our collection of beautiful bedroom transformations designed for comfort and style.
-            </p>
-
-            {/* Category Filter */}
-            <div className="flex flex-wrap justify-center gap-4">
-              {categories.map((category) => (
-                <button
-                  key={category.id}
-                  onClick={() => setSelectedCategory(category.id)}
-                  className={`px-6 py-3 rounded-lg font-medium transition-colors ${
-                    selectedCategory === category.id
-                      ? 'bg-forest-700 text-white'
-                      : 'bg-white text-forest-700 hover:bg-forest-100 border border-forest-200'
-                  }`}
-                >
-                  {category.name}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Gallery Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-8">
-            {filteredGallery.map((bedroom, index) => (
-              <div key={bedroom.id} className="bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer" onClick={() => handleImageClick(index)}>
-                <div className="relative overflow-hidden">
-                  <img
-                    src={eval(`bedroom${bedroom.id + 1}`)}
-                    alt={`Bedroom Project ${bedroom.id}`}
-                    className="w-full aspect-[1/1] object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Gallery Section with Sliders */}
+      <ImageSlider 
+        sliders={bedroomSliders}
+        title="Our Bedroom Portfolio"
+        description="Discover our collection of beautiful bedroom transformations designed for comfort and style."
+      />
 
       {/* CTA Section */}
       <section className="py-20 bg-gray-50">

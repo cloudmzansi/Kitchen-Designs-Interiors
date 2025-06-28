@@ -1,71 +1,179 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Star, CheckCircle, Phone } from 'lucide-react';
-import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
+import React from 'react';
+import { ArrowRight, CheckCircle, Phone } from 'lucide-react';
 import { useScrollTo } from '../hooks/useScrollTo';
-import commercialHero from '../assets/commercial/commercial-1.jpeg';
-import commercial2 from '../assets/commercial/commercial-2.jpeg';
-import commercial3 from '../assets/commercial/commercial-3.jpeg';
-import commercial4 from '../assets/commercial/commercial-4.jpeg';
-import commercial5 from '../assets/commercial/commercial-5.jpeg';
-import commercial6 from '../assets/commercial/commercial-6.jpeg';
-import commercial7 from '../assets/commercial/commercial-7.jpeg';
-import commercial8 from '../assets/commercial/commercial-8.jpeg';
-import commercial9 from '../assets/commercial/commercial-9.jpeg';
-import commercial10 from '../assets/commercial/commercial-10.jpeg';
+import { usePageMeta } from '../hooks/usePageMeta';
+import ImageSlider from '../components/ImageSlider';
+import commercialHero from '../assets/commercial/commercial-hero.jpg';
+import commercialHeroAvif from '../assets/commercial/commercial-hero.avif';
+
+// Import all commercial slider images
+// Slider 1
+import commercialOfficeDesign from '../assets/commercial/Slider 1/commercial-office-design.jpg';
+import commercialOfficeDesignAvif from '../assets/commercial/Slider 1/commercial-office-design.avif';
+import commercialReceptionArea from '../assets/commercial/Slider 1/commercial-reception-area.jpg';
+import commercialReceptionAreaAvif from '../assets/commercial/Slider 1/commercial-reception-area.avif';
+import commercialMeetingRoom from '../assets/commercial/Slider 1/commercial-meeting-room.jpg';
+import commercialMeetingRoomAvif from '../assets/commercial/Slider 1/commercial-meeting-room.avif';
+import commercialBoardroom from '../assets/commercial/Slider 1/commercial-boardroom.jpg';
+import commercialBoardroomAvif from '../assets/commercial/Slider 1/commercial-boardroom.avif';
+import commercialWorkstation from '../assets/commercial/Slider 1/commercial-workstation.jpg';
+import commercialWorkstationAvif from '../assets/commercial/Slider 1/commercial-workstation.avif';
+import commercialStorageSolutions from '../assets/commercial/Slider 1/commercial-storage-solutions.jpg';
+import commercialStorageSolutionsAvif from '../assets/commercial/Slider 1/commercial-storage-solutions.avif';
+import commercialCustomCabinets from '../assets/commercial/Slider 1/commercial-custom-cabinets.jpg';
+import commercialCustomCabinetsAvif from '../assets/commercial/Slider 1/commercial-custom-cabinets.avif';
+import commercialLightingDesign from '../assets/commercial/Slider 1/commercial-lighting-design.jpg';
+import commercialLightingDesignAvif from '../assets/commercial/Slider 1/commercial-lighting-design.avif';
+import commercialAccessibility from '../assets/commercial/Slider 1/commercial-accessibility.jpg';
+import commercialAccessibilityAvif from '../assets/commercial/Slider 1/commercial-accessibility.avif';
+
+// Slider 2
+import commercialRetailDesign from '../assets/commercial/Slider 2/commercial-retail-design.jpg';
+import commercialRetailDesignAvif from '../assets/commercial/Slider 2/commercial-retail-design.avif';
+import commercialDisplayCabinets from '../assets/commercial/Slider 2/commercial-display-cabinets.jpg';
+import commercialDisplayCabinetsAvif from '../assets/commercial/Slider 2/commercial-display-cabinets.avif';
+import commercialCashWrap from '../assets/commercial/Slider 2/commercial-cash-wrap.jpg';
+import commercialCashWrapAvif from '../assets/commercial/Slider 2/commercial-cash-wrap.avif';
+import commercialFittingRoom from '../assets/commercial/Slider 2/commercial-fitting-room.jpg';
+import commercialFittingRoomAvif from '../assets/commercial/Slider 2/commercial-fitting-room.avif';
+import commercialMerchandising from '../assets/commercial/Slider 2/commercial-merchandising.jpg';
+import commercialMerchandisingAvif from '../assets/commercial/Slider 2/commercial-merchandising.avif';
+import commercialStorageRoom from '../assets/commercial/Slider 2/commercial-storage-room.jpg';
+import commercialStorageRoomAvif from '../assets/commercial/Slider 2/commercial-storage-room.avif';
+import commercialBackOffice from '../assets/commercial/Slider 2/commercial-back-office.jpg';
+import commercialBackOfficeAvif from '../assets/commercial/Slider 2/commercial-back-office.avif';
+import commercialCustomerService from '../assets/commercial/Slider 2/commercial-customer-service.jpg';
+import commercialCustomerServiceAvif from '../assets/commercial/Slider 2/commercial-customer-service.avif';
+import commercialBreakRoom from '../assets/commercial/Slider 2/commercial-break-room.jpg';
+import commercialBreakRoomAvif from '../assets/commercial/Slider 2/commercial-break-room.avif';
+
+// Slider 3
+import commercialRestaurantDesign from '../assets/commercial/Slider 3/commercial-restaurant-design.jpg';
+import commercialRestaurantDesignAvif from '../assets/commercial/Slider 3/commercial-restaurant-design.avif';
+import commercialKitchen from '../assets/commercial/Slider 3/commercial-kitchen.jpg';
+import commercialKitchenAvif from '../assets/commercial/Slider 3/commercial-kitchen.avif';
+import commercialDiningArea from '../assets/commercial/Slider 3/commercial-dining-area.jpg';
+import commercialDiningAreaAvif from '../assets/commercial/Slider 3/commercial-dining-area.avif';
+import commercialBarDesign from '../assets/commercial/Slider 3/commercial-bar-design.jpg';
+import commercialBarDesignAvif from '../assets/commercial/Slider 3/commercial-bar-design.avif';
+import commercialWaitingArea from '../assets/commercial/Slider 3/commercial-waiting-area.jpg';
+import commercialWaitingAreaAvif from '../assets/commercial/Slider 3/commercial-waiting-area.avif';
+import commercialStorageKitchen from '../assets/commercial/Slider 3/commercial-storage-kitchen.jpg';
+import commercialStorageKitchenAvif from '../assets/commercial/Slider 3/commercial-storage-kitchen.avif';
+import commercialPrepArea from '../assets/commercial/Slider 3/commercial-prep-area.jpg';
+import commercialPrepAreaAvif from '../assets/commercial/Slider 3/commercial-prep-area.avif';
+import commercialDishwashing from '../assets/commercial/Slider 3/commercial-dishwashing.jpg';
+import commercialDishwashingAvif from '../assets/commercial/Slider 3/commercial-dishwashing.avif';
+
+// Slider 4
+import commercialMedicalOffice from '../assets/commercial/Slider 4/commercial-medical-office.jpg';
+import commercialMedicalOfficeAvif from '../assets/commercial/Slider 4/commercial-medical-office.avif';
+import commercialExaminationRoom from '../assets/commercial/Slider 4/commercial-examination-room.jpg';
+import commercialExaminationRoomAvif from '../assets/commercial/Slider 4/commercial-examination-room.avif';
+import commercialWaitingRoom from '../assets/commercial/Slider 4/commercial-waiting-room.jpg';
+import commercialWaitingRoomAvif from '../assets/commercial/Slider 4/commercial-waiting-room.avif';
+import commercialStorageMedical from '../assets/commercial/Slider 4/commercial-storage-medical.jpg';
+import commercialStorageMedicalAvif from '../assets/commercial/Slider 4/commercial-storage-medical.avif';
+import commercialReceptionMedical from '../assets/commercial/Slider 4/commercial-reception-medical.jpg';
+import commercialReceptionMedicalAvif from '../assets/commercial/Slider 4/commercial-reception-medical.avif';
+import commercialConsultationRoom from '../assets/commercial/Slider 4/commercial-consultation-room.jpg';
+import commercialConsultationRoomAvif from '../assets/commercial/Slider 4/commercial-consultation-room.avif';
+import commercialLabArea from '../assets/commercial/Slider 4/commercial-lab-area.jpg';
+import commercialLabAreaAvif from '../assets/commercial/Slider 4/commercial-lab-area.avif';
+import commercialSterilization from '../assets/commercial/Slider 4/commercial-sterilization.jpg';
+import commercialSterilizationAvif from '../assets/commercial/Slider 4/commercial-sterilization.avif';
+import commercialMedicalStorage from '../assets/commercial/Slider 4/commercial-medical-storage.jpg';
+import commercialMedicalStorageAvif from '../assets/commercial/Slider 4/commercial-medical-storage.avif';
 
 const Commercial = () => {
-  const [open, setOpen] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [selectedCategory, setSelectedCategory] = useState('all');
   const { handleScrollClick } = useScrollTo();
 
-  const categories: { id: string; name: string }[] = [];
-
-  const commercialGallery = [
-    { id: 1, category: 'gallery', image: commercial2 },
-    { id: 2, category: 'gallery', image: commercial3 },
-    { id: 3, category: 'gallery', image: commercial4 },
-    { id: 4, category: 'gallery', image: commercial5 },
-    { id: 5, category: 'gallery', image: commercial6 },
-    { id: 6, category: 'gallery', image: commercial7 },
-    { id: 7, category: 'gallery', image: commercial8 },
-    { id: 8, category: 'gallery', image: commercial9 },
-    { id: 9, category: 'gallery', image: commercial10 },
-  ];
-
-  const filteredGallery = selectedCategory === 'all'
-    ? commercialGallery
-    : commercialGallery.filter(item => item.category === selectedCategory);
+  // Page-specific meta tags
+  usePageMeta({
+    title: "Commercial Renovations Cape Town - Office & Retail Interior Design | KD Interiors",
+    description: "Transform your commercial space with expert interior design and fit-out services in Cape Town. Office renovations, retail design, and complete commercial makeovers.",
+    keywords: "commercial renovation Cape Town, office design, retail design, commercial interior design, Cape Town commercial contractor, office fit-out",
+    ogTitle: "Commercial Renovations Cape Town - Office & Retail Design",
+    ogDescription: "Expert commercial renovations in Cape Town. Office design, retail fit-outs, and complete commercial makeovers. Free consultation available.",
+    ogImage: "/src/assets/commercial/commercial-hero.jpg",
+    canonical: "https://kdinteriors.co.za/commercial"
+  });
 
   const services = [
-    "Commercial Space Planning",
     "Office Design & Fit-out",
     "Retail Store Design",
-    "Restaurant & Cafe Interiors",
-    "Hospitality & Hotel Design",
-    "Custom Joinery & Cabinetry",
+    "Restaurant & Hospitality Design",
+    "Medical Office Design",
+    "Custom Cabinetry & Storage",
+    "Lighting Design & Installation",
+    "Space Planning & Layout",
     "Project Management",
-    "Lighting & Electrical Layouts",
-    "Flooring & Finishes",
-    "Brand Integration"
+    "Commercial Furniture",
+    "Accessibility Compliance"
   ];
 
-  const handleImageClick = (index: number) => {
-    setSelectedIndex(index);
-    setOpen(true);
-  };
+  // Commercial sliders data
+  const commercialSliders = [
+    {
+      id: "office-designs",
+      images: [
+        { avif: commercialOfficeDesignAvif, jpg: commercialOfficeDesign, alt: "Modern office design" },
+        { avif: commercialReceptionAreaAvif, jpg: commercialReceptionArea, alt: "Office reception area" },
+        { avif: commercialMeetingRoomAvif, jpg: commercialMeetingRoom, alt: "Meeting room design" },
+        { avif: commercialBoardroomAvif, jpg: commercialBoardroom, alt: "Boardroom design" },
+        { avif: commercialWorkstationAvif, jpg: commercialWorkstation, alt: "Office workstation design" },
+        { avif: commercialStorageSolutionsAvif, jpg: commercialStorageSolutions, alt: "Office storage solutions" },
+        { avif: commercialCustomCabinetsAvif, jpg: commercialCustomCabinets, alt: "Custom office cabinets" },
+        { avif: commercialLightingDesignAvif, jpg: commercialLightingDesign, alt: "Office lighting design" },
+        { avif: commercialAccessibilityAvif, jpg: commercialAccessibility, alt: "Accessible office design" }
+      ]
+    },
+    {
+      id: "retail-spaces",
+      images: [
+        { avif: commercialRetailDesignAvif, jpg: commercialRetailDesign, alt: "Retail store design" },
+        { avif: commercialDisplayCabinetsAvif, jpg: commercialDisplayCabinets, alt: "Display cabinets for retail" },
+        { avif: commercialCashWrapAvif, jpg: commercialCashWrap, alt: "Cash wrap design" },
+        { avif: commercialFittingRoomAvif, jpg: commercialFittingRoom, alt: "Fitting room design" },
+        { avif: commercialMerchandisingAvif, jpg: commercialMerchandising, alt: "Retail merchandising" },
+        { avif: commercialStorageRoomAvif, jpg: commercialStorageRoom, alt: "Retail storage room" },
+        { avif: commercialBackOfficeAvif, jpg: commercialBackOffice, alt: "Back office design" },
+        { avif: commercialCustomerServiceAvif, jpg: commercialCustomerService, alt: "Customer service area" },
+        { avif: commercialBreakRoomAvif, jpg: commercialBreakRoom, alt: "Employee break room" }
+      ]
+    },
+    {
+      id: "restaurant-designs",
+      images: [
+        { avif: commercialRestaurantDesignAvif, jpg: commercialRestaurantDesign, alt: "Restaurant design" },
+        { avif: commercialKitchenAvif, jpg: commercialKitchen, alt: "Commercial kitchen design" },
+        { avif: commercialDiningAreaAvif, jpg: commercialDiningArea, alt: "Restaurant dining area" },
+        { avif: commercialBarDesignAvif, jpg: commercialBarDesign, alt: "Bar design" },
+        { avif: commercialWaitingAreaAvif, jpg: commercialWaitingArea, alt: "Restaurant waiting area" },
+        { avif: commercialStorageKitchenAvif, jpg: commercialStorageKitchen, alt: "Kitchen storage solutions" },
+        { avif: commercialPrepAreaAvif, jpg: commercialPrepArea, alt: "Food preparation area" },
+        { avif: commercialDishwashingAvif, jpg: commercialDishwashing, alt: "Dishwashing area design" },
+        { avif: commercialRestaurantDesignAvif, jpg: commercialRestaurantDesign, alt: "Restaurant design showcase" }
+      ]
+    },
+    {
+      id: "medical-spaces",
+      images: [
+        { avif: commercialMedicalOfficeAvif, jpg: commercialMedicalOffice, alt: "Medical office design" },
+        { avif: commercialExaminationRoomAvif, jpg: commercialExaminationRoom, alt: "Medical examination room" },
+        { avif: commercialWaitingRoomAvif, jpg: commercialWaitingRoom, alt: "Medical waiting room" },
+        { avif: commercialStorageMedicalAvif, jpg: commercialStorageMedical, alt: "Medical storage solutions" },
+        { avif: commercialReceptionMedicalAvif, jpg: commercialReceptionMedical, alt: "Medical reception area" },
+        { avif: commercialConsultationRoomAvif, jpg: commercialConsultationRoom, alt: "Medical consultation room" },
+        { avif: commercialLabAreaAvif, jpg: commercialLabArea, alt: "Medical laboratory area" },
+        { avif: commercialSterilizationAvif, jpg: commercialSterilization, alt: "Sterilization area design" },
+        { avif: commercialMedicalStorageAvif, jpg: commercialMedicalStorage, alt: "Medical equipment storage" }
+      ]
+    }
+  ];
 
   return (
     <div className="pt-20">
-      <Lightbox
-        open={open}
-        close={() => setOpen(false)}
-        slides={filteredGallery.map(item => ({ src: item.image }))}
-        index={selectedIndex}
-      />
-
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-r from-forest-900 to-forest-700 text-white">
         <div className="relative container mx-auto px-4 text-center">
@@ -73,17 +181,17 @@ const Commercial = () => {
             Commercial Renovations
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-forest-100">
-            Expert commercial interior design and fit-out solutions for businesses of all sizes, creating functional and inspiring workspaces.
+            Transform your commercial space with expert interior design and fit-out services that enhance productivity and customer experience.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button
+            <button 
               onClick={(e) => handleScrollClick(e, 'contact-section')}
               className="bg-gradient-to-r from-forest-700 to-forest-600 text-white px-8 py-4 rounded-lg hover:from-forest-800 hover:to-forest-900 transition-colors font-semibold text-lg inline-flex items-center justify-center space-x-2"
             >
               <span>Get a Free Quote</span>
               <ArrowRight size={20} />
             </button>
-            <a
+            <a 
               href="tel:+27799352223"
               className="border-2 border-white text-white px-8 py-4 rounded-lg hover:bg-white hover:text-forest-900 transition-colors font-semibold text-lg inline-flex items-center justify-center space-x-2"
             >
@@ -100,10 +208,10 @@ const Commercial = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-4xl font-bold text-gray-800 mb-6">
-                Full-Service Commercial Interiors
+                Complete Commercial Solutions
               </h2>
               <p className="text-lg text-gray-600 mb-8">
-                We provide end-to-end solutions for commercial spaces, from initial concept to final installation. Our goal is to create environments that enhance your brand, improve productivity, and leave a lasting impression.
+                From office renovations to retail fit-outs, we provide comprehensive commercial interior design services that create functional, beautiful, and productive spaces for your business.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {services.map((service, index) => (
@@ -115,77 +223,40 @@ const Commercial = () => {
               </div>
             </div>
             <div className="relative">
-              <img
-                src={commercialHero}
-                alt="Commercial Design Process"
-                className="rounded-2xl shadow-2xl w-full h-auto object-cover"
-              />
+              <picture>
+                <img
+                  src={commercialHero}
+                  alt="Commercial Design Process"
+                  className="rounded-2xl shadow-2xl"
+                />
+              </picture>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Gallery Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-              Our Commercial Portfolio
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-              Explore a selection of our successfully completed commercial projects.
-            </p>
-
-            {/* Category Filter */}
-            <div className="flex flex-wrap justify-center gap-4">
-              {categories.map((category) => (
-                <button
-                  key={category.id}
-                  onClick={() => setSelectedCategory(category.id)}
-                  className={`px-6 py-3 rounded-lg font-medium transition-colors ${
-                    selectedCategory === category.id
-                      ? 'bg-forest-700 text-white'
-                      : 'bg-white text-forest-700 hover:bg-forest-100 border border-forest-200'
-                  }`}
-                >
-                  {category.name}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Gallery Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-8">
-            {filteredGallery.map((item, index) => (
-              <div key={item.id} className="bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer" onClick={() => handleImageClick(index)}>
-                <div className="relative overflow-hidden">
-                  <img
-                    src={eval(`commercial${item.id + 1}`)}
-                    alt={`Commercial Project ${item.id}`}
-                    className="w-full aspect-[1/1] object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Gallery Section with Sliders */}
+      <ImageSlider 
+        sliders={commercialSliders}
+        title="Our Commercial Portfolio"
+        description="Explore our collection of stunning commercial transformations across various industries."
+      />
 
       {/* CTA Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center bg-white rounded-2xl p-12 shadow-2xl">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Ready to Elevate Your Business Space?
+            <h2 className="text-4xl font-bold text-gray-800 mb-6">
+              Ready to Transform Your Commercial Space?
             </h2>
             <p className="text-xl text-gray-600 mb-8">
-              Let's discuss how we can bring your vision to life. Contact us for a free, no-obligation consultation.
+              Let's create a commercial space that enhances your business operations and impresses your clients.
             </p>
-            <button
+            <button 
               onClick={(e) => handleScrollClick(e, 'contact-section')}
-              className="bg-gradient-to-r from-forest-700 to-forest-600 text-white px-8 py-4 rounded-lg hover:from-forest-800 hover:to-forest-900 transition-all duration-300 font-semibold text-lg inline-flex items-center space-x-2"
+              className="bg-gradient-to-r from-forest-600 to-forest-700 text-white px-8 py-4 rounded-lg hover:from-forest-700 hover:to-forest-800 transition-all duration-300 font-semibold text-lg inline-flex items-center space-x-2 mt-6"
             >
-              <span>Schedule a Consultation</span>
+              <span>Get Free Consultation</span>
               <ArrowRight size={20} />
             </button>
           </div>

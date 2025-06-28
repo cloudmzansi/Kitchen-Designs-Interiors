@@ -1,6 +1,17 @@
 import React from 'react';
+import { usePageMeta } from '../hooks/usePageMeta';
 
 const PrivacyPolicy = () => {
+  // Page-specific meta tags
+  usePageMeta({
+    title: "Privacy Policy - KD Interiors | Data Protection & POPIA Compliance",
+    description: "Read our privacy policy to understand how KD Interiors collects, uses, and protects your personal information in compliance with POPIA regulations.",
+    keywords: "privacy policy, data protection, POPIA compliance, personal information, KD Interiors",
+    ogTitle: "Privacy Policy - KD Interiors",
+    ogDescription: "Our privacy policy explains how we protect your personal information in compliance with POPIA regulations.",
+    canonical: "https://kdinteriors.co.za/privacy-policy"
+  });
+
   return (
     <div className="bg-gray-100">
       <div className="bg-gray-200 border-b border-gray-300 shadow-sm">

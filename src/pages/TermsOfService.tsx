@@ -1,6 +1,17 @@
 import React from 'react';
+import { usePageMeta } from '../hooks/usePageMeta';
 
 const TermsOfService = () => {
+  // Page-specific meta tags
+  usePageMeta({
+    title: "Terms of Service - KD Interiors | Service Terms & Conditions",
+    description: "Read our terms of service to understand the terms and conditions governing the use of KD Interiors services and website.",
+    keywords: "terms of service, terms and conditions, service agreement, KD Interiors",
+    ogTitle: "Terms of Service - KD Interiors",
+    ogDescription: "Our terms of service outline the terms and conditions for using KD Interiors services and website.",
+    canonical: "https://kdinteriors.co.za/terms-of-service"
+  });
+
   return (
     <div className="bg-gray-100">
       <div className="bg-white py-20">

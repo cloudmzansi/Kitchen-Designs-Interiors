@@ -1,35 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Star, Users, Award, Shield, Clock, CheckCircle, Phone, Mail, MapPin, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
-import heroBg from '../assets/home/home-1.jpg';
-import about1 from '../assets/home/home-2.jpg';
-import about2 from '../assets/home/home-3.jpg';
-import serviceKitchen from '../assets/home/home-4.jpg';
-import serviceBedroom from '../assets/home/home-5.jpg';
-import serviceBathroom from '../assets/home/home-6.jpg';
-import serviceCommercial from '../assets/home/home-7.jpg';
-import kitchen1 from '../assets/kitchens/kitchens-1.avif';
-import kitchen2 from '../assets/kitchens/kitchens-2.avif';
-import kitchen3 from '../assets/kitchens/kitchens-3.avif';
-import kitchen4 from '../assets/kitchens/kitchens-4.avif';
-import kitchen5 from '../assets/kitchens/kitchens-5.avif';
-import kitchen6 from '../assets/kitchens/kitchens-6.avif';
-import kitchen7 from '../assets/kitchens/kitchens-7.avif';
-import kitchen8 from '../assets/kitchens/kitchens-8.avif';
-import kitchen9 from '../assets/kitchens/kitchens-9.avif';
-import kitchen10 from '../assets/kitchens/kitchens-10.avif';
-import home1 from '../assets/home/home-1.avif';
-import home2 from '../assets/home/home-2.avif';
-import home3 from '../assets/home/home-3.avif';
-import home4 from '../assets/home/home-4.avif';
-import home5 from '../assets/home/home-5.avif';
-import home6 from '../assets/home/home-6.avif';
-import home7 from '../assets/home/home-7.avif';
+import heroBg from '../assets/home/kd-interiors-hero-kitchen.jpg';
+import heroBgAvif from '../assets/home/kd-interiors-hero-kitchen.avif';
+import about1 from '../assets/home/kd-interiors-modern-bathroom.jpg';
+import about1Avif from '../assets/home/kd-interiors-modern-bathroom.avif';
+import about2 from '../assets/home/kd-interiors-luxury-bedroom.jpg';
+import about2Avif from '../assets/home/kd-interiors-luxury-bedroom.avif';
+import serviceKitchen from '../assets/home/kd-interiors-commercial-office.jpg';
+import serviceKitchenAvif from '../assets/home/kd-interiors-commercial-office.avif';
+import serviceBedroom from '../assets/home/kd-interiors-custom-cabinetry.jpg';
+import serviceBedroomAvif from '../assets/home/kd-interiors-custom-cabinetry.avif';
+import serviceBathroom from '../assets/home/kd-interiors-storage-solutions.jpg';
+import serviceBathroomAvif from '../assets/home/kd-interiors-storage-solutions.avif';
+import serviceCommercial from '../assets/home/kd-interiors-design-process.jpg';
+import serviceCommercialAvif from '../assets/home/kd-interiors-design-process.avif';
+import home1 from '../assets/home/kd-interiors-hero-kitchen.avif';
+import home2 from '../assets/home/kd-interiors-modern-bathroom.avif';
+import home3 from '../assets/home/kd-interiors-luxury-bedroom.avif';
+import home4 from '../assets/home/kd-interiors-commercial-office.avif';
+import home5 from '../assets/home/kd-interiors-custom-cabinetry.avif';
+import home6 from '../assets/home/kd-interiors-storage-solutions.avif';
+import home7 from '../assets/home/kd-interiors-design-process.avif';
 
 type Service = {
   title: string;
   description: string;
   image: string;
+  imageAvif?: string;
   link: string;
 };
 
@@ -58,7 +56,8 @@ const Home = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const heroImages = [heroBg];
+  const heroImages = [heroBgAvif];
+  const heroImagesFallback = [heroBg];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
@@ -130,8 +129,14 @@ const Home = () => {
     formData.forEach((value, key) => {
       data[key] = value;
     });
-    // Add Web3Forms access key
-    data.access_key = "1a5b610a-5454-42da-89ae-40d3d3820e44";
+    // Add Web3Forms access key from environment variable
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
+      console.error('Web3Forms access key not found in environment variables');
+      alert('Form submission is not configured. Please contact support.');
+      return;
+    }
+    data.access_key = accessKey;
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
@@ -162,24 +167,28 @@ const Home = () => {
       title: "Kitchen Renovations",
       description: "Transform your kitchen into the heart of your home with custom cabinetry and premium finishes.",
       image: serviceKitchen,
+      imageAvif: serviceKitchenAvif,
       link: "/kitchens"
     },
     {
       title: "Bedroom Renovations",
       description: "Create your perfect sanctuary with built-in wardrobes and custom bedroom furniture.",
       image: serviceBedroom,
+      imageAvif: serviceBedroomAvif,
       link: "/bedrooms"
     },
     {
       title: "Bathroom Renovations",
       description: "Design luxurious bathrooms that combine style, functionality, and lasting quality.",
       image: serviceBathroom,
+      imageAvif: serviceBathroomAvif,
       link: "/bathrooms"
     },
     {
       title: "Commercial Renovations",
       description: "Expert commercial interior design and fit-out solutions for businesses of all sizes, creating functional and inspiring workspaces.",
       image: serviceCommercial,
+      imageAvif: serviceCommercialAvif,
       link: "/commercial"
     }
   ];
@@ -235,11 +244,14 @@ const Home = () => {
       {/* Hero Section */}
       <section className="relative min-h-screen min-h-[100svh] flex flex-col items-center justify-center text-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img 
-            src={heroImages[currentImageIndex]}
-            alt="Kitchen Design"
-            className="w-full h-full min-h-screen min-h-[100svh] object-cover transition-opacity duration-1000"
-          />
+          <picture>
+            <source srcSet={heroImages[currentImageIndex]} type="image/avif" />
+            <img 
+              src={heroImagesFallback[currentImageIndex]}
+              alt="Kitchen Design"
+              className="w-full h-full min-h-screen min-h-[100svh] object-cover transition-opacity duration-1000"
+            />
+          </picture>
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60"></div>
         </div>
         <div className="relative z-10 container mx-auto px-4 flex flex-col items-center justify-center md:justify-end min-h-screen min-h-[100svh]">
@@ -310,11 +322,14 @@ const Home = () => {
                 </p>
               </div>
               <div>
-                <img 
-                  src={about1}
-                  alt="Modern Kitchen Interior by KD Interiors"
-                  className="rounded-2xl shadow-2xl w-full h-auto object-cover"
-                />
+                <picture>
+                  <source srcSet={about1Avif} type="image/avif" />
+                  <img 
+                    src={about1}
+                    alt="Modern Kitchen Interior by KD Interiors"
+                    className="rounded-2xl shadow-2xl w-full h-auto object-cover"
+                  />
+                </picture>
               </div>
             </div>
 
@@ -329,11 +344,14 @@ const Home = () => {
                 </p>
               </div>
               <div>
-                <img 
-                  src={about2}
-                  alt="Modern Kitchen Interior by KD Interiors"
-                  className="rounded-2xl shadow-2xl w-full h-auto object-cover"
-                />
+                <picture>
+                  <source srcSet={about2Avif} type="image/avif" />
+                  <img 
+                    src={about2}
+                    alt="Modern Kitchen Interior by KD Interiors"
+                    className="rounded-2xl shadow-2xl w-full h-auto object-cover"
+                  />
+                </picture>
               </div>
             </div>
           </div>
@@ -378,7 +396,10 @@ const Home = () => {
                 {services.slice(specialtyIndex, specialtyIndex + 1).map((service, index) => (
                   <div key={index} className="group text-left">
                     <Link to={service.link} className="block relative mb-6 overflow-hidden rounded-2xl shadow-xl focus:outline-none focus:ring-2 focus:ring-forest-700">
-                      <img src={service.image.replace('Avif', '')} alt={service.title} className="w-full aspect-[1/1] object-cover transition-transform duration-300 group-hover:scale-105 max-w-full" />
+                      <picture>
+                        {service.imageAvif && <source srcSet={service.imageAvif} type="image/avif" />}
+                        <img src={service.image} alt={service.title} className="w-full aspect-[1/1] object-cover transition-transform duration-300 group-hover:scale-105 max-w-full" />
+                      </picture>
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                       <div className="absolute bottom-0 left-0 p-6">
                         <h3 className="text-2xl font-bold text-white">{service.title}</h3>
@@ -401,7 +422,10 @@ const Home = () => {
               {services.map((service, index) => (
                 <div key={index} className="group text-left">
                   <Link to={service.link} className="block relative mb-6 overflow-hidden rounded-2xl shadow-xl focus:outline-none focus:ring-2 focus:ring-forest-700">
-                    <img src={service.image.replace('Avif', '')} alt={service.title} className="w-full aspect-[1/1] object-cover transition-transform duration-300 group-hover:scale-105 max-w-full" />
+                    <picture>
+                      {service.imageAvif && <source srcSet={service.imageAvif} type="image/avif" />}
+                      <img src={service.image} alt={service.title} className="w-full aspect-[1/1] object-cover transition-transform duration-300 group-hover:scale-105 max-w-full" />
+                    </picture>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                     <div className="absolute bottom-0 left-0 p-6">
                       <h3 className="text-2xl font-bold text-white">{service.title}</h3>
@@ -456,7 +480,7 @@ const Home = () => {
       </section>
 
       {/* Testimonials Section (heading only, no reviews) */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50" style={{ display: 'none' }}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
