@@ -312,15 +312,15 @@ const Home = () => {
       {/* Trust Badges */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          {/* Mobile Grid: 4 in a row */}
-          <div className="md:hidden grid grid-cols-4 gap-4">
+          {/* Mobile Grid: 2x2 */}
+          <div className="md:hidden grid grid-cols-2 gap-6">
             {trustBadges.map((badge, index) => (
               <div key={index} className="text-center group">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-forest-100 to-forest-50 rounded-full mb-3 group-hover:bg-forest-700 transition-colors duration-300 border border-forest-200">
-                  <badge.icon size={24} className="text-forest-700 group-hover:text-white transition-colors duration-300" />
+                <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-forest-100 to-forest-50 rounded-full mb-3 group-hover:bg-forest-700 transition-colors duration-300 border border-forest-200">
+                  <badge.icon size={28} className="text-forest-700 group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h3 className="text-sm font-semibold text-forest-900 mb-1">{badge.title}</h3>
-                <p className="text-forest-600 text-xs">{badge.desc}</p>
+                <h3 className="text-base font-semibold text-forest-900 mb-1">{badge.title}</h3>
+                <p className="text-forest-600 text-sm">{badge.desc}</p>
               </div>
             ))}
           </div>
