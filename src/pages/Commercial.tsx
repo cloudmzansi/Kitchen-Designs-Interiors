@@ -198,6 +198,7 @@ const Commercial = () => {
               <button 
                 onClick={(e) => handleScrollClick(e, 'contact-section')}
                 className="group bg-gradient-to-r from-forest-700 to-forest-600 text-white px-8 py-4 md:px-12 md:py-5 rounded-2xl hover:from-forest-800 hover:to-forest-900 transition-all duration-500 font-semibold text-lg md:text-xl inline-flex items-center justify-center space-x-3 shadow-2xl hover:shadow-forest-900/25 transform hover:scale-105"
+                aria-label="Get a free quote for commercial renovations"
               >
                 <span>Get a Free Quote</span>
                 <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform duration-300" />
@@ -239,6 +240,8 @@ const Commercial = () => {
                 <img
                   src={commercialHero}
                   alt="Commercial Design Process"
+                  width={600}
+                  height={400}
                   className="rounded-2xl shadow-2xl"
                 />
               </picture>
@@ -270,6 +273,7 @@ const Commercial = () => {
                   <button 
                     onClick={(e) => handleScrollClick(e, 'contact-section')}
                     className="bg-gradient-to-r from-forest-700 to-forest-600 text-white px-8 py-4 rounded-xl hover:from-forest-800 hover:to-forest-900 transition-all duration-300 font-semibold text-lg inline-flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transform hover:scale-105"
+                    aria-label="Get free consultation for commercial renovations"
                   >
                     <span>Get Free Consultation</span>
                     <ArrowRight size={20} />

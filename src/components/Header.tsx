@@ -173,6 +173,7 @@ const Header = () => {
           <button
             className="lg:hidden p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
           >
             {isMenuOpen ? <X size={24} className="text-forest-800" /> : <Menu size={24} className="text-forest-800" />}
           </button>
@@ -223,6 +224,7 @@ const Header = () => {
                 <button
                   className="w-full text-xl font-semibold text-black py-4 rounded-lg hover:bg-gray-100 transition-colors focus:outline-none flex justify-center items-center"
                   aria-expanded={isMobileServicesOpen}
+                  aria-label="Toggle services menu"
                   onClick={() => setIsMobileServicesOpen((open) => !open)}
                 >
                   <span>Services</span>

@@ -258,6 +258,8 @@ const Home = () => {
             <img 
               src={heroImagesFallback[currentImageIndex]}
               alt="Kitchen Design"
+              width={1920}
+              height={1080}
               className="w-full h-full min-h-screen min-h-[100svh] object-cover transition-opacity duration-1000"
             />
           </picture>
@@ -319,7 +321,7 @@ const Home = () => {
                 <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-forest-100 to-forest-50 rounded-full mb-3 group-hover:bg-forest-700 transition-colors duration-300 border border-forest-200">
                   <badge.icon size={28} className="text-forest-700 group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h3 className="text-base font-semibold text-forest-900 mb-1">{badge.title}</h3>
+                <h2 className="text-base font-semibold text-forest-900 mb-1">{badge.title}</h2>
                 <p className="text-forest-600 text-sm">{badge.desc}</p>
               </div>
             ))}
@@ -331,7 +333,7 @@ const Home = () => {
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-forest-100 to-forest-50 rounded-full mb-4 group-hover:bg-forest-700 transition-colors duration-300 border border-forest-200">
                   <badge.icon size={32} className="text-forest-700 group-hover:text-white transition-colors duration-300" />
                 </div>
-                <h3 className="text-lg font-semibold text-forest-900 mb-2">{badge.title}</h3>
+                <h2 className="text-lg font-semibold text-forest-900 mb-2">{badge.title}</h2>
                 <p className="text-forest-600 text-sm">{badge.desc}</p>
               </div>
             ))}
@@ -366,7 +368,9 @@ const Home = () => {
                   <source srcSet={about1Avif} type="image/avif" />
                   <img 
                     src={about1}
-                    alt="Modern Kitchen Interior by KD Interiors"
+                    alt="Modern bathroom interior design showcasing luxury fixtures and custom cabinetry"
+                    width={600}
+                    height={400}
                     className="rounded-2xl shadow-2xl w-full max-w-md mx-auto h-auto object-cover"
                   />
                 </picture>
@@ -391,7 +395,9 @@ const Home = () => {
                   <source srcSet={about2Avif} type="image/avif" />
                   <img 
                     src={about2}
-                    alt="Modern Kitchen Interior by KD Interiors"
+                    alt="Luxury bedroom design with custom wardrobes and premium finishes"
+                    width={600}
+                    height={400}
                     className="rounded-2xl shadow-2xl w-full max-w-md mx-auto h-auto object-cover"
                   />
                 </picture>
@@ -416,12 +422,14 @@ const Home = () => {
                 <button
                   onClick={prevServices}
                   className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                  aria-label="Previous service"
                 >
                   <ChevronLeft size={20} className="text-gray-600" />
                 </button>
                 <button
                   onClick={nextServices}
                   className="p-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+                  aria-label="Next service"
                 >
                   <ChevronRight size={20} className="text-gray-600" />
                 </button>
@@ -439,7 +447,7 @@ const Home = () => {
                     <Link to={service.link} className="block relative mb-6 overflow-hidden rounded-2xl shadow-xl focus:outline-none focus:ring-2 focus:ring-forest-700">
                       <picture>
                         {service.imageAvif && <source srcSet={service.imageAvif} type="image/avif" />}
-                        <img src={service.image} alt={service.title} className="w-full aspect-[1/1] object-cover transition-transform duration-300 group-hover:scale-105 max-w-full" />
+                        <img src={service.image} alt={`${service.title} - Custom interior design and renovation services`} width={400} height={400} className="w-full aspect-[1/1] object-cover transition-transform duration-300 group-hover:scale-105 max-w-full" />
                       </picture>
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                       <div className="absolute bottom-0 left-0 p-6">
@@ -448,7 +456,7 @@ const Home = () => {
                     </Link>
                     <p className="text-gray-700 mb-4 text-lg leading-relaxed">{service.description}</p>
                     <Link to={service.link} className="font-semibold text-forest-700 hover:text-forest-800 flex items-center group-hover:text-forest-800 transition-colors">
-                      View Gallery
+                      View {service.title} Gallery
                       <ArrowRight size={20} className="ml-2 transform group-hover:translate-x-1 transition-transform" />
                     </Link>
                   </div>
@@ -464,7 +472,7 @@ const Home = () => {
                   <Link to={service.link} className="block relative mb-6 overflow-hidden rounded-2xl shadow-xl focus:outline-none focus:ring-2 focus:ring-forest-700">
                     <picture>
                       {service.imageAvif && <source srcSet={service.imageAvif} type="image/avif" />}
-                      <img src={service.image} alt={service.title} className="w-full aspect-[1/1] object-cover transition-transform duration-300 group-hover:scale-105 max-w-full" />
+                      <img src={service.image} alt={`${service.title} - Custom interior design and renovation services`} width={400} height={400} className="w-full aspect-[1/1] object-cover transition-transform duration-300 group-hover:scale-105 max-w-full" />
                     </picture>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                     <div className="absolute bottom-0 left-0 p-6">
@@ -473,7 +481,7 @@ const Home = () => {
                   </Link>
                   <p className="text-gray-700 mb-4 text-lg leading-relaxed flex-grow">{service.description}</p>
                   <Link to={service.link} className="font-semibold text-forest-700 hover:text-forest-800 flex items-center group-hover:text-forest-800 transition-colors mt-auto">
-                    Learn More
+                    Learn More About {service.title}
                     <ArrowRight size={20} className="ml-2 transform group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
