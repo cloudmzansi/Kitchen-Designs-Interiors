@@ -135,9 +135,6 @@ const Home = () => {
     if (!name || name.trim() === '') {
       errors.name = 'Name is required';
     }
-    if (!projectType || projectType === '') {
-      errors.projectType = 'Please select a project type';
-    }
 
     // Hero form specific validations
     if (isHeroForm) {
@@ -147,12 +144,16 @@ const Home = () => {
       if (!email || email.trim() === '') {
         errors.email = 'Email address is required';
       }
+      // Message is optional for hero form
     }
 
     // Contact form specific validations
     if (isContactForm) {
       if (!email || email.trim() === '') {
         errors.email = 'Email address is required';
+      }
+      if (!projectType || projectType === '') {
+        errors.projectType = 'Please select a project type';
       }
       if (!message || message.trim() === '') {
         errors.message = 'Project details are required';
@@ -402,29 +403,18 @@ const Home = () => {
                     )}
                   </div>
                   
-                  {/* Project Type Dropdown */}
+                  {/* Optional Message Field */}
                   <div>
-                    <label htmlFor="hero-project-type" className="block text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-2 md:mb-2">
-                      Project Type *
+                    <label htmlFor="hero-message" className="block text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-2 md:mb-2">
+                      Message (Optional)
                     </label>
-                    <select
-                      id="hero-project-type"
-                      name="projectType"
-                      required
-                      className={`w-full px-4 sm:px-4 py-3 sm:py-3 md:py-3.5 text-base border rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200 ${
-                        formErrors.projectType ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                    >
-                      <option value="">Select project type</option>
-                      <option value="kitchen">Kitchen Renovations</option>
-                      <option value="bedroom">Bedroom Renovations</option>
-                      <option value="bathroom">Bathroom Renovations</option>
-                      <option value="commercial">Commercial Renovations</option>
-                      <option value="other">Other</option>
-                    </select>
-                    {formErrors.projectType && (
-                      <p className="mt-1.5 text-xs sm:text-sm text-red-600">{formErrors.projectType}</p>
-                    )}
+                    <textarea
+                      id="hero-message"
+                      name="message"
+                      rows={3}
+                      className="w-full px-4 sm:px-4 py-3 sm:py-3 md:py-3.5 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200 resize-none"
+                      placeholder="Tell us about your project..."
+                    />
                   </div>
                   
                   {/* Submit Button */}

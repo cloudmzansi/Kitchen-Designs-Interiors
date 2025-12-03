@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CheckCircle, Hammer, Clock, Shield, DollarSign, Calendar, Ruler, Wrench, MapPin, Phone, Mail } from 'lucide-react';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
@@ -36,7 +37,7 @@ type ProjectImage = {
 };
 
 const Landing = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
   const [isFormSubmitting, setIsFormSubmitting] = useState(false);
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -63,9 +64,6 @@ const Landing = () => {
     if (!name || name.trim() === '') {
       errors.name = 'Name is required';
     }
-    if (!projectType || projectType === '') {
-      errors.projectType = 'Please select a project type';
-    }
 
     // Hero form specific validations
     if (isHeroForm) {
@@ -75,12 +73,16 @@ const Landing = () => {
       if (!email || email.trim() === '') {
         errors.email = 'Email address is required';
       }
+      // Message is optional for hero form
     }
 
     // Contact form specific validations
     if (isContactForm) {
       if (!email || email.trim() === '') {
         errors.email = 'Email address is required';
+      }
+      if (!projectType || projectType === '') {
+        errors.projectType = 'Please select a project type';
       }
       if (!message || message.trim() === '') {
         errors.message = 'Project details are required';
@@ -99,16 +101,14 @@ const Landing = () => {
     await submitToWeb3Forms({
       formData,
       onSuccess: () => {
-        setIsModalOpen(true);
-        form.reset();
-        setFormErrors({});
+        // Redirect to thank-you page for Google Ads conversion tracking
+        navigate('/thank-you');
       },
       onError: (errorMsg) => {
         setFormErrors({ submit: errorMsg });
+        setIsFormSubmitting(false);
       },
     });
-
-    setIsFormSubmitting(false);
   };
 
   const valueProps = [
@@ -300,8 +300,13 @@ const Landing = () => {
               </h1>
               
               {/* Benefit Sub-headline */}
-              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-forest-300 leading-tight pt-1 sm:pt-0">
+              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-forest-300 leading-none pt-1 sm:pt-0">
                 Free Design Consultation. Fast Quotes.
+              </p>
+              
+              {/* Specialists Line */}
+              <p className="text-sm sm:text-base md:text-lg text-white/90 leading-tight -mt-2 sm:-mt-3 md:-mt-4 pt-0">
+                Specialists in Kitchen Renovations & Custom Cabinetry in Cape Town
               </p>
               
               {/* Benefit Statement */}
@@ -394,29 +399,18 @@ const Landing = () => {
                     )}
                   </div>
                   
-                  {/* Project Type Dropdown */}
+                  {/* Optional Message Field */}
                   <div>
-                    <label htmlFor="landing-project-type" className="block text-sm font-medium text-gray-700 mb-2">
-                      Project Type *
+                    <label htmlFor="landing-message" className="block text-sm font-medium text-gray-700 mb-2">
+                      Message (Optional)
                     </label>
-                    <select
-                      id="landing-project-type"
-                      name="projectType"
-                      required
-                      className={`w-full px-4 py-3 text-base border rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200 ${
-                        formErrors.projectType ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                    >
-                      <option value="">Select project type</option>
-                      <option value="kitchen">Kitchen Renovations</option>
-                      <option value="bedroom">Bedroom Renovations</option>
-                      <option value="bathroom">Bathroom Renovations</option>
-                      <option value="commercial">Commercial Renovations</option>
-                      <option value="other">Other</option>
-                    </select>
-                    {formErrors.projectType && (
-                      <p className="mt-1.5 text-sm text-red-600">{formErrors.projectType}</p>
-                    )}
+                    <textarea
+                      id="landing-message"
+                      name="message"
+                      rows={3}
+                      className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200 resize-none"
+                      placeholder="Tell us about your project..."
+                    />
                   </div>
                   
                   {/* Submit Button */}
@@ -839,27 +833,6 @@ const Landing = () => {
           </div>
         </div>
       </section>
-
-      {/* Success Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-12 rounded-2xl shadow-xl max-w-lg mx-auto text-center">
-            <div className="flex justify-center mb-6">
-              <CheckCircle size={64} className="text-green-500" />
-            </div>
-            <h1 className="text-4xl font-bold text-gray-800 mb-4">Thank You!</h1>
-            <p className="text-lg text-gray-600 mb-8">
-              Your submission has been received. We'll be in touch shortly.
-            </p>
-            <button
-              onClick={() => setIsModalOpen(false)}
-              className="bg-gradient-to-r from-forest-600 to-forest-700 text-white px-8 py-4 rounded-lg hover:from-forest-700 hover:to-forest-800 transition-all duration-300 font-semibold text-lg"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

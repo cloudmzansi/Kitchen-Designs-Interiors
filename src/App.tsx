@@ -7,6 +7,7 @@ import ScrollToTop from './hooks/ScrollToTop';
 // Lazy load page components for code splitting
 const Home = React.lazy(() => import('./pages/Home'));
 const Landing = React.lazy(() => import('./pages/Landing'));
+const ThankYou = React.lazy(() => import('./pages/ThankYou'));
 const Kitchens = React.lazy(() => import('./pages/Kitchens'));
 const Bedrooms = React.lazy(() => import('./pages/Bedrooms'));
 const Bathrooms = React.lazy(() => import('./pages/Bathrooms'));
@@ -67,6 +68,7 @@ function AppContent() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/landing" element={<Landing />} />
+            <Route path="/thank-you" element={<ThankYou />} />
             <Route path="/kitchens" element={<Kitchens />} />
             <Route path="/bedrooms" element={<Bedrooms />} />
             <Route path="/bathrooms" element={<Bathrooms />} />
