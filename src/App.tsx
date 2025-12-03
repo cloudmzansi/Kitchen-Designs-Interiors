@@ -1,11 +1,12 @@
 import React, { Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ScrollToTop from './hooks/ScrollToTop';
 
 // Lazy load page components for code splitting
 const Home = React.lazy(() => import('./pages/Home'));
+const Landing = React.lazy(() => import('./pages/Landing'));
 const Kitchens = React.lazy(() => import('./pages/Kitchens'));
 const Bedrooms = React.lazy(() => import('./pages/Bedrooms'));
 const Bathrooms = React.lazy(() => import('./pages/Bathrooms'));
@@ -40,7 +41,7 @@ const WhatsAppButton = () => {
   return (
     <button
       onClick={handleWhatsAppClick}
-      className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110"
+      className="fixed bottom-20 sm:bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110"
       aria-label="Contact us on WhatsApp"
     >
       <svg 
@@ -54,6 +55,34 @@ const WhatsAppButton = () => {
   );
 };
 
+function AppContent() {
+  const location = useLocation();
+  const isLandingPage = location.pathname === '/landing';
+
+  return (
+    <div id="top" className="bg-white">
+      {!isLandingPage && <Header />}
+      <main>
+        <Suspense fallback={<LoadingSpinner />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/landing" element={<Landing />} />
+            <Route path="/kitchens" element={<Kitchens />} />
+            <Route path="/bedrooms" element={<Bedrooms />} />
+            <Route path="/bathrooms" element={<Bathrooms />} />
+            <Route path="/commercial" element={<Commercial />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </main>
+      {!isLandingPage && <Footer />}
+      <WhatsAppButton />
+    </div>
+  );
+}
+
 function App() {
   return (
     <Router
@@ -63,25 +92,7 @@ function App() {
       }}
     >
       <ScrollToTop />
-      <div id="top" className="bg-white">
-        <Header />
-        <main>
-          <Suspense fallback={<LoadingSpinner />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/kitchens" element={<Kitchens />} />
-              <Route path="/bedrooms" element={<Bedrooms />} />
-              <Route path="/bathrooms" element={<Bathrooms />} />
-              <Route path="/commercial" element={<Commercial />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/terms-of-service" element={<TermsOfService />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </main>
-        <Footer />
-        <WhatsAppButton />
-      </div>
+      <AppContent />
     </Router>
   );
 }

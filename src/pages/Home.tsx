@@ -44,6 +44,8 @@ const Home = () => {
   const [whyChooseIndex, setWhyChooseIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
+  const [isFormSubmitting, setIsFormSubmitting] = useState(false);
+  const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
 
   const heroImages = [heroBgAvif];
   const heroImagesFallback = [heroBg];
@@ -116,6 +118,55 @@ const Home = () => {
     const form = event.currentTarget;
     const formData = new FormData(form);
 
+    // Validate required fields - check which form is being submitted
+    const errors: { [key: string]: string } = {};
+    const name = formData.get('name') as string;
+    const phone = formData.get('phone') as string;
+    const email = formData.get('email') as string;
+    const area = formData.get('area') as string;
+    const projectType = formData.get('projectType') as string;
+    const message = formData.get('message') as string;
+    
+    // Check if this is the hero form (has area field) or contact form (has message field)
+    const isHeroForm = form.id === 'hero-form' || (area !== null && message === null);
+    const isContactForm = form.id === 'contact-form' || (message !== null && area === null);
+
+    // Common validations
+    if (!name || name.trim() === '') {
+      errors.name = 'Name is required';
+    }
+    if (!projectType || projectType === '') {
+      errors.projectType = 'Please select a project type';
+    }
+
+    // Hero form specific validations
+    if (isHeroForm) {
+      if (!phone || phone.trim() === '') {
+        errors.phone = 'Phone number is required';
+      }
+      if (!area || area === '') {
+        errors.area = 'Please select your area';
+      }
+    }
+
+    // Contact form specific validations
+    if (isContactForm) {
+      if (!email || email.trim() === '') {
+        errors.email = 'Email address is required';
+      }
+      if (!message || message.trim() === '') {
+        errors.message = 'Project details are required';
+      }
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+
+    setFormErrors({});
+    setIsFormSubmitting(true);
+
     // Convert FormData to object for JSON submission
     const data: { [key: string]: any } = {};
     formData.forEach((value, key) => {
@@ -125,7 +176,8 @@ const Home = () => {
     const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
     if (!accessKey) {
       console.error('Web3Forms access key not found in environment variables');
-      alert('Form submission is not configured. Please contact support.');
+      setFormErrors({ submit: 'Form submission is not configured. Please contact support.' });
+      setIsFormSubmitting(false);
       return;
     }
     data.access_key = accessKey;
@@ -145,12 +197,15 @@ const Home = () => {
       if (result.success) {
         setIsModalOpen(true);
         form.reset();
+        setFormErrors({});
       } else {
-        alert('There was an error submitting the form.');
+        setFormErrors({ submit: 'There was an error submitting the form. Please try again.' });
       }
     } catch (error) {
       console.error('Form submission error:', error);
-      alert('There was a network error. Please try again.');
+      setFormErrors({ submit: 'There was a network error. Please try again.' });
+    } finally {
+      setIsFormSubmitting(false);
     }
   };
 
@@ -249,10 +304,10 @@ const Home = () => {
 
   return (
     <div className="bg-white">
-      {/* Hero Section */}
-      <section className="relative min-h-screen min-h-[100svh] flex flex-col items-center justify-center text-center overflow-hidden">
-        {/* Enhanced background with multiple layers */}
-        <div className="absolute inset-0 z-0">
+      {/* Hero Section - Conversion Focused Two-Column Layout */}
+      <section className="relative min-h-screen min-h-[100svh] overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+        {/* Background Image - Full Width */}
+        <div className="absolute inset-0 z-0 w-full">
           <picture>
             <source srcSet={heroImages[currentImageIndex]} type="image/avif" />
             <img 
@@ -263,49 +318,187 @@ const Home = () => {
               className="w-full h-full min-h-screen min-h-[100svh] object-cover transition-opacity duration-1000"
             />
           </picture>
-          {/* Enhanced gradient overlay with multiple stops */}
-          <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-black/60"></div>
-          
-          {/* Add subtle geometric elements */}
-          <div className="absolute top-20 left-20 w-32 h-32 border border-white/10 rounded-full"></div>
-          <div className="absolute bottom-20 right-20 w-24 h-24 border border-white/10 rounded-full"></div>
-          <div className="absolute top-1/2 left-10 w-16 h-16 border border-white/5 rounded-full"></div>
+          {/* Enhanced gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/70 to-black/80"></div>
         </div>
         
-        {/* Enhanced content layout */}
-        <div className="relative z-10 container mx-auto px-4 flex flex-col items-center justify-center min-h-screen min-h-[100svh]">
-          <div className="max-w-4xl mx-auto flex flex-col items-center justify-center gap-6 md:gap-10 w-full pb-8 md:pb-24 mt-32 md:mt-32 -mt-8">
-            {/* Enhanced typography with better hierarchy */}
-            <div className="space-y-4">
-              <h1 className="text-6xl md:text-7xl font-bold leading-tight mb-2 md:mb-4">
-                <span className="text-white">Beautiful Renovations.</span>
-                <span className="block text-forest-300 text-5xl md:text-5xl font-light mt-2">Inspired Living.</span>
+        {/* Two-Column Content Layout */}
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 py-8 sm:py-10 md:py-12 lg:py-20 min-h-screen min-h-[100svh]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-8 lg:gap-12 items-start lg:items-center min-h-[calc(100vh-3rem)] sm:min-h-[calc(100vh-4rem)] lg:min-h-[calc(100vh-6rem)]">
+            
+            {/* Left Column - Marketing Content */}
+            <div className="relative z-10 text-white space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8 pt-20 sm:pt-24 md:pt-28 lg:pt-0">
+              {/* Main Headline */}
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] sm:leading-tight">
+                Kitchen & Home Renovations in Cape Town — Made Easy
               </h1>
+              
+              {/* Benefit Sub-headline */}
+              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-forest-300 leading-tight pt-1 sm:pt-0">
+                Free Design Consultation. Fast Quotes.
+              </p>
+              
+              {/* Benefit Statement */}
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed max-w-xl pt-1 sm:pt-0">
+                Transform your kitchen, bathroom, or bedroom with custom cabinetry and premium finishes. Get a free on-site consultation and a detailed quote within 48 hours. Serving Cape Town and nearby suburbs.
+              </p>
+              
+              {/* Trust Badges */}
+              <div className="space-y-3 sm:space-y-3 md:space-y-3.5 pt-3 sm:pt-4 md:pt-5">
+                <div className="flex items-start space-x-2.5 sm:space-x-3">
+                  <CheckCircle size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 text-forest-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Full Warranty on Materials & Workmanship</span>
+                </div>
+                <div className="flex items-start space-x-2.5 sm:space-x-3">
+                  <CheckCircle size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 text-forest-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Free On-Site Design Consultation in Cape Town</span>
+                </div>
+                <div className="flex items-start space-x-2.5 sm:space-x-3">
+                  <CheckCircle size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 text-forest-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Licensed & Insured Professional Installers</span>
+                </div>
+              </div>
             </div>
             
-            {/* Enhanced description with better typography */}
-            <p className="text-xl md:text-2xl text-white max-w-3xl mx-auto leading-relaxed mb-6 md:mb-8">
-              From kitchens to bedrooms and bathrooms, we create bespoke spaces that reflect your style and enhance your lifestyle.
-            </p>
-            
-            {/* Enhanced CTA section with smaller buttons */}
-            <div className="flex flex-row flex-wrap gap-3 justify-center mt-12 md:mt-20">
-              <a 
-                href="/#contact-section"
-                className="bg-forest-700 text-white px-5 py-2 md:px-10 md:py-4 rounded-lg hover:bg-forest-800 transition-all duration-300 font-semibold text-base md:text-lg flex items-center justify-center space-x-2 group shadow-2xl"
-              >
-                <span>Get Your Free Quote</span>
-                <ArrowRight size={18} className="md:hidden group-hover:translate-x-1 transition-transform" />
-                <ArrowRight size={20} className="hidden md:inline group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a 
-                href="tel:+27799352223"
-                className="border-2 border-white text-white px-5 py-2 md:px-10 md:py-4 rounded-lg hover:bg-white hover:text-gray-900 transition-all duration-300 font-semibold text-base md:text-lg flex items-center justify-center space-x-2"
-              >
-                <Phone size={18} className="md:hidden" />
-                <Phone size={20} className="hidden md:inline" />
-                <span>Call Now</span>
-              </a>
+            {/* Right Column - Contact Form */}
+            <div className="relative z-10 lg:pl-8 mt-4 sm:mt-6 md:mt-4 lg:mt-0">
+              <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl p-5 sm:p-6 md:p-6 lg:p-8">
+                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 mb-4 sm:mb-5 md:mb-6">
+                  Get Your Free Quote Today
+                </h2>
+                
+                <form id="hero-form" onSubmit={handleSubmit} className="space-y-4 sm:space-y-5 md:space-y-5">
+                  {/* Name Field */}
+                  <div>
+                    <label htmlFor="hero-name" className="block text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-2 md:mb-2">
+                      Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="hero-name"
+                      name="name"
+                      required
+                      className={`w-full px-4 sm:px-4 py-3 sm:py-3 md:py-3.5 text-base border rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200 ${
+                        formErrors.name ? 'border-red-500' : 'border-gray-300'
+                      }`}
+                      placeholder="Your full name"
+                    />
+                    {formErrors.name && (
+                      <p className="mt-1.5 text-xs sm:text-sm text-red-600">{formErrors.name}</p>
+                    )}
+                  </div>
+                  
+                  {/* Phone / WhatsApp Field */}
+                  <div>
+                    <label htmlFor="hero-phone" className="block text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-2 md:mb-2">
+                      Phone / WhatsApp *
+                    </label>
+                    <input
+                      type="tel"
+                      id="hero-phone"
+                      name="phone"
+                      required
+                      className={`w-full px-4 sm:px-4 py-3 sm:py-3 md:py-3.5 text-base border rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200 ${
+                        formErrors.phone ? 'border-red-500' : 'border-gray-300'
+                      }`}
+                      placeholder="e.g. 079 123 4567"
+                    />
+                    {formErrors.phone && (
+                      <p className="mt-1.5 text-xs sm:text-sm text-red-600">{formErrors.phone}</p>
+                    )}
+                  </div>
+                  
+                  {/* Area Dropdown */}
+                  <div>
+                    <label htmlFor="hero-area" className="block text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-2 md:mb-2">
+                      Your Area *
+                    </label>
+                    <select
+                      id="hero-area"
+                      name="area"
+                      required
+                      className={`w-full px-4 sm:px-4 py-3 sm:py-3 md:py-3.5 text-base border rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200 ${
+                        formErrors.area ? 'border-red-500' : 'border-gray-300'
+                      }`}
+                    >
+                      <option value="">Select your area</option>
+                      <option value="Cape Town">Cape Town</option>
+                      <option value="Stellenbosch">Stellenbosch</option>
+                      <option value="Paarl">Paarl</option>
+                      <option value="Somerset West">Somerset West</option>
+                      <option value="Constantia">Constantia</option>
+                      <option value="Camps Bay">Camps Bay</option>
+                      <option value="Sea Point">Sea Point</option>
+                      <option value="Claremont">Claremont</option>
+                      <option value="Newlands">Newlands</option>
+                      <option value="Rondebosch">Rondebosch</option>
+                      <option value="Observatory">Observatory</option>
+                      <option value="Woodstock">Woodstock</option>
+                      <option value="Green Point">Green Point</option>
+                      <option value="V&A Waterfront">V&A Waterfront</option>
+                      <option value="Atlantic Seaboard">Atlantic Seaboard</option>
+                      <option value="Other">Other</option>
+                    </select>
+                    {formErrors.area && (
+                      <p className="mt-1.5 text-xs sm:text-sm text-red-600">{formErrors.area}</p>
+                    )}
+                  </div>
+                  
+                  {/* Project Type Dropdown */}
+                  <div>
+                    <label htmlFor="hero-project-type" className="block text-xs sm:text-sm font-medium text-gray-700 mb-2 sm:mb-2 md:mb-2">
+                      Project Type *
+                    </label>
+                    <select
+                      id="hero-project-type"
+                      name="projectType"
+                      required
+                      className={`w-full px-4 sm:px-4 py-3 sm:py-3 md:py-3.5 text-base border rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200 ${
+                        formErrors.projectType ? 'border-red-500' : 'border-gray-300'
+                      }`}
+                    >
+                      <option value="">Select project type</option>
+                      <option value="kitchen">Kitchen Renovations</option>
+                      <option value="bedroom">Bedroom Renovations</option>
+                      <option value="bathroom">Bathroom Renovations</option>
+                      <option value="commercial">Commercial Renovations</option>
+                      <option value="other">Other</option>
+                    </select>
+                    {formErrors.projectType && (
+                      <p className="mt-1.5 text-xs sm:text-sm text-red-600">{formErrors.projectType}</p>
+                    )}
+                  </div>
+                  
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    disabled={isFormSubmitting}
+                    className="w-full bg-gradient-to-r from-forest-600 to-forest-700 hover:from-forest-700 hover:to-forest-800 text-white font-bold py-4 sm:py-4 px-4 sm:px-6 rounded-lg transition-all duration-300 text-sm sm:text-base md:text-lg shadow-lg hover:shadow-xl transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none min-h-[48px] mt-2"
+                  >
+                    {isFormSubmitting ? (
+                      <span className="flex items-center justify-center">
+                        <svg className="animate-spin -ml-1 mr-3 h-4 w-4 sm:h-5 sm:w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Submitting...
+                      </span>
+                    ) : (
+                      'GET MY FREE QUOTE'
+                    )}
+                  </button>
+                  
+                  {/* Urgency Text */}
+                  <p className="text-center text-xs sm:text-sm text-gray-600 mt-3 sm:mt-3">
+                    We'll contact you within 2 hours. No obligations.
+                  </p>
+                  
+                  {/* Error Message */}
+                  {formErrors.submit && (
+                    <p className="mt-2 text-xs sm:text-sm text-red-600 text-center">{formErrors.submit}</p>
+                  )}
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -666,15 +859,25 @@ const Home = () => {
             <div className="bg-white rounded-2xl shadow-xl p-8">
               <h3 className="text-2xl font-bold text-gray-800 mb-6">Request Your Free Quote</h3>
               <p className="text-gray-600 mb-6">Tell us about your project and we'll get back to you within 24 hours with a detailed consultation.</p>
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form id="contact-form" onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
-                    <input type="text" id="name" name="name" required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200" />
+                    <input type="text" id="name" name="name" required className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200 ${
+                      formErrors.name ? 'border-red-500' : 'border-gray-300'
+                    }`} />
+                    {formErrors.name && (
+                      <p className="mt-1 text-sm text-red-600">{formErrors.name}</p>
+                    )}
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
-                    <input type="email" id="email" name="email" required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200" />
+                    <input type="email" id="email" name="email" required className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200 ${
+                      formErrors.email ? 'border-red-500' : 'border-gray-300'
+                    }`} />
+                    {formErrors.email && (
+                      <p className="mt-1 text-sm text-red-600">{formErrors.email}</p>
+                    )}
                   </div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -684,7 +887,9 @@ const Home = () => {
                   </div>
                   <div>
                     <label htmlFor="projectType" className="block text-sm font-medium text-gray-700 mb-2">Service Required *</label>
-                    <select id="projectType" name="projectType" required className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200">
+                    <select id="projectType" name="projectType" required className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200 ${
+                      formErrors.projectType ? 'border-red-500' : 'border-gray-300'
+                    }`}>
                       <option value="">Select a service</option>
                       <option value="kitchen">Kitchen Renovations</option>
                       <option value="bedroom">Bedroom Renovations</option>
@@ -692,16 +897,39 @@ const Home = () => {
                       <option value="commercial">Commercial Renovations</option>
                       <option value="other">Other</option>
                     </select>
+                    {formErrors.projectType && (
+                      <p className="mt-1 text-sm text-red-600">{formErrors.projectType}</p>
+                    )}
                   </div>
                 </div>
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">Project Details *</label>
-                  <textarea id="message" name="message" required rows={5} placeholder="Tell us about your project, timeline, and any specific requirements..." className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200" />
+                  <textarea id="message" name="message" required rows={5} placeholder="Tell us about your project, timeline, and any specific requirements..." className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200 ${
+                    formErrors.message ? 'border-red-500' : 'border-gray-300'
+                  }`} />
+                  {formErrors.message && (
+                    <p className="mt-1 text-sm text-red-600">{formErrors.message}</p>
+                  )}
                 </div>
-                <button type="submit" className="w-full bg-gradient-to-r from-forest-600 to-forest-700 hover:from-forest-700 hover:to-forest-800 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 text-lg shadow-lg hover:shadow-xl transform hover:scale-105">
+                <button type="submit" disabled={isFormSubmitting} className="w-full bg-gradient-to-r from-forest-600 to-forest-700 hover:from-forest-700 hover:to-forest-800 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 text-lg shadow-lg hover:shadow-xl transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
+                  {isFormSubmitting ? (
+                    <span className="flex items-center justify-center">
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Submitting...
+                    </span>
+                  ) : (
+                    <>
                   <CheckCircle size={20} className="inline-block mr-2" />
                   Send Message
+                    </>
+                  )}
                 </button>
+                {formErrors.submit && (
+                  <p className="mt-2 text-sm text-red-600 text-center">{formErrors.submit}</p>
+                )}
               </form>
             </div>
             {/* Contact Information */}
