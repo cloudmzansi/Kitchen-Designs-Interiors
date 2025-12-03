@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CheckCircle, Hammer, Clock, Shield, DollarSign, Calendar, Ruler, Wrench, MapPin, Phone, Mail } from 'lucide-react';
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import { submitToWeb3Forms } from '../utils/web3forms';
 import heroBg from '../assets/home/kd-interiors-hero-kitchen.jpg';
 import heroBgAvif from '../assets/home/kd-interiors-hero-kitchen.avif';
 
@@ -95,46 +96,20 @@ const Landing = () => {
     setFormErrors({});
     setIsFormSubmitting(true);
 
-    // Convert FormData to object for JSON submission
-    const data: { [key: string]: any } = {};
-    formData.forEach((value, key) => {
-      data[key] = value;
-    });
-    // Add Web3Forms access key from environment variable
-    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
-    if (!accessKey) {
-      console.error('Web3Forms access key not found in environment variables');
-      setFormErrors({ submit: 'Form submission is not configured. Please contact support.' });
-      setIsFormSubmitting(false);
-      return;
-    }
-    data.access_key = accessKey;
-
-    try {
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
-      
-      if (result.success) {
+    // Use shared Web3Forms utility function
+    const success = await submitToWeb3Forms({
+      formData,
+      onSuccess: () => {
         setIsModalOpen(true);
         form.reset();
         setFormErrors({});
-      } else {
-        setFormErrors({ submit: 'There was an error submitting the form. Please try again.' });
-      }
-    } catch (error) {
-      console.error('Form submission error:', error);
-      setFormErrors({ submit: 'There was a network error. Please try again.' });
-    } finally {
-      setIsFormSubmitting(false);
-    }
+      },
+      onError: (errorMsg) => {
+        setFormErrors({ submit: errorMsg });
+      },
+    });
+
+    setIsFormSubmitting(false);
   };
 
   const valueProps = [
