@@ -52,13 +52,12 @@ const Landing = () => {
     const name = formData.get('name') as string;
     const email = formData.get('email') as string;
     const phone = formData.get('phone') as string;
-    const area = formData.get('area') as string;
     const projectType = formData.get('projectType') as string;
     const message = formData.get('message') as string;
 
-    // Check if this is the hero form (has area field) or contact form (has message field)
-    const isHeroForm = form.id === 'landing-form' || (area !== null && message === null);
-    const isContactForm = form.id === 'landing-contact-form' || (message !== null && area === null);
+    // Check if this is the hero form or contact form
+    const isHeroForm = form.id === 'landing-form';
+    const isContactForm = form.id === 'landing-contact-form';
 
     // Common validations
     if (!name || name.trim() === '') {
@@ -73,8 +72,8 @@ const Landing = () => {
       if (!phone || phone.trim() === '') {
         errors.phone = 'Phone number is required';
       }
-      if (!area || area === '') {
-        errors.area = 'Please select your area';
+      if (!email || email.trim() === '') {
+        errors.email = 'Email address is required';
       }
     }
 
@@ -97,7 +96,7 @@ const Landing = () => {
     setIsFormSubmitting(true);
 
     // Use shared Web3Forms utility function
-    const success = await submitToWeb3Forms({
+    await submitToWeb3Forms({
       formData,
       onSuccess: () => {
         setIsModalOpen(true);
@@ -375,39 +374,23 @@ const Landing = () => {
                     )}
                   </div>
                   
-                  {/* Area Dropdown */}
+                  {/* Email Field */}
                   <div>
-                    <label htmlFor="landing-area" className="block text-sm font-medium text-gray-700 mb-2">
-                      Your Area *
+                    <label htmlFor="landing-email" className="block text-sm font-medium text-gray-700 mb-2">
+                      Email Address *
                     </label>
-                    <select
-                      id="landing-area"
-                      name="area"
+                    <input
+                      type="email"
+                      id="landing-email"
+                      name="email"
                       required
                       className={`w-full px-4 py-3 text-base border rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200 ${
-                        formErrors.area ? 'border-red-500' : 'border-gray-300'
+                        formErrors.email ? 'border-red-500' : 'border-gray-300'
                       }`}
-                    >
-                      <option value="">Select your area</option>
-                      <option value="Cape Town">Cape Town</option>
-                      <option value="Stellenbosch">Stellenbosch</option>
-                      <option value="Paarl">Paarl</option>
-                      <option value="Somerset West">Somerset West</option>
-                      <option value="Constantia">Constantia</option>
-                      <option value="Camps Bay">Camps Bay</option>
-                      <option value="Sea Point">Sea Point</option>
-                      <option value="Claremont">Claremont</option>
-                      <option value="Newlands">Newlands</option>
-                      <option value="Rondebosch">Rondebosch</option>
-                      <option value="Observatory">Observatory</option>
-                      <option value="Woodstock">Woodstock</option>
-                      <option value="Green Point">Green Point</option>
-                      <option value="V&A Waterfront">V&A Waterfront</option>
-                      <option value="Atlantic Seaboard">Atlantic Seaboard</option>
-                      <option value="Other">Other</option>
-                    </select>
-                    {formErrors.area && (
-                      <p className="mt-1.5 text-sm text-red-600">{formErrors.area}</p>
+                      placeholder="your.email@example.com"
+                    />
+                    {formErrors.email && (
+                      <p className="mt-1.5 text-sm text-red-600">{formErrors.email}</p>
                     )}
                   </div>
                   
