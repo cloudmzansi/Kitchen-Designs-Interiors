@@ -138,49 +138,49 @@ const Landing = () => {
     {
       image: kitchenModernWhiteCabinets,
       imageAvif: kitchenModernWhiteCabinetsAvif,
-      caption: 'Sea Point Apartment Kitchen Upgrade – 2 Weeks',
+      caption: 'Sea Point Apartment Kitchen Upgrade',
       type: 'kitchen'
     },
     {
       image: kitchenIslandDesign,
       imageAvif: kitchenIslandDesignAvif,
-      caption: 'Camps Bay Modern Kitchen Renovation – 3 Weeks',
+      caption: 'Camps Bay Modern Kitchen Renovation',
       type: 'kitchen'
     },
     {
       image: kitchenQuartzCountertop,
       imageAvif: kitchenQuartzCountertopAvif,
-      caption: 'Green Point Luxury Kitchen Transformation – 4 Weeks',
+      caption: 'Green Point Luxury Kitchen Transformation',
       type: 'kitchen'
     },
     {
       image: bedroomMasterSuite,
       imageAvif: bedroomMasterSuiteAvif,
-      caption: 'Claremont Master Bedroom Suite – 2 Weeks',
+      caption: 'Claremont Master Bedroom Suite',
       type: 'bedroom'
     },
     {
       image: bedroomCustomWardrobe,
       imageAvif: bedroomCustomWardrobeAvif,
-      caption: 'Rondebosch Custom Wardrobe Installation – 1 Week',
+      caption: 'Rondebosch Custom Wardrobe Installation',
       type: 'bedroom'
     },
     {
       image: bathroomLuxuryDesign,
       imageAvif: bathroomLuxuryDesignAvif,
-      caption: 'Observatory Luxury Bathroom Renovation – 3 Weeks',
+      caption: 'Observatory Luxury Bathroom Renovation',
       type: 'bathroom'
     },
     {
       image: kitchenLuxuryDesign,
       imageAvif: kitchenLuxuryDesignAvif,
-      caption: 'City Bowl Premium Kitchen Design – 4 Weeks',
+      caption: 'City Bowl Premium Kitchen Design',
       type: 'kitchen'
     },
     {
       image: bathroomCustomVanity,
       imageAvif: bathroomCustomVanityAvif,
-      caption: 'Sea Point Modern Bathroom Upgrade – 2 Weeks',
+      caption: 'Sea Point Modern Bathroom Upgrade',
       type: 'bathroom'
     }
   ];
@@ -218,13 +218,6 @@ const Landing = () => {
 
   return (
     <div className="bg-white">
-      {/* KD Logo at Top - Non-clickable - Aligned with "Kitchen" in headline */}
-      <div className="absolute top-24 sm:top-28 md:top-32 lg:top-12 left-4 sm:left-6 md:left-8 lg:left-[max(1.5rem,calc((100vw-1280px)/2+1.5rem))] xl:left-[max(1.5rem,calc((100vw-1280px)/2+1.5rem))] 2xl:left-[max(2rem,calc((100vw-1280px)/2+2rem))] z-50">
-        <div className="w-12 h-12 bg-gradient-to-br from-forest-700 to-forest-600 rounded-xl flex items-center justify-center shadow-lg">
-          <span className="text-white font-bold text-2xl tracking-tighter" style={{letterSpacing: '-0.15em'}}>KD</span>
-        </div>
-      </div>
-
       {/* Hero Section */}
       <section id="quote-form" className="relative min-h-screen min-h-[100svh] overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
         {/* Background Image */}
@@ -245,14 +238,23 @@ const Landing = () => {
           <div className="absolute top-0 left-0 right-0 h-[40%] bg-black/5 lg:bg-black/7"></div>
         </div>
         
+        {/* KD Logo - Inside Hero Section */}
+        <div className="relative z-10 container mx-auto px-4 pt-5 sm:pt-4">
+          <div className="flex items-center">
+            <div className="w-12 h-12 bg-gradient-to-br from-forest-700 to-forest-600 rounded-xl flex items-center justify-center shadow-lg">
+              <span className="text-white font-bold text-2xl tracking-tighter" style={{letterSpacing: '-0.15em'}}>KD</span>
+            </div>
+          </div>
+        </div>
+        
         {/* Two-Column Content Layout */}
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 py-8 sm:py-10 md:py-12 lg:py-20 min-h-screen min-h-[100svh]">
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 py-6 sm:py-10 md:py-12 lg:py-20 min-h-screen min-h-[100svh]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-8 lg:gap-12 items-start lg:items-center min-h-[calc(100vh-3rem)] sm:min-h-[calc(100vh-4rem)] lg:min-h-[calc(100vh-6rem)]">
             
             {/* Left Column - Marketing Content */}
-            <div className="relative z-10 text-white space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8 pt-20 sm:pt-24 md:pt-28 lg:pt-0 text-center lg:text-left">
+            <div className="relative z-10 text-white space-y-6 sm:space-y-5 md:space-y-6 lg:space-y-8 pt-14 sm:pt-16 md:pt-20 lg:pt-0 text-center lg:text-left">
               {/* Main Headline */}
-              <h1 className="text-4xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] sm:leading-tight lg:leading-[1.15]">
+              <h1 className="text-5xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold sm:font-bold leading-[1.1] sm:leading-tight lg:leading-[1.15] drop-shadow-lg sm:drop-shadow-none">
                 Kitchen & Home Renovations in Cape Town — Made Easy
               </h1>
               
@@ -289,7 +291,7 @@ const Landing = () => {
             </div>
             
             {/* Right Column - Contact Form */}
-            <div className="relative z-10 lg:pl-8 mt-8 sm:mt-10 md:mt-8 lg:mt-0">
+            <div className="relative z-10 lg:pl-8 mt-6 sm:mt-10 md:mt-8 lg:mt-0">
               <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl p-5 sm:p-6 md:p-6 lg:p-7 max-w-lg lg:max-w-md mx-auto lg:mx-0">
                 <h2 className="text-lg sm:text-xl md:text-2xl lg:text-2xl font-bold text-gray-800 mb-4 sm:mb-5 text-center lg:text-left">
                   Get Your Free Quote Today
@@ -551,7 +553,7 @@ const Landing = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8 sm:gap-12 max-w-5xl mx-auto">
             {processSteps.map((step, index) => (
-              <div key={index} className="text-center">
+              <div key={index} className={`text-center ${index === 2 ? 'col-span-2 md:col-span-1 max-w-xs mx-auto md:max-w-none md:mx-0' : ''}`}>
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-forest-600 text-white rounded-full font-bold text-xl mb-6">
                   {step.number}
                 </div>
