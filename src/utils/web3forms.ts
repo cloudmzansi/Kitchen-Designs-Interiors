@@ -1,6 +1,7 @@
 /**
- * Web3Forms utility function for consistent form submissions
- * All forms use the same API key from environment variables
+ * Form submission utility function
+ * Temporarily using Formspree.io for testing
+ * All forms use the same endpoint
  */
 
 export interface Web3FormsSubmitOptions {
@@ -14,46 +15,27 @@ export const submitToWeb3Forms = async ({
   onSuccess,
   onError,
 }: Web3FormsSubmitOptions): Promise<boolean> => {
-  // Get Web3Forms access key from environment variable
-  const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
-
-  if (!accessKey) {
-    const errorMsg = 'Web3Forms access key not found in environment variables';
-    console.error(errorMsg);
-    if (onError) {
-      onError('Form submission is not configured. Please contact support.');
-    }
-    return false;
-  }
-
-  // Convert FormData to object for JSON submission
-  const data: { [key: string]: any } = {};
-  formData.forEach((value, key) => {
-    data[key] = value;
-  });
-
-  // Add Web3Forms access key
-  data.access_key = accessKey;
+  // Formspree.io endpoint
+  const formspreeEndpoint = 'https://formspree.io/f/mkgdqndr';
 
   try {
-    const response = await fetch('https://api.web3forms.com/submit', {
+    const response = await fetch(formspreeEndpoint, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: formData,
     });
 
     const result = await response.json();
 
-    if (result.success) {
+    if (response.ok && !result.error) {
       if (onSuccess) {
         onSuccess();
       }
       return true;
     } else {
-      const errorMsg = 'There was an error submitting the form. Please try again.';
+      const errorMsg = result.error || 'There was an error submitting the form. Please try again.';
       if (onError) {
         onError(errorMsg);
       }
