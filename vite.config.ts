@@ -6,8 +6,15 @@ export default defineConfig({
   plugins: [
     react(),
   ],
+  resolve: {
+    dedupe: ['react', 'react-dom'],
+  },
   optimizeDeps: {
     exclude: ['lucide-react'],
+    include: ['react', 'react-dom', 'react/jsx-runtime'],
+    esbuildOptions: {
+      resolveExtensions: ['.jsx', '.js', '.ts', '.tsx'],
+    },
   },
   build: {
     rollupOptions: {
@@ -30,6 +37,8 @@ export default defineConfig({
     },
   },
   server: {
+    host: '0.0.0.0',
+    port: 5173,
     headers: {
       'Cache-Control': 'public, max-age=31536000',
     },

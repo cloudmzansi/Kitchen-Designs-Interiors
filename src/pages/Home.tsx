@@ -298,28 +298,28 @@ const Home = () => {
         </div>
         
         {/* Two-Column Content Layout */}
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 py-8 sm:py-10 md:py-12 lg:py-20 min-h-screen min-h-[100svh]">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-8 lg:gap-12 items-start lg:items-center min-h-[calc(100vh-3rem)] sm:min-h-[calc(100vh-4rem)] lg:min-h-[calc(100vh-6rem)]">
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 py-6 sm:py-10 md:py-12 lg:py-20 min-h-screen min-h-[100svh]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10 md:gap-8 lg:gap-12 items-start lg:items-center min-h-[calc(100vh-3rem)] sm:min-h-[calc(100vh-4rem)] lg:min-h-[calc(100vh-6rem)]">
             
             {/* Left Column - Marketing Content */}
-            <div className="relative z-10 text-white space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8 pt-20 sm:pt-24 md:pt-28 lg:pt-0">
+            <div className="relative z-10 text-white space-y-3 sm:space-y-5 md:space-y-6 lg:space-y-8 pt-16 sm:pt-24 md:pt-28 lg:pt-0">
               {/* Main Headline */}
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] sm:leading-tight">
+              <h1 className="text-5xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] sm:leading-tight">
                 Kitchen & Home Renovations in Cape Town — Made Easy
               </h1>
               
               {/* Benefit Sub-headline */}
-              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-forest-300 leading-tight pt-1 sm:pt-0">
+              <p className="text-xl sm:text-xl md:text-2xl lg:text-3xl font-semibold text-forest-300 leading-tight pt-1 sm:pt-0">
                 Free Design Consultation. Fast Quotes.
               </p>
               
               {/* Benefit Statement */}
-              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed max-w-xl pt-1 sm:pt-0">
+              <p className="text-base sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed max-w-xl pt-1 sm:pt-0">
                 Transform your kitchen, bathroom, or bedroom with custom cabinetry and premium finishes. Get a free on-site consultation and a detailed quote within 48 hours. Serving Cape Town and nearby suburbs.
               </p>
               
               {/* Trust Badges */}
-              <div className="space-y-3 sm:space-y-3 md:space-y-3.5 pt-3 sm:pt-4 md:pt-5">
+              <div className="space-y-2 sm:space-y-3 md:space-y-3.5 pt-2 sm:pt-4 md:pt-5">
                 <div className="flex items-start space-x-2.5 sm:space-x-3">
                   <CheckCircle size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 text-forest-300 flex-shrink-0 mt-0.5" />
                   <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Full Warranty on Materials & Workmanship</span>
