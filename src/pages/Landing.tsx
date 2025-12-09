@@ -248,13 +248,13 @@ const Landing = () => {
         </div>
         
         {/* Two-Column Content Layout */}
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 py-6 sm:py-10 md:py-12 lg:py-20 min-h-screen min-h-[100svh]">
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 py-6 sm:py-10 md:py-12 lg:pt-8 lg:pb-20 min-h-screen min-h-[100svh]">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-8 lg:gap-12 items-start lg:items-center min-h-[calc(100vh-3rem)] sm:min-h-[calc(100vh-4rem)] lg:min-h-[calc(100vh-6rem)]">
             
             {/* Left Column - Marketing Content */}
             <div className="relative z-10 text-white space-y-6 sm:space-y-5 md:space-y-6 lg:space-y-8 pt-14 sm:pt-16 md:pt-20 lg:pt-0 text-center lg:text-left">
               {/* Main Headline */}
-              <h1 className="text-5xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold sm:font-bold leading-[1.1] sm:leading-tight lg:leading-[1.15] drop-shadow-lg sm:drop-shadow-none">
+              <h1 className="text-4xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold sm:font-bold leading-[1.1] sm:leading-tight lg:leading-[1.15] drop-shadow-lg sm:drop-shadow-none">
                 Kitchen & Home Renovations in Cape Town — Made Easy
               </h1>
               
@@ -263,14 +263,9 @@ const Landing = () => {
                 Free Design Consultation. Fast Quotes.
               </p>
               
-              {/* Specialists Line */}
-              <p className="text-sm sm:text-base md:text-lg text-white/90 leading-tight -mt-2 sm:-mt-3 md:-mt-4 pt-0">
-                Specialists in Kitchen Renovations & Custom Cabinetry in Cape Town
-              </p>
-              
               {/* Benefit Statement */}
               <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed max-w-xl mx-auto lg:mx-0 pt-1 sm:pt-0">
-                Transform your kitchen, bathroom, or bedroom with custom cabinetry and premium finishes. Get a free on-site consultation and a detailed quote within 48 hours. Serving Cape Town and nearby suburbs.
+                Cape Town specialists in Kitchen Renovations and Custom Cabinetry. Upgrade your kitchen with custom-built units and quality finishes. Free on-site consultation and a detailed quote within 48 hours.
               </p>
               
               {/* Trust Badges */}
