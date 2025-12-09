@@ -206,49 +206,6 @@ const Landing = () => {
     }
   ];
 
-  // Service areas sorted by region: City Bowl → Atlantic Seaboard → Southern Suburbs → Northern Suburbs
-  const serviceAreas = [
-    // City Bowl
-    'Cape Town City Bowl',
-    'V&A Waterfront',
-    'Green Point',
-    'Woodstock',
-    'Observatory',
-    // Atlantic Seaboard
-    'Sea Point',
-    'Camps Bay',
-    'Atlantic Seaboard',
-    'Bantry Bay',
-    'Clifton',
-    'Fresnaye',
-    'Bakoven',
-    // Southern Suburbs
-    'Claremont',
-    'Newlands',
-    'Rondebosch',
-    'Constantia',
-    'Wynberg',
-    'Bishopscourt',
-    'Tokai',
-    'Bergvliet',
-    'Fish Hoek',
-    'Simon\'s Town',
-    // Northern Suburbs
-    'Blouberg',
-    'Bloubergstrand',
-    'Table View',
-    'Milnerton',
-    'Parklands',
-    'Sunset Beach',
-    'Melkbosstrand',
-    'Durbanville',
-    'Bellville',
-    // Other areas
-    'Stellenbosch',
-    'Paarl',
-    'Somerset West'
-  ];
-
   const handleWhatsAppClick = () => {
     const phoneNumber = '27799352223';
     const whatsappUrl = `https://wa.me/${phoneNumber}`;
@@ -293,9 +250,9 @@ const Landing = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-8 lg:gap-12 items-start lg:items-center min-h-[calc(100vh-3rem)] sm:min-h-[calc(100vh-4rem)] lg:min-h-[calc(100vh-6rem)]">
             
             {/* Left Column - Marketing Content */}
-            <div className="relative z-10 text-white space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8 pt-20 sm:pt-24 md:pt-28 lg:pt-0">
+            <div className="relative z-10 text-white space-y-4 sm:space-y-5 md:space-y-6 lg:space-y-8 pt-20 sm:pt-24 md:pt-28 lg:pt-0 text-center lg:text-left">
               {/* Main Headline */}
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] sm:leading-tight lg:leading-[1.15]">
+              <h1 className="text-4xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] sm:leading-tight lg:leading-[1.15]">
                 Kitchen & Home Renovations in Cape Town — Made Easy
               </h1>
               
@@ -310,21 +267,21 @@ const Landing = () => {
               </p>
               
               {/* Benefit Statement */}
-              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed max-w-xl pt-1 sm:pt-0">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed max-w-xl mx-auto lg:mx-0 pt-1 sm:pt-0">
                 Transform your kitchen, bathroom, or bedroom with custom cabinetry and premium finishes. Get a free on-site consultation and a detailed quote within 48 hours. Serving Cape Town and nearby suburbs.
               </p>
               
               {/* Trust Badges */}
               <div className="space-y-3 sm:space-y-3 md:space-y-3.5 pt-3 sm:pt-4 md:pt-5">
-                <div className="flex items-start space-x-2.5 sm:space-x-3">
+                <div className="flex items-start justify-center lg:justify-start space-x-2.5 sm:space-x-3">
                   <CheckCircle size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 text-forest-300 flex-shrink-0 mt-0.5" />
                   <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Full Warranty on Materials & Workmanship</span>
                 </div>
-                <div className="flex items-start space-x-2.5 sm:space-x-3">
+                <div className="flex items-start justify-center lg:justify-start space-x-2.5 sm:space-x-3">
                   <CheckCircle size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 text-forest-300 flex-shrink-0 mt-0.5" />
                   <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Free On-Site Design Consultation in Cape Town</span>
                 </div>
-                <div className="flex items-start space-x-2.5 sm:space-x-3">
+                <div className="flex items-start justify-center lg:justify-start space-x-2.5 sm:space-x-3">
                   <CheckCircle size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 text-forest-300 flex-shrink-0 mt-0.5" />
                   <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Licensed & Insured Professional Installers</span>
                 </div>
@@ -332,9 +289,9 @@ const Landing = () => {
             </div>
             
             {/* Right Column - Contact Form */}
-            <div className="relative z-10 lg:pl-8 mt-4 sm:mt-6 md:mt-4 lg:mt-0">
+            <div className="relative z-10 lg:pl-8 mt-8 sm:mt-10 md:mt-8 lg:mt-0">
               <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl p-5 sm:p-6 md:p-6 lg:p-7 max-w-lg lg:max-w-md mx-auto lg:mx-0">
-                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-2xl font-bold text-gray-800 mb-4 sm:mb-5">
+                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-2xl font-bold text-gray-800 mb-4 sm:mb-5 text-center lg:text-left">
                   Get Your Free Quote Today
                 </h2>
                 
@@ -498,7 +455,7 @@ const Landing = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {valueProps.map((prop, index) => (
               <div key={index} className="text-center p-6 rounded-2xl bg-gray-50 hover:bg-gray-100 transition-colors duration-300 border border-gray-200">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-forest-600 text-white rounded-full mb-6">
@@ -524,7 +481,7 @@ const Landing = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {projects.map((project, index) => (
               <div 
                 key={index} 
@@ -592,7 +549,7 @@ const Landing = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12 max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 sm:gap-12 max-w-5xl mx-auto">
             {processSteps.map((step, index) => (
               <div key={index} className="text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-forest-600 text-white rounded-full font-bold text-xl mb-6">
@@ -605,31 +562,6 @@ const Landing = () => {
                 <p className="text-gray-600">{step.description}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Section 5: Service Areas */}
-      <section className="py-16 sm:py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-              Areas We Serve
-            </h2>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-              Proudly serving Cape Town and surrounding suburbs with expert renovation services.
-            </p>
-          </div>
-
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
-              {serviceAreas.map((area, index) => (
-                <div key={index} className="flex items-center space-x-2 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
-                  <MapPin size={20} className="text-forest-600 flex-shrink-0" />
-                  <span className="text-gray-700 font-medium text-sm sm:text-base">{area}</span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
