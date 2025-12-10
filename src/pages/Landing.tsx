@@ -501,7 +501,7 @@ const Landing = () => {
                 }}
               >
                 <picture>
-                  {project.imageAvif && <source srcSet={project.imageAvif} type="image/avif" />}
+                  {project.imageAvif && <source srcSet={project.imageAvif} type="image/avif" sizes="(max-width: 1024px) 50vw, 25vw" />}
                   <img 
                     src={project.image}
                     alt={project.caption}
@@ -509,6 +509,7 @@ const Landing = () => {
                     height={400}
                     loading="lazy"
                     decoding="async"
+                    sizes="(max-width: 1024px) 50vw, 25vw"
                     className="w-full aspect-[4/3] object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </picture>

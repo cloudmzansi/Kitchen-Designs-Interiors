@@ -194,16 +194,14 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     
-    <!-- Deferred Analytics Scripts - Load after page content -->
+    <!-- Deferred Analytics Scripts - Load after page interaction or delay -->
     <script>
-      // Load analytics after DOM is ready to prevent render blocking
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loadAnalytics);
-      } else {
-        loadAnalytics();
-      }
+      let analyticsLoaded = false;
       
       function loadAnalytics() {
+        if (analyticsLoaded) return;
+        analyticsLoaded = true;
+        
         // Google Tag Manager
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -222,6 +220,25 @@
         gtag('js', new Date());
         gtag('config', 'G-HJ3BN76KEH');
       }
+      
+      // Load on user interaction (scroll, click, touch) for faster tracking
+      const loadOnInteraction = () => {
+        loadAnalytics();
+        window.removeEventListener('scroll', loadOnInteraction, { passive: true });
+        window.removeEventListener('click', loadOnInteraction);
+        window.removeEventListener('touchstart', loadOnInteraction, { passive: true });
+      };
+      
+      window.addEventListener('scroll', loadOnInteraction, { passive: true });
+      window.addEventListener('click', loadOnInteraction);
+      window.addEventListener('touchstart', loadOnInteraction, { passive: true });
+      
+      // Fallback: Load after 3 seconds if no interaction
+      setTimeout(() => {
+        if (!analyticsLoaded) {
+          loadAnalytics();
+        }
+      }, 3000);
     </script>
   </body>
 </html>

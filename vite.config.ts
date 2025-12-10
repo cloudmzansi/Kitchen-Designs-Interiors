@@ -54,8 +54,10 @@ export default defineConfig({
       },
     },
     cssCodeSplit: true,
+    cssMinify: true,
     sourcemap: false,
     target: 'es2015',
+    reportCompressedSize: false,
   },
   server: {
     host: '0.0.0.0',
