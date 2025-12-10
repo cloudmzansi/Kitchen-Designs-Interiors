@@ -305,7 +305,7 @@ const Home = () => {
             <div className="relative z-10 text-white space-y-3 sm:space-y-5 md:space-y-6 lg:space-y-8 pt-16 sm:pt-24 md:pt-28 lg:pt-0">
               {/* Main Headline */}
               <h1 className="text-5xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] sm:leading-tight">
-                Kitchen & Home Renovations in Cape Town — Made Easy
+                Kitchen Renovations Cape Town — Transform Your Kitchen Today
               </h1>
               
               {/* Benefit Sub-headline */}
