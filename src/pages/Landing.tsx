@@ -272,12 +272,12 @@ const Landing = () => {
               
               {/* Benefit Sub-headline */}
               <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-forest-300 leading-none pt-1 sm:pt-0">
-                Free Design Consultation. Fast Quotes.
+                Free on-site consult. Quote in 48 hours.
               </p>
               
               {/* Benefit Statement */}
               <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed max-w-xl mx-auto lg:mx-0 pt-1 sm:pt-0">
-                Cape Town specialists in Kitchen Renovations and Custom Cabinetry. Upgrade your kitchen with custom-built units and quality finishes. Free on-site consultation and a detailed quote within 48 hours.
+                Cape Town specialists in Kitchen Renovations and Custom Cabinetry. Serving Cape Town + surrounding suburbs (±50 km). Free on-site consultation. Detailed quote within 48 hours after we confirm measurements/scope.
               </p>
               
               {/* Trust Badges */}
@@ -343,6 +343,7 @@ const Landing = () => {
                     {formErrors.phone && (
                       <p className="mt-1.5 text-sm text-red-600">{formErrors.phone}</p>
                     )}
+                    <p className="mt-1.5 text-xs text-gray-500">Used only to book your consult.</p>
                   </div>
                   
                   {/* Email Field */}
@@ -588,7 +589,7 @@ const Landing = () => {
               Ready to Transform Your Home?
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-              Get a fast, detailed renovation quote within 48 hours. Contact us for a free consultation and detailed quote tailored to your project requirements.
+              You'll receive a detailed quote within 48 hours after we confirm measurements/scope. Contact us for a free consultation tailored to your project requirements.
             </p>
           </div>
           

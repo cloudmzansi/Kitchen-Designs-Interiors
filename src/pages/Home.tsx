@@ -310,12 +310,12 @@ const Home = () => {
               
               {/* Benefit Sub-headline */}
               <p className="text-xl sm:text-xl md:text-2xl lg:text-3xl font-semibold text-forest-300 leading-tight pt-1 sm:pt-0">
-                Free Design Consultation. Fast Quotes.
+                Free on-site consult. Quote in 48 hours.
               </p>
               
               {/* Benefit Statement */}
               <p className="text-base sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed max-w-xl pt-1 sm:pt-0">
-                Transform your kitchen, bathroom, or bedroom with custom cabinetry and premium finishes. Get a free on-site consultation and a detailed quote within 48 hours. Serving Cape Town and nearby suburbs.
+                Transform your kitchen, bathroom, or bedroom with custom cabinetry and premium finishes. Serving Cape Town + surrounding suburbs (±50 km). Free on-site consultation. Detailed quote within 48 hours after we confirm measurements/scope.
               </p>
               
               {/* Trust Badges */}
@@ -381,6 +381,7 @@ const Home = () => {
                     {formErrors.phone && (
                       <p className="mt-1.5 text-xs sm:text-sm text-red-600">{formErrors.phone}</p>
                     )}
+                    <p className="mt-1.5 text-xs text-gray-500">Used only to book your consult.</p>
                   </div>
                   
                   {/* Email Field */}
