@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle, Hammer, Clock, Shield, DollarSign, Calendar, Ruler, Wrench, MapPin, Phone, Mail } from 'lucide-react';
-import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
 import { submitToWeb3Forms } from '../utils/web3forms';
 import heroBg from '../assets/home/kd-interiors-hero-kitchen.jpg';
 import heroBgAvif from '../assets/home/kd-interiors-hero-kitchen.avif';
@@ -42,6 +40,17 @@ const Landing = () => {
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [LightboxComponent, setLightboxComponent] = useState<React.ComponentType<any> | null>(null);
+
+  // Lazy load Lightbox component only when needed
+  useEffect(() => {
+    if (lightboxOpen && !LightboxComponent) {
+      import("yet-another-react-lightbox").then((module) => {
+        import("yet-another-react-lightbox/styles.css");
+        setLightboxComponent(() => module.default);
+      });
+    }
+  }, [lightboxOpen, LightboxComponent]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -223,12 +232,15 @@ const Landing = () => {
         {/* Background Image */}
         <div className="absolute inset-0 z-0 w-full">
           <picture>
-            <source srcSet={heroBgAvif} type="image/avif" />
+            <source srcSet={heroBgAvif} type="image/avif" sizes="100vw" />
             <img 
               src={heroBg}
               alt="Kitchen Design"
               width={1920}
               height={1080}
+              fetchPriority="high"
+              decoding="async"
+              sizes="100vw"
               className="w-full h-full min-h-screen min-h-[100svh] object-cover transition-opacity duration-1000"
             />
           </picture>
@@ -495,6 +507,8 @@ const Landing = () => {
                     alt={project.caption}
                     width={400}
                     height={400}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full aspect-[4/3] object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </picture>
@@ -505,32 +519,34 @@ const Landing = () => {
             ))}
           </div>
 
-          {/* Lightbox for Project Images */}
-          <Lightbox
-            open={lightboxOpen}
-            close={() => setLightboxOpen(false)}
-            slides={projects.map(project => ({
-              src: project.image,
-              alt: project.caption
-            }))}
-            index={lightboxIndex}
-            carousel={{
-              finite: true,
-              preload: 2,
-            }}
-            controller={{
-              closeOnBackdropClick: true,
-              closeOnPullDown: true,
-            }}
-            styles={{
-              container: {
-                backgroundColor: "rgba(0, 0, 0, 0.95)",
-              },
-              slide: {
-                padding: "20px",
-              },
-            }}
-          />
+          {/* Lightbox for Project Images - Lazy Loaded */}
+          {LightboxComponent && (
+            <LightboxComponent
+              open={lightboxOpen}
+              close={() => setLightboxOpen(false)}
+              slides={projects.map(project => ({
+                src: project.image,
+                alt: project.caption
+              }))}
+              index={lightboxIndex}
+              carousel={{
+                finite: true,
+                preload: 2,
+              }}
+              controller={{
+                closeOnBackdropClick: true,
+                closeOnPullDown: true,
+              }}
+              styles={{
+                container: {
+                  backgroundColor: "rgba(0, 0, 0, 0.95)",
+                },
+                slide: {
+                  padding: "20px",
+                },
+              }}
+            />
+          )}
         </div>
       </section>
 

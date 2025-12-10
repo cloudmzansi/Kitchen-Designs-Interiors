@@ -19,11 +19,24 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          router: ['react-router-dom'],
-          ui: ['lucide-react'],
-          lightbox: ['yet-another-react-lightbox'],
+        manualChunks: (id) => {
+          // Vendor chunks
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'vendor-react';
+            }
+            if (id.includes('react-router')) {
+              return 'vendor-router';
+            }
+            if (id.includes('lucide-react')) {
+              return 'vendor-icons';
+            }
+            if (id.includes('yet-another-react-lightbox')) {
+              return 'vendor-lightbox';
+            }
+            // Other node_modules go into vendor chunk
+            return 'vendor';
+          }
         },
       },
     },
@@ -33,8 +46,16 @@ export default defineConfig({
       compress: {
         drop_console: true,
         drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info', 'console.debug'],
+        passes: 2,
+      },
+      format: {
+        comments: false,
       },
     },
+    cssCodeSplit: true,
+    sourcemap: false,
+    target: 'es2015',
   },
   server: {
     host: '0.0.0.0',
