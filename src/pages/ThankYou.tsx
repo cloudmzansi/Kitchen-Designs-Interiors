@@ -1,8 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { CheckCircle, ArrowLeft, Phone, Mail } from 'lucide-react';
 
+// Declare gtag function for TypeScript
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+    dataLayer?: any[];
+  }
+}
+
 const ThankYou = () => {
+  // Track conversion when user lands on thank-you page
+  useEffect(() => {
+    // Fire Google Ads conversion event
+    // Note: You need to get your conversion label ID from Google Ads
+    // Go to Google Ads > Tools & Settings > Conversions > [Your Conversion Action] > Tag setup
+    // The send_to format should be: 'AW-17777725085/CONVERSION_LABEL_ID'
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'conversion', {
+        'send_to': 'AW-17777725085', // TODO: Add your conversion label ID after the slash (e.g., 'AW-17777725085/AbC-D_efG-h12_34-567')
+        // Optional: Uncomment and set these if you want to track conversion value
+        // 'value': 1.0,
+        // 'currency': 'ZAR',
+        // 'transaction_id': '' // Optional: Add unique transaction ID
+      });
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-forest-100 via-forest-50 to-forest-100 flex items-center justify-center px-4 py-12">
       <div className="max-w-2xl w-full">
