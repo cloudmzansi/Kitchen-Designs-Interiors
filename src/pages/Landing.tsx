@@ -2,8 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle, Hammer, Clock, Shield, DollarSign, Calendar, Ruler, Wrench, MapPin, Phone, Mail } from 'lucide-react';
 import { submitToWeb3Forms } from '../utils/web3forms';
+import BeforeAfterSection from '../components/BeforeAfterSection';
 import heroBg from '../assets/home/kd-interiors-hero-kitchen.jpg';
 import heroBgAvif from '../assets/home/kd-interiors-hero-kitchen.avif';
+
+// Before/After slider images
+import slider1Before from '../assets/home/slider1-1.jpg';
+import slider1After from '../assets/home/slider1-2.jpg';
+import slider2Before from '../assets/home/slider2-1.jpg';
+import slider2After from '../assets/home/slider2-2.jpg';
 
 // Kitchen images
 import kitchenModernWhiteCabinets from '../assets/kitchens/Slider 1/kitchen-modern-white-cabinets.jpg';
@@ -454,7 +461,7 @@ const Landing = () => {
       </section>
 
       {/* Section 2: Why Homeowners Choose Us */}
-      <section className="py-16 sm:py-20 bg-white">
+      <section className="py-16 sm:py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">
@@ -479,7 +486,23 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Section 3: Featured Projects Gallery */}
+      {/* Section 3: Before/After Transformations */}
+      <BeforeAfterSection
+        sliders={[
+          {
+            beforeImage: slider1Before,
+            afterImage: slider1After,
+            alt: 'Kitchen transformation before and after',
+          },
+          {
+            beforeImage: slider2Before,
+            afterImage: slider2After,
+            alt: 'Interior design transformation before and after',
+          },
+        ]}
+      />
+
+      {/* Section 4: Featured Projects Gallery */}
       <section className="py-16 sm:py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 sm:mb-16">
@@ -552,7 +575,7 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Section 4: Simple 3-Step Process */}
+      {/* Section 5: Simple 3-Step Process */}
       <section className="py-16 sm:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 sm:mb-16">
