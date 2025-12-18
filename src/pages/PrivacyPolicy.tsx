@@ -5,11 +5,10 @@ import { Shield, Lock, Eye, User, Mail, Phone } from 'lucide-react';
 const PrivacyPolicy = () => {
   // Page-specific meta tags
   usePageMeta({
-    title: "Privacy Policy - KD Interiors | Data Protection & POPIA Compliance",
-    description: "Read our privacy policy to understand how KD Interiors collects, uses, and protects your personal information in compliance with POPIA regulations.",
-    keywords: "privacy policy, data protection, POPIA compliance, personal information, KD Interiors",
-    ogTitle: "Privacy Policy - KD Interiors",
-    ogDescription: "Our privacy policy explains how we protect your personal information in compliance with POPIA regulations.",
+    title: "Privacy Policy | KD Interiors Cape Town",
+    description: "Learn how KD Interiors Cape Town collects, uses, and protects personal information in accordance with POPIA and data protection regulations.",
+    ogTitle: "Privacy Policy | KD Interiors Cape Town",
+    ogDescription: "Learn how KD Interiors Cape Town collects, uses, and protects personal information in accordance with POPIA and data protection regulations.",
     canonical: "https://kdinteriors.co.za/privacy-policy"
   });
 

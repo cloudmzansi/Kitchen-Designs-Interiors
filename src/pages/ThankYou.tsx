@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { CheckCircle, ArrowLeft, Phone, Mail } from 'lucide-react';
+import { usePageMeta } from '../hooks/usePageMeta';
 
 // Declare gtag function for TypeScript
 declare global {
@@ -11,6 +12,14 @@ declare global {
 }
 
 const ThankYou = () => {
+  // Page-specific meta tags
+  usePageMeta({
+    title: "Thank You | KD Interiors Cape Town",
+    description: "Thank you for contacting KD Interiors Cape Town. A member of our team will be in touch shortly to discuss your renovation project.",
+    robots: "noindex, follow",
+    canonical: "https://kdinteriors.co.za/thank-you"
+  });
+
   // Track conversion when user lands on thank-you page
   useEffect(() => {
     // Fire Google Ads conversion event

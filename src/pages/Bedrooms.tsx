@@ -51,11 +51,10 @@ const Bedrooms = () => {
 
   // Page-specific meta tags
   usePageMeta({
-    title: "Bedroom Renovations Cape Town - Custom Wardrobes & Bedroom Design | KD Interiors",
-    description: "Transform your bedroom with custom wardrobes, built-in storage, and complete bedroom renovations in Cape Town. Create your perfect sanctuary today!",
-    keywords: "bedroom renovation Cape Town, custom wardrobes, built-in storage, bedroom design, Cape Town bedroom contractor, walk-in closet",
-    ogTitle: "Bedroom Renovations Cape Town - Custom Wardrobes & Design",
-    ogDescription: "Expert bedroom renovations in Cape Town. Custom wardrobes, built-in storage, and complete bedroom makeovers. Free consultation available.",
+    title: "Bedroom Renovations Cape Town | Custom Wardrobes & Storage",
+    description: "Transform your bedroom with custom wardrobes and professional renovations in Cape Town. Bespoke storage solutions designed and installed by experts. Get a free quote.",
+    ogTitle: "Bedroom Renovations Cape Town | Custom Wardrobes & Design",
+    ogDescription: "Professional bedroom renovations in Cape Town, including custom wardrobes, built-in storage, and complete room makeovers. Request a free quote.",
     ogImage: "/src/assets/bedrooms/bedroom-hero.jpg",
     canonical: "https://kdinteriors.co.za/bedrooms"
   });

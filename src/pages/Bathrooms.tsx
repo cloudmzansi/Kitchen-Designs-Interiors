@@ -71,11 +71,10 @@ const Bathrooms = () => {
 
   // Page-specific meta tags
   usePageMeta({
-    title: "Bathroom Renovations Cape Town - Luxury Bathroom Design & Installation | KD Interiors",
-    description: "Transform your bathroom with luxury design and expert installation services in Cape Town. Custom vanities, walk-in showers, and complete bathroom makeovers.",
-    keywords: "bathroom renovation Cape Town, bathroom design, luxury bathroom, walk-in shower, Cape Town bathroom contractor, bathroom remodeling",
-    ogTitle: "Bathroom Renovations Cape Town - Luxury Design & Installation",
-    ogDescription: "Expert bathroom renovations in Cape Town. Luxury design, custom vanities, and complete bathroom makeovers. Free consultation available.",
+    title: "Bathroom Renovations Cape Town | Custom Design & Installation",
+    description: "Upgrade your bathroom with professional renovations in Cape Town. Custom vanities, modern finishes, and complete bathroom transformations managed end to end. Get a free quote.",
+    ogTitle: "Bathroom Renovations Cape Town | Custom Bathrooms by KD Interiors",
+    ogDescription: "Expert bathroom renovations in Cape Town with modern design, quality finishes, and full project management. Book a free consultation or request a free quote.",
     ogImage: "/src/assets/bathrooms/bathroom-hero.jpg",
     canonical: "https://kdinteriors.co.za/bathrooms"
   });

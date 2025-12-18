@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Users, Award, Shield, Clock, CheckCircle, Phone, Mail, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 import { submitToWeb3Forms } from '../utils/web3forms';
+import { usePageMeta } from '../hooks/usePageMeta';
 import heroBg from '../assets/home/kd-interiors-hero-kitchen.jpg';
 import heroBgAvif from '../assets/home/kd-interiors-hero-kitchen.avif';
 import about1 from '../assets/home/kd-interiors-modern-bathroom.jpg';
@@ -38,6 +39,13 @@ type TrustBadge = {
 };
 
 const Home = () => {
+  // Page-specific meta tags
+  usePageMeta({
+    title: "Kitchen Renovations & Interior Design | KD Interiors Cape Town",
+    description: "KD Interiors Cape Town delivers professional kitchen, bathroom, bedroom, and commercial renovations. Custom design, quality workmanship, and full project management. Get a free quote today.",
+    canonical: "https://kdinteriors.co.za/"
+  });
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [servicesIndex, setServicesIndex] = useState(0);
   const [processIndex, setProcessIndex] = useState(0);
@@ -966,7 +974,7 @@ const Home = () => {
             <div className="flex justify-center mb-6">
               <CheckCircle size={64} className="text-green-500" />
             </div>
-            <h1 className="text-4xl font-bold text-gray-800 mb-4">Thank You!</h1>
+            <h2 className="text-4xl font-bold text-gray-800 mb-4">Thank You!</h2>
             <p className="text-lg text-gray-600 mb-8">
               Your submission has been received. We'll be in touch shortly.
             </p>

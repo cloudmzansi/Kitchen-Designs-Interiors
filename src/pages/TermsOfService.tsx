@@ -5,11 +5,10 @@ import { FileText, Shield, CreditCard, Copyright, Scale, AlertTriangle, Mail, Ph
 const TermsOfService = () => {
   // Page-specific meta tags
   usePageMeta({
-    title: "Terms of Service - KD Interiors | Service Terms & Conditions",
-    description: "Read our terms of service to understand the terms and conditions governing the use of KD Interiors services and website.",
-    keywords: "terms of service, terms and conditions, service agreement, KD Interiors",
-    ogTitle: "Terms of Service - KD Interiors",
-    ogDescription: "Our terms of service outline the terms and conditions for using KD Interiors services and website.",
+    title: "Terms of Service | KD Interiors Cape Town",
+    description: "Review the terms and conditions governing the use of KD Interiors Cape Town's website and renovation services.",
+    ogTitle: "Terms of Service | KD Interiors Cape Town",
+    ogDescription: "Review the terms and conditions governing the use of KD Interiors Cape Town's website and renovation services.",
     canonical: "https://kdinteriors.co.za/terms-of-service"
   });
 

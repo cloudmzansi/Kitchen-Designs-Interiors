@@ -109,11 +109,10 @@ const Kitchens = () => {
 
   // Page-specific meta tags
   usePageMeta({
-    title: "Kitchen Design & Renovations | Cape Town | KD Interiors",
-    description: "Elevate your home with custom kitchen designs and renovations in Cape Town. We specialize in modern, high-end kitchens. Contact us today.",
-    keywords: "kitchen renovation Cape Town, kitchen design, custom cabinets, kitchen installation, Cape Town kitchen contractor, kitchen remodeling",
-    ogTitle: "Kitchen Design & Renovations | Cape Town | KD Interiors",
-    ogDescription: "Elevate your home with custom kitchen designs and renovations in Cape Town. We specialize in modern, high-end kitchens. Contact us today.",
+    title: "Kitchen Renovations Cape Town | Bespoke Design & Installation",
+    description: "Professional kitchen renovations in Cape Town, from bespoke design to expert installation. We create modern, functional kitchens with quality finishes and full project management. Get a free quote.",
+    ogTitle: "Kitchen Renovations Cape Town | Bespoke Kitchens by KD Interiors",
+    ogDescription: "Custom kitchen renovations in Cape Town with professional design, quality workmanship, and complete project management. Book a free consultation or request a free quote.",
     ogImage: "/src/assets/kitchens/kitchen-hero.jpg",
     canonical: "https://kdinteriors.co.za/kitchens"
   });

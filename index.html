@@ -195,50 +195,7 @@
     </script>
   </head>
   <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5WJG5D44"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    
-    <!-- Deferred Analytics Scripts - Load after page interaction or delay -->
-    <script>
-      let analyticsLoaded = false;
-      
-      function loadAnalytics() {
-        if (analyticsLoaded) return;
-        analyticsLoaded = true;
-        
-        // Google Tag Manager
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-5WJG5D44');
-        
-        // Google tag is now loaded in head for immediate tracking
-      }
-      
-      // Load on user interaction (scroll, click, touch) for faster tracking
-      const loadOnInteraction = () => {
-        loadAnalytics();
-        window.removeEventListener('scroll', loadOnInteraction, { passive: true });
-        window.removeEventListener('click', loadOnInteraction);
-        window.removeEventListener('touchstart', loadOnInteraction, { passive: true });
-      };
-      
-      window.addEventListener('scroll', loadOnInteraction, { passive: true });
-      window.addEventListener('click', loadOnInteraction);
-      window.addEventListener('touchstart', loadOnInteraction, { passive: true });
-      
-      // Fallback: Load after 3 seconds if no interaction
-      setTimeout(() => {
-        if (!analyticsLoaded) {
-          loadAnalytics();
-        }
-      }, 3000);
-    </script>
   </body>
 </html>

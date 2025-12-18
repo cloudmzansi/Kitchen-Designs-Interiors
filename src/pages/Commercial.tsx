@@ -89,11 +89,10 @@ const Commercial = () => {
 
   // Page-specific meta tags
   usePageMeta({
-    title: "Commercial Renovations Cape Town - Office & Retail Interior Design | KD Interiors",
-    description: "Transform your commercial space with expert interior design and fit-out services in Cape Town. Office renovations, retail design, and complete commercial makeovers.",
-    keywords: "commercial renovation Cape Town, office design, retail design, commercial interior design, Cape Town commercial contractor, office fit-out",
-    ogTitle: "Commercial Renovations Cape Town - Office & Retail Design",
-    ogDescription: "Expert commercial renovations in Cape Town. Office design, retail fit-outs, and complete commercial makeovers. Free consultation available.",
+    title: "Commercial Renovations Cape Town | Office & Retail Fit-Outs",
+    description: "Professional commercial renovations in Cape Town. Office and retail fit-outs delivered with expert design, quality workmanship, and reliable project management. Get a free quote.",
+    ogTitle: "Commercial Renovations Cape Town | Office & Retail Fit-Outs",
+    ogDescription: "Expert commercial renovations in Cape Town, including office and retail interior fit-outs with full project management. Request a free quote.",
     ogImage: "/src/assets/commercial/commercial-hero.jpg",
     canonical: "https://kdinteriors.co.za/commercial"
   });

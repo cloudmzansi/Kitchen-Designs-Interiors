@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { CheckCircle, Hammer, Clock, Shield, DollarSign, Calendar, Ruler, Wrench, MapPin, Phone, Mail } from 'lucide-react';
 import { submitToWeb3Forms } from '../utils/web3forms';
 import BeforeAfterSection from '../components/BeforeAfterSection';
+import { usePageMeta } from '../hooks/usePageMeta';
 import heroBg from '../assets/home/kd-interiors-hero-kitchen.jpg';
 import heroBgAvif from '../assets/home/kd-interiors-hero-kitchen.avif';
 
@@ -42,6 +43,13 @@ type ProjectImage = {
 };
 
 const Landing = () => {
+  // Page-specific meta tags
+  usePageMeta({
+    title: "Kitchen Renovations Cape Town | Custom Kitchens & Full Service Builds",
+    description: "Looking for professional kitchen renovations in Cape Town? We design, manage, and build bespoke kitchens with modern finishes and end-to-end project management. Get a free quote.",
+    canonical: "https://kdinteriors.co.za/landing"
+  });
+
   const navigate = useNavigate();
   const [isFormSubmitting, setIsFormSubmitting] = useState(false);
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});

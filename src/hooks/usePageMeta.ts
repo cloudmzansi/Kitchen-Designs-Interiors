@@ -8,6 +8,7 @@ interface PageMeta {
   ogDescription?: string;
   ogImage?: string;
   canonical?: string;
+  robots?: string;
 }
 
 export const usePageMeta = (meta: PageMeta) => {
@@ -82,6 +83,17 @@ export const usePageMeta = (meta: PageMeta) => {
     const canonicalLink = document.querySelector('link[rel="canonical"]');
     if (canonicalLink) {
       canonicalLink.setAttribute('href', canonical);
+    }
+    
+    // Update robots meta tag if provided
+    if (meta.robots) {
+      let robotsMeta = document.querySelector('meta[name="robots"]');
+      if (!robotsMeta) {
+        robotsMeta = document.createElement('meta');
+        robotsMeta.setAttribute('name', 'robots');
+        document.head.appendChild(robotsMeta);
+      }
+      robotsMeta.setAttribute('content', meta.robots);
     }
     
   }, [meta]);
