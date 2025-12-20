@@ -27,7 +27,7 @@ const ThankYou = () => {
       window.gtag('event', 'conversion', {
         'send_to': 'AW-17609409719/wkjlCP-mz9QbELeJ6cxB',
         'value': 1.0,
-        'currency': 'ZAR'
+        'currency': 'USD'
       });
     }
   }, []);
