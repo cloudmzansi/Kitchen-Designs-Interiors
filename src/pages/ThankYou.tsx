@@ -25,10 +25,10 @@ const ThankYou = () => {
     // Fire Google Ads conversion event
     // Note: You need to get your conversion label ID from Google Ads
     // Go to Google Ads > Tools & Settings > Conversions > [Your Conversion Action] > Tag setup
-    // The send_to format should be: 'AW-17777725085/CONVERSION_LABEL_ID'
+    // The send_to format should be: 'AW-17609409719/CONVERSION_LABEL_ID'
     if (typeof window !== 'undefined' && window.gtag) {
       window.gtag('event', 'conversion', {
-        'send_to': 'AW-17777725085', // TODO: Add your conversion label ID after the slash (e.g., 'AW-17777725085/AbC-D_efG-h12_34-567')
+        'send_to': 'AW-17609409719', // TODO: Add your conversion label ID after the slash (e.g., 'AW-17609409719/AbC-D_efG-h12_34-567')
         // Optional: Uncomment and set these if you want to track conversion value
         // 'value': 1.0,
         // 'currency': 'ZAR',
