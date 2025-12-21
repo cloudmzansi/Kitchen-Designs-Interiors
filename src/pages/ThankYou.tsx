@@ -21,14 +21,54 @@ const ThankYou = () => {
   });
 
   // Track conversion when user lands on thank-you page
-  // Event snippet for Submit lead form conversion page
+  // Event snippet for Submit lead form conversion page with enhanced conversions
   useEffect(() => {
     if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'conversion', {
+      // Retrieve customer data from sessionStorage for enhanced conversions
+      let customerData: {
+        email?: string;
+        phone_number?: string;
+        first_name?: string;
+        last_name?: string;
+      } = {};
+      
+      try {
+        const storedData = sessionStorage.getItem('google_ads_conversion_data');
+        if (storedData) {
+          customerData = JSON.parse(storedData);
+          // Clean up sessionStorage after reading
+          sessionStorage.removeItem('google_ads_conversion_data');
+        }
+      } catch (error) {
+        console.error('Error reading conversion data:', error);
+      }
+      
+      // Build enhanced conversion data object
+      const conversionData: any = {
         'send_to': 'AW-17609409719/wkjlCP-mz9QbELeJ6cxB',
         'value': 1.0,
         'currency': 'USD'
-      });
+      };
+      
+      // Add user-provided data for enhanced conversions if available
+      if (customerData.email || customerData.phone_number || customerData.first_name) {
+        conversionData.user_data = {};
+        
+        if (customerData.email) {
+          conversionData.user_data.email_address = customerData.email;
+        }
+        if (customerData.phone_number) {
+          conversionData.user_data.phone_number = customerData.phone_number;
+        }
+        if (customerData.first_name) {
+          conversionData.user_data.first_name = customerData.first_name;
+        }
+        if (customerData.last_name) {
+          conversionData.user_data.last_name = customerData.last_name;
+        }
+      }
+      
+      window.gtag('event', 'conversion', conversionData);
     }
   }, []);
 

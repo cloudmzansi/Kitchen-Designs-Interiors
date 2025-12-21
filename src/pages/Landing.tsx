@@ -125,6 +125,27 @@ const Landing = () => {
     await submitToWeb3Forms({
       formData,
       onSuccess: () => {
+        // Store customer data in sessionStorage for enhanced conversions
+        const customerData: {
+          email?: string;
+          phone_number?: string;
+          first_name?: string;
+          last_name?: string;
+        } = {};
+        
+        if (email) customerData.email = email.trim().toLowerCase();
+        if (phone) customerData.phone_number = phone.trim();
+        
+        // Split name into first and last name if available
+        if (name) {
+          const nameParts = name.trim().split(/\s+/);
+          if (nameParts.length > 0) customerData.first_name = nameParts[0];
+          if (nameParts.length > 1) customerData.last_name = nameParts.slice(1).join(' ');
+        }
+        
+        // Store in sessionStorage for enhanced conversions on thank-you page
+        sessionStorage.setItem('google_ads_conversion_data', JSON.stringify(customerData));
+        
         // Redirect to thank-you page for Google Ads conversion tracking
         navigate('/thank-you');
       },
