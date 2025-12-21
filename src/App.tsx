@@ -62,10 +62,7 @@ const WhatsAppButton = () => {
 function AppContent() {
   const location = useLocation();
   // Hide header/footer on all landing pages
-  const isLandingPage = location.pathname === '/landing' || 
-                        location.pathname === '/landing/bedroom' ||
-                        location.pathname === '/landing/bathroom' ||
-                        location.pathname === '/landing/commercial';
+  const isLandingPage = location.pathname.startsWith('/landing');
 
   return (
     <div id="top" className="bg-white">

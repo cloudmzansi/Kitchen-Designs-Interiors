@@ -14,11 +14,21 @@ import slider1After from '../assets/home/slider1-2.jpg';
 import slider2Before from '../assets/home/slider2-1.jpg';
 import slider2After from '../assets/home/slider2-2.jpg';
 
-// EDIT ZONE: Featured project images
+// EDIT ZONE: Featured project images - Source: /bedrooms page
 import bedroomMasterSuite from '../assets/bedrooms/Slider 1/bedroom-master-suite.jpg';
 import bedroomMasterSuiteAvif from '../assets/bedrooms/Slider 1/bedroom-master-suite.avif';
 import bedroomCustomWardrobe from '../assets/bedrooms/Slider 1/bedroom-custom-wardrobe.jpg';
 import bedroomCustomWardrobeAvif from '../assets/bedrooms/Slider 1/bedroom-custom-wardrobe.avif';
+import bedroomBuiltInStorage from '../assets/bedrooms/Slider 1/bedroom-built-in-storage.jpg';
+import bedroomBuiltInStorageAvif from '../assets/bedrooms/Slider 1/bedroom-built-in-storage.avif';
+import bedroomWalkInCloset from '../assets/bedrooms/Slider 1/bedroom-walk-in-closet.jpg';
+import bedroomWalkInClosetAvif from '../assets/bedrooms/Slider 1/bedroom-walk-in-closet.avif';
+import bedroomHeadboardDesign from '../assets/bedrooms/Slider 1/bedroom-headboard-design.jpg';
+import bedroomHeadboardDesignAvif from '../assets/bedrooms/Slider 1/bedroom-headboard-design.avif';
+import bedroomLuxuryDesign from '../assets/bedrooms/Slider 2/bedroom-luxury-design.jpg';
+import bedroomLuxuryDesignAvif from '../assets/bedrooms/Slider 2/bedroom-luxury-design.avif';
+import bedroomCustomFurniture from '../assets/bedrooms/Slider 2/bedroom-custom-furniture.jpg';
+import bedroomCustomFurnitureAvif from '../assets/bedrooms/Slider 2/bedroom-custom-furniture.avif';
 
 type ProjectImage = {
   image: string;
@@ -55,31 +65,31 @@ const LandingBedroom = () => {
     }
   }, [lightboxOpen, LightboxComponent]);
 
-  // EDIT ZONE: Value propositions
+  // EDIT ZONE: Value propositions - Source: /bedrooms page "Why Choose Us" + adapted for landing
   const valueProps = [
     {
       icon: Hammer,
-      title: 'Custom Cabinetry',
-      description: 'Made-to-measure solutions tailored to your exact space and style preferences.'
+      title: 'Custom Wardrobe Design',
+      description: 'Made-to-measure wardrobes and storage solutions tailored to your exact space and style preferences.'
     },
     {
       icon: Clock,
-      title: 'Fast Turnaround',
-      description: 'Efficient project management ensures your renovation is completed on time, every time.'
+      title: 'Complete Project Management',
+      description: 'End-to-end service from design to installation, ensuring your bedroom renovation is completed on time.'
     },
     {
       icon: Shield,
-      title: 'Quality Craftsmanship',
-      description: '30+ years of expertise delivering premium finishes and lasting quality.'
+      title: '30+ Years Experience',
+      description: 'Expertise delivering premium finishes and lasting quality in bedroom renovations across Cape Town.'
     },
     {
       icon: DollarSign,
-      title: 'Transparent Pricing',
-      description: 'Clear, upfront quotes with no hidden costs. Competitive rates for premium work.'
+      title: 'Free Consultation & Quote',
+      description: 'No-obligation consultation with detailed quote within 48 hours after confirming measurements.'
     }
   ];
 
-  // EDIT ZONE: Featured projects gallery
+  // EDIT ZONE: Featured projects gallery - Source: /bedrooms page sliders
   const projects: ProjectImage[] = [
     {
       image: bedroomMasterSuite,
@@ -90,30 +100,59 @@ const LandingBedroom = () => {
     {
       image: bedroomCustomWardrobe,
       imageAvif: bedroomCustomWardrobeAvif,
-      caption: 'Rondebosch Custom Headboard & Nightstands',
+      caption: 'Custom Bedroom Wardrobe Design',
       type: 'bedroom'
     },
-    // Add more bedroom projects here
+    {
+      image: bedroomBuiltInStorage,
+      imageAvif: bedroomBuiltInStorageAvif,
+      caption: 'Built-in Bedroom Storage Solutions',
+      type: 'bedroom'
+    },
+    {
+      image: bedroomWalkInCloset,
+      imageAvif: bedroomWalkInClosetAvif,
+      caption: 'Walk-in Closet Design',
+      type: 'bedroom'
+    },
+    {
+      image: bedroomHeadboardDesign,
+      imageAvif: bedroomHeadboardDesignAvif,
+      caption: 'Custom Headboard & Feature Wall',
+      type: 'bedroom'
+    },
+    {
+      image: bedroomLuxuryDesign,
+      imageAvif: bedroomLuxuryDesignAvif,
+      caption: 'Luxury Bedroom Design',
+      type: 'bedroom'
+    },
+    {
+      image: bedroomCustomFurniture,
+      imageAvif: bedroomCustomFurnitureAvif,
+      caption: 'Custom Bedroom Furniture',
+      type: 'bedroom'
+    }
   ];
 
-  // EDIT ZONE: Process steps
+  // EDIT ZONE: Process steps - Adapted from standard funnel, bedroom-specific
   const processSteps = [
     {
       number: '1',
       title: 'Book Your Free Consultation',
-      description: 'Submit the quote form — we confirm within 2 hours.',
+      description: 'Submit the quote form — we confirm within 2 hours and schedule your free on-site consultation.',
       icon: Calendar
     },
     {
       number: '2',
-      title: 'On-Site Visit & Measurements',
-      description: 'We assess your space, discuss designs, and plan materials.',
+      title: 'On-Site Visit & Design',
+      description: 'We assess your bedroom space, discuss custom wardrobe and storage designs, and plan materials.',
       icon: Ruler
     },
     {
       number: '3',
       title: 'Build & Install',
-      description: 'Professional installers complete your renovation with warranty protection.',
+      description: 'Professional installers complete your bedroom renovation with warranty protection.',
       icon: Wrench
     }
   ];
@@ -173,29 +212,33 @@ const LandingBedroom = () => {
                 Bedroom Renovations Cape Town — Transform Your Bedroom Today
               </h1>
               
-              {/* EDIT ZONE: Benefit Sub-headline */}
+              {/* EDIT ZONE: Benefit Sub-headline - Source: /bedrooms + Value Triple-Threat */}
               <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-forest-300 leading-none pt-1 sm:pt-0">
-                Free on-site consult. Quote in 48 hours.
+                Free Consult + Free 3D Design + 48-Hour Quote
               </p>
               
-              {/* EDIT ZONE: Benefit Statement */}
+              {/* EDIT ZONE: Benefit Statement - Source: /bedrooms page description */}
               <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed max-w-xl mx-auto lg:mx-0 pt-1 sm:pt-0">
-                Cape Town specialists in Bedroom Renovations and Custom Wardrobes. Serving Cape Town + surrounding suburbs (±50 km). Free on-site consultation. Detailed quote within 48 hours after we confirm measurements/scope.
+                Create your perfect sanctuary with custom bedroom designs that combine comfort, style, and functionality. 30+ years of expertise. Serving Cape Town + surrounding suburbs (±50 km). Free on-site consultation with detailed quote within 48 hours.
               </p>
               
-              {/* EDIT ZONE: Trust Badges */}
+              {/* EDIT ZONE: Trust Badges - Source: /bedrooms page "Why Choose Us" section */}
               <div className="space-y-3 sm:space-y-3 md:space-y-3.5 pt-3 sm:pt-4 md:pt-5">
                 <div className="flex items-start justify-center lg:justify-start space-x-2.5 sm:space-x-3">
                   <CheckCircle size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 text-forest-300 flex-shrink-0 mt-0.5" />
-                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Full Warranty on Materials & Workmanship</span>
+                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">30+ years of experience</span>
                 </div>
                 <div className="flex items-start justify-center lg:justify-start space-x-2.5 sm:space-x-3">
                   <CheckCircle size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 text-forest-300 flex-shrink-0 mt-0.5" />
-                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Free On-Site Design Consultation in Cape Town</span>
+                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Free consultation & quote</span>
                 </div>
                 <div className="flex items-start justify-center lg:justify-start space-x-2.5 sm:space-x-3">
                   <CheckCircle size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 text-forest-300 flex-shrink-0 mt-0.5" />
-                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Licensed & Insured Professional Installers</span>
+                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Complete project management</span>
+                </div>
+                <div className="flex items-start justify-center lg:justify-start space-x-2.5 sm:space-x-3">
+                  <CheckCircle size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 text-forest-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Custom storage solutions</span>
                 </div>
               </div>
             </div>
@@ -364,7 +407,7 @@ const LandingBedroom = () => {
               Why Homeowners Choose Us
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-              Trusted expertise, quality craftsmanship, and transparent service you can rely on.
+              Transform your bedroom into a personal retreat with our comprehensive design and installation services. From custom wardrobes to complete room makeovers, we create spaces that reflect your style and meet your needs.
             </p>
           </div>
 
@@ -403,10 +446,10 @@ const LandingBedroom = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-              Featured Projects
+              Featured Bedroom Projects
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-              Real renovations completed across Cape Town with premium finishes and expert craftsmanship.
+              Discover our collection of beautiful bedroom transformations designed for comfort and style across Cape Town.
             </p>
           </div>
 
@@ -505,10 +548,10 @@ const LandingBedroom = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-gray-800">
-              Ready to Transform Your Home?
+              Ready to Create Your Dream Bedroom?
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-              You'll receive a detailed quote within 48 hours after we confirm measurements/scope. Contact us for a free consultation tailored to your project requirements.
+              Contact us today for a free consultation and let's start designing the bedroom you've always wanted. You'll receive a detailed quote within 48 hours after we confirm measurements and scope.
             </p>
           </div>
           

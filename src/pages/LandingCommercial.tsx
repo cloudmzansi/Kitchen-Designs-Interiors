@@ -14,9 +14,19 @@ import slider1After from '../assets/home/slider1-2.jpg';
 import slider2Before from '../assets/home/slider2-1.jpg';
 import slider2After from '../assets/home/slider2-2.jpg';
 
-// EDIT ZONE: Featured project images - Add commercial project images here
-import commercialHero from '../assets/commercial/commercial-hero.jpg';
-import commercialHeroAvif from '../assets/commercial/commercial-hero.avif';
+// EDIT ZONE: Featured project images - Source: /commercial page sliders
+import commercialOfficeDesign from '../assets/commercial/Slider 1/commercial-office-design.jpg';
+import commercialOfficeDesignAvif from '../assets/commercial/Slider 1/commercial-office-design.avif';
+import commercialReceptionArea from '../assets/commercial/Slider 1/commercial-reception-area.jpg';
+import commercialReceptionAreaAvif from '../assets/commercial/Slider 1/commercial-reception-area.avif';
+import commercialMeetingRoom from '../assets/commercial/Slider 1/commercial-meeting-room.jpg';
+import commercialMeetingRoomAvif from '../assets/commercial/Slider 1/commercial-meeting-room.avif';
+import commercialRetailDesign from '../assets/commercial/Slider 2/commercial-retail-design.jpg';
+import commercialRetailDesignAvif from '../assets/commercial/Slider 2/commercial-retail-design.avif';
+import commercialRestaurantDesign from '../assets/commercial/Slider 3/commercial-restaurant-design.jpg';
+import commercialRestaurantDesignAvif from '../assets/commercial/Slider 3/commercial-restaurant-design.avif';
+import commercialMedicalOffice from '../assets/commercial/Slider 4/commercial-medical-office.jpg';
+import commercialMedicalOfficeAvif from '../assets/commercial/Slider 4/commercial-medical-office.avif';
 
 type ProjectImage = {
   image: string;
@@ -53,59 +63,88 @@ const LandingCommercial = () => {
     }
   }, [lightboxOpen, LightboxComponent]);
 
-  // EDIT ZONE: Value propositions
+  // EDIT ZONE: Value propositions - Source: /commercial page "Why Choose Us" + adapted for landing
   const valueProps = [
     {
       icon: Hammer,
-      title: 'Custom Cabinetry',
-      description: 'Made-to-measure solutions tailored to your exact space and style preferences.'
+      title: 'Office & Retail Fit-Outs',
+      description: 'Comprehensive commercial interior design services tailored to your business needs and brand identity.'
     },
     {
       icon: Clock,
-      title: 'Fast Turnaround',
-      description: 'Efficient project management ensures your renovation is completed on time, every time.'
+      title: 'Complete Project Management',
+      description: 'End-to-end service from design to installation, ensuring your commercial renovation is completed on time.'
     },
     {
       icon: Shield,
-      title: 'Quality Craftsmanship',
-      description: '30+ years of expertise delivering premium finishes and lasting quality.'
+      title: '30+ Years Experience',
+      description: 'Expertise delivering premium finishes and lasting quality in commercial renovations across Cape Town.'
     },
     {
       icon: DollarSign,
-      title: 'Transparent Pricing',
-      description: 'Clear, upfront quotes with no hidden costs. Competitive rates for premium work.'
+      title: 'Free Consultation & Quote',
+      description: 'No-obligation consultation with detailed quote within 48 hours after confirming measurements.'
     }
   ];
 
-  // EDIT ZONE: Featured projects gallery
+  // EDIT ZONE: Featured projects gallery - Source: /commercial page sliders
   const projects: ProjectImage[] = [
     {
-      image: commercialHero,
-      imageAvif: commercialHeroAvif,
-      caption: 'Commercial Office Fit-Out',
-      type: 'kitchen' // Update type as needed
+      image: commercialOfficeDesign,
+      imageAvif: commercialOfficeDesignAvif,
+      caption: 'Modern Office Design',
+      type: 'kitchen'
     },
-    // Add more commercial projects here
+    {
+      image: commercialReceptionArea,
+      imageAvif: commercialReceptionAreaAvif,
+      caption: 'Office Reception Area',
+      type: 'kitchen'
+    },
+    {
+      image: commercialMeetingRoom,
+      imageAvif: commercialMeetingRoomAvif,
+      caption: 'Meeting Room Design',
+      type: 'kitchen'
+    },
+    {
+      image: commercialRetailDesign,
+      imageAvif: commercialRetailDesignAvif,
+      caption: 'Retail Store Design',
+      type: 'kitchen'
+    },
+    {
+      image: commercialRestaurantDesign,
+      imageAvif: commercialRestaurantDesignAvif,
+      caption: 'Restaurant Design',
+      type: 'kitchen'
+    },
+    {
+      image: commercialMedicalOffice,
+      imageAvif: commercialMedicalOfficeAvif,
+      caption: 'Medical Office Design',
+      type: 'kitchen'
+    }
   ];
 
-  // EDIT ZONE: Process steps
+  // EDIT ZONE: Process steps - Adapted from standard funnel, commercial-specific
   const processSteps = [
     {
       number: '1',
       title: 'Book Your Free Consultation',
-      description: 'Submit the quote form — we confirm within 2 hours.',
+      description: 'Submit the quote form — we confirm within 2 hours and schedule your free on-site consultation.',
       icon: Calendar
     },
     {
       number: '2',
-      title: 'On-Site Visit & Measurements',
-      description: 'We assess your space, discuss designs, and plan materials.',
+      title: 'On-Site Visit & Design',
+      description: 'We assess your commercial space, discuss fit-out designs, and plan materials and layout.',
       icon: Ruler
     },
     {
       number: '3',
       title: 'Build & Install',
-      description: 'Professional installers complete your renovation with warranty protection.',
+      description: 'Professional installers complete your commercial renovation with warranty protection.',
       icon: Wrench
     }
   ];
@@ -165,29 +204,33 @@ const LandingCommercial = () => {
                 Commercial Renovations Cape Town — Transform Your Business Space Today
               </h1>
               
-              {/* EDIT ZONE: Benefit Sub-headline */}
+              {/* EDIT ZONE: Benefit Sub-headline - Source: /commercial + Value Triple-Threat */}
               <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-forest-300 leading-none pt-1 sm:pt-0">
-                Free on-site consult. Quote in 48 hours.
+                Free Consult + Free 3D Design + 48-Hour Quote
               </p>
               
-              {/* EDIT ZONE: Benefit Statement */}
+              {/* EDIT ZONE: Benefit Statement - Source: /commercial page description */}
               <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed max-w-xl mx-auto lg:mx-0 pt-1 sm:pt-0">
-                Cape Town specialists in Commercial Renovations and Office Fit-Outs. Serving Cape Town + surrounding suburbs (±50 km). Free on-site consultation. Detailed quote within 48 hours after we confirm measurements/scope.
+                Transform your commercial space with expert interior design and fit-out services that enhance productivity and customer experience. 30+ years of expertise. Serving Cape Town + surrounding suburbs (±50 km). Free on-site consultation with detailed quote within 48 hours.
               </p>
               
-              {/* EDIT ZONE: Trust Badges */}
+              {/* EDIT ZONE: Trust Badges - Source: /commercial page "Why Choose Us" section */}
               <div className="space-y-3 sm:space-y-3 md:space-y-3.5 pt-3 sm:pt-4 md:pt-5">
                 <div className="flex items-start justify-center lg:justify-start space-x-2.5 sm:space-x-3">
                   <CheckCircle size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 text-forest-300 flex-shrink-0 mt-0.5" />
-                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Full Warranty on Materials & Workmanship</span>
+                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">30+ years of experience</span>
                 </div>
                 <div className="flex items-start justify-center lg:justify-start space-x-2.5 sm:space-x-3">
                   <CheckCircle size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 text-forest-300 flex-shrink-0 mt-0.5" />
-                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Free On-Site Design Consultation in Cape Town</span>
+                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Free consultation & quote</span>
                 </div>
                 <div className="flex items-start justify-center lg:justify-start space-x-2.5 sm:space-x-3">
                   <CheckCircle size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 text-forest-300 flex-shrink-0 mt-0.5" />
-                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Licensed & Insured Professional Installers</span>
+                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Complete project management</span>
+                </div>
+                <div className="flex items-start justify-center lg:justify-start space-x-2.5 sm:space-x-3">
+                  <CheckCircle size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 text-forest-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Commercial expertise</span>
                 </div>
               </div>
             </div>
@@ -356,7 +399,7 @@ const LandingCommercial = () => {
               Why Businesses Choose Us
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-              Trusted expertise, quality craftsmanship, and transparent service you can rely on.
+              From office renovations to retail fit-outs, we provide comprehensive commercial interior design services that create functional, beautiful, and productive spaces for your business.
             </p>
           </div>
 
@@ -395,10 +438,10 @@ const LandingCommercial = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-              Featured Projects
+              Featured Commercial Projects
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-              Real renovations completed across Cape Town with premium finishes and expert craftsmanship.
+              Explore our collection of stunning commercial transformations across various industries in Cape Town.
             </p>
           </div>
 
@@ -497,10 +540,10 @@ const LandingCommercial = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-gray-800">
-              Ready to Transform Your Business Space?
+              Ready to Transform Your Commercial Space?
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-              You'll receive a detailed quote within 48 hours after we confirm measurements/scope. Contact us for a free consultation tailored to your project requirements.
+              Let's create a commercial space that enhances your business operations and impresses your clients. You'll receive a detailed quote within 48 hours after we confirm measurements and scope.
             </p>
           </div>
           

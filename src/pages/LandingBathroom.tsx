@@ -14,11 +14,21 @@ import slider1After from '../assets/home/slider1-2.jpg';
 import slider2Before from '../assets/home/slider2-1.jpg';
 import slider2After from '../assets/home/slider2-2.jpg';
 
-// EDIT ZONE: Featured project images
+// EDIT ZONE: Featured project images - Source: /bathrooms page sliders
 import bathroomLuxuryDesign from '../assets/bathrooms/Slider 1/bathroom-luxury-design.jpg';
 import bathroomLuxuryDesignAvif from '../assets/bathrooms/Slider 1/bathroom-luxury-design.avif';
 import bathroomCustomVanity from '../assets/bathrooms/Slider 1/bathroom-custom-vanity.jpg';
 import bathroomCustomVanityAvif from '../assets/bathrooms/Slider 1/bathroom-custom-vanity.avif';
+import bathroomMarbleTiles from '../assets/bathrooms/Slider 1/bathroom-marble-tiles.jpg';
+import bathroomMarbleTilesAvif from '../assets/bathrooms/Slider 1/bathroom-marble-tiles.avif';
+import bathroomFreestandingBath from '../assets/bathrooms/Slider 1/bathroom-freestanding-bath.jpg';
+import bathroomFreestandingBathAvif from '../assets/bathrooms/Slider 1/bathroom-freestanding-bath.avif';
+import bathroomWalkInShower from '../assets/bathrooms/Slider 1/bathroom-walk-in-shower.jpg';
+import bathroomWalkInShowerAvif from '../assets/bathrooms/Slider 1/bathroom-walk-in-shower.avif';
+import bathroomModernDesign from '../assets/bathrooms/Slider 2/bathroom-modern-design.jpg';
+import bathroomModernDesignAvif from '../assets/bathrooms/Slider 2/bathroom-modern-design.avif';
+import bathroomQuartzCountertop from '../assets/bathrooms/Slider 2/bathroom-quartz-countertop.jpg';
+import bathroomQuartzCountertopAvif from '../assets/bathrooms/Slider 2/bathroom-quartz-countertop.avif';
 
 type ProjectImage = {
   image: string;
@@ -55,65 +65,94 @@ const LandingBathroom = () => {
     }
   }, [lightboxOpen, LightboxComponent]);
 
-  // EDIT ZONE: Value propositions
+  // EDIT ZONE: Value propositions - Source: /bathrooms page "Why Choose Us" + adapted for landing
   const valueProps = [
     {
       icon: Hammer,
-      title: 'Custom Cabinetry',
-      description: 'Made-to-measure solutions tailored to your exact space and style preferences.'
+      title: 'Custom Vanity Design',
+      description: 'Made-to-measure vanities and storage solutions tailored to your exact space and style preferences.'
     },
     {
       icon: Clock,
-      title: 'Fast Turnaround',
-      description: 'Efficient project management ensures your renovation is completed on time, every time.'
+      title: 'Complete Project Management',
+      description: 'End-to-end service from design to installation, ensuring your bathroom renovation is completed on time.'
     },
     {
       icon: Shield,
-      title: 'Quality Craftsmanship',
-      description: '30+ years of expertise delivering premium finishes and lasting quality.'
+      title: '30+ Years Experience',
+      description: 'Expertise delivering premium finishes and lasting quality in bathroom renovations across Cape Town.'
     },
     {
       icon: DollarSign,
-      title: 'Transparent Pricing',
-      description: 'Clear, upfront quotes with no hidden costs. Competitive rates for premium work.'
+      title: 'Free Consultation & Quote',
+      description: 'No-obligation consultation with detailed quote within 48 hours after confirming measurements.'
     }
   ];
 
-  // EDIT ZONE: Featured projects gallery
+  // EDIT ZONE: Featured projects gallery - Source: /bathrooms page sliders
   const projects: ProjectImage[] = [
     {
       image: bathroomLuxuryDesign,
       imageAvif: bathroomLuxuryDesignAvif,
-      caption: 'Observatory Luxury Bathroom Renovation',
+      caption: 'Luxury Bathroom Design',
       type: 'bathroom'
     },
     {
       image: bathroomCustomVanity,
       imageAvif: bathroomCustomVanityAvif,
-      caption: 'Sea Point Modern Bathroom Upgrade',
+      caption: 'Custom Bathroom Vanity',
       type: 'bathroom'
     },
-    // Add more bathroom projects here
+    {
+      image: bathroomMarbleTiles,
+      imageAvif: bathroomMarbleTilesAvif,
+      caption: 'Marble Tiles in Bathroom',
+      type: 'bathroom'
+    },
+    {
+      image: bathroomFreestandingBath,
+      imageAvif: bathroomFreestandingBathAvif,
+      caption: 'Freestanding Bath Installation',
+      type: 'bathroom'
+    },
+    {
+      image: bathroomWalkInShower,
+      imageAvif: bathroomWalkInShowerAvif,
+      caption: 'Walk-in Shower Design',
+      type: 'bathroom'
+    },
+    {
+      image: bathroomModernDesign,
+      imageAvif: bathroomModernDesignAvif,
+      caption: 'Modern Bathroom Design',
+      type: 'bathroom'
+    },
+    {
+      image: bathroomQuartzCountertop,
+      imageAvif: bathroomQuartzCountertopAvif,
+      caption: 'Quartz Countertop in Bathroom',
+      type: 'bathroom'
+    }
   ];
 
-  // EDIT ZONE: Process steps
+  // EDIT ZONE: Process steps - Adapted from standard funnel, bathroom-specific
   const processSteps = [
     {
       number: '1',
       title: 'Book Your Free Consultation',
-      description: 'Submit the quote form — we confirm within 2 hours.',
+      description: 'Submit the quote form — we confirm within 2 hours and schedule your free on-site consultation.',
       icon: Calendar
     },
     {
       number: '2',
-      title: 'On-Site Visit & Measurements',
-      description: 'We assess your space, discuss designs, and plan materials.',
+      title: 'On-Site Visit & Design',
+      description: 'We assess your bathroom space, discuss custom vanity and fixture designs, and plan materials.',
       icon: Ruler
     },
     {
       number: '3',
       title: 'Build & Install',
-      description: 'Professional installers complete your renovation with warranty protection.',
+      description: 'Professional installers complete your bathroom renovation with warranty protection.',
       icon: Wrench
     }
   ];
@@ -173,29 +212,33 @@ const LandingBathroom = () => {
                 Bathroom Renovations Cape Town — Transform Your Bathroom Today
               </h1>
               
-              {/* EDIT ZONE: Benefit Sub-headline */}
+              {/* EDIT ZONE: Benefit Sub-headline - Source: /bathrooms + Value Triple-Threat */}
               <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-forest-300 leading-none pt-1 sm:pt-0">
-                Free on-site consult. Quote in 48 hours.
+                Free Consult + Free 3D Design + 48-Hour Quote
               </p>
               
-              {/* EDIT ZONE: Benefit Statement */}
+              {/* EDIT ZONE: Benefit Statement - Source: /bathrooms page description */}
               <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed max-w-xl mx-auto lg:mx-0 pt-1 sm:pt-0">
-                Cape Town specialists in Bathroom Renovations and Luxury Finishes. Serving Cape Town + surrounding suburbs (±50 km). Free on-site consultation. Detailed quote within 48 hours after we confirm measurements/scope.
+                Transform your bathroom into a luxurious retreat with our expert design and installation services. 30+ years of expertise. Serving Cape Town + surrounding suburbs (±50 km). Free on-site consultation with detailed quote within 48 hours.
               </p>
               
-              {/* EDIT ZONE: Trust Badges */}
+              {/* EDIT ZONE: Trust Badges - Source: /bathrooms page "Why Choose Us" section */}
               <div className="space-y-3 sm:space-y-3 md:space-y-3.5 pt-3 sm:pt-4 md:pt-5">
                 <div className="flex items-start justify-center lg:justify-start space-x-2.5 sm:space-x-3">
                   <CheckCircle size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 text-forest-300 flex-shrink-0 mt-0.5" />
-                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Full Warranty on Materials & Workmanship</span>
+                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">30+ years of experience</span>
                 </div>
                 <div className="flex items-start justify-center lg:justify-start space-x-2.5 sm:space-x-3">
                   <CheckCircle size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 text-forest-300 flex-shrink-0 mt-0.5" />
-                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Free On-Site Design Consultation in Cape Town</span>
+                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Free consultation & quote</span>
                 </div>
                 <div className="flex items-start justify-center lg:justify-start space-x-2.5 sm:space-x-3">
                   <CheckCircle size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 text-forest-300 flex-shrink-0 mt-0.5" />
-                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Licensed & Insured Professional Installers</span>
+                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Complete project management</span>
+                </div>
+                <div className="flex items-start justify-center lg:justify-start space-x-2.5 sm:space-x-3">
+                  <CheckCircle size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 text-forest-300 flex-shrink-0 mt-0.5" />
+                  <span className="text-white text-xs sm:text-sm md:text-base lg:text-lg leading-relaxed">Luxury fixtures & materials</span>
                 </div>
               </div>
             </div>
@@ -364,7 +407,7 @@ const LandingBathroom = () => {
               Why Homeowners Choose Us
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-              Trusted expertise, quality craftsmanship, and transparent service you can rely on.
+              From luxury spa bathrooms to practical family bathrooms, we create beautiful and functional spaces that enhance your daily routine and add value to your home.
             </p>
           </div>
 
@@ -403,10 +446,10 @@ const LandingBathroom = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-              Featured Projects
+              Featured Bathroom Projects
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-              Real renovations completed across Cape Town with premium finishes and expert craftsmanship.
+              Explore our collection of stunning bathroom transformations designed for luxury and functionality across Cape Town.
             </p>
           </div>
 
@@ -505,10 +548,10 @@ const LandingBathroom = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-gray-800">
-              Ready to Transform Your Home?
+              Ready for Your Dream Bathroom?
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-              You'll receive a detailed quote within 48 hours after we confirm measurements/scope. Contact us for a free consultation tailored to your project requirements.
+              Let's create a bathroom that combines luxury, functionality, and your personal style. You'll receive a detailed quote within 48 hours after we confirm measurements and scope.
             </p>
           </div>
           
