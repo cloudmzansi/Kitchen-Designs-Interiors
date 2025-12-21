@@ -7,6 +7,9 @@ import ScrollToTop from './hooks/ScrollToTop';
 // Lazy load page components for code splitting
 const Home = React.lazy(() => import('./pages/Home'));
 const Landing = React.lazy(() => import('./pages/Landing'));
+const LandingBedroom = React.lazy(() => import('./pages/LandingBedroom'));
+const LandingBathroom = React.lazy(() => import('./pages/LandingBathroom'));
+const LandingCommercial = React.lazy(() => import('./pages/LandingCommercial'));
 const ThankYou = React.lazy(() => import('./pages/ThankYou'));
 const Kitchens = React.lazy(() => import('./pages/Kitchens'));
 const Bedrooms = React.lazy(() => import('./pages/Bedrooms'));
@@ -58,7 +61,11 @@ const WhatsAppButton = () => {
 
 function AppContent() {
   const location = useLocation();
-  const isLandingPage = location.pathname === '/landing';
+  // Hide header/footer on all landing pages
+  const isLandingPage = location.pathname === '/landing' || 
+                        location.pathname === '/landing/bedroom' ||
+                        location.pathname === '/landing/bathroom' ||
+                        location.pathname === '/landing/commercial';
 
   return (
     <div id="top" className="bg-white">
@@ -68,6 +75,9 @@ function AppContent() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/landing" element={<Landing />} />
+            <Route path="/landing/bedroom" element={<LandingBedroom />} />
+            <Route path="/landing/bathroom" element={<LandingBathroom />} />
+            <Route path="/landing/commercial" element={<LandingCommercial />} />
             <Route path="/thank-you" element={<ThankYou />} />
             <Route path="/kitchens" element={<Kitchens />} />
             <Route path="/bedrooms" element={<Bedrooms />} />

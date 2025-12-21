@@ -44,8 +44,9 @@ const ThankYou = () => {
       }
       
       // Build enhanced conversion data object
+      // Event snippet for KD Interiors Lead Submission conversion page
       const conversionData: any = {
-        'send_to': 'AW-17609409719/wkjlCP-mz9QbELeJ6cxB',
+        'send_to': 'AW-17609409719/1vA6Cwez-NQbELEeJ6CXB',
         'value': 1.0,
         'currency': 'USD'
       };

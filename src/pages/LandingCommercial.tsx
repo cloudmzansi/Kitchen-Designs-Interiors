@@ -1,39 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { CheckCircle, Hammer, Clock, Shield, DollarSign, Calendar, Ruler, Wrench, MapPin, Phone, Mail } from 'lucide-react';
-import { submitToWeb3Forms } from '../utils/web3forms';
 import BeforeAfterSection from '../components/BeforeAfterSection';
 import { usePageMeta } from '../hooks/usePageMeta';
-import heroBg from '../assets/home/kd-interiors-hero-kitchen.jpg';
-import heroBgAvif from '../assets/home/kd-interiors-hero-kitchen.avif';
+import { useLandingForm } from '../hooks/useLandingForm';
 
-// Before/After slider images
+// EDIT ZONE: Hero background image
+import heroBg from '../assets/commercial/commercial-hero.jpg';
+import heroBgAvif from '../assets/commercial/commercial-hero.avif';
+
+// EDIT ZONE: Before/After slider images
 import slider1Before from '../assets/home/slider1-1.jpg';
 import slider1After from '../assets/home/slider1-2.jpg';
 import slider2Before from '../assets/home/slider2-1.jpg';
 import slider2After from '../assets/home/slider2-2.jpg';
 
-// Kitchen images
-import kitchenModernWhiteCabinets from '../assets/kitchens/Slider 1/kitchen-modern-white-cabinets.jpg';
-import kitchenModernWhiteCabinetsAvif from '../assets/kitchens/Slider 1/kitchen-modern-white-cabinets.avif';
-import kitchenIslandDesign from '../assets/kitchens/Slider 1/kitchen-island-design.jpg';
-import kitchenIslandDesignAvif from '../assets/kitchens/Slider 1/kitchen-island-design.avif';
-import kitchenQuartzCountertop from '../assets/kitchens/Slider 1/kitchen-quartz-countertop.jpg';
-import kitchenQuartzCountertopAvif from '../assets/kitchens/Slider 1/kitchen-quartz-countertop.avif';
-import kitchenLuxuryDesign from '../assets/kitchens/Slider 2/kitchen-luxury-design.jpg';
-import kitchenLuxuryDesignAvif from '../assets/kitchens/Slider 2/kitchen-luxury-design.avif';
-
-// Bedroom images
-import bedroomMasterSuite from '../assets/bedrooms/Slider 1/bedroom-master-suite.jpg';
-import bedroomMasterSuiteAvif from '../assets/bedrooms/Slider 1/bedroom-master-suite.avif';
-import bedroomCustomWardrobe from '../assets/bedrooms/Slider 1/bedroom-custom-wardrobe.jpg';
-import bedroomCustomWardrobeAvif from '../assets/bedrooms/Slider 1/bedroom-custom-wardrobe.avif';
-
-// Bathroom images
-import bathroomLuxuryDesign from '../assets/bathrooms/Slider 1/bathroom-luxury-design.jpg';
-import bathroomLuxuryDesignAvif from '../assets/bathrooms/Slider 1/bathroom-luxury-design.avif';
-import bathroomCustomVanity from '../assets/bathrooms/Slider 1/bathroom-custom-vanity.jpg';
-import bathroomCustomVanityAvif from '../assets/bathrooms/Slider 1/bathroom-custom-vanity.avif';
+// EDIT ZONE: Featured project images - Add commercial project images here
+import commercialHero from '../assets/commercial/commercial-hero.jpg';
+import commercialHeroAvif from '../assets/commercial/commercial-hero.avif';
 
 type ProjectImage = {
   image: string;
@@ -42,22 +25,20 @@ type ProjectImage = {
   type: 'kitchen' | 'bedroom' | 'bathroom';
 };
 
-const Landing = () => {
+const LandingCommercial = () => {
   // Set landing source for tracking
   useEffect(() => {
-    sessionStorage.setItem('landing_source', 'kitchen');
+    sessionStorage.setItem('landing_source', 'commercial');
   }, []);
 
-  // Page-specific meta tags
+  // EDIT ZONE: Page-specific meta tags
   usePageMeta({
-    title: "Kitchen Renovations Cape Town | Custom Kitchens & Full Service Builds",
-    description: "Looking for professional kitchen renovations in Cape Town? We design, manage, and build bespoke kitchens with modern finishes and end-to-end project management. Get a free quote.",
-    canonical: "https://kdinteriors.co.za/landing"
+    title: "Commercial Renovations Cape Town | Office Fit-Outs & Commercial Interiors",
+    description: "Looking for professional commercial renovations in Cape Town? We design, manage, and build bespoke commercial spaces with premium finishes and end-to-end project management. Get a free quote.",
+    canonical: "https://kdinteriors.co.za/landing/commercial"
   });
 
-  const navigate = useNavigate();
-  const [isFormSubmitting, setIsFormSubmitting] = useState(false);
-  const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
+  const { formIds, isFormSubmitting, formErrors, handleSubmit } = useLandingForm('commercial-landing');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [LightboxComponent, setLightboxComponent] = useState<React.ComponentType<any> | null>(null);
@@ -72,95 +53,7 @@ const Landing = () => {
     }
   }, [lightboxOpen, LightboxComponent]);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const formData = new FormData(form);
-
-    // Validate required fields
-    const errors: { [key: string]: string } = {};
-    const name = formData.get('name') as string;
-    const email = formData.get('email') as string;
-    const phone = formData.get('phone') as string;
-    const projectType = formData.get('projectType') as string;
-    const message = formData.get('message') as string;
-
-    // Check if this is the hero form or contact form
-    const isHeroForm = form.id === 'landing-form';
-    const isContactForm = form.id === 'landing-contact-form';
-
-    // Common validations
-    if (!name || name.trim() === '') {
-      errors.name = 'Name is required';
-    }
-
-    // Hero form specific validations
-    if (isHeroForm) {
-      if (!phone || phone.trim() === '') {
-        errors.phone = 'Phone number is required';
-      }
-      if (!email || email.trim() === '') {
-        errors.email = 'Email address is required';
-      }
-      // Message is optional for hero form
-    }
-
-    // Contact form specific validations
-    if (isContactForm) {
-      if (!email || email.trim() === '') {
-        errors.email = 'Email address is required';
-      }
-      if (!projectType || projectType === '') {
-        errors.projectType = 'Please select a project type';
-      }
-      if (!message || message.trim() === '') {
-        errors.message = 'Project details are required';
-      }
-    }
-
-    if (Object.keys(errors).length > 0) {
-      setFormErrors(errors);
-      return;
-    }
-
-    setFormErrors({});
-    setIsFormSubmitting(true);
-
-    // Use shared Web3Forms utility function
-    await submitToWeb3Forms({
-      formData,
-      onSuccess: () => {
-        // Store customer data in sessionStorage for enhanced conversions
-        const customerData: {
-          email?: string;
-          phone_number?: string;
-          first_name?: string;
-          last_name?: string;
-        } = {};
-        
-        if (email) customerData.email = email.trim().toLowerCase();
-        if (phone) customerData.phone_number = phone.trim();
-        
-        // Split name into first and last name if available
-        if (name) {
-          const nameParts = name.trim().split(/\s+/);
-          if (nameParts.length > 0) customerData.first_name = nameParts[0];
-          if (nameParts.length > 1) customerData.last_name = nameParts.slice(1).join(' ');
-        }
-        
-        // Store in sessionStorage for enhanced conversions on thank-you page
-        sessionStorage.setItem('google_ads_conversion_data', JSON.stringify(customerData));
-        
-        // Redirect to thank-you page for Google Ads conversion tracking
-        navigate('/thank-you');
-      },
-      onError: (errorMsg) => {
-        setFormErrors({ submit: errorMsg });
-        setIsFormSubmitting(false);
-      },
-    });
-  };
-
+  // EDIT ZONE: Value propositions
   const valueProps = [
     {
       icon: Hammer,
@@ -184,57 +77,18 @@ const Landing = () => {
     }
   ];
 
+  // EDIT ZONE: Featured projects gallery
   const projects: ProjectImage[] = [
     {
-      image: kitchenModernWhiteCabinets,
-      imageAvif: kitchenModernWhiteCabinetsAvif,
-      caption: 'Sea Point Apartment Kitchen Upgrade',
-      type: 'kitchen'
+      image: commercialHero,
+      imageAvif: commercialHeroAvif,
+      caption: 'Commercial Office Fit-Out',
+      type: 'kitchen' // Update type as needed
     },
-    {
-      image: kitchenIslandDesign,
-      imageAvif: kitchenIslandDesignAvif,
-      caption: 'Camps Bay Modern Kitchen Renovation',
-      type: 'kitchen'
-    },
-    {
-      image: kitchenQuartzCountertop,
-      imageAvif: kitchenQuartzCountertopAvif,
-      caption: 'Green Point Luxury Kitchen Transformation',
-      type: 'kitchen'
-    },
-    {
-      image: bedroomMasterSuite,
-      imageAvif: bedroomMasterSuiteAvif,
-      caption: 'Claremont Master Bedroom Suite',
-      type: 'bedroom'
-    },
-    {
-      image: bedroomCustomWardrobe,
-      imageAvif: bedroomCustomWardrobeAvif,
-      caption: 'Rondebosch Custom Headboard & Nightstands',
-      type: 'bedroom'
-    },
-    {
-      image: bathroomLuxuryDesign,
-      imageAvif: bathroomLuxuryDesignAvif,
-      caption: 'Observatory Luxury Bathroom Renovation',
-      type: 'bathroom'
-    },
-    {
-      image: kitchenLuxuryDesign,
-      imageAvif: kitchenLuxuryDesignAvif,
-      caption: 'City Bowl Premium Kitchen Design',
-      type: 'kitchen'
-    },
-    {
-      image: bathroomCustomVanity,
-      imageAvif: bathroomCustomVanityAvif,
-      caption: 'Sea Point Modern Bathroom Upgrade',
-      type: 'bathroom'
-    }
+    // Add more commercial projects here
   ];
 
+  // EDIT ZONE: Process steps
   const processSteps = [
     {
       number: '1',
@@ -268,7 +122,7 @@ const Landing = () => {
 
   return (
     <div className="bg-white">
-      {/* Hero Section */}
+      {/* EDIT ZONE: Hero Section */}
       <section id="quote-form" className="relative min-h-screen min-h-[100svh] overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
         {/* Background Image */}
         <div className="absolute inset-0 z-0 w-full">
@@ -276,7 +130,7 @@ const Landing = () => {
             <source srcSet={heroBgAvif} type="image/avif" sizes="100vw" />
             <img 
               src={heroBg}
-              alt="Kitchen Design"
+              alt="Commercial Design"
               width={1920}
               height={1080}
               fetchPriority="high"
@@ -306,22 +160,22 @@ const Landing = () => {
             
             {/* Left Column - Marketing Content */}
             <div className="relative z-10 text-white space-y-6 sm:space-y-5 md:space-y-6 lg:space-y-8 pt-14 sm:pt-16 md:pt-20 lg:pt-0 text-center lg:text-left">
-              {/* Main Headline */}
+              {/* EDIT ZONE: Main Headline */}
               <h1 className="text-4xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold sm:font-bold leading-[1.1] sm:leading-tight lg:leading-[1.15] drop-shadow-lg sm:drop-shadow-none">
-                Kitchen Renovations Cape Town — Transform Your Kitchen Today
+                Commercial Renovations Cape Town — Transform Your Business Space Today
               </h1>
               
-              {/* Benefit Sub-headline */}
+              {/* EDIT ZONE: Benefit Sub-headline */}
               <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-forest-300 leading-none pt-1 sm:pt-0">
                 Free on-site consult. Quote in 48 hours.
               </p>
               
-              {/* Benefit Statement */}
+              {/* EDIT ZONE: Benefit Statement */}
               <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/90 leading-relaxed max-w-xl mx-auto lg:mx-0 pt-1 sm:pt-0">
-                Cape Town specialists in Kitchen Renovations and Custom Cabinetry. Serving Cape Town + surrounding suburbs (±50 km). Free on-site consultation. Detailed quote within 48 hours after we confirm measurements/scope.
+                Cape Town specialists in Commercial Renovations and Office Fit-Outs. Serving Cape Town + surrounding suburbs (±50 km). Free on-site consultation. Detailed quote within 48 hours after we confirm measurements/scope.
               </p>
               
-              {/* Trust Badges */}
+              {/* EDIT ZONE: Trust Badges */}
               <div className="space-y-3 sm:space-y-3 md:space-y-3.5 pt-3 sm:pt-4 md:pt-5">
                 <div className="flex items-start justify-center lg:justify-start space-x-2.5 sm:space-x-3">
                   <CheckCircle size={18} className="sm:w-5 sm:h-5 md:w-6 md:h-6 text-forest-300 flex-shrink-0 mt-0.5" />
@@ -345,15 +199,15 @@ const Landing = () => {
                   Get Your Free Quote Today
                 </h2>
                 
-                <form id="landing-form" onSubmit={handleSubmit} className="space-y-4 sm:space-y-4">
+                <form id={formIds.heroForm} onSubmit={handleSubmit} className="space-y-4 sm:space-y-4">
                   {/* Name Field */}
                   <div>
-                    <label htmlFor="landing-name" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor={formIds.name} className="block text-sm font-medium text-gray-700 mb-2">
                       Name *
                     </label>
                     <input
                       type="text"
-                      id="landing-name"
+                      id={formIds.name}
                       name="name"
                       required
                       className={`w-full px-4 py-3 text-base border rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200 ${
@@ -368,12 +222,12 @@ const Landing = () => {
                   
                   {/* Phone / WhatsApp Field */}
                   <div>
-                    <label htmlFor="landing-phone" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor={formIds.phone} className="block text-sm font-medium text-gray-700 mb-2">
                       Phone / WhatsApp *
                     </label>
                     <input
                       type="tel"
-                      id="landing-phone"
+                      id={formIds.phone}
                       name="phone"
                       required
                       className={`w-full px-4 py-3 text-base border rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200 ${
@@ -389,12 +243,12 @@ const Landing = () => {
                   
                   {/* Email Field */}
                   <div>
-                    <label htmlFor="landing-email" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor={formIds.email} className="block text-sm font-medium text-gray-700 mb-2">
                       Email Address *
                     </label>
                     <input
                       type="email"
-                      id="landing-email"
+                      id={formIds.email}
                       name="email"
                       required
                       className={`w-full px-4 py-3 text-base border rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200 ${
@@ -409,11 +263,11 @@ const Landing = () => {
                   
                   {/* Optional Message Field */}
                   <div>
-                    <label htmlFor="landing-message" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor={formIds.message} className="block text-sm font-medium text-gray-700 mb-2">
                       Message (Optional)
                     </label>
                     <textarea
-                      id="landing-message"
+                      id={formIds.message}
                       name="message"
                       rows={3}
                       className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200 resize-none"
@@ -494,12 +348,12 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Section 2: Why Homeowners Choose Us */}
+      {/* EDIT ZONE: Section 2: Why Homeowners Choose Us */}
       <section className="py-16 sm:py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-              Why Homeowners Choose Us
+              Why Businesses Choose Us
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
               Trusted expertise, quality craftsmanship, and transparent service you can rely on.
@@ -520,13 +374,13 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Section 3: Before/After Transformations */}
+      {/* EDIT ZONE: Section 3: Before/After Transformations */}
       <BeforeAfterSection
         sliders={[
           {
             beforeImage: slider1Before,
             afterImage: slider1After,
-            alt: 'Kitchen transformation before and after',
+            alt: 'Commercial transformation before and after',
           },
           {
             beforeImage: slider2Before,
@@ -536,7 +390,7 @@ const Landing = () => {
         ]}
       />
 
-      {/* Section 4: Featured Projects Gallery */}
+      {/* EDIT ZONE: Section 4: Featured Projects Gallery */}
       <section className="py-16 sm:py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 sm:mb-16">
@@ -609,7 +463,7 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Section 5: Simple 3-Step Process */}
+      {/* EDIT ZONE: Section 5: Simple 3-Step Process */}
       <section className="py-16 sm:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 sm:mb-16">
@@ -638,12 +492,12 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Section 6: Contact Section */}
+      {/* EDIT ZONE: Section 6: Contact Section */}
       <section id="contact-section" className="py-16 sm:py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 text-gray-800">
-              Ready to Transform Your Home?
+              Ready to Transform Your Business Space?
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
               You'll receive a detailed quote within 48 hours after we confirm measurements/scope. Contact us for a free consultation tailored to your project requirements.
@@ -725,13 +579,13 @@ const Landing = () => {
             <div className="bg-white rounded-2xl shadow-xl p-8">
               <h3 className="text-2xl font-bold text-gray-800 mb-6">Request Your Free Quote</h3>
               <p className="text-gray-600 mb-6">Tell us about your project and we'll get back to you within 24 hours with a detailed consultation.</p>
-              <form id="landing-contact-form" onSubmit={handleSubmit} className="space-y-6">
+              <form id={formIds.contactForm} onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="contact-name" className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+                    <label htmlFor={formIds.contactName} className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
                     <input
                       type="text"
-                      id="contact-name"
+                      id={formIds.contactName}
                       name="name"
                       required
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200 ${
@@ -744,10 +598,10 @@ const Landing = () => {
                     )}
                   </div>
                   <div>
-                    <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                    <label htmlFor={formIds.contactEmail} className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
                     <input
                       type="email"
-                      id="contact-email"
+                      id={formIds.contactEmail}
                       name="email"
                       required
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200 ${
@@ -762,19 +616,19 @@ const Landing = () => {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="contact-phone" className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                    <label htmlFor={formIds.contactPhone} className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
                     <input
                       type="tel"
-                      id="contact-phone"
+                      id={formIds.contactPhone}
                       name="phone"
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200"
                       placeholder="e.g. 079 123 4567"
                     />
                   </div>
                   <div>
-                    <label htmlFor="contact-project-type" className="block text-sm font-medium text-gray-700 mb-2">Service Required *</label>
+                    <label htmlFor={formIds.contactProjectType} className="block text-sm font-medium text-gray-700 mb-2">Service Required *</label>
                     <select
-                      id="contact-project-type"
+                      id={formIds.contactProjectType}
                       name="projectType"
                       required
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-forest-600 focus:border-forest-600 focus:outline-none transition-colors duration-200 ${
@@ -785,7 +639,7 @@ const Landing = () => {
                       <option value="kitchen">Kitchen Renovations</option>
                       <option value="bedroom">Bedroom Renovations</option>
                       <option value="bathroom">Bathroom Renovations</option>
-                      <option value="commercial">Commercial Renovations</option>
+                      <option value="commercial" selected>Commercial Renovations</option>
                       <option value="other">Other</option>
                     </select>
                     {formErrors.projectType && (
@@ -794,9 +648,9 @@ const Landing = () => {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="contact-message" className="block text-sm font-medium text-gray-700 mb-2">Project Details *</label>
+                  <label htmlFor={formIds.contactMessage} className="block text-sm font-medium text-gray-700 mb-2">Project Details *</label>
                   <textarea
-                    id="contact-message"
+                    id={formIds.contactMessage}
                     name="message"
                     required
                     rows={5}
@@ -841,5 +695,5 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default LandingCommercial;
 
